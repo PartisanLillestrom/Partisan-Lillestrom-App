@@ -1,0 +1,39 @@
+name: Oppdater nyheter og kampdata
+
+on:
+  schedule:
+    # Kjorer hver dag kl 06:00 UTC (ca. 07:00/08:00 norsk tid, avhengig av sommertid)
+    - cron: '0 6 * * *'
+  workflow_dispatch: {}   # gjor det mulig a trigge manuelt fra "Actions"-fanen pa GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sjekk ut repo
+        uses: actions/checkout@v4
+
+      - name: Sett opp Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Kjor oppdateringsskript
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python3 scripts/update_data.py
+
+      - name: Commit og push data.json hvis det er endret
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data.json
+          if git diff --cached --quiet; then
+            echo "Ingen endringer i data.json - hopper over commit."
+          else
+            git commit -m "Automatisk oppdatering av nyheter og kampdata"
+            git push
+          fi
