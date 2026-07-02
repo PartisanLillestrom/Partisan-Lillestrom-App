@@ -26,8 +26,6 @@ jobs:
 
 
       - name: Kjor oppdateringsskript
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python3 scripts/update_data.py
 
 
