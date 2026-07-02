@@ -1,51 +1,51 @@
 {
-  "updated": "2026-06-30T00:00:00Z",
   "fcstpauli_news": [
+    {
+      "title_no": "Perfekt start: Kiezkickerne vinner første testkamp mot Altona 93",
+      "title_de": "Auftakt nach Maß: Kiezkicker gewinnen erstes Testspiel gegen Altona 93",
+      "url": "https://www.fcstpauli.com/news/spielbericht-testspiel-altona-93-2627",
+      "image": ""
+    },
+    {
+      "title_no": "Sesongåpning på Millerntor: FC St. Pauli møter Deportivo de A Coruña",
+      "title_de": "Saisoneröffnung am Millerntor: FC St. Pauli empfängt Deportivo de A Coruña",
+      "url": "https://www.fcstpauli.com/news/saisoneroeffnung-am-millerntor-fc-st-pauli-testet-gegen-deportivo-de-a-coruna",
+      "image": ""
+    },
     {
       "title_no": "FC St. Pauli henter Marcus Mathisen",
       "title_de": "Der FC St. Pauli verpflichtet Marcus Mathisen",
       "url": "https://www.fcstpauli.com/news/der-fc-st-pauli-verpflichtet-marcus-mathisen",
-      "image": "https://api.fcstpauli.com/uploads/images/Fu%C3%9Fball/1-Profis/Saison-2026-2027/Neuzug%C3%A4nge/Marcus-Mathisen/_250x300_crop_center-center_85_none/744261/FCSP_YD-05920.webp"
-    },
-    {
-      "title_no": "Miniturnering avlyst - testkamp mot Dassendorf avtalt",
-      "title_de": "Miniturnier bei Holstein Kiels U23 abgesagt",
-      "url": "https://www.fcstpauli.com/news/miniturnier-bei-holstein-kiels-u23-abgesagt-testspiel-gegen-dassendorf-angesetzt",
-      "image": "https://api.fcstpauli.com/uploads/images/Fu%C3%9Fball/Trainingszentrum-Kollau/_250x300_crop_center-center_85_none/744777/STP5761.webp"
-    },
-    {
-      "title_no": "Treningsleir: FC St. Pauli moter AFC Bournemouth i test",
-      "title_de": "FC St. Pauli testet gegen den AFC Bournemouth",
-      "url": "https://www.fcstpauli.com/news/testspiel-fc-bournemouth-2627",
-      "image": "https://api.fcstpauli.com/uploads/images/Fu%C3%9Fball/1-Profis/Saison-2025-2026/Trainingslager/SaalfeldenArena/_250x300_crop_center-center_85_none/743682/FCS03569.webp"
+      "image": ""
     }
   ],
   "millernton_news": [
     {
-      "title_no": "Resultater fra sesongprognosen 2025/26",
-      "title_de": "Ergebnisse Saisonprognose FC St. Pauli 2025/26",
-      "url": "https://millernton.de/2026/06/28/ergebnisse-saisonprognose-fc-st-pauli-2025-26/",
-      "date": "28. juni"
+      "title_no": "Autografer, mange mål og enda mer regn",
+      "title_de": "Autogramme, viele Tore, noch mehr Regen",
+      "url": "https://millernton.de/2026/07/01/autogramme-viele-tore-noch-mehr-regen/",
+      "date": "1. juli"
     },
     {
-      "title_no": "Think Big - Millerntor i 2050 - Del 6",
-      "title_de": "Think Big - Das Millerntor im Jahre 2050 - Part 6",
+      "title_no": "Hvem er Marcus Mathisen? – En spillerprofil",
+      "title_de": "Wer ist Marcus Mathisen? – Ein Spielerprofil",
+      "url": "https://millernton.de/2026/06/26/wer-ist-marcus-mathisen-ein-spielerprofil/",
+      "date": "29. juni"
+    },
+    {
+      "title_no": "Tenk stort – Millerntor i år 2050 – del 6",
+      "title_de": "Think Big – Das Millerntor im Jahre 2050 – Part 6",
       "url": "https://millernton.de/2026/06/27/think-big-das-millerntor-im-jahre-2050-part-6/",
       "date": "27. juni"
-    },
-    {
-      "title_no": "Hvem er Marcus Mathisen? - En spillerprofil",
-      "title_de": "Wer ist Marcus Mathisen? - Ein Spielerprofil",
-      "url": "https://millernton.de/2026/06/26/wer-ist-marcus-mathisen-ein-spielerprofil/",
-      "date": "26. juni"
     }
   ],
   "next_match": {
-    "motstander": "Altona 93",
-    "dato": "2026-06-30",
-    "tid": "18:00",
+    "motstander": "SV Babelsberg 03",
+    "dato": "2026-07-11",
+    "tid": "15:30",
     "turnering": "Testspiel",
     "hjemme": false,
-    "stadion": "Adolf-Jager-Kampfbahn, Hamburg"
-  }
+    "stadion": "Karl-Liebknecht-Stadion, Babelsberg"
+  },
+  "updated": "2026-07-02T04:36:51Z"
 }
