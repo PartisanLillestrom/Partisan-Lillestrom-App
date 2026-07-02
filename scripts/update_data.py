@@ -1,149 +1,317 @@
 #!/usr/bin/env python3
 """
 Henter ferske nyheter (fcstpauli.com + millernton.de) og neste kamp for
-FC St. Pauli via Claude (Anthropic API) sin web_search-funksjon, og skriver
-resultatet til data.json i repo-roten.
+FC St. Pauli - HELT GRATIS, uten Anthropic API:
 
-Dette skriptet er ment a kjores server-side (f.eks. i en GitHub Action),
-IKKE i nettleseren - fordi det krever en hemmelig API-nokkel
-(ANTHROPIC_API_KEY) som aldri skal eksponeres i klientkode.
+  - fcstpauli.com: lenker scrapes fra nyhetssiden, og:title/og:image
+    hentes fra hver artikkelside.
+  - millernton.de: uendret - RSS-feed + og:image (som for).
+  - Oversettelse tysk -> norsk: MyMemory sin gratis oversettelses-API
+    (ingen norkkel nodvendig, https://mymemory.translated.net/).
+  - Neste kamp: scrapes direkte fra FC St. Paulis egen rahmenspielplan-side,
+    som ogsa inkluderer testkamper for sesongstart - ingen tredjeparts-API.
 
-Hvis noe feiler underveis (nettverksfeil, ugyldig JSON fra modellen, manglende
-felter), lar vi den eksisterende data.json sta urort og avslutter med
-feilkode 1, slik at GitHub Actions tydelig viser at korselen feilet - uten
-at nettsiden noensinne viser odelagt eller tom data.
+Resultatet skrives til data.json i repo-roten. Hvis noe feiler underveis
+lar vi eksisterende data.json sta urort og avslutter med feilkode 1, slik
+at GitHub Actions tydelig viser at korselen feilet - uten at nettsiden
+noensinne viser odelagt eller tom data.
 """
 
+import base64
+import email.utils
 import json
-import os
 import re
 import sys
+import urllib.parse
 import urllib.request
 import urllib.error
+import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 
-API_URL = "https://api.anthropic.com/v1/messages"
-MODEL = "claude-sonnet-4-6"
-DATA_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data.json")
+DATA_FILE = "data.json"
 
-SYSTEM_PROMPT = """Du er en research-assistent for en supporterklubb-app for FC St. Pauli (Partisan Lillestrom).
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
 
-Bruk web_search (og fyll inn videre detaljer ved behov) til a finne:
-
-1. De 3 NYESTE nyhetsartiklene fra https://www.fcstpauli.com/ (offisiell klubbside, "Aktuelles"-seksjonen pa forsiden eller https://www.fcstpauli.com/fussball/aktuelles). Hent ogsa en passende artikkelbilde-URL fra api.fcstpauli.com for hver artikkel hvis tilgjengelig (helst en mindre "_250x300_crop_center-center" variant av bildet - se etter slike URL-er pa siden eller i og-image meta-tags og bytt ut crop-storrelsen om nodvendig).
-
-2. De 3 NYESTE blogginnleggene fra https://millernton.de/ (uavhengig fan-blogg). Disse trenger IKKE bilde.
-
-3. NESTE planlagte kamp for FC St. Pauli sitt herrelag (2. Bundesliga-sesongen 2026/27, samt eventuelle testkamper/DFB-Pokal).
-
-Svar BARE med gyldig JSON - ingen markdown-formatering, ingen forklaringer for eller etter - i NOYAKTIG dette skjemaet:
-
-{
-  "fcstpauli_news": [
-    {"title_no": "norsk oversettelse av tittelen", "title_de": "original tysk tittel", "url": "fullstendig URL til artikkelen", "image": "fullstendig bilde-URL, eller tom streng hvis ingen funnet"}
-  ],
-  "millernton_news": [
-    {"title_no": "norsk oversettelse av tittelen", "title_de": "original tysk tittel", "url": "fullstendig URL til innlegget", "date": "dato pa norsk format, f.eks. '28. juni'"}
-  ],
-  "next_match": {"motstander": "lagnavn", "dato": "YYYY-MM-DD", "tid": "HH:MM eller tom streng hvis ukjent", "turnering": "2. Bundesliga / DFB-Pokal / Testspiel", "hjemme": true eller false, "stadion": "stadionnavn, by"}
+MONTHS_NO = {
+    1: "januar", 2: "februar", 3: "mars", 4: "april", 5: "mai", 6: "juni",
+    7: "juli", 8: "august", 9: "september", 10: "oktober", 11: "november", 12: "desember",
 }
 
-VIKTIG:
-- fcstpauli_news skal alltid inneholde noyaktig 3 elementer.
-- millernton_news skal alltid inneholde noyaktig 3 elementer.
-- Oversett titlene naturlig til norsk (bokmal), ikke ord-for-ord.
-- Ikke finn pa URL-er eller data du ikke faktisk har funnet via sok.
-"""
+
+def translate_de_to_no(text: str) -> str:
+    """Oversetter kort tysk tekst til norsk via MyMemory sin gratis API.
+    Returnerer originalteksten uendret hvis oversettelsen feiler."""
+    if not text:
+        return text
+    try:
+        q = urllib.parse.quote(text[:490])
+        url = f"https://api.mymemory.translated.net/get?q={q}&langpair=de|no"
+        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+        translated = (data.get("responseData") or {}).get("translatedText", "")
+        if translated and "MYMEMORY WARNING" not in translated.upper():
+            return translated
+        return text
+    except Exception as e:
+        print(f"  (advarsel: oversettelse feilet for '{text[:40]}...': {e})", file=sys.stderr)
+        return text
 
 
-def call_claude(api_key: str, today: str) -> str:
-    body = json.dumps({
-        "model": MODEL,
-        "max_tokens": 2000,
-        "tools": [{"type": "web_search_20250305", "name": "web_search"}],
-        "system": SYSTEM_PROMPT,
-        "messages": [
-            {"role": "user", "content": f"Dagens dato er {today}. Finn fersk informasjon og svar med JSON-objektet som beskrevet."}
-        ],
-    }).encode("utf-8")
-
-    req = urllib.request.Request(
-        API_URL,
-        data=body,
-        headers={
-            "Content-Type": "application/json",
-            "x-api-key": api_key,
-            "anthropic-version": "2023-06-01",
-        },
-        method="POST",
-    )
-    with urllib.request.urlopen(req, timeout=120) as resp:
-        raw = resp.read()
-    return raw.decode("utf-8")
-
-
-def extract_text(api_response_raw: str) -> str:
-    data = json.loads(api_response_raw)
-    if "error" in data:
-        raise RuntimeError(f"Anthropic API returnerte feil: {data['error']}")
-    blocks = data.get("content", [])
-    text = "".join(b.get("text", "") for b in blocks if b.get("type") == "text")
-    if not text.strip():
-        raise RuntimeError(f"Tomt svar fra API. Full respons: {api_response_raw[:500]}")
-    return text
+def fetch_millernton_rss(limit: int = 3) -> list:
+    """Henter de nyeste innleggene direkte fra MillernTon sin RSS-feed."""
+    try:
+        req = urllib.request.Request(
+            "https://millernton.de/feed/",
+            headers={"User-Agent": USER_AGENT, "Accept": "application/rss+xml,application/xml,*/*"},
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            xml_data = resp.read()
+        root = ET.fromstring(xml_data)
+        items = []
+        for item in root.iter("item"):
+            title = (item.findtext("title") or "").strip()
+            link = (item.findtext("link") or "").strip()
+            pub = (item.findtext("pubDate") or "").strip()
+            if not (title and link):
+                continue
+            date_no = ""
+            if pub:
+                try:
+                    dt = email.utils.parsedate_to_datetime(pub)
+                    date_no = f"{dt.day}. {MONTHS_NO[dt.month]}"
+                except Exception:
+                    pass
+            items.append({"title_de": title, "url": link, "date": date_no})
+            if len(items) >= limit:
+                break
+        print(f"RSS: hentet {len(items)} innlegg fra millernton.de/feed/")
+        return items
+    except Exception as e:
+        print(f"(advarsel: RSS-henting fra millernton.de feilet: {e})", file=sys.stderr)
+        return []
 
 
-def extract_json_object(text: str) -> dict:
-    # Modellen kan av og til pakke JSON i ```json ... ``` eller legge til tekst rundt.
-    match = re.search(r"\{[\s\S]*\}", text)
-    if not match:
-        raise ValueError(f"Fant ingen JSON i modellsvaret:\n{text[:1000]}")
-    return json.loads(match.group(0))
+def fetch_og_tag(page_url: str, tag: str) -> str:
+    """Henter en og:-meta-tag fra en artikkelside. Tom streng hvis ikke funnet."""
+    try:
+        req = urllib.request.Request(page_url, headers={"User-Agent": USER_AGENT})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            html = resp.read(400_000).decode("utf-8", "replace")
+        pattern_a = rf'property=["\']{re.escape(tag)}["\'][^>]*content=["\']([^"\']+)'
+        pattern_b = rf'content=["\']([^"\']+)["\'][^>]*property=["\']{re.escape(tag)}'
+        m = re.search(pattern_a, html) or re.search(pattern_b, html)
+        return m.group(1) if m else ""
+    except Exception as e:
+        print(f"  (advarsel: fant ikke {tag} pa {page_url}: {e})", file=sys.stderr)
+        return ""
+
+
+def fetch_og_image(page_url: str) -> str:
+    return fetch_og_tag(page_url, "og:image")
+
+
+def fetch_og_title(page_url: str) -> str:
+    return fetch_og_tag(page_url, "og:title")
+
+
+def fetch_fcstpauli_news_urls(limit: int = 3) -> list:
+    """Henter de nyeste artikkel-lenkene fra fcstpauli.com sin nyhetsside."""
+    try:
+        req = urllib.request.Request(
+            "https://www.fcstpauli.com/news/",
+            headers={"User-Agent": USER_AGENT},
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            html = resp.read().decode("utf-8", "replace")
+        raw_links = re.findall(r'href="(https://www\.fcstpauli\.com/news/[a-z0-9\-]+)"', html)
+        urls = []
+        seen = set()
+        for link in raw_links:
+            if link in seen:
+                continue
+            seen.add(link)
+            urls.append(link)
+            if len(urls) >= limit:
+                break
+        print(f"Scraping: fant {len(urls)} artikkel-lenker pa fcstpauli.com/news/")
+        return urls
+    except Exception as e:
+        print(f"(advarsel: henting av fcstpauli-nyheter feilet: {e})", file=sys.stderr)
+        return []
+
+
+RAHMENSPIELPLAN_URL = "https://www.fcstpauli.com/fu%C3%9Fball/teams/profis/rahmenspielplan-2026-27"
+
+
+def _strip_tags(html_fragment: str) -> str:
+    import html as html_mod
+    text = re.sub(r'<[^>]+>', ' ', html_fragment)
+    text = html_mod.unescape(text)
+    return re.sub(r'\s+', ' ', text).strip()
+
+
+def fetch_next_match_fcstpauli(url: str = RAHMENSPIELPLAN_URL) -> dict:
+    """Henter neste kamp direkte fra FC St. Paulis egen Rahmenspielplan-side."""
+    m_season = re.search(r'(\d{4})-\d{2}', url)
+    season_start_year = int(m_season.group(1)) if m_season else datetime.now(timezone.utc).year
+
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            html_doc = resp.read().decode("utf-8", "replace")
+    except Exception as e:
+        print(f"  (advarsel: henting av rahmenspielplan feilet: {e})", file=sys.stderr)
+        return {}
+
+    today = datetime.now(timezone.utc).date()
+    kandidater = []
+
+    for row_match in re.finditer(r'<tr\b[^>]*>(.*?)</tr>', html_doc, re.DOTALL | re.IGNORECASE):
+        cells = re.findall(r'<t[dh]\b[^>]*>(.*?)</t[dh]>', row_match.group(1), re.DOTALL | re.IGNORECASE)
+        if len(cells) < 6:
+            continue
+        wettbewerb, _runde, datum, anstot, hjem, gjest = (_strip_tags(c) for c in cells[:6])
+        if not hjem or not gjest:
+            continue
+
+        m_dato = re.match(r'(\d{1,2})\.(\d{1,2})\.', datum.strip())
+        if not m_dato:
+            continue
+        dag, maned = int(m_dato.group(1)), int(m_dato.group(2))
+        aar = season_start_year if maned >= 7 else season_start_year + 1
+
+        time_str = "12:00"
+        m_tid = re.search(r'(\d{1,2})(?::(\d{2}))?\s*Uhr', anstot)
+        if m_tid:
+            time_str = f"{int(m_tid.group(1)):02d}:{m_tid.group(2) or '00'}"
+
+        try:
+            dt = datetime.strptime(
+                f"{aar}-{maned:02d}-{dag:02d} {time_str}", "%Y-%m-%d %H:%M"
+            ).replace(tzinfo=timezone.utc)
+        except ValueError:
+            continue
+        if dt.date() < today:
+            continue
+
+        hjemme = "pauli" in hjem.lower()
+        kandidater.append({
+            "dt": dt,
+            "motstander": gjest if hjemme else hjem,
+            "hjemme": hjemme,
+            "turnering": wettbewerb.strip() or "Kamp",
+        })
+
+    if not kandidater:
+        print("  (advarsel: fant ingen kommende kamp med fastsatt dato pa rahmenspielplan-siden)", file=sys.stderr)
+        return {}
+
+    kandidater.sort(key=lambda x: x["dt"])
+    neste = kandidater[0]
+    return {
+        "motstander": neste["motstander"],
+        "dato": neste["dt"].strftime("%Y-%m-%d"),
+        "tid": neste["dt"].strftime("%H:%M"),
+        "turnering": neste["turnering"],
+        "hjemme": neste["hjemme"],
+        "stadion": "Millerntor-Stadion, Hamburg" if neste["hjemme"] else "",
+    }
+
+
+def download_image_as_data_uri(url: str, referer: str) -> str:
+    """Laster ned et bilde server-side og returnerer det som en base64 data-URI."""
+    if not url or not url.startswith("http"):
+        return ""
+    try:
+        req = urllib.request.Request(url, headers={
+            "User-Agent": USER_AGENT,
+            "Referer": referer,
+            "Accept": "image/webp,image/jpeg,image/png,image/*,*/*",
+        })
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            data = resp.read()
+            ctype = (resp.headers.get("Content-Type") or "image/webp").split(";")[0].strip()
+        if not ctype.startswith("image/"):
+            return ""
+        if len(data) > 600_000:
+            return ""
+        return f"data:{ctype};base64," + base64.b64encode(data).decode("ascii")
+    except Exception as e:
+        print(f"  (advarsel: kunne ikke laste ned bilde {url}: {e})", file=sys.stderr)
+        return ""
 
 
 def validate(payload: dict) -> None:
-    for key in ("fcstpauli_news", "millernton_news", "next_match"):
-        if key not in payload:
-            raise ValueError(f"Mangler felt '{key}' i resultatet")
-
+    if not payload.get("fcstpauli_news"):
+        raise ValueError("fcstpauli_news er tom - noe gikk galt under scraping")
+    if not payload.get("millernton_news"):
+        raise ValueError("millernton_news er tom - noe gikk galt under RSS-henting")
     for item in payload["fcstpauli_news"]:
         for field in ("title_no", "title_de", "url"):
             if not item.get(field):
                 raise ValueError(f"fcstpauli_news-element mangler felt '{field}': {item}")
-
     for item in payload["millernton_news"]:
         for field in ("title_no", "title_de", "url"):
             if not item.get(field):
                 raise ValueError(f"millernton_news-element mangler felt '{field}': {item}")
 
-    nm = payload["next_match"]
-    for field in ("motstander", "dato", "turnering"):
-        if not nm.get(field):
-            raise ValueError(f"next_match mangler felt '{field}': {nm}")
-    # Valider datoformat
-    datetime.strptime(nm["dato"], "%Y-%m-%d")
-
-    if len(payload["fcstpauli_news"]) == 0 or len(payload["millernton_news"]) == 0:
-        raise ValueError("Nyhetslister kan ikke vaere tomme")
-
 
 def main() -> int:
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
-    if not api_key:
-        print("FEIL: miljovariabelen ANTHROPIC_API_KEY er ikke satt.", file=sys.stderr)
-        return 1
+    rss_items = fetch_millernton_rss()
+    for it in rss_items:
+        it["image"] = fetch_og_image(it["url"])
+        it["title_no"] = translate_de_to_no(it["title_de"])
 
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    fcstpauli_items = []
+    for url in fetch_fcstpauli_news_urls(limit=3):
+        title_de = fetch_og_title(url)
+        if not title_de:
+            continue
+        fcstpauli_items.append({
+            "title_no": translate_de_to_no(title_de),
+            "title_de": title_de,
+            "url": url,
+            "image": fetch_og_image(url),
+        })
+
+    next_match = fetch_next_match_fcstpauli()
+
+    payload = {
+        "fcstpauli_news": fcstpauli_items,
+        "millernton_news": [
+            {
+                "title_no": it["title_no"],
+                "title_de": it["title_de"],
+                "url": it["url"],
+                "date": it.get("date", ""),
+                "image": it.get("image", ""),
+            }
+            for it in rss_items
+        ],
+        "next_match": next_match,
+    }
 
     try:
-        raw = call_claude(api_key, today)
-        text = extract_text(raw)
-        payload = extract_json_object(text)
         validate(payload)
-    except (urllib.error.URLError, RuntimeError, ValueError, json.JSONDecodeError) as e:
-        print(f"FEIL under henting/parsing: {e}", file=sys.stderr)
+    except ValueError as e:
+        print(f"FEIL: {e}", file=sys.stderr)
         print("Beholder eksisterende data.json urort.", file=sys.stderr)
         return 1
+
+    if not next_match.get("motstander"):
+        try:
+            with open(DATA_FILE, "r", encoding="utf-8") as f:
+                gammel = json.load(f)
+            payload["next_match"] = gammel.get("next_match", next_match)
+            print("  (info: beholder eksisterende next_match - fant ingen ny kamp)")
+        except Exception:
+            pass
+
+    for item in payload["fcstpauli_news"]:
+        item["image"] = download_image_as_data_uri(item.get("image", ""), referer="https://www.fcstpauli.com/")
+    for item in payload["millernton_news"]:
+        item["image"] = download_image_as_data_uri(item.get("image", ""), referer="https://millernton.de/")
 
     payload["updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -154,7 +322,10 @@ def main() -> int:
     print(f"OK: data.json oppdatert ({payload['updated']})")
     print(f"  - {len(payload['fcstpauli_news'])} fcstpauli-nyheter")
     print(f"  - {len(payload['millernton_news'])} millernton-nyheter")
-    print(f"  - neste kamp: {payload['next_match']['motstander']} ({payload['next_match']['dato']})")
+    if payload["next_match"].get("motstander"):
+        print(f"  - neste kamp: {payload['next_match']['motstander']} ({payload['next_match']['dato']})")
+    else:
+        print("  - neste kamp: ikke funnet")
     return 0
 
 
