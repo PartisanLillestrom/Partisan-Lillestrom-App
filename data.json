@@ -1,13 +1,13 @@
 {
   "fcstpauli_news": [
     {
-      "title_no": "Perfekt start: Kiezkickerne vinner første testkamp mot Altona 93",
-      "title_de": "Auftakt nach Maß: Kiezkicker gewinnen erstes Testspiel gegen Altona 93",
+      "title_no": "Perfekt oppstart: Kiezkickerne vinner første treningskamp",
+      "title_de": "Auftakt nach Maß: Kiezkicker gewinnen erstes Testspiel",
       "url": "https://www.fcstpauli.com/news/spielbericht-testspiel-altona-93-2627",
       "image": ""
     },
     {
-      "title_no": "Sesongåpning på Millerntor: FC St. Pauli møter Deportivo de A Coruña",
+      "title_no": "Sesongåpning på Millerntor: FC St. Pauli tar imot Deportivo de A Coruña",
       "title_de": "Saisoneröffnung am Millerntor: FC St. Pauli empfängt Deportivo de A Coruña",
       "url": "https://www.fcstpauli.com/news/saisoneroeffnung-am-millerntor-fc-st-pauli-testet-gegen-deportivo-de-a-coruna",
       "image": ""
@@ -27,25 +27,25 @@
       "date": "1. juli"
     },
     {
-      "title_no": "Hvem er Marcus Mathisen? – En spillerprofil",
-      "title_de": "Wer ist Marcus Mathisen? – Ein Spielerprofil",
-      "url": "https://millernton.de/2026/06/26/wer-ist-marcus-mathisen-ein-spielerprofil/",
+      "title_no": "«Ikke et utviklingsprosjekt, men en stabiliseringsgevinst»",
+      "title_de": "\"Kein Entwicklungsprojekt, sondern Stabilitätsgewinn\"",
+      "url": "https://millernton.de/2026/06/29/kein-entwicklungsprojekt-sondern-ein-stabilitaetsgewinn/",
       "date": "29. juni"
     },
     {
-      "title_no": "Tenk stort – Millerntor i år 2050 – del 6",
-      "title_de": "Think Big – Das Millerntor im Jahre 2050 – Part 6",
-      "url": "https://millernton.de/2026/06/27/think-big-das-millerntor-im-jahre-2050-part-6/",
-      "date": "27. juni"
+      "title_no": "Resultater fra sesongspådommen for FC St. Pauli 2025/26",
+      "title_de": "Ergebnisse Saisonprognose FC St. Pauli 2025/26",
+      "url": "https://millernton.de/2026/06/28/ergebnisse-saisonprognose-fc-st-pauli-2025-26/",
+      "date": "28. juni"
     }
   ],
   "next_match": {
-    "motstander": "SV Babelsberg 03",
-    "dato": "2026-07-11",
-    "tid": "15:30",
+    "motstander": "Kickers Emden",
+    "dato": "2026-07-04",
+    "tid": "18:00",
     "turnering": "Testspiel",
     "hjemme": false,
-    "stadion": "Karl-Liebknecht-Stadion, Babelsberg"
+    "stadion": "Ostfriesland-Stadion, Emden"
   },
-  "updated": "2026-07-02T04:36:51Z"
+  "updated": "2026-07-02T11:28:04Z"
 }
