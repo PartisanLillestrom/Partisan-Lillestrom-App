@@ -1010,7 +1010,9 @@ function renderNyheter(containerId, items, prikkFarge, harBilde) {
   const c = document.getElementById(containerId);
   if (!c || !items || !items.length) return;
   c.innerHTML = items.map(n => {
-    const bilde = harBilde ? `<img class="ni" src="${n.image}" alt="">` : `<div class="nip">&#127897;</div>`;
+    const bilde = harBilde && n.image
+      ? `<img class="ni" src="${n.image}" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">`
+      : `<div class="nip">&#9917;</div>`;
     const kilde = harBilde ? 'fcstpauli.com' : ('millernton.de &middot; ' + n.date);
     return `<a class="nc" href="${n.url}" target="_blank">${bilde}<div class="nb2"><div class="nt">${n.title_no}</div><div class="no">${n.title_de}</div><div class="ns"><div class="sd" style="background:${prikkFarge};"></div>${kilde}</div></div></a>`;
   }).join('');
