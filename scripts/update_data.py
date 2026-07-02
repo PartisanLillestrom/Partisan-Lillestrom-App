@@ -116,7 +116,9 @@ def fetch_og_title(page_url: str) -> str:
 
 
 def fetch_fcstpauli_news_urls(limit: int = 3) -> list:
-    """Henter de nyeste artikkel-lenkene fra fcstpauli.com sin nyhetsside."""
+    """Henter de nyeste artikkel-lenkene fra fcstpauli.com sin nyhetsside.
+    Lenkene pa siden er RELATIVE (f.eks. /news/spielplan-2627), sa vi
+    matcher dem relativt og bygger fulle URL-er selv."""
     try:
         req = urllib.request.Request(
             "https://www.fcstpauli.com/news/",
@@ -124,14 +126,15 @@ def fetch_fcstpauli_news_urls(limit: int = 3) -> list:
         )
         with urllib.request.urlopen(req, timeout=30) as resp:
             html = resp.read().decode("utf-8", "replace")
-        raw_links = re.findall(r'href="(https://www\.fcstpauli\.com/news/[a-z0-9\-]+)"', html)
+        raw_links = re.findall(r'href="(?:https://www\.fcstpauli\.com)?(/news/[a-z0-9\-]+)"', html)
         urls = []
         seen = set()
         for link in raw_links:
-            if link in seen:
+            full = "https://www.fcstpauli.com" + link
+            if full in seen:
                 continue
-            seen.add(link)
-            urls.append(link)
+            seen.add(full)
+            urls.append(full)
             if len(urls) >= limit:
                 break
         print(f"Scraping: fant {len(urls)} artikkel-lenker pa fcstpauli.com/news/")
