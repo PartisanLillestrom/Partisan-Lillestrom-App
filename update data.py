@@ -14,6 +14,7 @@ feilkode 1, slik at GitHub Actions tydelig viser at korselen feilet - uten
 at nettsiden noensinne viser odelagt eller tom data.
 """
 
+import base64
 import json
 import os
 import re
@@ -133,6 +134,34 @@ def validate(payload: dict) -> None:
         raise ValueError("Nyhetslister kan ikke vaere tomme")
 
 
+def download_image_as_data_uri(url: str) -> str:
+    """Laster ned et bilde server-side og returnerer det som en base64 data-URI.
+
+    Dette omgar hotlink-beskyttelse fullstendig: nettleseren trenger aldri
+    kontakte fcstpauli.com sine bildeservere - bildet ligger inni data.json.
+    Returnerer tom streng hvis nedlasting feiler eller bildet er for stort.
+    """
+    if not url or not url.startswith("http"):
+        return ""
+    try:
+        req = urllib.request.Request(url, headers={
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36",
+            "Referer": "https://www.fcstpauli.com/",
+            "Accept": "image/webp,image/jpeg,image/png,image/*,*/*",
+        })
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            data = resp.read()
+            ctype = (resp.headers.get("Content-Type") or "image/webp").split(";")[0].strip()
+        if not ctype.startswith("image/"):
+            return ""
+        if len(data) > 600_000:  # dropp bilder over ~600 KB for a holde data.json liten
+            return ""
+        return f"data:{ctype};base64," + base64.b64encode(data).decode("ascii")
+    except Exception as e:
+        print(f"  (advarsel: kunne ikke laste ned bilde {url}: {e})", file=sys.stderr)
+        return ""
+
+
 def main() -> int:
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
@@ -150,6 +179,11 @@ def main() -> int:
         print(f"FEIL under henting/parsing: {e}", file=sys.stderr)
         print("Beholder eksisterende data.json urort.", file=sys.stderr)
         return 1
+
+    # Last ned bildene server-side og bygg dem inn som base64, slik at
+    # nettleseren aldri trenger a hente noe fra fcstpauli.com sine servere.
+    for item in payload["fcstpauli_news"]:
+        item["image"] = download_image_as_data_uri(item.get("image", ""))
 
     payload["updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
