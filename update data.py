@@ -15,17 +15,26 @@ at nettsiden noensinne viser odelagt eller tom data.
 """
 
 import base64
+import email.utils
 import json
 import os
 import re
 import sys
 import urllib.request
 import urllib.error
+import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 
 API_URL = "https://api.anthropic.com/v1/messages"
 MODEL = "claude-sonnet-4-6"
 DATA_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data.json")
+
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+
+MONTHS_NO = {
+    1: "januar", 2: "februar", 3: "mars", 4: "april", 5: "mai", 6: "juni",
+    7: "juli", 8: "august", 9: "september", 10: "oktober", 11: "november", 12: "desember",
+}
 
 SYSTEM_PROMPT = """Du er en research-assistent for en supporterklubb-app for FC St. Pauli (Partisan Lillestrom).
 
@@ -39,9 +48,10 @@ Bruk web_search til a finne:
      tilgjengelig uten hotlink-beskyttelse. Bruk DENNE URL-en, ikke api.fcstpauli.com-URLer.
      Hvis du ikke finner og:image, sett image til tom streng "".
 
-2. De 3 NYESTE blogginnleggene fra https://millernton.de/ (uavhengig fan-blogg). For hvert innlegg:
-   hent ogsa og:image-URL fra innleggssiden (<meta property="og:image">) hvis tilgjengelig,
-   ellers tom streng "".
+2. MillernTon-innlegg: Brukerens melding inneholder en ferdig liste med de 3 nyeste innleggene
+   (hentet direkte fra RSS-feeden). IKKE sok etter disse. Behold url, date og image NOYAKTIG som
+   oppgitt, i SAMME rekkefolge, og oversett title_de naturlig til norsk (bokmal) i title_no.
+   (Hvis meldingen mot formodning IKKE inneholder en slik liste, sok selv pa https://millernton.de/.)
 
 3. NESTE planlagte kamp for FC St. Pauli sitt herrelag. Sjekk den offisielle terminlisten pa
    https://www.fcstpauli.com/fussball/teams/profis?tab=spielplanuebersicht (eller Rahmenspielplan-siden).
@@ -68,14 +78,77 @@ VIKTIG:
 """
 
 
-def call_claude(api_key: str, today: str) -> str:
+def fetch_millernton_rss(limit: int = 3) -> list:
+    """Henter de nyeste innleggene direkte fra MillernTon sin RSS-feed.
+
+    RSS er en strukturert kanal som alltid inneholder de aller nyeste
+    innleggene - i motsetning til web-sok, som kan henge etter fordi
+    millernton.de blokkerer crawling av vanlige sider.
+    Returnerer tom liste hvis henting feiler (da faller vi tilbake til sok).
+    """
+    try:
+        req = urllib.request.Request(
+            "https://millernton.de/feed/",
+            headers={"User-Agent": USER_AGENT, "Accept": "application/rss+xml,application/xml,*/*"},
+        )
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            xml_data = resp.read()
+        root = ET.fromstring(xml_data)
+        items = []
+        for item in root.iter("item"):
+            title = (item.findtext("title") or "").strip()
+            link = (item.findtext("link") or "").strip()
+            pub = (item.findtext("pubDate") or "").strip()
+            if not (title and link):
+                continue
+            date_no = ""
+            if pub:
+                try:
+                    dt = email.utils.parsedate_to_datetime(pub)
+                    date_no = f"{dt.day}. {MONTHS_NO[dt.month]}"
+                except Exception:
+                    pass
+            items.append({"title_de": title, "url": link, "date": date_no})
+            if len(items) >= limit:
+                break
+        print(f"RSS: hentet {len(items)} innlegg fra millernton.de/feed/")
+        return items
+    except Exception as e:
+        print(f"(advarsel: RSS-henting fra millernton.de feilet: {e})", file=sys.stderr)
+        return []
+
+
+def fetch_og_image(page_url: str) -> str:
+    """Henter og:image-URL fra en artikkelside. Tom streng hvis ikke funnet."""
+    try:
+        req = urllib.request.Request(page_url, headers={"User-Agent": USER_AGENT})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            html = resp.read(400_000).decode("utf-8", "replace")
+        m = re.search(r'property=["\']og:image["\'][^>]*content=["\']([^"\']+)', html)
+        if not m:
+            m = re.search(r'content=["\']([^"\']+)["\'][^>]*property=["\']og:image', html)
+        return m.group(1) if m else ""
+    except Exception as e:
+        print(f"  (advarsel: fant ikke og:image pa {page_url}: {e})", file=sys.stderr)
+        return ""
+
+
+def call_claude(api_key: str, today: str, millernton_items: list) -> str:
+    user_msg = f"Dagens dato er {today}. Finn fersk informasjon og svar med JSON-objektet som beskrevet."
+    if millernton_items:
+        user_msg += (
+            "\n\nHer er de 3 nyeste MillernTon-innleggene, ferdig hentet fra RSS-feeden. "
+            "Behold url, date og image noyaktig som de star, i samme rekkefolge, "
+            "og oversett kun title_de til norsk i title_no:\n"
+            + json.dumps(millernton_items, ensure_ascii=False, indent=2)
+        )
     body = json.dumps({
         "model": MODEL,
-        "max_tokens": 2000,
+        "max_tokens": 2500,
         "tools": [{"type": "web_search_20250305", "name": "web_search"}],
         "system": SYSTEM_PROMPT,
         "messages": [
-            {"role": "user", "content": f"Dagens dato er {today}. Finn fersk informasjon og svar med JSON-objektet som beskrevet."}
+            {"role": "user", "content": user_msg}
         ],
     }).encode("utf-8")
 
@@ -181,8 +254,13 @@ def main() -> int:
 
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
+    # Hent MillernTon-innlegg direkte fra RSS (alltid ferskest) og finn bildene deres
+    rss_items = fetch_millernton_rss()
+    for it in rss_items:
+        it["image"] = fetch_og_image(it["url"])
+
     try:
-        raw = call_claude(api_key, today)
+        raw = call_claude(api_key, today, rss_items)
         text = extract_text(raw)
         payload = extract_json_object(text)
         validate(payload)
@@ -190,6 +268,24 @@ def main() -> int:
         print(f"FEIL under henting/parsing: {e}", file=sys.stderr)
         print("Beholder eksisterende data.json urort.", file=sys.stderr)
         return 1
+
+    # RSS-dataene er fasit for MillernTon: bruk vare url/date/image,
+    # og hent kun de norske oversettelsene fra modellens svar (samme rekkefolge).
+    if rss_items:
+        model_mn = payload.get("millernton_news", [])
+        merged = []
+        for i, it in enumerate(rss_items):
+            title_no = it["title_de"]
+            if i < len(model_mn) and model_mn[i].get("title_no"):
+                title_no = model_mn[i]["title_no"]
+            merged.append({
+                "title_no": title_no,
+                "title_de": it["title_de"],
+                "url": it["url"],
+                "date": it.get("date", ""),
+                "image": it.get("image", ""),
+            })
+        payload["millernton_news"] = merged
 
     # Last ned bildene server-side og bygg dem inn som base64, slik at
     # nettleseren aldri trenger a hente noe fra eksterne bildeservere.
