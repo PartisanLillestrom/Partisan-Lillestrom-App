@@ -1010,7 +1010,7 @@ function renderNyheter(containerId, items, prikkFarge, harBilde) {
   const c = document.getElementById(containerId);
   if (!c || !items || !items.length) return;
   c.innerHTML = items.map(n => {
-    const bilde = harBilde && n.image
+    const bilde = n.image
       ? `<img class="ni" src="${n.image}" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'">`
       : `<div class="nip">&#9917;</div>`;
     const kilde = harBilde ? 'fcstpauli.com' : ('millernton.de &middot; ' + n.date);
