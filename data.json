@@ -1,8 +1,8 @@
 {
   "fcstpauli_news": [
     {
-      "title_no": "Perfekt oppstart: Kiezkickerne vinner første treningskamp",
-      "title_de": "Auftakt nach Maß: Kiezkicker gewinnen erstes Testspiel",
+      "title_no": "Perfekt oppstart: Kiezkickerne vinner første testkamp mot Altona 93 med 6:2",
+      "title_de": "Auftakt nach Maß: Kiezkicker gewinnen erstes Testspiel gegen Altona 93 mit 6:2",
       "url": "https://www.fcstpauli.com/news/spielbericht-testspiel-altona-93-2627",
       "image": ""
     },
@@ -27,7 +27,7 @@
       "date": "1. juli"
     },
     {
-      "title_no": "«Ikke et utviklingsprosjekt, men en stabiliseringsgevinst»",
+      "title_no": "Ikke et utviklingsprosjekt, men en stabiliseringsgevinst",
       "title_de": "\"Kein Entwicklungsprojekt, sondern Stabilitätsgewinn\"",
       "url": "https://millernton.de/2026/06/29/kein-entwicklungsprojekt-sondern-ein-stabilitaetsgewinn/",
       "date": "29. juni"
@@ -47,5 +47,5 @@
     "hjemme": false,
     "stadion": "Ostfriesland-Stadion, Emden"
   },
-  "updated": "2026-07-02T11:28:04Z"
+  "updated": "2026-07-02T11:45:27Z"
 }
