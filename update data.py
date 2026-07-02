@@ -39,9 +39,14 @@ Bruk web_search til a finne:
      tilgjengelig uten hotlink-beskyttelse. Bruk DENNE URL-en, ikke api.fcstpauli.com-URLer.
      Hvis du ikke finner og:image, sett image til tom streng "".
 
-2. De 3 NYESTE blogginnleggene fra https://millernton.de/ (uavhengig fan-blogg). Disse trenger IKKE bilde.
+2. De 3 NYESTE blogginnleggene fra https://millernton.de/ (uavhengig fan-blogg). For hvert innlegg:
+   hent ogsa og:image-URL fra innleggssiden (<meta property="og:image">) hvis tilgjengelig,
+   ellers tom streng "".
 
-3. NESTE planlagte kamp for FC St. Pauli sitt herrelag (2. Bundesliga-sesongen 2026/27 eller testkamper/DFB-Pokal).
+3. NESTE planlagte kamp for FC St. Pauli sitt herrelag. Sjekk den offisielle terminlisten pa
+   https://www.fcstpauli.com/fussball/teams/profis?tab=spielplanuebersicht (eller Rahmenspielplan-siden).
+   ABSOLUTT KRAV: Kampens dato MA vaere i dag eller senere - ALDRI en dato som allerede har passert.
+   Inkluder testkamper (Testspiel), DFB-Pokal og 2. Bundesliga-kamper. Velg den som kommer FORST.
 
 Svar BARE med gyldig JSON - ingen markdown-formatering, ingen forklaringer - i NOYAKTIG dette skjemaet:
 
@@ -50,7 +55,7 @@ Svar BARE med gyldig JSON - ingen markdown-formatering, ingen forklaringer - i N
     {"title_no": "norsk oversettelse", "title_de": "original tysk tittel", "url": "fullstendig artikkel-URL", "image": "og:image URL eller tom streng"}
   ],
   "millernton_news": [
-    {"title_no": "norsk oversettelse", "title_de": "original tysk tittel", "url": "fullstendig URL", "date": "dato pa norsk, f.eks. '2. juli'"}
+    {"title_no": "norsk oversettelse", "title_de": "original tysk tittel", "url": "fullstendig URL", "date": "dato pa norsk, f.eks. '2. juli'", "image": "og:image URL eller tom streng"}
   ],
   "next_match": {"motstander": "lagnavn", "dato": "YYYY-MM-DD", "tid": "HH:MM eller tom streng", "turnering": "2. Bundesliga / DFB-Pokal / Testspiel", "hjemme": true eller false, "stadion": "stadionnavn, by"}
 }
@@ -127,18 +132,24 @@ def validate(payload: dict) -> None:
     for field in ("motstander", "dato", "turnering"):
         if not nm.get(field):
             raise ValueError(f"next_match mangler felt '{field}': {nm}")
-    # Valider datoformat
-    datetime.strptime(nm["dato"], "%Y-%m-%d")
+    # Valider datoformat OG at kampen ikke er i fortiden
+    kampdato = datetime.strptime(nm["dato"], "%Y-%m-%d").date()
+    idag = datetime.now(timezone.utc).date()
+    if kampdato < idag:
+        raise ValueError(
+            f"next_match har dato i fortiden ({nm['dato']}, i dag er {idag}) - "
+            f"modellen fant feil kamp. Beholder gammel data."
+        )
 
     if len(payload["fcstpauli_news"]) == 0 or len(payload["millernton_news"]) == 0:
         raise ValueError("Nyhetslister kan ikke vaere tomme")
 
 
-def download_image_as_data_uri(url: str) -> str:
+def download_image_as_data_uri(url: str, referer: str = "https://www.fcstpauli.com/") -> str:
     """Laster ned et bilde server-side og returnerer det som en base64 data-URI.
 
     Dette omgar hotlink-beskyttelse fullstendig: nettleseren trenger aldri
-    kontakte fcstpauli.com sine bildeservere - bildet ligger inni data.json.
+    kontakte eksterne bildeservere - bildet ligger inni data.json.
     Returnerer tom streng hvis nedlasting feiler eller bildet er for stort.
     """
     if not url or not url.startswith("http"):
@@ -146,7 +157,7 @@ def download_image_as_data_uri(url: str) -> str:
     try:
         req = urllib.request.Request(url, headers={
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36",
-            "Referer": "https://www.fcstpauli.com/",
+            "Referer": referer,
             "Accept": "image/webp,image/jpeg,image/png,image/*,*/*",
         })
         with urllib.request.urlopen(req, timeout=30) as resp:
@@ -181,9 +192,11 @@ def main() -> int:
         return 1
 
     # Last ned bildene server-side og bygg dem inn som base64, slik at
-    # nettleseren aldri trenger a hente noe fra fcstpauli.com sine servere.
+    # nettleseren aldri trenger a hente noe fra eksterne bildeservere.
     for item in payload["fcstpauli_news"]:
-        item["image"] = download_image_as_data_uri(item.get("image", ""))
+        item["image"] = download_image_as_data_uri(item.get("image", ""), referer="https://www.fcstpauli.com/")
+    for item in payload["millernton_news"]:
+        item["image"] = download_image_as_data_uri(item.get("image", ""), referer="https://millernton.de/")
 
     payload["updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
