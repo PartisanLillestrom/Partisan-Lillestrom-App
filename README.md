@@ -1,2 +1,5 @@
-# Partisan-Lillestrom-App
-Applikasjon for medlemmer av Partisan Lillestrøm
+# Bilder
+
+Last opp kampbilder og arrangementsbilder her.
+
+Referer til dem i `feed.json` med filbanen `images/filnavn.jpg`.
