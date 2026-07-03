@@ -309,6 +309,8 @@ input,select,textarea{font-size:16px !important;-webkit-text-size-adjust:100%;} 
   border-radius:5px;color:#fff;padding:7px 10px;font-family:'Barlow',sans-serif;
   font-size:12px;resize:none;}
 .komm-send{background:linear-gradient(90deg,#3d1208,#1a0804);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;border-radius:5px;padding:10px 14px;cursor:pointer;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.06em;flex-shrink:0;min-width:60px;-webkit-appearance:none;touch-action:manipulation;}
+input[type="datetime-local"]{color-scheme:dark;}
+input[type="datetime-local"]::-webkit-calendar-picker-indicator{filter:invert(1);cursor:pointer;padding:4px;}
 </style>
 </head>
 <body>
@@ -647,12 +649,14 @@ function hentArr() {
 
 function lagreArr() {
   const tittel = document.getElementById('fTittel').value.trim();
-  const dato = document.getElementById('fDato').value;
+  const datoD = document.getElementById('fDatoD').value;
+  const datoT = document.getElementById('fDatoT').value || '18:00';
+  const dato = datoD ? datoD + 'T' + datoT : '';
   const sted = document.getElementById('fSted').value.trim();
   const beskr = document.getElementById('fBeskr').value.trim();
   const type = document.getElementById('fType').value;
 
-  if (!tittel || !dato) {
+  if (!tittel || !datoD) {
     alert('Tittel og dato er påkrevd!');
     return;
   }
@@ -668,7 +672,8 @@ function lagreArr() {
 
   // Reset skjema
   document.getElementById('fTittel').value = '';
-  document.getElementById('fDato').value = '';
+  document.getElementById('fDatoD').value = '';
+  document.getElementById('fDatoT').value = '';
   document.getElementById('fSted').value = '';
   document.getElementById('fBeskr').value = '';
   toggleForm();
@@ -678,6 +683,11 @@ function lagreArr() {
 function visSlettBekreft(id) {
   const el = document.getElementById('slettBekreft_' + id);
   if (el) el.style.display = 'block';
+}
+function velgType(type, label) {
+  document.getElementById('fType').value = type;
+  document.getElementById('fTypeSelected').querySelector('span').innerHTML = label;
+  document.getElementById('fTypeOpts').style.display = 'none';
 }
 function skjulSlettBekreft(id) {
   const el = document.getElementById('slettBekreft_' + id);
@@ -906,31 +916,44 @@ window.addEventListener('partisan_page_change', (e) => {
   </div>
 
   <!-- Opprett-skjema (skjult som standard) -->
-  <div id="arrForm" style="display:none;background:var(--g2);border-top:2px solid var(--red);border-bottom:1px solid rgba(255,255,255,.08);padding:16px 14px;margin-bottom:8px;">
+  <div id="arrForm" style="display:none;background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border-top:2px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;border-bottom:1px solid rgba(255,255,255,.08);padding:16px 14px;margin-bottom:8px;">
     <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px;">Opprett nytt arrangement</div>
 
     <label style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5);display:block;margin-bottom:4px;">Type arrangement</label>
-    <select id="fType" style="width:100%;background:var(--g1);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:#fff;padding:9px 10px;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;margin-bottom:12px;">
-      <option value="kampvisning">⚽ Kampvisning</option>
-      <option value="sosial">🍺 Sosialt</option>
-      <option value="stpauli">🏴‍☠️ Tur til St. Pauli</option>
-    </select>
+    <input type="hidden" id="fType" value="kampvisning">
+    <div id="fTypeWrap" style="position:relative;margin-bottom:12px;">
+      <div id="fTypeSelected" onclick="document.getElementById('fTypeOpts').style.display=document.getElementById('fTypeOpts').style.display==='block'?'none':'block'" style="width:100%;background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;padding:9px 10px;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:space-between;">
+        <span><span style="filter:grayscale(1) contrast(1.5);display:inline-block;">⚽</span> Kampvisning</span>
+        <span style="font-size:10px;color:rgba(255,255,255,.5);">▼</span>
+      </div>
+      <div id="fTypeOpts" style="display:none;position:absolute;top:100%;left:0;right:0;z-index:50;background:#1a0804;border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;">
+        <div onclick="velgType('kampvisning','<span style=filter:grayscale(1)+contrast(1.5)>⚽</span> Kampvisning')" style="padding:9px 10px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;color:#fff;display:flex;align-items:center;gap:6px;"><span style="filter:grayscale(1) contrast(1.5);">⚽</span> Kampvisning</div>
+        <div onclick="velgType('sosial','🍺 Sosialt')" style="padding:9px 10px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;color:#fff;border-top:1px solid rgba(255,255,255,.1);">🍺 Sosialt</div>
+        <div onclick="velgType('stpauli','☠️ Tur til St. Pauli')" style="padding:9px 10px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;color:#fff;border-top:1px solid rgba(255,255,255,.1);">☠️ Tur til St. Pauli</div>
+      </div>
+    </div>
 
     <label style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5);display:block;margin-bottom:4px;">Tittel</label>
     <input id="fTittel" type="text" placeholder="F.eks. Kampvisning: FCSP vs HSV"
-      style="width:100%;background:var(--g1);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:#fff;padding:9px 10px;font-family:'Barlow',sans-serif;font-size:13px;margin-bottom:12px;">
+      style="width:100%;background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;padding:9px 10px;font-family:'Barlow',sans-serif;font-size:13px;margin-bottom:12px;">
 
     <label style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5);display:block;margin-bottom:4px;">Dato og tid</label>
-    <input id="fDato" type="datetime-local"
-      style="width:100%;background:var(--g1);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:#fff;padding:9px 10px;font-family:'Barlow',sans-serif;font-size:13px;margin-bottom:12px;">
+    <div style="display:flex;gap:8px;margin-bottom:12px;">
+      <input id="fDatoD" type="date"
+        style="flex:1;background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;padding:9px 10px;font-family:'Barlow',sans-serif;font-size:13px;color-scheme:dark;"
+        onclick="this.showPicker&&this.showPicker()">
+      <input id="fDatoT" type="time"
+        style="flex:0 0 110px;background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;padding:9px 10px;font-family:'Barlow',sans-serif;font-size:13px;color-scheme:dark;"
+        onclick="this.showPicker&&this.showPicker()">
+    </div>
 
     <label style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5);display:block;margin-bottom:4px;">Sted / Lokasjon</label>
     <input id="fSted" type="text" placeholder="F.eks. Martins Pub, Lillestrøm"
-      style="width:100%;background:var(--g1);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:#fff;padding:9px 10px;font-family:'Barlow',sans-serif;font-size:13px;margin-bottom:12px;">
+      style="width:100%;background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;padding:9px 10px;font-family:'Barlow',sans-serif;font-size:13px;margin-bottom:12px;">
 
     <label style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5);display:block;margin-bottom:4px;">Beskrivelse</label>
     <textarea id="fBeskr" rows="3" placeholder="Mer informasjon om arrangementet..."
-      style="width:100%;background:var(--g1);border:1px solid rgba(255,255,255,.15);border-radius:4px;color:#fff;padding:9px 10px;font-family:'Barlow',sans-serif;font-size:13px;resize:none;margin-bottom:16px;"></textarea>
+      style="width:100%;background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;padding:9px 10px;font-family:'Barlow',sans-serif;font-size:13px;resize:none;margin-bottom:16px;"></textarea>
 
     <div style="display:flex;gap:8px;">
       <button onclick="lagreArr()"
@@ -949,7 +972,7 @@ window.addEventListener('partisan_page_change', (e) => {
     <button class="fbtn active" onclick="filtrerArr('alle',this)">Alle</button>
     <button class="fbtn" onclick="filtrerArr('kampvisning',this)"><span style="filter:grayscale(1) contrast(1.5);">⚽</span> Kampvisning</button>
     <button class="fbtn" onclick="filtrerArr('sosial',this)">🍺 Sosialt</button>
-    <button class="fbtn" onclick="filtrerArr('stpauli',this)">☠️ St. Pauli</button>
+    <button class="fbtn" onclick="filtrerArr('stpauli',this)">☠️ Tur til St. Pauli</button>
   </div>
 
   <!-- Liste over arrangementer -->
