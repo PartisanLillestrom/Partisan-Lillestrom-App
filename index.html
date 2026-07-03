@@ -8,6 +8,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik+Dirt&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
+#kamper .kamper-scroll{-ms-overflow-style:none;scrollbar-width:none;}
+#kamper .kamper-scroll::-webkit-scrollbar{display:none;}
+#hjem .hjem-scroll{-ms-overflow-style:none;scrollbar-width:none;}
+#hjem .hjem-scroll::-webkit-scrollbar{display:none;}
+#hjem.active{display:flex!important;}
 :root{
   --red:#c0392b;
   --brown:#3d1f14;
@@ -80,6 +85,7 @@ body{
 
 .page{display:none;}
 input,select,textarea{font-size:16px !important;-webkit-text-size-adjust:100%;} .page.active{display:block;}
+#kamper.active{display:flex!important;}
 
 /* HERO */
 .hero{
@@ -180,7 +186,7 @@ input,select,textarea{font-size:16px !important;-webkit-text-size-adjust:100%;} 
 .sd{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
 
 /* MATCHES */
-.card-box{background:var(--g1);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:0 14px;margin:0 14px;}
+.card-box{background:var(--g1);border:1px solid #444;border-radius:8px;padding:0 14px;margin:0 14px;}
 .mr{display:flex;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);gap:8px;}
 .mr:last-child{border-bottom:none;}
 .badge{
@@ -327,79 +333,87 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator{filter:invert(1)
 </div>
 
 <!-- HJEM -->
-<div id="hjem" class="page active">
-  <div class="hero">
-    <div class="hero-logo15">
-      <img src="logo-main.png" alt="Partisan Lillestrøm">
+<div id="hjem" class="page active" style="flex-direction:column;height:calc(100vh - 54px);overflow:hidden;">
+  <div style="flex-shrink:0;">
+    <div class="hero">
+      <div class="hero-logo15">
+        <img src="logo-main.png" alt="Partisan Lillestrøm">
+      </div>
+      <div class="hero-sub">FC St. Pauli &middot; Norway &middot; non est. 2/5-2008</div>
     </div>
-    <div class="hero-sub">FC St. Pauli &middot; Norway &middot; non est. 2/5-2008</div>
+
+    <div style="height:2px;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);width:100%;"></div>
+    <div class="stats-row">
+      <div class="stat-cell" style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);">
+        <div id="stat-ar" class="stat-num">–</div>
+        <div class="stat-lbl">År som supporterklubb</div>
+      </div>
+      <div class="stat-cell" style="background:linear-gradient(90deg,#1a0804 0%,#0a0a0a 100%);">
+        <div class="stat-num">32</div>
+        <div class="stat-lbl">Betalende medlemmer</div>
+      </div>
+      <div class="stat-cell" style="background:linear-gradient(90deg,#0a0a0a 0%,#0a0a0a 100%);">
+        <div class="stat-num red">50</div>
+        <div class="stat-lbl">Kamper sett</div>
+      </div>
+    </div>
   </div>
 
-  <div style="height:2px;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);width:100%;"></div>
-  <div class="stats-row">
-    <div class="stat-cell" style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);">
-      <div id="stat-ar" class="stat-num">–</div>
-      <div class="stat-lbl">År som supporterklubb</div>
+  <div class="hjem-scroll" style="flex:1;overflow-y:auto;padding-bottom:40px;">
+    <div class="sec">
+      <div class="sec-hdr">
+        <span class="sec-title">FC St. Pauli</span>
+        <a href="https://www.fcstpauli.com/news/" target="_blank" class="sec-link">fcstpauli.com &rarr;</a>
+      </div>
     </div>
-    <div class="stat-cell" style="background:linear-gradient(90deg,#1a0804 0%,#0a0a0a 100%);">
-      <div class="stat-num">32</div>
-      <div class="stat-lbl">Betalende medlemmer</div>
+    <div class="cw" id="fcstpauliNews">
+      <a class="nc" href="https://www.fcstpauli.com/news/der-fc-st-pauli-verpflichtet-marcus-mathisen" target="_blank"><img class="ni" src="https://api.fcstpauli.com/uploads/images/Fu%C3%9Fball/1-Profis/Saison-2026-2027/Neuzug%C3%A4nge/Marcus-Mathisen/_250x300_crop_center-center_85_none/744261/FCSP_YD-05920.webp" alt=""><div class="nb2"><div class="nt">FC St. Pauli henter Marcus Mathisen</div><div class="no">Der FC St. Pauli verpflichtet Marcus Mathisen</div><div class="ns"><div class="sd" style="background:rgba(192,57,43,0.55);"></div>fcstpauli.com</div></div></a>
+      <a class="nc" href="https://www.fcstpauli.com/news/miniturnier-bei-holstein-kiels-u23-abgesagt-testspiel-gegen-dassendorf-angesetzt" target="_blank"><img class="ni" src="https://api.fcstpauli.com/uploads/images/Fu%C3%9Fball/Trainingszentrum-Kollau/_250x300_crop_center-center_85_none/744777/STP5761.webp" alt=""><div class="nb2"><div class="nt">Miniturnering avlyst - testkamp mot Dassendorf avtalt</div><div class="no">Miniturnier bei Holstein Kiels U23 abgesagt</div><div class="ns"><div class="sd" style="background:rgba(192,57,43,0.55);"></div>fcstpauli.com</div></div></a>
+      <a class="nc" href="https://www.fcstpauli.com/news/testspiel-fc-bournemouth-2627" target="_blank"><img class="ni" src="https://api.fcstpauli.com/uploads/images/Fu%C3%9Fball/1-Profis/Saison-2025-2026/Trainingslager/SaalfeldenArena/_250x300_crop_center-center_85_none/743682/FCS03569.webp" alt=""><div class="nb2"><div class="nt">Treningsleir: FC St. Pauli mater AFC Bournemouth i test</div><div class="no">FC St. Pauli testet gegen den AFC Bournemouth</div><div class="ns"><div class="sd" style="background:rgba(192,57,43,0.55);"></div>fcstpauli.com</div></div></a>
     </div>
-    <div class="stat-cell" style="background:linear-gradient(90deg,#0a0a0a 0%,#0a0a0a 100%);">
-      <div class="stat-num red">50</div>
-      <div class="stat-lbl">Kamper sett</div>
-    </div>
-  </div>
-    
-<div class="sec">
-    <div class="sec-hdr">
-      <span class="sec-title">FC St. Pauli</span>
-      <a href="https://www.fcstpauli.com/news/" target="_blank" class="sec-link">fcstpauli.com &rarr;</a>
-    </div>
-  </div>
-  <div class="cw" id="fcstpauliNews">
-    <a class="nc" href="https://www.fcstpauli.com/news/der-fc-st-pauli-verpflichtet-marcus-mathisen" target="_blank"><img class="ni" src="https://api.fcstpauli.com/uploads/images/Fu%C3%9Fball/1-Profis/Saison-2026-2027/Neuzug%C3%A4nge/Marcus-Mathisen/_250x300_crop_center-center_85_none/744261/FCSP_YD-05920.webp" alt=""><div class="nb2"><div class="nt">FC St. Pauli henter Marcus Mathisen</div><div class="no">Der FC St. Pauli verpflichtet Marcus Mathisen</div><div class="ns"><div class="sd" style="background:rgba(192,57,43,0.55);"></div>fcstpauli.com</div></div></a>
-    <a class="nc" href="https://www.fcstpauli.com/news/miniturnier-bei-holstein-kiels-u23-abgesagt-testspiel-gegen-dassendorf-angesetzt" target="_blank"><img class="ni" src="https://api.fcstpauli.com/uploads/images/Fu%C3%9Fball/Trainingszentrum-Kollau/_250x300_crop_center-center_85_none/744777/STP5761.webp" alt=""><div class="nb2"><div class="nt">Miniturnering avlyst - testkamp mot Dassendorf avtalt</div><div class="no">Miniturnier bei Holstein Kiels U23 abgesagt</div><div class="ns"><div class="sd" style="background:rgba(192,57,43,0.55);"></div>fcstpauli.com</div></div></a>
-    <a class="nc" href="https://www.fcstpauli.com/news/testspiel-fc-bournemouth-2627" target="_blank"><img class="ni" src="https://api.fcstpauli.com/uploads/images/Fu%C3%9Fball/1-Profis/Saison-2025-2026/Trainingslager/SaalfeldenArena/_250x300_crop_center-center_85_none/743682/FCS03569.webp" alt=""><div class="nb2"><div class="nt">Treningsleir: FC St. Pauli mater AFC Bournemouth i test</div><div class="no">FC St. Pauli testet gegen den AFC Bournemouth</div><div class="ns"><div class="sd" style="background:rgba(192,57,43,0.55);"></div>fcstpauli.com</div></div></a>
-  </div>
 
-  <div class="sec">
-    <div class="sec-hdr">
-      <span class="sec-title">MillernTon</span>
-      <a href="https://millernton.de/" target="_blank" class="sec-link">millernton.de &rarr;</a>
+    <div class="sec">
+      <div class="sec-hdr">
+        <span class="sec-title">MillernTon</span>
+        <a href="https://millernton.de/" target="_blank" class="sec-link">millernton.de &rarr;</a>
+      </div>
     </div>
-  </div>
-  <div class="cw" id="millerntonNews">
-    <a class="nc" href="https://millernton.de/2026/06/28/ergebnisse-saisonprognose-fc-st-pauli-2025-26/" target="_blank"><div class="nip">&#127897;</div><div class="nb2"><div class="nt">Resultater fra sesongprognosen 2025/26</div><div class="no">Ergebnisse Saisonprognose FC St. Pauli 2025/26</div><div class="ns"><div class="sd" style="background:rgba(230,126,34,0.55);"></div>millernton.de &middot; 28. juni</div></div></a>
-    <a class="nc" href="https://millernton.de/2026/06/27/think-big-das-millerntor-im-jahre-2050-part-6/" target="_blank"><div class="nip">&#127897;</div><div class="nb2"><div class="nt">Think Big - Millerntor i 2050 - Del 6</div><div class="no">Think Big - Das Millerntor im Jahre 2050 - Part 6</div><div class="ns"><div class="sd" style="background:rgba(230,126,34,0.55);"></div>millernton.de &middot; 27. juni</div></div></a>
-    <a class="nc" href="https://millernton.de/2026/06/26/wer-ist-marcus-mathisen-ein-spielerprofil/" target="_blank"><div class="nip">&#127897;</div><div class="nb2"><div class="nt">Hvem er Marcus Mathisen? - En spillerprofil</div><div class="no">Wer ist Marcus Mathisen? - Ein Spielerprofil</div><div class="ns"><div class="sd" style="background:rgba(230,126,34,0.55);"></div>millernton.de &middot; 26. juni</div></div></a>
+    <div class="cw" id="millerntonNews">
+      <a class="nc" href="https://millernton.de/2026/06/28/ergebnisse-saisonprognose-fc-st-pauli-2025-26/" target="_blank"><div class="nip">&#127897;</div><div class="nb2"><div class="nt">Resultater fra sesongprognosen 2025/26</div><div class="no">Ergebnisse Saisonprognose FC St. Pauli 2025/26</div><div class="ns"><div class="sd" style="background:rgba(230,126,34,0.55);"></div>millernton.de &middot; 28. juni</div></div></a>
+      <a class="nc" href="https://millernton.de/2026/06/27/think-big-das-millerntor-im-jahre-2050-part-6/" target="_blank"><div class="nip">&#127897;</div><div class="nb2"><div class="nt">Think Big - Millerntor i 2050 - Del 6</div><div class="no">Think Big - Das Millerntor im Jahre 2050 - Part 6</div><div class="ns"><div class="sd" style="background:rgba(230,126,34,0.55);"></div>millernton.de &middot; 27. juni</div></div></a>
+      <a class="nc" href="https://millernton.de/2026/06/26/wer-ist-marcus-mathisen-ein-spielerprofil/" target="_blank"><div class="nip">&#127897;</div><div class="nb2"><div class="nt">Hvem er Marcus Mathisen? - En spillerprofil</div><div class="no">Wer ist Marcus Mathisen? - Ein Spielerprofil</div><div class="ns"><div class="sd" style="background:rgba(230,126,34,0.55);"></div>millernton.de &middot; 26. juni</div></div></a>
+    </div>
   </div>
 </div>
 
 <!-- KAMPER -->
-<div id="kamper" class="page" style="padding:16px 0 0;">
-  <div style="padding:0 14px;margin-bottom:14px;">
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px;">
-      <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:12px 6px;text-align:center;">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;">50</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;">Totalt</div>
-      </div>
-      <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:12px 6px;text-align:center;">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#2ecc71;">24</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;">Seier</div>
-      </div>
-      <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:12px 6px;text-align:center;">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#f1c40f;">12</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;">Uavg.</div>
-      </div>
-      <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid rgba(255,255,255,.06);border-radius:6px;padding:12px 6px;text-align:center;">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--red);">14</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;">Tap</div>
+<div id="kamper" class="page" style="padding:0;display:none;flex-direction:column;height:calc(100vh - 58px - 54px);overflow:hidden;">
+  <div style="flex-shrink:0;background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);">
+    <div style="padding:16px 14px 12px;">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">
+        <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:6px;padding:12px 6px;text-align:center;">
+          <div class="stat-num" style="font-size:28px;">50</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;">Totalt</div>
+        </div>
+        <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:6px;padding:12px 6px;text-align:center;">
+          <div class="stat-num" style="font-size:28px;">24</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;">Seier · 48%</div>
+        </div>
+        <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:6px;padding:12px 6px;text-align:center;">
+          <div class="stat-num" style="font-size:28px;">12</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;">Uavg. · 24%</div>
+        </div>
+        <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:6px;padding:12px 6px;text-align:center;">
+          <div class="stat-num red" style="font-size:28px;">14</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;">Tap · 28%</div>
+        </div>
       </div>
     </div>
+    <div style="height:2px;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);"></div>
   </div>
-  <div class="pbar"><div class="pfill" style="width:48%;"></div></div>
-  <div class="card-box" id="matchList"></div>
+  <div class="kamper-scroll" style="flex:1;overflow-y:auto;padding:0;">
+    <div class="card-box" id="matchList" style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border-radius:0;border-left:none;border-right:none;margin:0;"></div>
+  </div>
 </div>
 
 <!-- FEED -->
@@ -490,7 +504,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator{filter:invert(1)
 <div class="bnav">
   <button class="bb active" onclick="sp('hjem',this)"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg><span class="bb-label">Hjem</span></button>
   <button class="bb" onclick="sp('arr',this)"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="bb-label">Arr.</span></button>
-  <button class="bb" onclick="sp('kamper',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3c0 0 2 4 0 9s0 9 0 9M3 12h18"/></svg><span class="bb-label">Kamper</span></button>
+  <button class="bb" onclick="sp('kamper',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3c0 0 2 4 0 9s0 9 0 9M3 12h18"/></svg><span class="bb-label">Kamplogg</span></button>
   <button class="bb" onclick="sp('feed',this)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="bb-label">Feed</span></button>
   <button class="bb" onclick="sp('medlem',this)"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg><span class="bb-label">Bli medlem</span></button>
   <button class="bb" onclick="sp('om',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg><span class="bb-label">Om oss</span></button>
@@ -499,43 +513,57 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator{filter:invert(1)
 <script>
 const LOGO="logo-icon.jpeg";
 const posts=[
-  {yr:"2026",date:"19. april 2026",kamp:"FC St. Pauli vs 1. FC Koln",score:"1-1",res:"Uavgjort",loc:"Millerntor"},
-    {yr:"2025",date:"13. desember 2025",kamp:"FC St. Pauli vs FC Heidenheim",score:"2-1",res:"Seier",loc:"Millerntor"},
+  {yr:"2026",date:"17. april 2026",kamp:"FC St. Pauli vs 1. FC Køln",score:"1-1",res:"Uavgjort",loc:"Millerntor"},
+  {yr:"2025",date:"13. desember 2025",kamp:"FC St. Pauli vs FC Heidenheim",score:"2-1",res:"Seier",loc:"Millerntor"},
   {yr:"2025",date:"29. november 2025",kamp:"FC Bayern München vs FC St. Pauli",score:"3-1",res:"Tap",loc:"Allianz Arena"},
-  {yr:"2025",date:"23. november 2025",kamp:"FC St. Pauli vs Union Berlin",score:"0-1",res:"Tap",loc:"Millerntor"},
-  {yr:"2025",date:"1. november 2025",kamp:"FC St. Pauli vs Borussia Monchengladbach",score:"0-4",res:"Tap",loc:"Millerntor"},
+  {yr:"2025",date:"23. november 2025",kamp:"FC St. Pauli vs FC Union Berlin",score:"0-1",res:"Tap",loc:"Millerntor"},
+  {yr:"2025",date:"1. november 2025",kamp:"FC St. Pauli vs Borussia Mönchengladbach",score:"0-4",res:"Tap",loc:"Millerntor"},
   {yr:"2025",date:"23. august 2025",kamp:"FC St. Pauli vs Borussia Dortmund",score:"3-3",res:"Uavgjort",loc:"Millerntor"},
   {yr:"2025",date:"9. august 2025",kamp:"ElbRiot Festival",score:"",res:"Sosial",loc:"Hamburg"},
   {yr:"2025",date:"3. mai 2025",kamp:"FC St. Pauli vs VfB Stuttgart",score:"0-1",res:"Tap",loc:"Millerntor"},
-  {yr:"2024",date:"29. november 2024",kamp:"Julebord / Holstein Kiel 3-1",score:"3-1",res:"Seier",loc:"Martins"},
+  {yr:"2024",date:"29. november 2024",kamp:"FC St. Pauli vs Holstein Kiel",score:"3-1",res:"Seier",loc:"Millerntor"},
   {yr:"2024",date:"26. oktober 2024",kamp:"FC St. Pauli vs Wolfsburg",score:"0-0",res:"Uavgjort",loc:"Millerntor"},
   {yr:"2024",date:"25. august 2024",kamp:"FC St. Pauli vs FC Heidenheim",score:"0-2",res:"Tap",loc:"Millerntor"},
   {yr:"2024",date:"3. mai 2024",kamp:"Hamburger SV vs FC St. Pauli",score:"1-0",res:"Tap",loc:"Volkspark"},
-  {yr:"2024",date:"26. april 2024",kamp:"FC St. Pauli vs FC Hansa Rostock",score:"1-0",res:"Seier",loc:"Millerntor"},
+  {yr:"2024",date:"26. april 2024",kamp:"FC St. Pauli vs Hansa Rostock",score:"1-0",res:"Seier",loc:"Millerntor"},
   {yr:"2023",date:"30. september 2023",kamp:"Hertha Berlin vs FC St. Pauli",score:"1-2",res:"Seier",loc:"Olympiastadion"},
-  {yr:"2023",date:"5. august 2023",kamp:"FC St. Pauli vs Fortuna Dusseldorf",score:"0-0",res:"Uavgjort",loc:"Millerntor"},
-  {yr:"2023",date:"11. mars 2023",kamp:"FC St. Pauli vs Greuther Furth",score:"2-1",res:"Seier",loc:"Millerntor"},
+  {yr:"2023",date:"5. august 2023",kamp:"FC St. Pauli vs Fortuna Düsseldorf",score:"0-0",res:"Uavgjort",loc:"Millerntor"},
+  {yr:"2023",date:"28. mai 2023",kamp:"FC St. Pauli vs Karlsruher SC",score:"1-1",res:"Uavgjort",loc:"Millerntor"},
+  {yr:"2023",date:"11. mars 2023",kamp:"FC St. Pauli vs SpVgg Greuther Fürth",score:"2-1",res:"Seier",loc:"Millerntor"},
   {yr:"2023",date:"5. februar 2023",kamp:"FC St. Pauli vs Hannover 96",score:"2-0",res:"Seier",loc:"Millerntor"},
   {yr:"2022",date:"29. oktober 2022",kamp:"FC St. Pauli vs SV Darmstadt",score:"1-1",res:"Uavgjort",loc:"Millerntor"},
-  {yr:"2022",date:"22. oktober 2022",kamp:"Arminia Bielefeld vs FC St. Pauli",score:"2-0",res:"Tap",loc:"Schucoarena"},
-  {yr:"2022",date:"16. juli 2022",kamp:"FC St. Pauli vs FC Nurnberg",score:"3-2",res:"Seier",loc:"Millerntor"},
+  {yr:"2022",date:"22. oktober 2022",kamp:"Arminia Bielefeld vs FC St. Pauli",score:"2-0",res:"Tap",loc:"Arminia Bielefeld"},
+  {yr:"2022",date:"16. juli 2022",kamp:"FC St. Pauli vs FC Nürnberg",score:"3-2",res:"Seier",loc:"Millerntor"},
   {yr:"2022",date:"18. mars 2022",kamp:"FC St. Pauli vs FC Heidenheim",score:"1-0",res:"Seier",loc:"Millerntor"},
   {yr:"2021",date:"30. oktober 2021",kamp:"SV Werder Bremen vs FC St. Pauli",score:"1-1",res:"Uavgjort",loc:"Weserstadion"},
-  {yr:"2020",date:"30. oktober 2020",kamp:"Hamburger SV vs FC St. Pauli",score:"2-2",res:"Uavgjort",loc:"Martins"},
   {yr:"2019",date:"21. desember 2019",kamp:"FC St. Pauli vs Arminia Bielefeld",score:"3-0",res:"Seier",loc:"Millerntor"},
   {yr:"2019",date:"30. november 2019",kamp:"FC St. Pauli vs Hannover 96",score:"0-1",res:"Tap",loc:"Millerntor"},
-  {yr:"2018",date:"10. august 2018",kamp:"FC St. Pauli vs Darmstadt",score:"2-0",res:"Seier",loc:"Millerntor"},
-  {yr:"2018",date:"10. mars 2018",kamp:"FC St. Pauli vs Eintracht Braunschweig",score:"0-0",res:"Uavgjort",loc:"St. Pauli Eck"},
-  {yr:"2017",date:"23. september 2017",kamp:"FC St. Pauli vs Fortuna Dusseldorf",score:"1-2",res:"Tap",loc:"Millerntor"},
+  {yr:"2019",date:"10. mars 2019",kamp:"FC St. Pauli vs Hamburger SV",score:"0-4",res:"Tap",loc:"Millerntor"},
+  {yr:"2018",date:"30. september 2018",kamp:"Hamburger SV vs FC St. Pauli",score:"0-0",res:"Uavgjort",loc:"Hamburger SV"},
+  {yr:"2018",date:"10. august 2018",kamp:"FC St. Pauli vs SV Darmstadt",score:"2-0",res:"Seier",loc:"Millerntor"},
+  {yr:"2018",date:"28. april 2018",kamp:"FC St. Pauli vs SpVgg Greuther Fürth",score:"3-0",res:"Seier",loc:"Millerntor"},
+  {yr:"2018",date:"10. mars 2018",kamp:"FC St. Pauli vs Eintracht Braunschweig",score:"0-0",res:"Uavgjort",loc:"Millerntor"},
+  {yr:"2017",date:"23. september 2017",kamp:"FC St. Pauli vs Fortuna Düsseldorf",score:"1-2",res:"Tap",loc:"Millerntor"},
   {yr:"2017",date:"18. mars 2017",kamp:"FC St. Pauli vs Hannover 96",score:"0-0",res:"Uavgjort",loc:"Millerntor"},
-  {yr:"2017",date:"12. mars 2017",kamp:"FC St. Pauli vs Union Berlin",score:"2-3",res:"Tap",loc:"Millerntor"},
-  {yr:"2016",date:"15. mai 2016",kamp:"FC St. Pauli vs FC Kaiserslautern",score:"5-2",res:"Seier",loc:"St. Pauli Eck"},
-  {yr:"2016",date:"28. februar 2016",kamp:"MSV Duisburg vs FC St. Pauli",score:"0-2",res:"Seier",loc:"Schauinsland"},
-  {yr:"2015",date:"25. oktober 2015",kamp:"FC St. Pauli vs SC Freiburg",score:"1-0",res:"Seier",loc:"St. Pauli Eck"},
-  {yr:"2015",date:"16. august 2015",kamp:"FC St. Pauli vs Greuther Furth",score:"3-2",res:"Seier",loc:"Millerntor"},
+  {yr:"2017",date:"10. mars 2017",kamp:"FC St. Pauli vs FC Union Berlin",score:"1-2",res:"Tap",loc:"Millerntor"},
+  {yr:"2016",date:"10. september 2016",kamp:"FC St. Pauli vs DSC Arminia Bielefeld",score:"2-1",res:"Seier",loc:"Millerntor"},
+  {yr:"2016",date:"15. mai 2016",kamp:"FC St. Pauli vs FC Kaiserslautern",score:"5-2",res:"Seier",loc:"Millerntor"},
+  {yr:"2016",date:"28. februar 2016",kamp:"MSV Duisburg vs FC St. Pauli",score:"0-2",res:"Seier",loc:"MSV Duisburg"},
+  {yr:"2015",date:"25. oktober 2015",kamp:"FC St. Pauli vs SC Freiburg",score:"1-0",res:"Seier",loc:"Millerntor"},
+  {yr:"2015",date:"16. august 2015",kamp:"FC St. Pauli vs SpVgg Greuther Fürth",score:"3-2",res:"Seier",loc:"Millerntor"},
   {yr:"2015",date:"3. mai 2015",kamp:"FC St. Pauli vs RB Leipzig",score:"1-0",res:"Seier",loc:"Millerntor"},
+  {yr:"2014",date:"14. september 2014",kamp:"FC St. Pauli vs 1860 München",score:"1-2",res:"Tap",loc:"Millerntor"},
+  {yr:"2014",date:"11. mai 2014",kamp:"FC St. Pauli vs Erzgebirge Aue",score:"2-2",res:"Uavgjort",loc:"Millerntor"},
+  {yr:"2013",date:"14. september 2013",kamp:"FC St. Pauli vs FSV Frankfurt",score:"2-1",res:"Seier",loc:"Millerntor"},
+  {yr:"2013",date:"13. april 2013",kamp:"FC St. Pauli vs 1860 München",score:"3-1",res:"Seier",loc:"Millerntor"},
   {yr:"2012",date:"1. september 2012",kamp:"FC St. Pauli vs SV Sandhausen",score:"2-1",res:"Seier",loc:"Millerntor"},
+  {yr:"2011",date:"23. april 2011",kamp:"FC St. Pauli vs Werder Bremen",score:"1-3",res:"Tap",loc:"Millerntor"},
+  {yr:"2010",date:"30. oktober 2010",kamp:"FC St. Pauli vs Eintracht Frankfurt",score:"1-3",res:"Tap",loc:"Millerntor"},
+  {yr:"2010",date:"28. mars 2010",kamp:"FC St. Pauli vs Hansa Rostock",score:"2-0",res:"Seier",loc:"Millerntor"},
   {yr:"2009",date:"25. oktober 2009",kamp:"FC St. Pauli vs Energie Cottbus",score:"1-1",res:"Uavgjort",loc:"Millerntor"},
+  {yr:"2009",date:"10. mai 2009",kamp:"FC St. Pauli vs FSV Mainz 05",score:"2-0",res:"Seier",loc:"Millerntor"},
+  {yr:"2008",date:"31. august 2008",kamp:"FC St. Pauli vs Rot-Weiss Oberhausen",score:"4-1",res:"Seier",loc:"Millerntor"},
+  {yr:"2008",date:"2. mai 2008",kamp:"FC St. Pauli vs Erzgebirge Aue",score:"4-2",res:"Seier",loc:"Millerntor"},
   {yr:"2008",date:"2. mai 2008",kamp:"Grunnleggelsen av Partisan Lillestrøm",score:"",res:"Sosial",loc:"Lillestrom"},
 ];
 function rc(r){return r==="Seier"?"rw":r==="Tap"?"rl":r==="Uavgjort"?"rd":"rs";}
@@ -567,15 +595,19 @@ function renderFeed(f){
   c.innerHTML=h;
 }
 function ff(f,btn){document.querySelectorAll(".fb-row .fbtn").forEach(b=>b.classList.remove("active"));btn.classList.add("active");renderFeed(f);}
+function fmtDato(d){
+  const mnd={januar:'01',februar:'02',mars:'03',april:'04',mai:'05',juni:'06',juli:'07',august:'08',september:'09',oktober:'10',november:'11',desember:'12'};
+  const p=d.replace('.','').trim().split(/\s+/);
+  if(p.length>=3){const dd=p[0].padStart(2,'0');const mm=mnd[p[1].toLowerCase()]||'00';return dd+'/'+mm+'/'+p[2];}
+  return d;
+}
 function renderMatches(){
   const k=posts.filter(p=>p.score);
   document.getElementById("matchList").innerHTML=k.map(m=>{
-    const bc=m.res==="Seier"?"bw":m.res==="Tap"?"bl":"bd";
     return`<div class="mr">
-      <span style="font-family:'Bebas Neue',sans-serif;font-size:14px;color:rgba(255,255,255,.4);min-width:36px;">${m.yr}</span>
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;color:rgba(255,255,255,.4);min-width:74px;white-space:nowrap;">${fmtDato(m.date)}</span>
       <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${m.kamp}</span>
-      <span style="font-family:'Bebas Neue',sans-serif;font-size:16px;min-width:36px;text-align:center;">${m.score}</span>
-      <span class="badge ${bc}">${m.res}</span>
+      <span style="font-family:'Bebas Neue',sans-serif;font-size:16px;min-width:36px;text-align:right;margin-left:auto;">${m.score}</span>
     </div>`;
   }).join("");
 }
