@@ -46,7 +46,7 @@ body{
   position:absolute;
   bottom:0;left:0;right:0;
   height:2px;
-  background:linear-gradient(90deg,#0a0a0a 0%,#3d1208 40%,#5b2010 50%,#3d1208 60%,#0a0a0a 100%);
+  background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);
 }
 .hdr-logo{
   width:40px;height:40px;
@@ -61,7 +61,7 @@ body{
 .hdr-ig{
   margin-left:auto;
   background:linear-gradient(90deg,#3d1208,#1a0804);
-  border:1px solid rgba(192,57,43,0.4);color:#fff;
+  border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;
   border-radius:4px;
   padding:6px 12px;
   font-family:'Barlow Condensed',sans-serif;
@@ -225,7 +225,7 @@ input,select,textarea{font-size:16px !important;-webkit-text-size-adjust:100%;} 
   color:rgba(255,255,255,.5);cursor:pointer;white-space:nowrap;flex-shrink:0;
   text-transform:uppercase;
 }
-.fbtn.active{background:linear-gradient(90deg,#3d1208,#1a0804);border-color:rgba(192,57,43,0.5);color:#fff;}
+.fbtn.active{background:linear-gradient(90deg,#3d1208,#1a0804);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;}
 
 /* OM OSS */
 .ir{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:13px;}
@@ -259,18 +259,18 @@ input,select,textarea{font-size:16px !important;-webkit-text-size-adjust:100%;} 
 .pameldt-tag{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;
   background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
   border-radius:20px;padding:3px 10px;color:rgba(255,255,255,.7);}
-.pameldt-tag.meg{background:rgba(192,57,43,0.2);border-color:rgba(192,57,43,0.4);color:#fff;}
+.pameldt-tag.meg{background:rgba(192,57,43,0.2);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;}
 .meld-btn{width:100%;margin-top:10px;padding:9px;border:none;border-radius:5px;cursor:pointer;
   font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.06em;}
 .meld-btn.paa{background:linear-gradient(90deg,#3d1208,#1a0804);
-  border:1px solid rgba(192,57,43,0.4);color:#fff;}
+  border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;}
 .meld-btn.av{background:rgba(255,255,255,.05);
   border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.4);}
 
 /* NAVN-MODAL */
 .navn-modal{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:500;
   display:flex;align-items:center;justify-content:center;padding:20px;}
-.navn-boks{background:#1a0804;border:1px solid rgba(192,57,43,0.4);border-radius:10px;
+.navn-boks{background:#1a0804;border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;border-radius:10px;
   padding:20px;width:100%;max-width:320px;}
 .navn-boks h3{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.06em;
   background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);
@@ -282,7 +282,7 @@ input,select,textarea{font-size:16px !important;-webkit-text-size-adjust:100%;} 
 .navn-knapper{display:flex;gap:8px;}
 .navn-ok{flex:1;padding:10px;border:none;border-radius:5px;cursor:pointer;
   background:linear-gradient(90deg,#3d1208,#1a0804);
-  border:1px solid rgba(192,57,43,0.4);color:#fff;
+  border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;
   font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.06em;}
 .navn-avbryt{padding:10px 14px;border:1px solid rgba(255,255,255,.1);border-radius:5px;
   cursor:pointer;background:rgba(255,255,255,.05);color:rgba(255,255,255,.4);
@@ -308,7 +308,7 @@ input,select,textarea{font-size:16px !important;-webkit-text-size-adjust:100%;} 
 .komm-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
   border-radius:5px;color:#fff;padding:7px 10px;font-family:'Barlow',sans-serif;
   font-size:12px;resize:none;}
-.komm-send{background:linear-gradient(90deg,#3d1208,#1a0804);border:1px solid rgba(192,57,43,0.4);color:#fff;border-radius:5px;padding:10px 14px;cursor:pointer;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.06em;flex-shrink:0;min-width:60px;-webkit-appearance:none;touch-action:manipulation;}
+.komm-send{background:linear-gradient(90deg,#3d1208,#1a0804);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;border-radius:5px;padding:10px 14px;cursor:pointer;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.06em;flex-shrink:0;min-width:60px;-webkit-appearance:none;touch-action:manipulation;}
 </style>
 </head>
 <body>
@@ -320,7 +320,7 @@ input,select,textarea{font-size:16px !important;-webkit-text-size-adjust:100%;} 
     <div class="hdr-sub">Offisiell supporterklubb</div>
   </div>
   <a class="hdr-ig" href="https://www.instagram.com/therealpartisanlillestrom/" target="_blank">
-    &#128247; Folg oss
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>Følg oss
   </a>
 </div>
 
@@ -605,9 +605,9 @@ renderFeed("alle");renderMatches();
 // ---- ARRANGEMENTER ----
 
 const typeInfo = {
-  kampvisning: {emoji:'⚽', label:'Kampvisning',       color:'#c0392b'},
+  kampvisning: {emoji:'<span style="filter:grayscale(1) contrast(1.5);">⚽</span>', label:'Kampvisning', color:'#c0392b'},
   sosial:      {emoji:'🍺', label:'Sosialt',       color:'#2980b9'},
-  stpauli:     {emoji:'🏴‍☠️', label:'Tur til St. Pauli', color:'#8e44ad'},
+  stpauli:     {emoji:'☠️', label:'Tur til St. Pauli', color:'#8e44ad'},
   annet:       {emoji:'📌', label:'Annet', color:'#7f8c8d'},
 };
 
@@ -675,8 +675,15 @@ function lagreArr() {
   visArr('alle');
 }
 
+function visSlettBekreft(id) {
+  const el = document.getElementById('slettBekreft_' + id);
+  if (el) el.style.display = 'block';
+}
+function skjulSlettBekreft(id) {
+  const el = document.getElementById('slettBekreft_' + id);
+  if (el) el.style.display = 'none';
+}
 function slettArr(id) {
-  if (!confirm('Slette dette arrangementet?')) return;
   try {
     const data = localStorage.getItem('pl_arr');
     if (data) {
@@ -742,19 +749,27 @@ function kortHtml(a, fortid) {
   const tid = dato.toLocaleTimeString('nb-NO', {hour:'2-digit',minute:'2-digit'});
   const erBruker = a.id.startsWith('u_');
 
-  const html = `<div style="background:var(--g1);border:1px solid rgba(255,255,255,.06);border-radius:8px;margin-bottom:10px;overflow:hidden;${fortid?'opacity:0.6':''}">
-    <div style="background:${info.color}22;border-bottom:2px solid ${info.color};padding:12px 14px;">
+  const html = `<div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:2px solid #444;border-radius:8px;margin-bottom:10px;overflow:hidden;${fortid?'opacity:0.6':''}">
+    <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);padding:12px 14px;">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
         <div style="display:flex;align-items:center;gap:8px;min-width:0;">
-          <span style="font-size:20px;flex-shrink:0;">${info.emoji}</span>
+          <span style="font-size:24px;flex-shrink:0;display:flex;align-items:center;justify-content:center;width:32px;height:32px;">${info.emoji}</span>
           <div style="min-width:0;">
             <div style="font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.04em;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${a.tittel}</div>
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:${info.color};">${info.label}</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);">${info.label}</div>
           </div>
         </div>
-        ${erBruker ? `<button onclick="slettArr('${a.id}')" style="background:rgba(192,57,43,.2);border:none;color:rgba(255,100,100,.7);width:28px;height:28px;border-radius:4px;cursor:pointer;font-size:14px;flex-shrink:0;">✕</button>` : ''}
+        <button onclick="visSlettBekreft('${a.id}')" style="background:rgba(192,57,43,.2);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:rgba(255,100,100,.7);padding:4px 10px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:5px;flex-shrink:0;">✕ Slett</button>
+      </div>
+      <div id="slettBekreft_${a.id}" style="display:none;margin-top:10px;padding:10px;background:rgba(192,57,43,.1);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:rgba(255,255,255,.8);margin-bottom:8px;">Er du sikker på at du vil slette dette arrangementet?</div>
+        <div style="display:flex;gap:8px;">
+          <button onclick="slettArr('${a.id}')" style="background:rgba(192,57,43,.3);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;padding:6px 14px;cursor:pointer;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.06em;">Ja, slett</button>
+          <button onclick="skjulSlettBekreft('${a.id}')" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);padding:6px 14px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;">Avbryt</button>
+        </div>
       </div>
     </div>
+    <div style="height:2px;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);"></div>
     <div style="padding:12px 14px;">
       <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
@@ -773,7 +788,7 @@ function kortHtml(a, fortid) {
         <div id="komm_navn_${a.id}" style="display:none;gap:6px;margin-bottom:6px;">
           <input id="komm_navn_inp_${a.id}" class="komm-input" type="text"
             placeholder="Ditt navn..." style="flex:1;">
-          <button type="button" style="background:linear-gradient(90deg,#3d1208,#1a0804);border:1px solid rgba(192,57,43,0.4);color:#fff;border-radius:5px;padding:10px 12px;font-size:14px;cursor:pointer;touch-action:manipulation;"
+          <button type="button" style="background:linear-gradient(90deg,#3d1208,#1a0804);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;border-radius:5px;padding:10px 12px;font-size:14px;cursor:pointer;touch-action:manipulation;"
             onclick="bekreftKommNavn('${a.id}')">OK</button>
         </div>
         <div style="display:flex;gap:6px;">
@@ -855,7 +870,7 @@ window.addEventListener('partisan_page_change', (e) => {
       <span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;">Telefonnummer <span style="font-weight:400;color:rgba(255,255,255,.4);font-size:13px;">(valgfritt)</span></span>
     </div>
     <a href="mailto:partisan.lillestrom@gmail.com?subject=Innmelding%20Partisan%20Lillestr%C3%B8m&body=Hei!%0A%0AJeg%20%C3%B8nsker%20%C3%A5%20melde%20meg%20inn%20i%20Partisan%20Lillestr%C3%B8m.%0A%0ANavn%3A%20%0AF%C3%B8dselsdato%3A%20%0ATelefonnummer%3A%20"
-       style="display:block;background:linear-gradient(90deg,#3d1208,#1a0804);border:1px solid rgba(192,57,43,0.4);color:#fff;text-align:center;padding:13px;border-radius:6px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.1em;text-decoration:none;">
+       style="display:block;background:linear-gradient(90deg,#3d1208,#1a0804);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;text-align:center;padding:13px;border-radius:6px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.1em;text-decoration:none;">
       &#9993; Send innmeldingse-post
     </a>
   </div>
@@ -885,7 +900,7 @@ window.addEventListener('partisan_page_change', (e) => {
       Arrangementer
     </div>
     <button onclick="toggleForm()" id="nyBtn"
-      style="background:linear-gradient(90deg,#3d1208,#1a0804);border:1px solid rgba(192,57,43,0.4);color:#fff;padding:8px 14px;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.06em;cursor:pointer;">
+      style="background:linear-gradient(90deg,#3d1208,#1a0804);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;padding:8px 14px;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.06em;cursor:pointer;">
       + Nytt
     </button>
   </div>
@@ -919,7 +934,7 @@ window.addEventListener('partisan_page_change', (e) => {
 
     <div style="display:flex;gap:8px;">
       <button onclick="lagreArr()"
-        style="flex:1;background:linear-gradient(90deg,#3d1208,#1a0804);border:1px solid rgba(192,57,43,0.4);color:#fff;padding:12px;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;cursor:pointer;">
+        style="flex:1;background:linear-gradient(90deg,#3d1208,#1a0804);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;padding:12px;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;cursor:pointer;">
         Lagre arrangement
       </button>
       <button onclick="toggleForm()"
@@ -932,9 +947,9 @@ window.addEventListener('partisan_page_change', (e) => {
   <!-- Filter-knapper -->
   <div class="fb-row" style="padding-top:4px;margin-bottom:8px;">
     <button class="fbtn active" onclick="filtrerArr('alle',this)">Alle</button>
-    <button class="fbtn" onclick="filtrerArr('kampvisning',this)">⚽ Kampvisning</button>
+    <button class="fbtn" onclick="filtrerArr('kampvisning',this)"><span style="filter:grayscale(1) contrast(1.5);">⚽</span> Kampvisning</button>
     <button class="fbtn" onclick="filtrerArr('sosial',this)">🍺 Sosialt</button>
-    <button class="fbtn" onclick="filtrerArr('stpauli',this)">🏴‍☠️ St. Pauli</button>
+    <button class="fbtn" onclick="filtrerArr('stpauli',this)">☠️ St. Pauli</button>
   </div>
 
   <!-- Liste over arrangementer -->
