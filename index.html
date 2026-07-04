@@ -34,7 +34,8 @@
   background-origin:border-box;
   background-clip:padding-box,border-box;
 }
-.gb-dark{background-image:linear-gradient(90deg,#3d1208,#1a0804),var(--grad-accent);}
+.gb-dark{background-image:linear-gradient(90deg,#3d1208,#1a0804),var(--grad-accent);
+  font-family:'Bebas Neue',sans-serif;letter-spacing:.06em;}
 .gb-solid{background-image:linear-gradient(#0a0a0a,#0a0a0a),var(--grad-accent);}
 .gb-trans{background-image:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),var(--grad-accent);}
 .sec-title-style{
@@ -52,6 +53,34 @@
 .card-bg{background:var(--grad-bg);border:1px solid #444;border-radius:8px;}
 .form-field{width:100%;background:var(--grad-bg);border:1px solid rgba(255,255,255,.2);color:#fff;padding:9px 10px;font-family:'Barlow',sans-serif;font-size:13px;}
 .form-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5);display:block;margin-bottom:4px;}
+
+/* Gjenbrukbare rader og tekst */
+.info-row{display:flex;align-items:center;gap:6px;margin-bottom:6px;}
+.info-val{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,.8);}
+.info-val-dim{font-family:'Barlow Condensed',sans-serif;font-size:13px;color:rgba(255,255,255,.6);}
+.info-meta{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;color:rgba(255,255,255,.35);letter-spacing:.04em;}
+.body-dim{font-family:'Barlow',sans-serif;font-size:12px;color:rgba(255,255,255,.4);line-height:1.5;}
+.body-text{font-family:'Barlow',sans-serif;font-size:13px;color:rgba(255,255,255,.85);line-height:1.7;}
+.heading-bebas{font-family:'Bebas Neue',sans-serif;letter-spacing:.04em;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.sub-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.section-divider{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.1em;color:rgba(255,255,255,.4);text-transform:uppercase;}
+.list-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.list-row:last-child{border-bottom:none;}
+.list-icon{font-size:14px;flex-shrink:0;}
+.list-text{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;}
+.styre-row{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.styre-row:last-child{border-bottom:none;}
+.styre-navn{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;}
+.styre-rolle{font-size:11px;color:rgba(255,255,255,.4);font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.05em;}
+.logo-caption{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;color:rgba(255,255,255,.7);text-align:center;}
+.slett-btn{color:rgba(255,255,255,.4);padding:4px 10px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:5px;flex-shrink:0;border-radius:3px;}
+.slett-bekreft{display:none;margin-top:10px;padding:10px;background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.3);border-radius:6px;}
+.slett-ja{background:rgba(192,57,43,.3);border:1px solid rgba(192,57,43,.5);border-radius:4px;color:#fff;padding:6px 14px;cursor:pointer;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.06em;}
+.slett-nei{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px;color:rgba(255,255,255,.5);padding:6px 14px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;}
+.kort-emoji{font-size:24px;flex-shrink:0;display:flex;align-items:center;justify-content:center;width:32px;height:32px;}
+.kort-pad{padding:12px 14px;}
+.komm-ok-btn{color:#fff;border-radius:5px;padding:10px 12px;font-size:14px;cursor:pointer;touch-action:manipulation;}
+.cta-btn{display:block;color:#fff;text-align:center;padding:13px;border-radius:6px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.1em;text-decoration:none;}
 html{overflow:hidden;height:100%;}
 body{
   overflow:hidden;
@@ -426,21 +455,21 @@ setAppH();
 <div id="kamper" class="page" style="display:none;flex-direction:column;overflow:hidden;">
   <div style="flex-shrink:0;padding:16px 14px 16px;">
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">
-      <div style="background:var(--grad-bg);border:1px solid #444;border-radius:6px;padding:12px 6px;text-align:center;">
+      <div class="card-bg" style="border-radius:6px;padding:12px 6px;text-align:center;">
         <div class="stat-num" style="font-size:28px;">50</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;">Totalt</div>
+        <div class="sub-label" style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;">Totalt</div>
       </div>
-      <div style="background:var(--grad-bg);border:1px solid #444;border-radius:6px;padding:12px 6px;text-align:center;">
+      <div class="card-bg" style="border-radius:6px;padding:12px 6px;text-align:center;">
         <div class="stat-num" style="font-size:28px;">24</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;">Seier · 48%</div>
+        <div class="sub-label" style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;">Seier · 48%</div>
       </div>
-      <div style="background:var(--grad-bg);border:1px solid #444;border-radius:6px;padding:12px 6px;text-align:center;">
+      <div class="card-bg" style="border-radius:6px;padding:12px 6px;text-align:center;">
         <div class="stat-num" style="font-size:28px;">12</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;">Uavg. · 24%</div>
+        <div class="sub-label" style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;">Uavg. · 24%</div>
       </div>
-      <div style="background:var(--grad-bg);border:1px solid #444;border-radius:6px;padding:12px 6px;text-align:center;">
+      <div class="card-bg" style="border-radius:6px;padding:12px 6px;text-align:center;">
         <div class="stat-num red" style="font-size:28px;">14</div>
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;">Tap · 28%</div>
+        <div class="sub-label" style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;">Tap · 28%</div>
       </div>
     </div>
   </div>
@@ -455,19 +484,19 @@ setAppH();
   <div style="display:flex;flex-direction:column;align-items:center;gap:32px;">
     <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
       <img src="logo-icon.png" style="width:240px;height:240px;object-fit:contain;border-radius:12px;" alt="Partisan Lillestrøm - Original">
-      <span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;color:rgba(255,255,255,.7);text-align:center;">Partisan Lillestrøm — Original</span>
+      <span class="logo-caption">Partisan Lillestrøm — Original</span>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
       <img src="fight-like-a-girl.jpeg" style="width:200px;height:200px;object-fit:cover;border-radius:50%;" alt="En hyllest til St. Pauli's kvinnelige supportere">
-      <span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;color:rgba(255,255,255,.7);text-align:center;">En hyllest til St. Pauli's kvinnelige supportere</span>
+      <span class="logo-caption">En hyllest til St. Pauli's kvinnelige supportere</span>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
       <img src="veteranen-logo.jpeg" style="width:200px;height:200px;object-fit:cover;border-radius:50%;" alt="10-års jubileum">
-      <span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;color:rgba(255,255,255,.7);text-align:center;">10-års jubileum</span>
+      <span class="logo-caption">10-års jubileum</span>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
       <img src="logo-main.png" style="max-width:260px;height:auto;object-fit:contain;" alt="15-års jubileum">
-      <span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;color:rgba(255,255,255,.7);text-align:center;">15-års jubileum</span>
+      <span class="logo-caption">15-års jubileum</span>
     </div>
   </div>
 </div>
@@ -476,13 +505,13 @@ setAppH();
 <div id="om" class="page" style="padding:16px 14px 60px;overflow-y:auto;overscroll-behavior:contain;">
   <div class="sec-title-style" style="margin-bottom:16px;">Om foreningen</div>
   <div class="card-bg" style="padding:16px;margin-bottom:16px;">
-    <p style="font-family:'Barlow',sans-serif;font-size:13px;line-height:1.7;color:rgba(255,255,255,.85);">
+    <p class="body-text">
       Partisan Lillestrøm har siden 2008 hatt status som offisiell supporterklubb i paraplyorganisasjonen Fanclubsprecherrat der Fanclubs des FC St. Pauli. For å opprettholde denne statusen og forsikre oss om at de som representerer Partisan Lillestrøm har et forpliktende eierskap til både Partisan Lillestrøm og FC St. Paulis verdigrunnlag og karakter, dannet grunnleggerne av Partisan Lillestrøm en forening i 2022.
     </p>
-    <p style="font-family:'Barlow',sans-serif;font-size:13px;line-height:1.7;color:rgba(255,255,255,.85);margin-top:12px;">
+    <p class="body-text" style="margin-top:12px;">
       Foreningen er en frittstående, selveiende juridisk person. Formålet er å støtte FC St. Pauli gjennom medlemskap i Fanclubsprecherrat, tilby et fast møtested i Lillestrøm-området for å se kamper, delta på hjemme- og bortekamper, og arrangere en årlig innsamlingsaksjon til Fanladen eller andre prosjekter stemt frem av medlemmene.
     </p>
-    <p style="font-family:'Barlow',sans-serif;font-size:13px;line-height:1.7;color:rgba(255,255,255,.85);margin-top:12px;">
+    <p class="body-text" style="margin-top:12px;">
       Medlemmer må stå inne for klubbens holdning og karakter, med nulltoleranse for rasisme, homofobi, sexisme og anti-feminisme. Alle medlemmer har rett til å delta på årsmøte, har stemmerett og er valgbare til tillitsverv. I tillegg til foreningens egne vedtekter gjelder vedtektene fattet av <a href="https://www.fanclubsprecherrat.de/selbstverstaendnis/" target="_blank" style="color:#e8a878;text-decoration:underline;">Fanclubsprecherrat der Fanclubs des FC St. Pauli</a>.
     </p>
   </div>
@@ -500,20 +529,20 @@ setAppH();
 
   <div class="sec-title-style" style="margin-bottom:12px;">Nåværende styre</div>
   <div class="card-box card-bg" style="margin:0 0 16px;">
-    <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;">Bjorn Olsen</div><div style="font-size:11px;color:rgba(255,255,255,.4);font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.05em;">Styreleder</div>
+    <div class="styre-row">
+      <div class="styre-navn">Bjorn Olsen</div><div class="styre-rolle">Styreleder</div>
     </div>
-    <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;">Trond Granli</div><div style="font-size:11px;color:rgba(255,255,255,.4);font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.05em;">Nestleder</div>
+    <div class="styre-row">
+      <div class="styre-navn">Trond Granli</div><div class="styre-rolle">Nestleder</div>
     </div>
-    <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;">Espen Berge</div><div style="font-size:11px;color:rgba(255,255,255,.4);font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.05em;">Styremedlem og økonomiansvarlig</div>
+    <div class="styre-row">
+      <div class="styre-navn">Espen Berge</div><div class="styre-rolle">Styremedlem og økonomiansvarlig</div>
     </div>
-    <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;">Eirik Dreyer-Sveen</div><div style="font-size:11px;color:rgba(255,255,255,.4);font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.05em;">Styremedlem</div>
+    <div class="styre-row">
+      <div class="styre-navn">Eirik Dreyer-Sveen</div><div class="styre-rolle">Styremedlem</div>
     </div>
-    <div style="padding:10px 0;">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;">Simen Bakken Lorentzen</div><div style="font-size:11px;color:rgba(255,255,255,.4);font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.05em;">Styremedlem</div>
+    <div class="styre-row">
+      <div class="styre-navn">Simen Bakken Lorentzen</div><div class="styre-rolle">Styremedlem</div>
     </div>
   </div>
 </div>
@@ -521,7 +550,7 @@ setAppH();
 <!-- NESTE KAMP STICKY BAR -->
 <div id="nesteKampBar" style="position:fixed;bottom:54px;left:0;right:0;max-width:480px;margin:0 auto;background:#0a0a0a;border-top:2px solid transparent;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1 0 0 0;z-index:199;padding:7px 14px 7px;box-shadow:0 4px 0 4px #0a0a0a;">
   <div id="nesteKampBar_innhold" style="display:flex;align-items:center;justify-content:center;gap:0;width:100%;overflow:hidden;">
-    <span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:rgba(255,255,255,.4);">Laster...</span>
+    <span class="info-meta" style="font-size:12px;">Laster...</span>
   </div>
 </div>
 
@@ -568,9 +597,9 @@ function renderMatches(){
   const k=posts.filter(p=>p.score);
   document.getElementById("matchList").innerHTML=k.map(m=>{
     return`<div class="mr">
-      <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;color:rgba(255,255,255,.4);min-width:74px;white-space:nowrap;">${fmtDato(m.date)}</span>
-      <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${m.kamp}</span>
-      <span style="font-family:'Bebas Neue',sans-serif;font-size:16px;min-width:36px;text-align:right;margin-left:auto;">${m.score}</span>
+      <span class="info-meta" style="min-width:74px;white-space:nowrap;">${fmtDato(m.date)}</span>
+      <span class="info-val" style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${m.kamp}</span>
+      <span class="heading-bebas" style="font-size:16px;min-width:36px;text-align:right;margin-left:auto;white-space:normal;">${m.score}</span>
     </div>`;
   }).join("");
 }
@@ -743,8 +772,8 @@ function visArr(filter) {
   if (arr.length === 0) {
     container.innerHTML = `<div style="text-align:center;padding:40px 20px;color:rgba(255,255,255,.4);">
       <div style="font-size:40px;margin-bottom:12px;">📅</div>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;">Ingen arrangementer</div>
-      <div style="font-family:'Barlow',sans-serif;font-size:12px;margin-top:6px;">Trykk + Nytt for å opprette et arrangement</div>
+      <div class="sub-label" style="font-size:16px;">Ingen arrangementer</div>
+      <div class="body-dim" style="margin-top:6px;">Trykk + Nytt for å opprette et arrangement</div>
     </div>`;
     return;
   }
@@ -756,12 +785,12 @@ function visArr(filter) {
   let html = '';
 
   if (kommende.length > 0) {
-    html += `<div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.1em;color:rgba(255,255,255,.4);margin-bottom:8px;text-transform:uppercase;">Kommende</div>`;
+    html += `<div class="section-divider" style="margin-bottom:8px;">Kommende</div>`;
     kommende.forEach(a => { html += kortHtml(a, false); });
   }
 
   if (tidligere.length > 0) {
-    html += `<div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:.1em;color:rgba(255,255,255,.4);margin:16px 0 8px;text-transform:uppercase;">Tidligere</div>`;
+    html += `<div class="section-divider" style="margin:16px 0 8px;">Tidligere</div>`;
     tidligere.reverse().forEach(a => { html += kortHtml(a, true); });
   }
 
@@ -776,39 +805,39 @@ function kortHtml(a, fortid) {
   const erBruker = a.id.startsWith('u_');
 
   const html = `<div class="card-bg" style="margin-bottom:10px;overflow:hidden;${fortid?'opacity:0.6':''}">
-    <div style="padding:12px 14px;">
+    <div class="kort-pad">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
         <div style="display:flex;align-items:center;gap:8px;min-width:0;">
-          <span style="font-size:24px;flex-shrink:0;display:flex;align-items:center;justify-content:center;width:32px;height:32px;">${info.emoji}</span>
+          <span class="kort-emoji">${info.emoji}</span>
           <div style="min-width:0;">
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.04em;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${a.tittel}</div>
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);">${info.label}</div>
+            <div class="heading-bebas" style="font-size:17px;">${a.tittel}</div>
+            <div class="sub-label">${info.label}</div>
           </div>
         </div>
-        <button class="gb gb-dark" onclick="visSlettBekreft('${a.id}')" style="color:rgba(255,255,255,.4);padding:4px 10px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:5px;flex-shrink:0;border-radius:3px;">✕ Slett</button>
+        <button class="gb gb-dark slett-btn" onclick="visSlettBekreft('${a.id}')">✕ Slett</button>
       </div>
-      <div id="slettBekreft_${a.id}" style="display:none;margin-top:10px;padding:10px;background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.3);border-radius:6px;">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:rgba(255,255,255,.8);margin-bottom:8px;">Er du sikker på at du vil slette dette arrangementet?</div>
+      <div id="slettBekreft_${a.id}" class="slett-bekreft">
+        <div class="info-val" style="margin-bottom:8px;">Er du sikker på at du vil slette dette arrangementet?</div>
         <div style="display:flex;gap:8px;">
-          <button onclick="slettArr('${a.id}')" style="background:rgba(192,57,43,.3);border:1px solid rgba(192,57,43,.5);border-radius:4px;color:#fff;padding:6px 14px;cursor:pointer;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.06em;">Ja, slett</button>
-          <button onclick="skjulSlettBekreft('${a.id}')" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px;color:rgba(255,255,255,.5);padding:6px 14px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;">Avbryt</button>
+          <button class="slett-ja" onclick="slettArr('${a.id}')">Ja, slett</button>
+          <button class="slett-nei" onclick="skjulSlettBekreft('${a.id}')">Avbryt</button>
         </div>
       </div>
     </div>
     <div style="height:2px;background:var(--grad-accent);"></div>
-    <div style="padding:12px 14px;">
-      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+    <div class="kort-pad">
+      <div class="info-row">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-        <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,.8);">${dag} kl. ${tid}</span>
+        <span class="info-val">${dag} kl. ${tid}</span>
       </div>
-      ${a.sted ? `<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+      ${a.sted ? `<div class="info-row">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;color:rgba(255,255,255,.6);">${a.sted}</span>
+        <span class="info-val-dim">${a.sted}</span>
       </div>` : ''}
-      ${a.beskr ? `<div style="font-family:'Barlow',sans-serif;font-size:12px;color:rgba(255,255,255,.4);line-height:1.5;margin-top:4px;">${a.beskr}</div>` : ''}
-      ${a.opprettetAv ? `<div style="display:flex;align-items:center;gap:6px;margin-top:8px;">
+      ${a.beskr ? `<div class="body-dim" style="margin-top:4px;">${a.beskr}</div>` : ''}
+      ${a.opprettetAv ? `<div class="info-row" style="margin-top:8px;margin-bottom:0;">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-        <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;color:rgba(255,255,255,.35);letter-spacing:.04em;">Opprettet av ${a.opprettetAv}</span>
+        <span class="info-meta">Opprettet av ${a.opprettetAv}</span>
       </div>` : ''}
       <div id="rsvp_${a.id}" style="margin-top:10px;">
         <button class="meld-btn gb gb-dark paa" onclick="meldPaa('${a.id}', '')">+ Meld deg på</button>
@@ -818,7 +847,7 @@ function kortHtml(a, fortid) {
         <div id="komm_navn_${a.id}" style="display:none;gap:6px;margin-bottom:6px;">
           <input id="komm_navn_inp_${a.id}" class="komm-input" type="text"
             placeholder="Ditt navn..." style="flex:1;">
-          <button type="button" class="gb gb-dark" style="color:#fff;border-radius:5px;padding:10px 12px;font-size:14px;cursor:pointer;touch-action:manipulation;"
+          <button type="button" class="gb gb-dark komm-ok-btn"
             onclick="bekreftKommNavn('${a.id}')">OK</button>
         </div>
         <div style="display:flex;gap:6px;">
@@ -848,55 +877,54 @@ window.addEventListener('partisan_page_change', (e) => {
 
   <div class="sec-title-style" style="margin-bottom:12px;">Som medlem har du rett til</div>
   <div class="card-bg" style="padding:4px 16px;margin-bottom:16px;">
-    <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);">
-      <span style="color:rgba(192,57,43,0.5);font-size:12px;flex-shrink:0;">&#9632;</span>
-      <span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;">Delta på årsmøte</span>
+    <div class="list-row">
+      <span class="list-icon">✓</span>
+      <span class="list-text">Delta på årsmøte</span>
     </div>
-    <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);">
-      <span style="color:rgba(192,57,43,0.5);font-size:12px;flex-shrink:0;">&#9632;</span>
-      <span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;">Stemmerett</span>
+    <div class="list-row">
+      <span class="list-icon">✓</span>
+      <span class="list-text">Stemmerett</span>
     </div>
-    <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);">
-      <span style="color:rgba(192,57,43,0.5);font-size:12px;flex-shrink:0;">&#9632;</span>
-      <span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;">Valgbar til tillitsverv i foreningen</span>
+    <div class="list-row">
+      <span class="list-icon">✓</span>
+      <span class="list-text">Valgbar til tillitsverv i foreningen</span>
     </div>
-    <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;">
-      <span style="color:rgba(192,57,43,0.5);font-size:12px;flex-shrink:0;margin-top:3px;">&#9632;</span>
-      <span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;">Billetter tildelt Partisan Lillestrøm ihht. omforente tildelingskriterier</span>
+    <div class="list-row" style="align-items:flex-start;">
+      <span class="list-icon" style="margin-top:2px;">✓</span>
+      <span class="list-text">Billetter tildelt Partisan Lillestrøm ihht. omforente tildelingskriterier</span>
     </div>
   </div>
 
   <div class="sec-title-style" style="margin-bottom:12px;">Slik melder du deg inn</div>
   <div class="card-bg" style="padding:16px;margin-bottom:16px;">
-    <p style="font-family:'Barlow',sans-serif;font-size:13px;color:rgba(255,255,255,.7);margin-bottom:14px;line-height:1.6;">
+    <p class="body-dim" style="font-size:13px;color:rgba(255,255,255,.7);margin-bottom:14px;line-height:1.6;">
       Send e-post til <strong style="color:#fff;">partisan.lillestrom@gmail.com</strong> med følgende opplysninger:
     </p>
-    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);">
-      <span style="color:rgba(192,57,43,0.5);font-size:12px;flex-shrink:0;">&#9632;</span>
-      <span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;">Navn</span>
+    <div class="list-row">
+      <span class="list-icon">☠️</span>
+      <span class="list-text">Navn</span>
     </div>
-    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);">
-      <span style="color:rgba(192,57,43,0.5);font-size:12px;flex-shrink:0;">&#9632;</span>
-      <span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;">Fødselsdato <span style="font-weight:400;color:rgba(255,255,255,.4);font-size:13px;">(valgfritt)</span></span>
+    <div class="list-row">
+      <span class="list-icon">☠️</span>
+      <span class="list-text">Fødselsdato <span style="font-weight:400;color:rgba(255,255,255,.4);font-size:13px;">(valgfritt)</span></span>
     </div>
-    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;margin-bottom:14px;">
-      <span style="color:rgba(192,57,43,0.5);font-size:12px;flex-shrink:0;">&#9632;</span>
-      <span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;">Telefonnummer <span style="font-weight:400;color:rgba(255,255,255,.4);font-size:13px;">(valgfritt)</span></span>
+    <div class="list-row" style="border-bottom:none;margin-bottom:14px;">
+      <span class="list-icon">☠️</span>
+      <span class="list-text">Telefonnummer <span style="font-weight:400;color:rgba(255,255,255,.4);font-size:13px;">(valgfritt)</span></span>
     </div>
-    <a class="gb gb-dark" href="mailto:partisan.lillestrom@gmail.com?subject=Innmelding%20Partisan%20Lillestr%C3%B8m&body=Hei!%0A%0AJeg%20%C3%B8nsker%20%C3%A5%20melde%20meg%20inn%20i%20Partisan%20Lillestr%C3%B8m.%0A%0ANavn%3A%20%0AF%C3%B8dselsdato%3A%20%0ATelefonnummer%3A%20"
-       style="display:block;color:#fff;text-align:center;padding:13px;border-radius:6px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.1em;text-decoration:none;">
+    <a class="gb gb-dark cta-btn" href="mailto:partisan.lillestrom@gmail.com?subject=Innmelding%20Partisan%20Lillestr%C3%B8m&body=Hei!%0A%0AJeg%20%C3%B8nsker%20%C3%A5%20melde%20meg%20inn%20i%20Partisan%20Lillestr%C3%B8m.%0A%0ANavn%3A%20%0AF%C3%B8dselsdato%3A%20%0ATelefonnummer%3A%20">
       &#9993; Send innmeldings-epost
     </a>
   </div>
 
   <div class="sec-title-style" style="margin-bottom:12px;">Betal medlemskontingent</div>
   <div class="card-bg" style="padding:20px 16px;margin-bottom:16px;text-align:center;">
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Vipps-nummer</div>
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:44px;color:#fff;letter-spacing:.05em;line-height:1;margin-bottom:4px;">743097</div>
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;color:rgba(255,255,255,.4);margin-bottom:18px;">200,- kr per år</div>
+    <div class="sub-label" style="font-size:14px;font-weight:600;color:rgba(255,255,255,.5);margin-bottom:4px;">Vipps-nummer</div>
+    <div class="heading-bebas" style="font-size:44px;letter-spacing:.05em;line-height:1;margin-bottom:4px;white-space:normal;">743097</div>
+    <div class="info-meta" style="font-size:13px;color:rgba(255,255,255,.4);margin-bottom:18px;">200,- kr per år</div>
     <img src="vipps-qr.png" alt="Vipps QR-kode"
          style="width:190px;height:190px;object-fit:contain;border-radius:10px;background:#fff;padding:10px;display:inline-block;">
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;color:rgba(255,255,255,.4);margin-top:10px;text-transform:uppercase;letter-spacing:.1em;">Scan QR-koden med Vipps-appen</div>
+    <div class="sub-label" style="margin-top:10px;color:rgba(255,255,255,.4);letter-spacing:.1em;">Scan QR-koden med Vipps-appen</div>
   </div>
 
 </div>
@@ -908,7 +936,7 @@ window.addEventListener('partisan_page_change', (e) => {
   <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 14px 12px;">
     <div class="sec-title-style">Arrangementer</div>
     <button class="gb gb-dark" onclick="toggleForm()" id="nyBtn"
-      style="color:#fff;padding:8px 14px;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.06em;cursor:pointer;">
+      style="color:#fff;padding:8px 14px;border-radius:4px;font-size:16px;cursor:pointer;">
       + Nytt
     </button>
   </div>
@@ -924,14 +952,14 @@ window.addEventListener('partisan_page_change', (e) => {
     <label class="form-label">Type arrangement</label>
     <input type="hidden" id="fType" value="kampvisning">
     <div id="fTypeWrap" style="position:relative;margin-bottom:12px;">
-      <div id="fTypeSelected" onclick="document.getElementById('fTypeOpts').style.display=document.getElementById('fTypeOpts').style.display==='block'?'none':'block'" class="form-field" style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:space-between;">
+      <div id="fTypeSelected" onclick="document.getElementById('fTypeOpts').style.display=document.getElementById('fTypeOpts').style.display==='block'?'none':'block'" class="form-field list-text" style="cursor:pointer;display:flex;align-items:center;justify-content:space-between;">
         <span><span style="filter:grayscale(1) contrast(1.5);display:inline-block;">⚽</span> Kampvisning</span>
         <span style="font-size:10px;color:rgba(255,255,255,.5);">▼</span>
       </div>
       <div id="fTypeOpts" style="display:none;position:absolute;top:100%;left:0;right:0;z-index:50;background:#1a0804;border:1px solid rgba(255,255,255,.2);">
-        <div onclick="velgType('kampvisning','<span style=filter:grayscale(1)+contrast(1.5)>⚽</span> Kampvisning')" style="padding:9px 10px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;color:#fff;display:flex;align-items:center;gap:6px;"><span style="filter:grayscale(1) contrast(1.5);">⚽</span> Kampvisning</div>
-        <div onclick="velgType('sosial','🍺 Sosialt')" style="padding:9px 10px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;color:#fff;border-top:1px solid rgba(255,255,255,.1);">🍺 Sosialt</div>
-        <div onclick="velgType('stpauli','☠️ Tur til St. Pauli')" style="padding:9px 10px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;color:#fff;border-top:1px solid rgba(255,255,255,.1);">☠️ Tur til St. Pauli</div>
+        <div onclick="velgType('kampvisning','<span style=filter:grayscale(1)+contrast(1.5)>⚽</span> Kampvisning')" class="list-text" style="padding:9px 10px;cursor:pointer;color:#fff;display:flex;align-items:center;gap:6px;"><span style="filter:grayscale(1) contrast(1.5);">⚽</span> Kampvisning</div>
+        <div onclick="velgType('sosial','🍺 Sosialt')" class="list-text" style="padding:9px 10px;cursor:pointer;color:#fff;border-top:1px solid rgba(255,255,255,.1);">🍺 Sosialt</div>
+        <div onclick="velgType('stpauli','☠️ Tur til St. Pauli')" class="list-text" style="padding:9px 10px;cursor:pointer;color:#fff;border-top:1px solid rgba(255,255,255,.1);">☠️ Tur til St. Pauli</div>
       </div>
     </div>
 
@@ -959,12 +987,13 @@ window.addEventListener('partisan_page_change', (e) => {
 
     <div style="display:flex;gap:8px;">
       <button class="gb gb-dark" onclick="lagreArr()"
-        style="flex:1;color:#fff;padding:12px;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;cursor:pointer;">
+        style="flex:1;color:#fff;padding:12px;border-radius:4px;font-size:18px;cursor:pointer;">
         Lagre arrangement
       </button>
-      <button onclick="toggleForm()"
-        style="background:rgba(255,255,255,.08);border:none;color:rgba(255,255,255,.6);padding:12px 16px;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">
+      <button class="slett-nei" onclick="toggleForm()"
+        style="padding:12px 16px;">
         Avbryt
+      </button>
       </button>
     </div>
   </div>
@@ -1075,12 +1104,12 @@ function visKamp(kamp) {
     }
     const hj = kamp.hjemme;
     bar.innerHTML = `
-  <span style="font-family:'Bebas Neue',sans-serif;font-size:14px;line-height:1;color:rgba(255,255,255,.4);white-space:nowrap;">NESTE KAMP</span>
-  <span style="font-family:'Bebas Neue',sans-serif;font-size:14px;line-height:1;color:rgba(255,255,255,.2);margin:0 8px;">·</span>
-  <span style="font-family:'Bebas Neue',sans-serif;font-size:14px;line-height:1;color:rgba(255,255,255,.85);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${hj?'FC St. Pauli':kamp.motstander} · ${hj?kamp.motstander:'FC St. Pauli'}</span>
-  <span style="font-family:'Bebas Neue',sans-serif;font-size:14px;line-height:1;color:rgba(255,255,255,.2);margin:0 8px;">·</span>
-  <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;line-height:1;color:rgba(255,255,255,.4);white-space:nowrap;">${dagKort}${kamp.tid?' '+kamp.tid:''}</span>
-  ${cd?`<span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;line-height:1;color:rgba(255,255,255,.4);white-space:nowrap;margin-left:8px;">${cd}</span>`:''}
+  <span class="heading-bebas" style="font-size:14px;line-height:1;color:rgba(255,255,255,.4);white-space:nowrap;">NESTE KAMP</span>
+  <span class="heading-bebas" style="font-size:14px;line-height:1;color:rgba(255,255,255,.2);margin:0 8px;">·</span>
+  <span class="heading-bebas" style="font-size:14px;line-height:1;color:rgba(255,255,255,.85);white-space:nowrap;">${hj?'FC St. Pauli':kamp.motstander} · ${hj?kamp.motstander:'FC St. Pauli'}</span>
+  <span class="heading-bebas" style="font-size:14px;line-height:1;color:rgba(255,255,255,.2);margin:0 8px;">·</span>
+  <span class="info-meta" style="line-height:1;white-space:nowrap;">${dagKort}${kamp.tid?' '+kamp.tid:''}</span>
+  ${cd?`<span class="info-meta" style="line-height:1;white-space:nowrap;margin-left:8px;">${cd}</span>`:''}
 `;
   }
   const box = document.getElementById('nesteKampBox');
@@ -1100,25 +1129,25 @@ function visKamp(kamp) {
   box.innerHTML = `
     <div style="display:flex;align-items:center;gap:6px;margin-bottom:12px;">
       <div style="flex:1;min-width:0;text-align:center;">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${hj?'FC St. Pauli':kamp.motstander}</div>
+        <div class="heading-bebas" style="font-size:16px;">${hj?'FC St. Pauli':kamp.motstander}</div>
       </div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--red);flex-shrink:0;">VS</div>
+      <div class="heading-bebas" style="font-size:22px;color:var(--red);flex-shrink:0;white-space:normal;">VS</div>
       <div style="flex:1;min-width:0;text-align:center;">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${hj?kamp.motstander:'FC St. Pauli'}</div>
+        <div class="heading-bebas" style="font-size:16px;">${hj?kamp.motstander:'FC St. Pauli'}</div>
       </div>
     </div>
     <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:10px;display:flex;flex-direction:column;gap:5px;">
-      <div style="display:flex;align-items:center;gap:7px;">
+      <div class="info-row" style="gap:7px;margin-bottom:0;">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-        <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,.9);text-transform:capitalize;">${dag}${kamp.tid?' kl. '+kamp.tid:''}</span>
-        ${cd?`<span style="font-family:'Bebas Neue',sans-serif;font-size:13px;color:var(--red);margin-left:auto;">${cd}</span>`:''}
+        <span class="info-val" style="color:rgba(255,255,255,.9);text-transform:capitalize;">${dag}${kamp.tid?' kl. '+kamp.tid:''}</span>
+        ${cd?`<span class="heading-bebas" style="font-size:13px;color:var(--red);margin-left:auto;white-space:normal;">${cd}</span>`:''}
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;">
-        <div style="display:flex;align-items:center;gap:6px;min-width:0;">
+        <div class="info-row" style="min-width:0;margin-bottom:0;">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span style="font-family:'Barlow Condensed',sans-serif;font-size:12px;color:rgba(255,255,255,.4);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${kamp.stadion||''}</span>
+          <span class="info-meta" style="font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${kamp.stadion||''}</span>
         </div>
-        <span style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.06em;padding:2px 8px;border-radius:3px;background:${farge}33;color:${farge};flex-shrink:0;text-transform:uppercase;">${kamp.turnering||''}</span>
+        <span class="sub-label" style="font-size:10px;padding:2px 8px;border-radius:3px;background:${farge}33;color:${farge};flex-shrink:0;">${kamp.turnering||''}</span>
       </div>
     </div>`;
 }
@@ -1206,8 +1235,7 @@ async function oppdaterRSVPVisning(eventId) {
   boks.innerHTML = `
     ${antall > 0 ? `
     <div class="pameldt-liste">
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;
-        letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.35);">
+      <div class="sub-label" style="color:rgba(255,255,255,.35);">
         ${antall} påmeldt${antall !== 1 ? 'e' : ''}
       </div>
       <div class="pameldt-navn">
@@ -1230,8 +1258,7 @@ function visMeldModal(eventId, tittel) {
   modal.innerHTML = `
     <div class="navn-boks gb">
       <h3>Meld deg på</h3>
-      <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;
-        color:rgba(255,255,255,.5);margin-bottom:12px;">${tittel || ''}</div>
+      <div class="info-val-dim" style="margin-bottom:12px;">${tittel || ''}</div>
       <input class="navn-input" id="navnInput" type="text"
         placeholder="Ditt navn" value="${_mittNavn}" autocomplete="name">
       <div class="navn-knapper">
