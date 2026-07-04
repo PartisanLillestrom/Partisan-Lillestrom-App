@@ -10,10 +10,6 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 *::-webkit-scrollbar{display:none;}
 *{-ms-overflow-style:none;scrollbar-width:none;}
-#kamper .kamper-scroll{-ms-overflow-style:none;scrollbar-width:none;}
-#kamper .kamper-scroll::-webkit-scrollbar{display:none;}
-#hjem .hjem-scroll{-ms-overflow-style:none;scrollbar-width:none;}
-#hjem .hjem-scroll::-webkit-scrollbar{display:none;}
 #hjem.active{display:flex!important;}
 #hjem{height:calc(var(--app-h,100vh) - 90px);}
 #kamper{height:calc(var(--app-h,100vh) - 112px);}
@@ -28,7 +24,34 @@
   --g1:#2a1509;
   --g2:#331a0d;
   --accent:#c0392b;
+  --grad-accent:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);
+  --grad-bg:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);
+  --grad-text:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);
 }
+.gb{
+  border:1px solid transparent !important;
+  border-image:none !important;
+  background-origin:border-box;
+  background-clip:padding-box,border-box;
+}
+.gb-dark{background-image:linear-gradient(90deg,#3d1208,#1a0804),var(--grad-accent);}
+.gb-solid{background-image:linear-gradient(#0a0a0a,#0a0a0a),var(--grad-accent);}
+.gb-trans{background-image:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),var(--grad-accent);}
+.sec-title-style{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:18px;letter-spacing:.06em;
+  padding-left:10px;position:relative;
+  background:var(--grad-text);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  width:fit-content;
+}
+.sec-title-style::before{
+  content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);
+  width:4px;height:80%;background:rgba(192,57,43,0.5);border-radius:2px;
+}
+.card-bg{background:var(--grad-bg);border:1px solid #444;border-radius:8px;}
+.form-field{width:100%;background:var(--grad-bg);border:1px solid rgba(255,255,255,.2);color:#fff;padding:9px 10px;font-family:'Barlow',sans-serif;font-size:13px;}
+.form-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5);display:block;margin-bottom:4px;}
 html{overflow:hidden;height:100%;}
 body{
   overflow:hidden;
@@ -41,9 +64,7 @@ body{
 
 /* HEADER */
 .hdr{
-  background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);
-  
-  position:relative;
+  background:var(--grad-bg);
   padding:0 14px;
   display:flex;
   align-items:center;
@@ -72,8 +93,7 @@ body{
 .hdr-sub{font-family:'Barlow Condensed',sans-serif;font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase;}
 .hdr-ig{
   margin-left:auto;
-  background:linear-gradient(90deg,#3d1208,#1a0804);
-  border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;
+  color:#fff;
   border-radius:4px;
   padding:6px 12px;
   font-family:'Barlow Condensed',sans-serif;
@@ -98,8 +118,7 @@ input,select,textarea{font-size:16px !important;-webkit-text-size-adjust:100%;} 
 .hero{
   display:flex;flex-direction:column;align-items:center;
   padding:28px 14px 22px;
-  
-  background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);
+  background:var(--grad-bg);
   position:relative;overflow:hidden;
 }
 .hero::before{
@@ -238,7 +257,8 @@ input,select,textarea{font-size:16px !important;-webkit-text-size-adjust:100%;} 
   color:rgba(255,255,255,.5);cursor:pointer;white-space:nowrap;flex-shrink:0;
   text-transform:uppercase;
 }
-.fbtn.active{background:linear-gradient(90deg,#3d1208,#1a0804);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;}
+.fbtn.active{color:#fff;}
+.fbtn.active.gb{background-image:linear-gradient(90deg,#3d1208,#1a0804),var(--grad-accent);}
 
 /* OM OSS */
 .ir{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:13px;}
@@ -270,21 +290,23 @@ input,select,textarea{font-size:16px !important;-webkit-text-size-adjust:100%;} 
 .pameldt-liste{margin-top:10px;border-top:1px solid rgba(255,255,255,.06);padding-top:10px;}
 .pameldt-navn{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
 .pameldt-tag{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;
-  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
   border-radius:20px;padding:3px 10px;color:rgba(255,255,255,.7);}
-.pameldt-tag.meg{background:rgba(192,57,43,0.2);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;}
+.pameldt-tag.gb{background-image:linear-gradient(#1c0e06,#1c0e06),var(--grad-accent);}
+.pameldt-tag.meg{color:#fff;}
+.pameldt-tag.meg.gb{background-image:linear-gradient(#2a1015,#2a1015),var(--grad-accent);}
 .meld-btn{width:100%;margin-top:10px;padding:9px;border:none;border-radius:5px;cursor:pointer;
   font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.06em;}
-.meld-btn.paa{background:linear-gradient(90deg,#3d1208,#1a0804);
-  border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;}
+.meld-btn.paa{color:#fff;}
+.meld-btn.paa.gb{background-image:linear-gradient(90deg,#3d1208,#1a0804),var(--grad-accent);}
 .meld-btn.av{background:rgba(255,255,255,.05);
   border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.4);}
 
 /* NAVN-MODAL */
 .navn-modal{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:500;
   display:flex;align-items:center;justify-content:center;padding:20px;}
-.navn-boks{background:#1a0804;border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;border-radius:10px;
+.navn-boks{background-color:#1a0804;border-radius:10px;
   padding:20px;width:100%;max-width:320px;}
+.navn-boks.gb{background-image:linear-gradient(#1a0804,#1a0804),var(--grad-accent);}
 .navn-boks h3{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.06em;
   background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
@@ -293,10 +315,10 @@ input,select,textarea{font-size:16px !important;-webkit-text-size-adjust:100%;} 
   border-radius:5px;color:#fff;padding:10px 12px;font-family:'Barlow',sans-serif;
   font-size:14px;margin-bottom:12px;}
 .navn-knapper{display:flex;gap:8px;}
-.navn-ok{flex:1;padding:10px;border:none;border-radius:5px;cursor:pointer;
-  background:linear-gradient(90deg,#3d1208,#1a0804);
-  border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;
+.navn-ok{flex:1;padding:10px;border-radius:5px;cursor:pointer;
+  color:#fff;
   font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:.06em;}
+.navn-ok.gb{background-image:linear-gradient(90deg,#3d1208,#1a0804),var(--grad-accent);}
 .navn-avbryt{padding:10px 14px;border:1px solid rgba(255,255,255,.1);border-radius:5px;
   cursor:pointer;background:rgba(255,255,255,.05);color:rgba(255,255,255,.4);
   font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;}
@@ -321,7 +343,8 @@ input,select,textarea{font-size:16px !important;-webkit-text-size-adjust:100%;} 
 .komm-input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
   border-radius:5px;color:#fff;padding:7px 10px;font-family:'Barlow',sans-serif;
   font-size:12px;resize:none;}
-.komm-send{background:linear-gradient(90deg,#3d1208,#1a0804);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;border-radius:5px;padding:10px 14px;cursor:pointer;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.06em;flex-shrink:0;min-width:60px;-webkit-appearance:none;touch-action:manipulation;}
+.komm-send{color:#fff;border-radius:5px;padding:10px 14px;cursor:pointer;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.06em;flex-shrink:0;min-width:60px;-webkit-appearance:none;touch-action:manipulation;}
+.komm-send.gb{background-image:linear-gradient(90deg,#3d1208,#1a0804),var(--grad-accent);}
 input[type="datetime-local"]{color-scheme:dark;}
 input[type="datetime-local"]::-webkit-calendar-picker-indicator{filter:invert(1);cursor:pointer;padding:4px;}
 </style>
@@ -340,7 +363,7 @@ setAppH();
     <div class="hdr-title">Partisan Lillestrøm</div>
     <div class="hdr-sub">Offisiell supporterklubb</div>
   </div>
-  <a class="hdr-ig" href="https://www.instagram.com/therealpartisanlillestrom/" target="_blank">
+  <a class="hdr-ig gb gb-dark" href="https://www.instagram.com/therealpartisanlillestrom/" target="_blank">
     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>Følg oss
   </a>
 </div>
@@ -357,7 +380,7 @@ setAppH();
 
     <div style="height:2px;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);width:100%;"></div>
     <div class="stats-row">
-      <div class="stat-cell" style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);">
+      <div class="stat-cell" style="background:var(--grad-bg);">
         <div id="stat-ar" class="stat-num">–</div>
         <div class="stat-lbl">År som supporterklubb</div>
       </div>
@@ -403,35 +426,32 @@ setAppH();
 <div id="kamper" class="page" style="display:none;flex-direction:column;overflow:hidden;">
   <div style="flex-shrink:0;padding:16px 14px 16px;">
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">
-      <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:6px;padding:12px 6px;text-align:center;">
+      <div style="background:var(--grad-bg);border:1px solid #444;border-radius:6px;padding:12px 6px;text-align:center;">
         <div class="stat-num" style="font-size:28px;">50</div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;">Totalt</div>
       </div>
-      <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:6px;padding:12px 6px;text-align:center;">
+      <div style="background:var(--grad-bg);border:1px solid #444;border-radius:6px;padding:12px 6px;text-align:center;">
         <div class="stat-num" style="font-size:28px;">24</div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;">Seier · 48%</div>
       </div>
-      <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:6px;padding:12px 6px;text-align:center;">
+      <div style="background:var(--grad-bg);border:1px solid #444;border-radius:6px;padding:12px 6px;text-align:center;">
         <div class="stat-num" style="font-size:28px;">12</div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;">Uavg. · 24%</div>
       </div>
-      <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:6px;padding:12px 6px;text-align:center;">
+      <div style="background:var(--grad-bg);border:1px solid #444;border-radius:6px;padding:12px 6px;text-align:center;">
         <div class="stat-num red" style="font-size:28px;">14</div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;">Tap · 28%</div>
       </div>
     </div>
   </div>
   <div style="flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:0 14px 40px;">
-    <div id="matchList" style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:8px;padding:0 14px;"></div>
+    <div id="matchList" style="background:var(--grad-bg);border:1px solid #444;border-radius:8px;padding:0 14px;"></div>
   </div>
 </div>
 
 <!-- FEED -->
 <div id="logoer" class="page" style="padding:16px 14px 60px;overflow-y:auto;overscroll-behavior:contain;">
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:16px;width:fit-content;">
-    <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:80%;background:rgba(192,57,43,0.5);border-radius:2px;"></span>
-    Våre logoer
-  </div>
+  <div class="sec-title-style" style="margin-bottom:16px;">Våre logoer</div>
   <div style="display:flex;flex-direction:column;align-items:center;gap:32px;">
     <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
       <img src="logo-icon.png" style="width:240px;height:240px;object-fit:contain;border-radius:12px;" alt="Partisan Lillestrøm - Original">
@@ -454,11 +474,8 @@ setAppH();
 
 <!-- OM OSS -->
 <div id="om" class="page" style="padding:16px 14px 60px;overflow-y:auto;overscroll-behavior:contain;">
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:16px;width:fit-content;">
-    <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:80%;background:rgba(192,57,43,0.5);border-radius:2px;"></span>
-    Om foreningen
-  </div>
-  <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:8px;padding:16px;margin-bottom:16px;">
+  <div class="sec-title-style" style="margin-bottom:16px;">Om foreningen</div>
+  <div class="card-bg" style="padding:16px;margin-bottom:16px;">
     <p style="font-family:'Barlow',sans-serif;font-size:13px;line-height:1.7;color:rgba(255,255,255,.85);">
       Partisan Lillestrøm har siden 2008 hatt status som offisiell supporterklubb i paraplyorganisasjonen Fanclubsprecherrat der Fanclubs des FC St. Pauli. For å opprettholde denne statusen og forsikre oss om at de som representerer Partisan Lillestrøm har et forpliktende eierskap til både Partisan Lillestrøm og FC St. Paulis verdigrunnlag og karakter, dannet grunnleggerne av Partisan Lillestrøm en forening i 2022.
     </p>
@@ -470,25 +487,19 @@ setAppH();
     </p>
   </div>
 
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:12px;width:fit-content;">
-    <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:80%;background:rgba(192,57,43,0.5);border-radius:2px;"></span>
-    Foreningsinformasjon
-  </div>
-  <div class="card-box" style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);margin:0 0 16px;">
+  <div class="sec-title-style" style="margin-bottom:12px;">Foreningsinformasjon</div>
+  <div class="card-box card-bg" style="margin:0 0 16px;">
     <div class="ir"><span class="il">Navn</span><span>Partisan Lillestrøm</span></div>
     <div class="ir"><span class="il">Org.nr.</span><span>928 705 196</span></div>
     <div class="ir"><span class="il">Grunnlagt</span><span>2. mai 2008</span></div>
     <div class="ir"><span class="il">Registrert</span><span>21. januar 2022</span></div>
-    <div class="ir"><span class="il">Kontingent</span><span>200 kr / ar</span></div>
+    <div class="ir"><span class="il">Kontingent</span><span>200 kr / år</span></div>
     <div class="ir"><span class="il">E-post</span><span style="font-size:11px;">partisan.lillestrom@gmail.com</span></div>
     <div class="ir"><span class="il">Tilholdssted</span><span>Martins Pub</span></div>
   </div>
 
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:12px;width:fit-content;">
-    <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:80%;background:rgba(192,57,43,0.5);border-radius:2px;"></span>
-    Nåværende styre
-  </div>
-  <div class="card-box" style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);margin:0 0 16px;">
+  <div class="sec-title-style" style="margin-bottom:12px;">Nåværende styre</div>
+  <div class="card-box card-bg" style="margin:0 0 16px;">
     <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);">
       <div style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;">Bjorn Olsen</div><div style="font-size:11px;color:rgba(255,255,255,.4);font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.05em;">Styreleder</div>
     </div>
@@ -623,8 +634,12 @@ function hentArr() {
   try {
     const data = localStorage.getItem('pl_arr');
     const user = data ? JSON.parse(data) : [];
+    // Hent slettede default-IDer
+    const slettet = JSON.parse(localStorage.getItem('pl_arr_slettet') || '[]');
+    // Filtrer ut slettede defaults
+    const aktiveDefaults = defaultArr.filter(a => !slettet.includes(a.id));
     // Kombiner default og bruker-opprettede, fjern duplikater
-    const alle = [...defaultArr, ...user];
+    const alle = [...aktiveDefaults, ...user];
     const sett = new Map();
     alle.forEach(a => sett.set(a.id, a));
     return Array.from(sett.values()).sort((a,b) => new Date(a.dato) - new Date(b.dato));
@@ -632,6 +647,7 @@ function hentArr() {
 }
 
 function lagreArr() {
+  const navn = document.getElementById('fNavn').value.trim();
   const tittel = document.getElementById('fTittel').value.trim();
   const datoD = document.getElementById('fDatoD').value;
   const datoT = document.getElementById('fDatoT').value || '18:00';
@@ -640,12 +656,16 @@ function lagreArr() {
   const beskr = document.getElementById('fBeskr').value.trim();
   const type = document.getElementById('fType').value;
 
-  if (!tittel || !datoD) {
-    alert('Tittel og dato er påkrevd!');
+  if (!navn || !tittel || !datoD) {
+    alert('Navn, tittel og dato er påkrevd!');
     return;
   }
 
-  const nytt = { id: 'u_' + Date.now(), type, tittel, dato, sted, beskr, opprettet: new Date().toISOString().split('T')[0] };
+  // Husk navnet til neste gang
+  _mittNavn = navn;
+  localStorage.setItem('pl_mitt_navn', navn);
+
+  const nytt = { id: 'u_' + Date.now(), type, tittel, dato, sted, beskr, opprettet: new Date().toISOString().split('T')[0], opprettetAv: navn };
 
   try {
     const eksist = localStorage.getItem('pl_arr');
@@ -654,7 +674,7 @@ function lagreArr() {
     localStorage.setItem('pl_arr', JSON.stringify(liste));
   } catch(e) {}
 
-  // Reset skjema
+  // Reset skjema (behold navn)
   document.getElementById('fTittel').value = '';
   document.getElementById('fDatoD').value = '';
   document.getElementById('fDatoT').value = '';
@@ -679,10 +699,18 @@ function skjulSlettBekreft(id) {
 }
 function slettArr(id) {
   try {
-    const data = localStorage.getItem('pl_arr');
-    if (data) {
-      const liste = JSON.parse(data).filter(a => a.id !== id);
-      localStorage.setItem('pl_arr', JSON.stringify(liste));
+    if (id.startsWith('u_')) {
+      // Brukeropprettet: fjern fra localStorage-listen
+      const data = localStorage.getItem('pl_arr');
+      if (data) {
+        const liste = JSON.parse(data).filter(a => a.id !== id);
+        localStorage.setItem('pl_arr', JSON.stringify(liste));
+      }
+    } else {
+      // Default-arrangement: legg til i slettet-liste
+      const slettet = JSON.parse(localStorage.getItem('pl_arr_slettet') || '[]');
+      if (!slettet.includes(id)) slettet.push(id);
+      localStorage.setItem('pl_arr_slettet', JSON.stringify(slettet));
     }
   } catch(e) {}
   visArr('alle');
@@ -693,6 +721,10 @@ function toggleForm() {
   const vis = form.style.display === 'none';
   form.style.display = vis ? 'block' : 'none';
   document.getElementById('nyBtn').textContent = vis ? '✕ Lukk' : '+ Nytt';
+  if (vis) {
+    const navnFelt = document.getElementById('fNavn');
+    if (navnFelt && !navnFelt.value && _mittNavn) navnFelt.value = _mittNavn;
+  }
 }
 
 function filtrerArr(type, btn) {
@@ -743,8 +775,8 @@ function kortHtml(a, fortid) {
   const tid = dato.toLocaleTimeString('nb-NO', {hour:'2-digit',minute:'2-digit'});
   const erBruker = a.id.startsWith('u_');
 
-  const html = `<div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:8px;margin-bottom:10px;overflow:hidden;${fortid?'opacity:0.6':''}">
-    <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);padding:12px 14px;">
+  const html = `<div class="card-bg" style="margin-bottom:10px;overflow:hidden;${fortid?'opacity:0.6':''}">
+    <div style="padding:12px 14px;">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
         <div style="display:flex;align-items:center;gap:8px;min-width:0;">
           <span style="font-size:24px;flex-shrink:0;display:flex;align-items:center;justify-content:center;width:32px;height:32px;">${info.emoji}</span>
@@ -753,17 +785,17 @@ function kortHtml(a, fortid) {
             <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);">${info.label}</div>
           </div>
         </div>
-        <button onclick="visSlettBekreft('${a.id}')" style="background:rgba(192,57,43,.2);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:rgba(255,255,255,.2);padding:4px 10px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:5px;flex-shrink:0;">✕ Slett</button>
+        <button class="gb gb-dark" onclick="visSlettBekreft('${a.id}')" style="color:rgba(255,255,255,.4);padding:4px 10px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:5px;flex-shrink:0;border-radius:3px;">✕ Slett</button>
       </div>
-      <div id="slettBekreft_${a.id}" style="display:none;margin-top:10px;padding:10px;background:rgba(192,57,43,.1);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;">
+      <div id="slettBekreft_${a.id}" style="display:none;margin-top:10px;padding:10px;background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.3);border-radius:6px;">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:rgba(255,255,255,.8);margin-bottom:8px;">Er du sikker på at du vil slette dette arrangementet?</div>
         <div style="display:flex;gap:8px;">
-          <button onclick="slettArr('${a.id}')" style="background:rgba(192,57,43,.3);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;padding:6px 14px;cursor:pointer;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.06em;">Ja, slett</button>
-          <button onclick="skjulSlettBekreft('${a.id}')" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);padding:6px 14px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;">Avbryt</button>
+          <button onclick="slettArr('${a.id}')" style="background:rgba(192,57,43,.3);border:1px solid rgba(192,57,43,.5);border-radius:4px;color:#fff;padding:6px 14px;cursor:pointer;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:.06em;">Ja, slett</button>
+          <button onclick="skjulSlettBekreft('${a.id}')" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px;color:rgba(255,255,255,.5);padding:6px 14px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;">Avbryt</button>
         </div>
       </div>
     </div>
-    <div style="height:2px;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);"></div>
+    <div style="height:2px;background:var(--grad-accent);"></div>
     <div style="padding:12px 14px;">
       <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
@@ -774,22 +806,26 @@ function kortHtml(a, fortid) {
         <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;color:rgba(255,255,255,.6);">${a.sted}</span>
       </div>` : ''}
       ${a.beskr ? `<div style="font-family:'Barlow',sans-serif;font-size:12px;color:rgba(255,255,255,.4);line-height:1.5;margin-top:4px;">${a.beskr}</div>` : ''}
+      ${a.opprettetAv ? `<div style="display:flex;align-items:center;gap:6px;margin-top:8px;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        <span style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;color:rgba(255,255,255,.35);letter-spacing:.04em;">Opprettet av ${a.opprettetAv}</span>
+      </div>` : ''}
       <div id="rsvp_${a.id}" style="margin-top:10px;">
-        <button class="meld-btn paa" onclick="meldPaa('${a.id}', '')">+ Meld deg å</button>
+        <button class="meld-btn gb gb-dark paa" onclick="meldPaa('${a.id}', '')">+ Meld deg på</button>
       </div>
       <div style="margin-top:10px;border-top:1px solid rgba(255,255,255,.06);padding-top:10px;">
         <div id="komm_liste_${a.id}" style="margin-bottom:8px;"></div>
         <div id="komm_navn_${a.id}" style="display:none;gap:6px;margin-bottom:6px;">
           <input id="komm_navn_inp_${a.id}" class="komm-input" type="text"
             placeholder="Ditt navn..." style="flex:1;">
-          <button type="button" style="background:linear-gradient(90deg,#3d1208,#1a0804);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;border-radius:5px;padding:10px 12px;font-size:14px;cursor:pointer;touch-action:manipulation;"
+          <button type="button" class="gb gb-dark" style="color:#fff;border-radius:5px;padding:10px 12px;font-size:14px;cursor:pointer;touch-action:manipulation;"
             onclick="bekreftKommNavn('${a.id}')">OK</button>
         </div>
         <div style="display:flex;gap:6px;">
           <input id="komm_inp_${a.id}" class="komm-input" type="text"
             placeholder="Skriv kommentar..."
             data-eid="${a.id}">
-          <button type="button" class="komm-send" data-eid="${a.id}">Send</button>
+          <button type="button" class="komm-send gb gb-dark" data-eid="${a.id}">Send</button>
         </div>
       </div>
     </div>
@@ -810,11 +846,8 @@ window.addEventListener('partisan_page_change', (e) => {
 <!-- BLI MEDLEM -->
 <div id="medlem" class="page" style="padding:16px 14px 60px;overflow-y:auto;overscroll-behavior:contain;">
 
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:12px;width:fit-content;">
-    <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:80%;background:rgba(192,57,43,0.5);border-radius:2px;"></span>
-    Som medlem har du rett til
-  </div>
-  <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:8px;padding:4px 16px;margin-bottom:16px;">
+  <div class="sec-title-style" style="margin-bottom:12px;">Som medlem har du rett til</div>
+  <div class="card-bg" style="padding:4px 16px;margin-bottom:16px;">
     <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);">
       <span style="color:rgba(192,57,43,0.5);font-size:12px;flex-shrink:0;">&#9632;</span>
       <span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;">Delta på årsmøte</span>
@@ -833,11 +866,8 @@ window.addEventListener('partisan_page_change', (e) => {
     </div>
   </div>
 
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:12px;width:fit-content;">
-    <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:80%;background:rgba(192,57,43,0.5);border-radius:2px;"></span>
-    Slik melder du deg inn
-  </div>
-  <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:8px;padding:16px;margin-bottom:16px;">
+  <div class="sec-title-style" style="margin-bottom:12px;">Slik melder du deg inn</div>
+  <div class="card-bg" style="padding:16px;margin-bottom:16px;">
     <p style="font-family:'Barlow',sans-serif;font-size:13px;color:rgba(255,255,255,.7);margin-bottom:14px;line-height:1.6;">
       Send e-post til <strong style="color:#fff;">partisan.lillestrom@gmail.com</strong> med følgende opplysninger:
     </p>
@@ -853,17 +883,14 @@ window.addEventListener('partisan_page_change', (e) => {
       <span style="color:rgba(192,57,43,0.5);font-size:12px;flex-shrink:0;">&#9632;</span>
       <span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;">Telefonnummer <span style="font-weight:400;color:rgba(255,255,255,.4);font-size:13px;">(valgfritt)</span></span>
     </div>
-    <a href="mailto:partisan.lillestrom@gmail.com?subject=Innmelding%20Partisan%20Lillestr%C3%B8m&body=Hei!%0A%0AJeg%20%C3%B8nsker%20%C3%A5%20melde%20meg%20inn%20i%20Partisan%20Lillestr%C3%B8m.%0A%0ANavn%3A%20%0AF%C3%B8dselsdato%3A%20%0ATelefonnummer%3A%20"
-       style="display:block;background:linear-gradient(90deg,#3d1208,#1a0804);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;text-align:center;padding:13px;border-radius:6px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.1em;text-decoration:none;">
+    <a class="gb gb-dark" href="mailto:partisan.lillestrom@gmail.com?subject=Innmelding%20Partisan%20Lillestr%C3%B8m&body=Hei!%0A%0AJeg%20%C3%B8nsker%20%C3%A5%20melde%20meg%20inn%20i%20Partisan%20Lillestr%C3%B8m.%0A%0ANavn%3A%20%0AF%C3%B8dselsdato%3A%20%0ATelefonnummer%3A%20"
+       style="display:block;color:#fff;text-align:center;padding:13px;border-radius:6px;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.1em;text-decoration:none;">
       &#9993; Send innmeldings-epost
     </a>
   </div>
 
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:12px;width:fit-content;">
-    <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:80%;background:rgba(192,57,43,0.5);border-radius:2px;"></span>
-    Betal medlemskontingent
-  </div>
-  <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:8px;padding:20px 16px;margin-bottom:16px;text-align:center;">
+  <div class="sec-title-style" style="margin-bottom:12px;">Betal medlemskontingent</div>
+  <div class="card-bg" style="padding:20px 16px;margin-bottom:16px;text-align:center;">
     <div style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;">Vipps-nummer</div>
     <div style="font-family:'Bebas Neue',sans-serif;font-size:44px;color:#fff;letter-spacing:.05em;line-height:1;margin-bottom:4px;">743097</div>
     <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;color:rgba(255,255,255,.4);margin-bottom:18px;">200,- kr per år</div>
@@ -879,59 +906,60 @@ window.addEventListener('partisan_page_change', (e) => {
 
   <!-- Header med "Nytt arrangement"-knapp -->
   <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 14px 12px;">
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;">
-      <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:80%;background:rgba(192,57,43,0.5);border-radius:2px;"></span>
-      Arrangementer
-    </div>
-    <button onclick="toggleForm()" id="nyBtn"
-      style="background:linear-gradient(90deg,#3d1208,#1a0804);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;padding:8px 14px;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.06em;cursor:pointer;">
+    <div class="sec-title-style">Arrangementer</div>
+    <button class="gb gb-dark" onclick="toggleForm()" id="nyBtn"
+      style="color:#fff;padding:8px 14px;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.06em;cursor:pointer;">
       + Nytt
     </button>
   </div>
 
   <!-- Opprett-skjema (skjult som standard) -->
-  <div id="arrForm" style="display:none;background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border-top:2px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;border-bottom:1px solid rgba(255,255,255,.08);padding:16px 14px;margin-bottom:8px;">
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px;">Opprett nytt arrangement</div>
+  <div id="arrForm" style="display:none;background:var(--grad-bg);border-top:2px solid var(--red);border-bottom:1px solid rgba(255,255,255,.08);padding:16px 14px;margin-bottom:8px;">
+    <div class="sec-title-style" style="font-size:16px;margin-bottom:12px;">Opprett nytt arrangement</div>
 
-    <label style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5);display:block;margin-bottom:4px;">Type arrangement</label>
+    <label class="form-label">Ditt navn</label>
+    <input id="fNavn" class="form-field" type="text" placeholder="Hvem oppretter arrangementet?"
+      style="margin-bottom:12px;" autocomplete="name">
+
+    <label class="form-label">Type arrangement</label>
     <input type="hidden" id="fType" value="kampvisning">
     <div id="fTypeWrap" style="position:relative;margin-bottom:12px;">
-      <div id="fTypeSelected" onclick="document.getElementById('fTypeOpts').style.display=document.getElementById('fTypeOpts').style.display==='block'?'none':'block'" style="width:100%;background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;padding:9px 10px;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:space-between;">
+      <div id="fTypeSelected" onclick="document.getElementById('fTypeOpts').style.display=document.getElementById('fTypeOpts').style.display==='block'?'none':'block'" class="form-field" style="font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:space-between;">
         <span><span style="filter:grayscale(1) contrast(1.5);display:inline-block;">⚽</span> Kampvisning</span>
         <span style="font-size:10px;color:rgba(255,255,255,.5);">▼</span>
       </div>
-      <div id="fTypeOpts" style="display:none;position:absolute;top:100%;left:0;right:0;z-index:50;background:#1a0804;border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;">
+      <div id="fTypeOpts" style="display:none;position:absolute;top:100%;left:0;right:0;z-index:50;background:#1a0804;border:1px solid rgba(255,255,255,.2);">
         <div onclick="velgType('kampvisning','<span style=filter:grayscale(1)+contrast(1.5)>⚽</span> Kampvisning')" style="padding:9px 10px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;color:#fff;display:flex;align-items:center;gap:6px;"><span style="filter:grayscale(1) contrast(1.5);">⚽</span> Kampvisning</div>
         <div onclick="velgType('sosial','🍺 Sosialt')" style="padding:9px 10px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;color:#fff;border-top:1px solid rgba(255,255,255,.1);">🍺 Sosialt</div>
         <div onclick="velgType('stpauli','☠️ Tur til St. Pauli')" style="padding:9px 10px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;color:#fff;border-top:1px solid rgba(255,255,255,.1);">☠️ Tur til St. Pauli</div>
       </div>
     </div>
 
-    <label style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5);display:block;margin-bottom:4px;">Tittel</label>
-    <input id="fTittel" type="text" placeholder="F.eks. Kampvisning: FCSP vs HSV"
-      style="width:100%;background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;padding:9px 10px;font-family:'Barlow',sans-serif;font-size:13px;margin-bottom:12px;">
+    <label class="form-label">Tittel</label>
+    <input id="fTittel" class="form-field" type="text" placeholder="F.eks. Kampvisning: FCSP vs HSV"
+      style="margin-bottom:12px;">
 
-    <label style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5);display:block;margin-bottom:4px;">Dato og tid</label>
+    <label class="form-label">Dato og tid</label>
     <div style="display:flex;gap:8px;margin-bottom:12px;">
-      <input id="fDatoD" type="date"
-        style="flex:1;background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;padding:9px 10px;font-family:'Barlow',sans-serif;font-size:13px;color-scheme:dark;"
+      <input id="fDatoD" class="form-field" type="date"
+        style="flex:1;color-scheme:dark;"
         onclick="this.showPicker&&this.showPicker()">
-      <input id="fDatoT" type="time"
-        style="flex:0 0 110px;background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;padding:9px 10px;font-family:'Barlow',sans-serif;font-size:13px;color-scheme:dark;"
+      <input id="fDatoT" class="form-field" type="time"
+        style="flex:0 0 110px;color-scheme:dark;"
         onclick="this.showPicker&&this.showPicker()">
     </div>
 
-    <label style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5);display:block;margin-bottom:4px;">Sted / Lokasjon</label>
-    <input id="fSted" type="text" placeholder="F.eks. Martins Pub, Lillestrøm"
-      style="width:100%;background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;padding:9px 10px;font-family:'Barlow',sans-serif;font-size:13px;margin-bottom:12px;">
+    <label class="form-label">Sted / Lokasjon</label>
+    <input id="fSted" class="form-field" type="text" placeholder="F.eks. Martins Pub, Lillestrøm"
+      style="margin-bottom:12px;">
 
-    <label style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.5);display:block;margin-bottom:4px;">Beskrivelse</label>
-    <textarea id="fBeskr" rows="3" placeholder="Mer informasjon om arrangementet..."
-      style="width:100%;background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;padding:9px 10px;font-family:'Barlow',sans-serif;font-size:13px;resize:none;margin-bottom:16px;"></textarea>
+    <label class="form-label">Beskrivelse</label>
+    <textarea id="fBeskr" class="form-field" rows="3" placeholder="Mer informasjon om arrangementet..."
+      style="resize:none;margin-bottom:16px;"></textarea>
 
     <div style="display:flex;gap:8px;">
-      <button onclick="lagreArr()"
-        style="flex:1;background:linear-gradient(90deg,#3d1208,#1a0804);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:#fff;padding:12px;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;cursor:pointer;">
+      <button class="gb gb-dark" onclick="lagreArr()"
+        style="flex:1;color:#fff;padding:12px;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;cursor:pointer;">
         Lagre arrangement
       </button>
       <button onclick="toggleForm()"
@@ -943,10 +971,10 @@ window.addEventListener('partisan_page_change', (e) => {
 
   <!-- Filter-knapper -->
   <div class="fb-row" style="padding-top:4px;margin-bottom:8px;">
-    <button class="fbtn active" onclick="filtrerArr('alle',this)">Alle</button>
-    <button class="fbtn" onclick="filtrerArr('kampvisning',this)"><span style="filter:grayscale(1) contrast(1.5);">⚽</span> Kampvisning</button>
-    <button class="fbtn" onclick="filtrerArr('sosial',this)">🍺 Sosialt</button>
-    <button class="fbtn" onclick="filtrerArr('stpauli',this)">☠️ Tur til St. Pauli</button>
+    <button class="fbtn gb active" onclick="filtrerArr('alle',this)">Alle</button>
+    <button class="fbtn gb" onclick="filtrerArr('kampvisning',this)"><span style="filter:grayscale(1) contrast(1.5);">⚽</span> Kampvisning</button>
+    <button class="fbtn gb" onclick="filtrerArr('sosial',this)">🍺 Sosialt</button>
+    <button class="fbtn gb" onclick="filtrerArr('stpauli',this)">☠️ Tur til St. Pauli</button>
   </div>
 
   <!-- Liste over arrangementer -->
@@ -1183,10 +1211,10 @@ async function oppdaterRSVPVisning(eventId) {
         ${antall} påmeldt${antall !== 1 ? 'e' : ''}
       </div>
       <div class="pameldt-navn">
-        ${liste.map(n => `<span class="pameldt-tag${n === _mittNavn ? ' meg' : ''}">${n}</span>`).join('')}
+        ${liste.map(n => `<span class="pameldt-tag gb${n === _mittNavn ? ' meg' : ''}">${n}</span>`).join('')}
       </div>
     </div>` : ''}
-    <button class="meld-btn ${erPaameldt ? 'av' : 'paa'}"
+    <button class="meld-btn gb ${erPaameldt ? 'av gb-trans' : 'paa gb-dark'}"
       onclick="${erPaameldt
         ? `meldAv('${eventId}')`
         : `meldPaa('${eventId}', '')`}">
@@ -1200,14 +1228,14 @@ function visMeldModal(eventId, tittel) {
   modal.className = 'navn-modal';
   modal.id = 'navnModal';
   modal.innerHTML = `
-    <div class="navn-boks">
+    <div class="navn-boks gb">
       <h3>Meld deg på</h3>
       <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;
         color:rgba(255,255,255,.5);margin-bottom:12px;">${tittel || ''}</div>
       <input class="navn-input" id="navnInput" type="text"
         placeholder="Ditt navn" value="${_mittNavn}" autocomplete="name">
       <div class="navn-knapper">
-        <button class="navn-ok" onclick="bekreftNavn('${eventId}')">Meld på</button>
+        <button class="navn-ok gb" onclick="bekreftNavn('${eventId}')">Meld på</button>
         <button class="navn-avbryt" onclick="lukkModal()">Avbryt</button>
       </div>
     </div>
