@@ -534,41 +534,9 @@ async function lastFeed() {
   } catch(e) {
     console.warn('Kunne ikke laste feed.json', e);
   }
-  renderFeed("alle");
   renderMatches();
 }
 
-function rc(r){return r==="Seier"?"rw":r==="Tap"?"rl":r==="Uavgjort"?"rd":"rs";}
-function renderFeed(f){
-  const c=document.getElementById("feedContainer");
-  const list=f==="alle"?posts:posts.filter(p=>p.res===f);
-  let h="",ly="";
-  list.forEach(p=>{
-    const bilde = p.img || LOGO;
-    const erEgetBilde = p.img && p.img !== '';
-    if(p.yr!==ly){h+=`<div class="yr-div">${p.yr}</div>`;ly=p.yr;}
-    h+=`<div class="post">
-      <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;">
-        <div class="pav"><img src="${LOGO}" alt=""></div>
-        <div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;">therealpartisanlillestrom</div>
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.05em;">${p.loc}</div>
-        </div>
-      </div>
-      <div class="piw">
-        <img src="${bilde}" alt="${p.kamp}" style="${erEgetBilde?'object-fit:cover;':'object-fit:contain;padding:20%;opacity:0.1;'}">
-        ${p.score?`<div class="rp ${rc(p.res)}">${p.score}</div>`:`<div class="rp rs">${p.res}</div>`}
-      </div>
-      <div style="padding:8px 14px 14px;">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;">${p.kamp}</div>
-        ${p.score?`<div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;color:rgba(255,255,255,.4);margin-top:2px;">${p.score} &middot; ${p.res}</div>`:""}
-        <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:.06em;margin-top:4px;">${p.date}</div>
-      </div>
-    </div>`;
-  });
-  c.innerHTML=h;
-}
-function ff(f,btn){document.querySelectorAll(".fb-row .fbtn").forEach(b=>b.classList.remove("active"));btn.classList.add("active");renderFeed(f);}
 function fmtDato(d){
   const mnd={januar:'01',februar:'02',mars:'03',april:'04',mai:'05',juni:'06',juli:'07',august:'08',september:'09',oktober:'10',november:'11',desember:'12'};
   const p=d.replace('.','').trim().split(/\s+/);
@@ -599,7 +567,6 @@ function sp(id,btn){
   const bar = document.getElementById('nesteKampBar');
   if(bar) bar.style.display = id === 'hjem' ? 'flex' : 'none';
 }
-renderMatches();
 document.addEventListener('DOMContentLoaded', () => lastFeed());
 </script>
 
