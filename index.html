@@ -15,10 +15,10 @@
 #hjem .hjem-scroll{-ms-overflow-style:none;scrollbar-width:none;}
 #hjem .hjem-scroll::-webkit-scrollbar{display:none;}
 #hjem.active{display:flex!important;}
-#hjem{height:calc(100vh - 90px);height:calc(100dvh - 90px);}
-#kamper{height:calc(100vh - 112px);height:calc(100dvh - 112px);}
-#logoer,#om,#medlem{height:calc(100vh - 112px);height:calc(100dvh - 112px);}
-#arr{height:calc(100vh - 112px);height:calc(100dvh - 112px);}
+#hjem{height:calc(var(--app-h,100vh) - 90px);}
+#kamper{height:calc(var(--app-h,100vh) - 112px);}
+#logoer,#om,#medlem{height:calc(var(--app-h,100vh) - 112px);}
+#arr{height:calc(var(--app-h,100vh) - 112px);}
 :root{
   --red:#c0392b;
   --brown:#3d1f14;
@@ -325,6 +325,12 @@ input,select,textarea{font-size:16px !important;-webkit-text-size-adjust:100%;} 
 input[type="datetime-local"]{color-scheme:dark;}
 input[type="datetime-local"]::-webkit-calendar-picker-indicator{filter:invert(1);cursor:pointer;padding:4px;}
 </style>
+<script>
+function setAppH(){document.documentElement.style.setProperty('--app-h',window.innerHeight+'px');}
+window.addEventListener('resize',setAppH);
+window.addEventListener('orientationchange',function(){setTimeout(setAppH,150);});
+setAppH();
+</script>
 </head>
 <body>
 
