@@ -428,13 +428,13 @@ setAppH();
 
 <!-- FEED -->
 <div id="logoer" class="page" style="padding:16px 14px 60px;overflow-y:auto;overscroll-behavior:contain;">
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:16px;">
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:16px;width:fit-content;">
     <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:80%;background:rgba(192,57,43,0.5);border-radius:2px;"></span>
     Våre logoer
   </div>
   <div style="display:flex;flex-direction:column;align-items:center;gap:32px;">
     <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
-      <img src="logo-icon.jpeg" style="width:240px;height:240px;object-fit:contain;" alt="Partisan Lillestrøm - Original">
+      <img src="logo-icon.jpeg" style="width:240px;height:240px;object-fit:contain;border-radius:12px;" alt="Partisan Lillestrøm - Original">
       <span style="font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;color:rgba(255,255,255,.7);text-align:center;">Partisan Lillestrøm — Original</span>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
@@ -454,7 +454,7 @@ setAppH();
 
 <!-- OM OSS -->
 <div id="om" class="page" style="padding:16px 14px 60px;overflow-y:auto;overscroll-behavior:contain;">
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:16px;">
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:16px;width:fit-content;">
     <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:80%;background:rgba(192,57,43,0.5);border-radius:2px;"></span>
     Om foreningen
   </div>
@@ -470,7 +470,7 @@ setAppH();
     </p>
   </div>
 
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:12px;">
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:12px;width:fit-content;">
     <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:80%;background:rgba(192,57,43,0.5);border-radius:2px;"></span>
     Foreningsinformasjon
   </div>
@@ -484,9 +484,9 @@ setAppH();
     <div class="ir"><span class="il">Tilholdssted</span><span>Martins Pub</span></div>
   </div>
 
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:12px;">
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:12px;width:fit-content;">
     <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:80%;background:rgba(192,57,43,0.5);border-radius:2px;"></span>
-    Styre 2026
+    Nåværende styre
   </div>
   <div class="card-box" style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);margin:0 0 16px;">
     <div style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);">
@@ -753,7 +753,7 @@ function kortHtml(a, fortid) {
             <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);">${info.label}</div>
           </div>
         </div>
-        <button onclick="visSlettBekreft('${a.id}')" style="background:rgba(192,57,43,.2);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:rgba(255,100,100,.7);padding:4px 10px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:5px;flex-shrink:0;">✕ Slett</button>
+        <button onclick="visSlettBekreft('${a.id}')" style="background:rgba(192,57,43,.2);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;color:rgba(255,255,255,.2);padding:4px 10px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:5px;flex-shrink:0;">✕ Slett</button>
       </div>
       <div id="slettBekreft_${a.id}" style="display:none;margin-top:10px;padding:10px;background:rgba(192,57,43,.1);border:1px solid;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1;">
         <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:rgba(255,255,255,.8);margin-bottom:8px;">Er du sikker på at du vil slette dette arrangementet?</div>
@@ -810,7 +810,7 @@ window.addEventListener('partisan_page_change', (e) => {
 <!-- BLI MEDLEM -->
 <div id="medlem" class="page" style="padding:16px 14px 60px;overflow-y:auto;overscroll-behavior:contain;">
 
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:12px;">
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:12px;width:fit-content;">
     <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:80%;background:rgba(192,57,43,0.5);border-radius:2px;"></span>
     Som medlem har du rett til
   </div>
@@ -833,7 +833,7 @@ window.addEventListener('partisan_page_change', (e) => {
     </div>
   </div>
 
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:12px;">
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:12px;width:fit-content;">
     <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:80%;background:rgba(192,57,43,0.5);border-radius:2px;"></span>
     Slik melder du deg inn
   </div>
@@ -859,7 +859,7 @@ window.addEventListener('partisan_page_change', (e) => {
     </a>
   </div>
 
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:12px;">
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:12px;width:fit-content;">
     <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:80%;background:rgba(192,57,43,0.5);border-radius:2px;"></span>
     Betal medlemskontingent
   </div>
