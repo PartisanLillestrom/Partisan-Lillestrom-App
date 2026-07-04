@@ -8,6 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik+Dirt&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
+*::-webkit-scrollbar{display:none;}
+*{-ms-overflow-style:none;scrollbar-width:none;}
 #kamper .kamper-scroll{-ms-overflow-style:none;scrollbar-width:none;}
 #kamper .kamper-scroll::-webkit-scrollbar{display:none;}
 #hjem .hjem-scroll{-ms-overflow-style:none;scrollbar-width:none;}
@@ -333,7 +335,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator{filter:invert(1)
 </div>
 
 <!-- HJEM -->
-<div id="hjem" class="page active" style="flex-direction:column;overflow-y:auto;">
+<div id="hjem" class="page active" style="flex-direction:column;height:calc(100vh - 54px);overflow:hidden;">
   <div style="flex-shrink:0;">
     <div class="hero">
       <div class="hero-logo15">
@@ -359,7 +361,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator{filter:invert(1)
     </div>
   </div>
 
-  <div style="padding:12px 14px 16px;">
+  <div style="flex:1;overflow-y:auto;padding:12px 14px 16px;">
     <div class="sec">
       <div class="sec-hdr">
         <span class="sec-title">FC St. Pauli</span>
@@ -387,8 +389,8 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator{filter:invert(1)
 </div>
 
 <!-- KAMPER -->
-<div id="kamper" class="page" style="padding:16px 14px;display:none;flex-direction:column;overflow-y:auto;">
-  <div style="flex-shrink:0;margin-bottom:12px;">
+<div id="kamper" class="page" style="display:none;flex-direction:column;height:calc(100vh - 54px);overflow:hidden;">
+  <div style="flex-shrink:0;padding:16px 14px 12px;">
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">
       <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:6px;padding:12px 6px;text-align:center;">
         <div class="stat-num" style="font-size:28px;">50</div>
@@ -408,7 +410,9 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator{filter:invert(1)
       </div>
     </div>
   </div>
-  <div id="matchList" style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:8px;padding:0 14px;margin-bottom:16px;"></div>
+  <div style="flex:1;overflow-y:auto;padding:0 14px 16px;">
+    <div id="matchList" style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:8px;padding:0 14px;"></div>
+  </div>
 </div>
 
 <!-- FEED -->
