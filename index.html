@@ -417,15 +417,29 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator{filter:invert(1)
 </div>
 
 <!-- FEED -->
-<div id="feed" class="page">
-  <div class="fb-row">
-    <button class="fbtn active" onclick="ff('alle',this)">Alle</button>
-    <button class="fbtn" onclick="ff('Seier',this)">Seier</button>
-    <button class="fbtn" onclick="ff('Uavgjort',this)">Uavgjort</button>
-    <button class="fbtn" onclick="ff('Tap',this)">Tap</button>
-    <button class="fbtn" onclick="ff('Sosial',this)">Sosialt</button>
+<div id="logoer" class="page" style="padding:16px 14px;">
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.06em;background:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;padding-left:10px;position:relative;margin-bottom:16px;">
+    <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:80%;background:rgba(192,57,43,0.5);border-radius:2px;"></span>
+    Våre logoer
   </div>
-  <div id="feedContainer" style="margin-top:10px;"></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+    <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:8px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <img src="logo-icon.jpeg" style="width:80px;height:80px;object-fit:cover;border-radius:50%;border:2px solid rgba(192,57,43,0.5);" alt="Hovedlogo">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;text-align:center;">Hovedlogo</span>
+    </div>
+    <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:8px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <img src="logo-main.png" style="height:80px;width:auto;object-fit:contain;" alt="15-årslogo">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;text-align:center;">15-årslogo</span>
+    </div>
+    <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:8px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <img src="veteranen-logo.jpeg" style="width:80px;height:80px;object-fit:contain;border-radius:6px;background:#fff;padding:3px;" alt="Veteranen">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;text-align:center;">Veteranen</span>
+    </div>
+    <div style="background:linear-gradient(90deg,#3d1208 0%,#1a0804 50%,#0a0a0a 100%);border:1px solid #444;border-radius:8px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <img src="fight-like-a-girl.jpeg" style="width:80px;height:80px;object-fit:cover;border-radius:6px;" alt="Fight Like A Girl">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;text-align:center;">Fight Like A Girl</span>
+    </div>
+  </div>
 </div>
 
 <!-- OM OSS -->
@@ -504,7 +518,7 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator{filter:invert(1)
   <button class="bb active" onclick="sp('hjem',this)"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg><span class="bb-label">Hjem</span></button>
   <button class="bb" onclick="sp('arr',this)"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="bb-label">Arr.</span></button>
   <button class="bb" onclick="sp('kamper',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3c0 0 2 4 0 9s0 9 0 9M3 12h18"/></svg><span class="bb-label">Kamplogg</span></button>
-  <button class="bb" onclick="sp('feed',this)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><span class="bb-label">Feed</span></button>
+  <button class="bb" onclick="sp('logoer',this)"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg><span class="bb-label">Logoer</span></button>
   <button class="bb" onclick="sp('om',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg><span class="bb-label">Om oss</span></button>
   <button class="bb" onclick="sp('medlem',this)"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg><span class="bb-label">Bli medlem</span></button>
 </div>
