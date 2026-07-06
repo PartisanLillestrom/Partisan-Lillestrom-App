@@ -167,7 +167,15 @@ def fetch_fcstpauli_news_urls(limit: int = 3) -> list:
 # Neste kamp (nytt: scraper fcstpauli.com sin egen rahmenspielplan-side)
 # ---------------------------------------------------------------------------
 
-RAHMENSPIELPLAN_URL = "https://www.fcstpauli.com/fu%C3%9Fball/teams/profis/rahmenspielplan-2026-27"
+def rahmenspielplan_urls() -> list:
+    """Bygger URL-ene til inneværende og neste sesongs Rahmenspielplan-side
+    dynamisk ut fra dagens dato, slik at skriptet ikke må oppdateres manuelt
+    ved sesongskifte. En Bundesliga-sesong regnes her som å starte i juni
+    (treningskampene begynner i juni/juli)."""
+    now = datetime.now(timezone.utc)
+    start = now.year if now.month >= 6 else now.year - 1
+    base = "https://www.fcstpauli.com/fu%C3%9Fball/teams/profis/rahmenspielplan-{}-{}"
+    return [base.format(y, str(y + 1)[-2:]) for y in (start, start + 1)]
 
 
 def _strip_tags(html_fragment: str) -> str:
@@ -178,11 +186,10 @@ def _strip_tags(html_fragment: str) -> str:
     return re.sub(r'\s+', ' ', text).strip()
 
 
-def fetch_next_match_fcstpauli(url: str = RAHMENSPIELPLAN_URL) -> dict:
-    """Henter neste kamp direkte fra FC St. Paulis egen Rahmenspielplan-side.
-    Dette er den mest palitelige kilden: den inkluderer ogsa testkamper
-    (Testspiel) i forkant av sesongen, som tredjeparts-fotball-APIer som
-    OpenLigaDB ikke har - og terminlisten legges ut her forst uansett."""
+def _hent_kamp_kandidater(url: str) -> list:
+    """Henter alle kommende kamper med fastsatt dato fra én Rahmenspielplan-
+    side. Returnerer tom liste hvis siden ikke finnes (typisk: neste sesongs
+    side er ikke publisert ennå) eller ikke inneholder treff."""
     m_season = re.search(r'(\d{4})-\d{2}', url)
     season_start_year = int(m_season.group(1)) if m_season else datetime.now(timezone.utc).year
 
@@ -190,9 +197,15 @@ def fetch_next_match_fcstpauli(url: str = RAHMENSPIELPLAN_URL) -> dict:
         req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
         with urllib.request.urlopen(req, timeout=30) as resp:
             html_doc = resp.read().decode("utf-8", "replace")
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            print(f"  (info: {url} finnes ikke (404) - hopper over)", file=sys.stderr)
+        else:
+            print(f"  (advarsel: henting av {url} feilet: {e})", file=sys.stderr)
+        return []
     except Exception as e:
-        print(f"  (advarsel: henting av rahmenspielplan feilet: {e})", file=sys.stderr)
-        return {}
+        print(f"  (advarsel: henting av {url} feilet: {e})", file=sys.stderr)
+        return []
 
     today = datetime.now(timezone.utc).date()
     kandidater = []
@@ -209,7 +222,10 @@ def fetch_next_match_fcstpauli(url: str = RAHMENSPIELPLAN_URL) -> dict:
         if not m_dato:
             continue
         dag, maned = int(m_dato.group(1)), int(m_dato.group(2))
-        aar = season_start_year if maned >= 7 else season_start_year + 1
+        # Juni regnes til sesongstartåret: Rahmenspielplan-siden inkluderer
+        # treningskamper i juni FØR sesongstart (f.eks. 30.06.2026 for
+        # 2026/27-sesongen), mens ligasesongen aldri har kamper i juni.
+        aar = season_start_year if maned >= 6 else season_start_year + 1
 
         time_str = "12:00"
         m_tid = re.search(r'(\d{1,2})(?::(\d{2}))?\s*Uhr', anstot)
@@ -233,8 +249,24 @@ def fetch_next_match_fcstpauli(url: str = RAHMENSPIELPLAN_URL) -> dict:
             "turnering": wettbewerb.strip() or "Kamp",
         })
 
+    return kandidater
+
+
+def fetch_next_match_fcstpauli() -> dict:
+    """Henter neste kamp direkte fra FC St. Paulis egne Rahmenspielplan-sider.
+    Dette er den mest palitelige kilden: den inkluderer ogsa testkamper
+    (Testspiel) i forkant av sesongen, som tredjeparts-fotball-APIer ikke
+    har - og terminlisten legges ut her forst uansett.
+
+    Vi sjekker bade inneværende og neste sesongs side (neste sesongs side
+    gir 404 frem til den publiseres - det er helt normalt), slik at
+    overgangen mellom sesonger skjer automatisk uten kodeendringer."""
+    kandidater = []
+    for url in rahmenspielplan_urls():
+        kandidater.extend(_hent_kamp_kandidater(url))
+
     if not kandidater:
-        print("  (advarsel: fant ingen kommende kamp med fastsatt dato pa rahmenspielplan-siden)", file=sys.stderr)
+        print("  (advarsel: fant ingen kommende kamp med fastsatt dato pa rahmenspielplan-sidene)", file=sys.stderr)
         return {}
 
     kandidater.sort(key=lambda x: x["dt"])
@@ -297,9 +329,9 @@ def validate(payload: dict) -> None:
         for field in ("title_no", "title_de", "url"):
             if not item.get(field):
                 raise ValueError(f"millernton_news-element mangler felt '{field}': {item}")
-    # next_match er "best effort" - hvis OpenLigaDB ikke har data (f.eks. ny
-    # sesong ikke lagt inn enna) beholder vi heller gammel data enn a feile
-    # hele korselen. Se main() for hvordan dette handteres.
+    # next_match er "best effort" - hvis rahmenspielplan-siden ikke gir
+    # treff (f.eks. ny sesong ikke publisert enna) beholder vi heller gammel
+    # data enn a feile hele korselen. Se main() for hvordan dette handteres.
 
 
 # ---------------------------------------------------------------------------
