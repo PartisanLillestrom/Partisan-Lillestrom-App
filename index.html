@@ -1031,6 +1031,7 @@ async function hentNesteKamp(force) {
   const CACHE_KEY = 'pl_kamp_v3';
   const CACHE_TS  = 'pl_kamp_v3_ts';
   const btn = null; // knapp fjernet
+  let kampCached = false;
 
   // Slett gammel cache ved force
   if (force) {
@@ -1038,18 +1039,18 @@ async function hentNesteKamp(force) {
     localStorage.removeItem(CACHE_TS);
     if (btn) btn.textContent = '⟳ Henter...';
   } else {
-    // Bruk cache hvis under 6 timer gammel
+    // Bruk kamp-cache hvis under 6 timer gammel
     try {
       const ts = localStorage.getItem(CACHE_TS);
       if (ts && (Date.now() - parseInt(ts)) < 6*3600*1000) {
         const cached = localStorage.getItem(CACHE_KEY);
-        if (cached) { visKamp(JSON.parse(cached)); return; }
+        if (cached) { visKamp(JSON.parse(cached)); kampCached = true; }
       }
     } catch(e) {}
   }
 
   // Vis fallback mens vi henter
-  visKamp(nesteKampFraListe());
+  if (!kampCached) visKamp(nesteKampFraListe());
 
   // Hent fersk data fra data.json (skrives av en GitHub Action server-side,
   // siden et direkte kall til Anthropic API fra nettleseren ikke fungerer
@@ -1060,7 +1061,7 @@ async function hentNesteKamp(force) {
     const data = await resp.json();
 
     // Neste kamp – vis kun hvis kampdato ikke er passert
-    if (data.next_match && data.next_match.dato) {
+    if (!kampCached && data.next_match && data.next_match.dato) {
       if (new Date(data.next_match.dato + 'T23:59') >= new Date()) {
         localStorage.setItem(CACHE_KEY, JSON.stringify(data.next_match));
         localStorage.setItem(CACHE_TS, Date.now().toString());
@@ -1068,7 +1069,7 @@ async function hentNesteKamp(force) {
       }
     }
 
-    // Nyheter – oppdateres uavhengig av kampdato
+    // Nyheter – oppdateres alltid fra data.json
     if (data.fcstpauli_news) renderNyheter('fcstpauliNews', data.fcstpauli_news, 'rgba(192,57,43,0.55)', true);
     if (data.millernton_news) renderNyheter('millerntonNews', data.millernton_news, 'rgba(230,126,34,0.55)', false);
   } catch(e) {
