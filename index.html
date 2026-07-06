@@ -1013,7 +1013,8 @@ window.addEventListener('partisan_page_change', (e) => {
 
 <script>
 // ---- NESTE KAMP ----
-// Hent alltid fersk fra fcstpauli.com via Claude API. Fallback: hardkodet liste.
+// Hentes fra data.json (skrives av GitHub Action som scraper fcstpauli.com).
+// Fallback: hardkodet liste under, brukes hvis data.json ikke kan hentes.
 
 const KJENTE_KAMPER = [
   { motstander:'Altona 93',        dato:'2026-06-30', tid:'18:00', turnering:'Testspiel',   hjemme:false, stadion:'Adolf-Jäger-Kampfbahn, Hamburg' },
@@ -1039,12 +1040,17 @@ async function hentNesteKamp(force) {
     localStorage.removeItem(CACHE_TS);
     if (btn) btn.textContent = '⟳ Henter...';
   } else {
-    // Bruk kamp-cache hvis under 6 timer gammel
+    // Bruk kamp-cache hvis under 6 timer gammel OG kampdatoen ikke er passert
     try {
       const ts = localStorage.getItem(CACHE_TS);
       if (ts && (Date.now() - parseInt(ts)) < 6*3600*1000) {
         const cached = localStorage.getItem(CACHE_KEY);
-        if (cached) { visKamp(JSON.parse(cached)); kampCached = true; }
+        if (cached) {
+          const k = JSON.parse(cached);
+          if (k && k.dato && new Date(k.dato + 'T23:59') >= new Date()) {
+            visKamp(k); kampCached = true;
+          }
+        }
       }
     } catch(e) {}
   }
