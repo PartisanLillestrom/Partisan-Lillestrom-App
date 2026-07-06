@@ -383,6 +383,40 @@ window.addEventListener('resize',setAppH);
 window.addEventListener('orientationchange',function(){setTimeout(setAppH,150);});
 setAppH();
 </script>
+<!-- Firebase (delt lagring for arrangementer, påmeldinger og kommentarer) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+// ============================================================
+// FIREBASE-OPPSETT
+// Lim inn verdiene fra Firebase-konsollen her (Prosjektinnstillinger
+// -> Generelt -> Dine apper -> SDK-oppsett og konfigurasjon).
+// Så lenge feltene under starter med "LIM_INN" kjører appen videre
+// med lokal lagring (kun egen enhet) - helt som før.
+// ============================================================
+const FIREBASE_CONFIG = {
+  apiKey: "LIM_INN_API_KEY",
+  authDomain: "LIM_INN_PROSJEKT.firebaseapp.com",
+  databaseURL: "LIM_INN_DATABASE_URL", // f.eks. https://partisan-lillestrom-default-rtdb.europe-west1.firebasedatabase.app
+  projectId: "LIM_INN_PROSJEKT_ID",
+};
+
+let _fdb = null; // Firebase-database, null = bruk localStorage
+try {
+  if (typeof firebase !== 'undefined' && !FIREBASE_CONFIG.apiKey.startsWith('LIM_INN')) {
+    firebase.initializeApp(FIREBASE_CONFIG);
+    _fdb = firebase.database();
+  }
+} catch(e) { console.warn('Firebase utilgjengelig, bruker lokal lagring:', e); }
+
+// Navn kan ikke inneholde tegnene .#$[]/ i Firebase-nøkler
+function _fbKey(s) { return String(s).replace(/[.#$\[\]\/]/g, '_'); }
+
+// Enkel HTML-escaping for brukerskrevet innhold (navn, kommentarer)
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+</script>
 </head>
 <body>
 
@@ -659,12 +693,37 @@ const defaultArr = [
   },
 ];
 
+// Delt tilstand fra Firebase (null = ikke lastet ennå / Firebase ikke i bruk)
+let _skyArr = null;      // brukeropprettede arrangementer fra skyen
+let _skySlettet = null;  // IDer på skjulte standardarrangementer
+let _gjeldendeFilter = 'alle';
+
+// Lytt på endringer i skyen: når noen oppretter/sletter et arrangement,
+// oppdateres visningen automatisk hos alle
+if (_fdb) {
+  _fdb.ref('arrangementer').on('value', snap => {
+    _skyArr = snap.exists() ? Object.values(snap.val()) : [];
+    visArr(_gjeldendeFilter);
+  });
+  _fdb.ref('arr_slettet').on('value', snap => {
+    _skySlettet = snap.exists() ? Object.keys(snap.val()) : [];
+    visArr(_gjeldendeFilter);
+  });
+}
+
 function hentArr() {
   try {
-    const data = localStorage.getItem('pl_arr');
-    const user = data ? JSON.parse(data) : [];
-    // Hent slettede default-IDer
-    const slettet = JSON.parse(localStorage.getItem('pl_arr_slettet') || '[]');
+    let user, slettet;
+    if (_fdb && _skyArr !== null) {
+      // Delt lagring: alle ser de samme arrangementene
+      user = _skyArr;
+      slettet = _skySlettet || [];
+    } else {
+      // Fallback: lokal lagring på denne enheten
+      const data = localStorage.getItem('pl_arr');
+      user = data ? JSON.parse(data) : [];
+      slettet = JSON.parse(localStorage.getItem('pl_arr_slettet') || '[]');
+    }
     // Filtrer ut slettede defaults
     const aktiveDefaults = defaultArr.filter(a => !slettet.includes(a.id));
     // Kombiner default og bruker-opprettede, fjern duplikater
@@ -696,12 +755,20 @@ function lagreArr() {
 
   const nytt = { id: 'u_' + Date.now(), type, tittel, dato, sted, beskr, opprettet: new Date().toISOString().split('T')[0], opprettetAv: navn };
 
-  try {
-    const eksist = localStorage.getItem('pl_arr');
-    const liste = eksist ? JSON.parse(eksist) : [];
-    liste.push(nytt);
-    localStorage.setItem('pl_arr', JSON.stringify(liste));
-  } catch(e) {}
+  if (_fdb) {
+    // Delt lagring: synlig for alle - lytteren re-rendrer automatisk
+    _fdb.ref('arrangementer/' + nytt.id).set(nytt).catch(e => {
+      console.warn('Kunne ikke lagre til skyen:', e);
+      alert('Kunne ikke lagre arrangementet - sjekk nettforbindelsen og prøv igjen.');
+    });
+  } else {
+    try {
+      const eksist = localStorage.getItem('pl_arr');
+      const liste = eksist ? JSON.parse(eksist) : [];
+      liste.push(nytt);
+      localStorage.setItem('pl_arr', JSON.stringify(liste));
+    } catch(e) {}
+  }
 
   // Reset skjema (behold navn)
   document.getElementById('fTittel').value = '';
@@ -728,7 +795,14 @@ function skjulSlettBekreft(id) {
 }
 function slettArr(id) {
   try {
-    if (id.startsWith('u_')) {
+    if (_fdb) {
+      // Delt lagring: slettes for alle - lytteren re-rendrer automatisk
+      if (id.startsWith('u_')) {
+        _fdb.ref('arrangementer/' + id).remove();
+      } else {
+        _fdb.ref('arr_slettet/' + id).set(true);
+      }
+    } else if (id.startsWith('u_')) {
       // Brukeropprettet: fjern fra localStorage-listen
       const data = localStorage.getItem('pl_arr');
       if (data) {
@@ -742,7 +816,7 @@ function slettArr(id) {
       localStorage.setItem('pl_arr_slettet', JSON.stringify(slettet));
     }
   } catch(e) {}
-  visArr('alle');
+  visArr(_gjeldendeFilter);
 }
 
 function toggleForm() {
@@ -763,6 +837,7 @@ function filtrerArr(type, btn) {
 }
 
 function visArr(filter) {
+  _gjeldendeFilter = filter || 'alle';
   const container = document.getElementById('arrListe');
   if (!container) return;
 
@@ -795,6 +870,12 @@ function visArr(filter) {
   }
 
   container.innerHTML = html;
+
+  // Fyll inn påmeldinger og kommentarer i de nyopprettede kortene
+  setTimeout(() => {
+    if (typeof lastAlleRSVP === 'function') lastAlleRSVP();
+    if (typeof lastAlleKommentarer === 'function') lastAlleKommentarer();
+  }, 0);
 }
 
 function kortHtml(a, fortid) {
@@ -1190,27 +1271,28 @@ document.addEventListener('DOMContentLoaded', oppdaterTid);
 
 let _mittNavn = localStorage.getItem('pl_mitt_navn') || '';
 
-// Hent delt lagring (bruker window.storage hvis tilgjengelig, ellers localStorage)
+// Hent delt lagring (Firebase hvis konfigurert, ellers localStorage lokalt)
 async function getRSVP(eventId) {
-  try {
-    if (window.storage) {
-      const r = await window.storage.get('rsvp_' + eventId, true);
-      return r ? JSON.parse(r.value) : [];
-    }
-  } catch(e) {}
+  if (_fdb) {
+    try {
+      const snap = await _fdb.ref('rsvp/' + eventId).get();
+      const liste = snap.exists() ? Object.values(snap.val()) : [];
+      // Speil til localStorage så listen også vises offline
+      try { localStorage.setItem('rsvp_' + eventId, JSON.stringify(liste)); } catch(e) {}
+      return liste;
+    } catch(e) { console.warn('RSVP-henting fra skyen feilet:', e); }
+  }
   try {
     const d = localStorage.getItem('rsvp_' + eventId);
     return d ? JSON.parse(d) : [];
   } catch(e) { return []; }
 }
 
-async function setRSVP(eventId, liste) {
-  try {
-    if (window.storage) {
-      await window.storage.set('rsvp_' + eventId, JSON.stringify(liste), true);
-    }
-  } catch(e) {}
-  localStorage.setItem('rsvp_' + eventId, JSON.stringify(liste));
+// Sanntid: når noen melder seg på/av, oppdateres visningen hos alle
+if (_fdb) {
+  _fdb.ref('rsvp').on('value', () => {
+    if (typeof lastAlleRSVP === 'function') lastAlleRSVP();
+  });
 }
 
 async function meldPaa(eventId, tittel) {
@@ -1223,15 +1305,25 @@ async function meldPaa(eventId, tittel) {
     await meldAv(eventId);
     return;
   }
+  if (_fdb) {
+    // Én nøkkel per navn - to som melder seg på samtidig overskriver
+    // ikke hverandre (i motsetning til å skrive hele listen)
+    try { await _fdb.ref('rsvp/' + eventId + '/' + _fbKey(_mittNavn)).set(_mittNavn); }
+    catch(e) { console.warn('Påmelding til skyen feilet:', e); }
+  }
   liste.push(_mittNavn);
-  await setRSVP(eventId, liste);
+  try { localStorage.setItem('rsvp_' + eventId, JSON.stringify(liste)); } catch(e) {}
   await oppdaterRSVPVisning(eventId);
 }
 
 async function meldAv(eventId) {
   const liste = await getRSVP(eventId);
   const ny = liste.filter(n => n !== _mittNavn);
-  await setRSVP(eventId, ny);
+  if (_fdb) {
+    try { await _fdb.ref('rsvp/' + eventId + '/' + _fbKey(_mittNavn)).remove(); }
+    catch(e) { console.warn('Avmelding fra skyen feilet:', e); }
+  }
+  try { localStorage.setItem('rsvp_' + eventId, JSON.stringify(ny)); } catch(e) {}
   await oppdaterRSVPVisning(eventId);
 }
 
@@ -1250,7 +1342,7 @@ async function oppdaterRSVPVisning(eventId) {
         ${antall} påmeldt${antall !== 1 ? 'e' : ''}
       </div>
       <div class="pameldt-navn">
-        ${liste.map(n => `<span class="pameldt-tag gb${n === _mittNavn ? ' meg' : ''}">${n}</span>`).join('')}
+        ${liste.map(n => `<span class="pameldt-tag gb${n === _mittNavn ? ' meg' : ''}">${esc(n)}</span>`).join('')}
       </div>
     </div>` : ''}
     <button class="meld-btn gb ${erPaameldt ? 'av gb-trans' : 'paa gb-dark'}"
@@ -1318,25 +1410,51 @@ const _origVisArr = typeof visArr === 'function' ? visArr : null;
 // ---- KOMMENTARER ----
 
 async function getKommentarer(eventId) {
-  try {
-    if (window.storage) {
-      const r = await window.storage.get('komm_' + eventId, true);
-      return r ? JSON.parse(r.value) : [];
-    }
-  } catch(e) {}
+  if (_fdb) {
+    try {
+      const snap = await _fdb.ref('komm/' + eventId).get();
+      const liste = snap.exists() ? Object.values(snap.val()) : [];
+      // Kommentar-ID starter med tidsstempel, så dette gir kronologisk rekkefølge
+      liste.sort((a, b) => String(a.id).localeCompare(String(b.id)));
+      try { localStorage.setItem('komm_' + eventId, JSON.stringify(liste)); } catch(e) {}
+      return liste;
+    } catch(e) { console.warn('Kommentar-henting fra skyen feilet:', e); }
+  }
   try {
     const d = localStorage.getItem('komm_' + eventId);
     return d ? JSON.parse(d) : [];
   } catch(e) { return []; }
 }
 
-async function setKommentarer(eventId, liste) {
+// Sanntid: nye kommentarer fra andre dukker opp uten at siden må lastes på nytt.
+// (Trygt mens man skriver: bare selve kommentarlisten re-rendres, ikke input-feltet.)
+if (_fdb) {
+  _fdb.ref('komm').on('value', () => {
+    if (typeof lastAlleKommentarer === 'function') lastAlleKommentarer();
+  });
+}
+
+async function lagreKommentar(eventId, komm) {
+  if (_fdb) {
+    try { await _fdb.ref('komm/' + eventId + '/' + _fbKey(komm.id)).set(komm); }
+    catch(e) { console.warn('Kommentar-lagring til skyen feilet:', e); }
+  }
   try {
-    if (window.storage) {
-      await window.storage.set('komm_' + eventId, JSON.stringify(liste), true);
-    }
+    const liste = JSON.parse(localStorage.getItem('komm_' + eventId) || '[]');
+    liste.push(komm);
+    localStorage.setItem('komm_' + eventId, JSON.stringify(liste));
   } catch(e) {}
-  localStorage.setItem('komm_' + eventId, JSON.stringify(liste));
+}
+
+async function fjernKommentar(eventId, kommId) {
+  if (_fdb) {
+    try { await _fdb.ref('komm/' + eventId + '/' + _fbKey(kommId)).remove(); }
+    catch(e) { console.warn('Kommentar-sletting i skyen feilet:', e); }
+  }
+  try {
+    const liste = JSON.parse(localStorage.getItem('komm_' + eventId) || '[]');
+    localStorage.setItem('komm_' + eventId, JSON.stringify(liste.filter(k => k.id !== kommId)));
+  } catch(e) {}
 }
 
 function bekreftKommNavn(eventId) {
@@ -1362,22 +1480,19 @@ async function sendKommentar(eventId) {
   const tekst = inp.value.trim();
   if (!tekst) { inp.focus(); return; }
 
-  const liste = await getKommentarer(eventId);
-  liste.push({
+  const komm = {
     id: Date.now() + '_' + Math.random().toString(36).slice(2,6),
     navn: _mittNavn,
     tekst,
     tid: new Date().toLocaleString('nb-NO', {day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})
-  });
-  await setKommentarer(eventId, liste);
+  };
+  await lagreKommentar(eventId, komm);
   inp.value = '';
   await oppdaterKommListe(eventId);
 }
 
 async function slettKommentar(eventId, kommId) {
-  const liste = await getKommentarer(eventId);
-  const ny = liste.filter(k => k.id !== kommId);
-  await setKommentarer(eventId, ny);
+  await fjernKommentar(eventId, kommId);
   await oppdaterKommListe(eventId);
 }
 
@@ -1389,13 +1504,13 @@ async function oppdaterKommListe(eventId) {
   boks.innerHTML = liste.map(k => `
     <div class="komm-item">
       <div class="komm-hdr">
-        <span class="komm-navn${k.navn === _mittNavn ? ' meg' : ''}">${k.navn}</span>
+        <span class="komm-navn${k.navn === _mittNavn ? ' meg' : ''}">${esc(k.navn)}</span>
         <span>
-          <span class="komm-tid">${k.tid}</span>
+          <span class="komm-tid">${esc(k.tid)}</span>
           ${k.navn === _mittNavn ? `<button class="komm-slett" onclick="slettKommentar('${eventId}','${k.id}')">✕</button>` : ''}
         </span>
       </div>
-      <div class="komm-tekst">${k.tekst}</div>
+      <div class="komm-tekst">${esc(k.tekst)}</div>
     </div>
   `).join('');
 }
