@@ -1059,12 +1059,16 @@ async function hentNesteKamp(force) {
     if (!resp.ok) throw new Error('data.json mangler');
     const data = await resp.json();
 
+    // Neste kamp – vis kun hvis kampdato ikke er passert
     if (data.next_match && data.next_match.dato) {
-      if (new Date(data.next_match.dato + 'T23:59') < new Date()) throw new Error('gammel kamp');
-      localStorage.setItem(CACHE_KEY, JSON.stringify(data.next_match));
-      localStorage.setItem(CACHE_TS, Date.now().toString());
-      visKamp(data.next_match);
+      if (new Date(data.next_match.dato + 'T23:59') >= new Date()) {
+        localStorage.setItem(CACHE_KEY, JSON.stringify(data.next_match));
+        localStorage.setItem(CACHE_TS, Date.now().toString());
+        visKamp(data.next_match);
+      }
     }
+
+    // Nyheter – oppdateres uavhengig av kampdato
     if (data.fcstpauli_news) renderNyheter('fcstpauliNews', data.fcstpauli_news, 'rgba(192,57,43,0.55)', true);
     if (data.millernton_news) renderNyheter('millerntonNews', data.millernton_news, 'rgba(230,126,34,0.55)', false);
   } catch(e) {
