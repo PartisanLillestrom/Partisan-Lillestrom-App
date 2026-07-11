@@ -2,34 +2,33 @@ name: Oppdater nyheter og kampdata
 
 on:
   schedule:
-    - cron: '0 4,10,14,18 * * *'  # 06/12/16/20 norsk tid sommertid (CEST)
-    - cron: '0 5,11,15,19 * * *'  # 06/12/16/20 norsk tid vintertid (CET)
-  workflow_dispatch: {}   # gjor det muhlig a trigge manuelt fra "Actions"-fanen pa GitHub
-
+    # Kjører 06/12/16/20 norsk tid. Minutt :17 (ikke :00) - GitHub dropper
+    # oftere kjøringer på hele klokkeslett pga. stor pågang.
+    # Sommertid (CEST = UTC+2):
+    - cron: '17 4,10,14,18 * * *'
+    # Vintertid (CET = UTC+1):
+    - cron: '17 5,11,15,19 * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
 
-
 jobs:
-  update-data:
+  update:
     runs-on: ubuntu-latest
     steps:
       - name: Sjekk ut repo
-        uses: actions/checkout@v4
-
+        uses: actions/checkout@v5
 
       - name: Sett opp Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-
       - name: Kjor oppdateringsskript
         run: python3 scripts/update_data.py
 
-
-      - name: Commit og push data.json hvis det er endret
+      - name: Commit og push data.json hvis det er endringer
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -37,6 +36,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "Ingen endringer i data.json - hopper over commit."
           else
-            git commit -m "Automatisk oppdatering av nyheter og kampdata"
+            git commit -m "Automatisk oppdatering av data.json"
             git push
           fi
