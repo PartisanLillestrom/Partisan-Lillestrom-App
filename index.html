@@ -1098,9 +1098,10 @@ window.addEventListener('partisan_page_change', (e) => {
 // Fallback: hardkodet liste under, brukes hvis data.json ikke kan hentes.
 
 const KJENTE_KAMPER = [
+  { motstander:'Altona 93',        dato:'2026-06-30', tid:'18:00', turnering:'Testspiel',   hjemme:false, stadion:'Adolf-Jäger-Kampfbahn, Hamburg' },
+  { motstander:'Kickers Emden',    dato:'2026-07-04', tid:'18:00', turnering:'Testspiel',   hjemme:false, stadion:'Ostfriesland-Stadion, Emden' },
   { motstander:'SV Babelsberg 03', dato:'2026-07-11', tid:'15:30', turnering:'Testspiel',   hjemme:false, stadion:'Karl-Liebknecht-Stadion, Babelsberg' },
   { motstander:'Rot-Weiss Essen',  dato:'2026-08-02', tid:'',      turnering:'DFB-Pokal',   hjemme:false, stadion:'Dato ikke bekreftet' },
-  { motstander:'2. Bundesliga',    dato:'2026-08-08', tid:'',      turnering:'2. Bundesliga', hjemme:true,  stadion:'Millerntor-Stadion, Hamburg' },
 ];
 
 function nesteKampFraListe() {
@@ -1188,7 +1189,9 @@ function visKamp(kamp) {
     const diff = d - now;
     let cd = '';
     if (diff > 0) {
-      const dager = Math.floor(diff/86400000);
+      // Kalenderdager (midnatt mot midnatt) - ikke 24-timersperioder
+      const midnatt = x => new Date(x.getFullYear(), x.getMonth(), x.getDate());
+      const dager = Math.round((midnatt(d) - midnatt(now)) / 86400000);
       if (dager > 1) cd = `om ${dager}d`;
       else if (dager === 1) cd = 'i morgen';
       else cd = 'i dag!';
@@ -1211,8 +1214,10 @@ function visKamp(kamp) {
   const diff = d - now;
   let cd = '';
   if (diff > 0) {
-    const dager = Math.floor(diff/86400000);
-    const timer = Math.floor((diff%86400000)/3600000);
+    // Kalenderdager (midnatt mot midnatt) - ikke 24-timersperioder
+    const midnatt = x => new Date(x.getFullYear(), x.getMonth(), x.getDate());
+    const dager = Math.round((midnatt(d) - midnatt(now)) / 86400000);
+    const timer = Math.floor(diff/3600000);
     cd = dager > 1 ? `om ${dager} dager` : dager === 1 ? 'i morgen' : timer > 0 ? `om ${timer}t` : 'I dag! 🔥';
   }
   const hj = kamp.hjemme;
