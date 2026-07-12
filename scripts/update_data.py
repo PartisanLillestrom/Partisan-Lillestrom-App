@@ -17,7 +17,6 @@ at GitHub Actions tydelig viser at kjørselen feilet - uten at nettsiden
 noensinne viser ødelagt eller tom data.
 """
 
-import base64
 import email.utils
 import json
 import re
@@ -364,56 +363,22 @@ def fetch_next_match_fcstpauli(url: str = RAHMENSPIELPLAN_URL) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Bildenedlasting (uendret)
+# Bilde-URL via weserv-proxy (ingen nedlasting, ingen base64)
 # ---------------------------------------------------------------------------
 
-def _fetch_image_bytes(url: str, referer: str) -> tuple:
-    """Prover aa laste ned bildebytes: (1) direkte med Referer,
-    (2) via images.weserv.nl-proxyen (gratis; omgar blokkering og
-    krymper bildet til 400px bredde samtidig). Returnerer (bytes, ctype)."""
-    # Lag 1: direkte
-    try:
-        req = urllib.request.Request(url, headers={
-            "User-Agent": USER_AGENT,
-            "Referer": referer,
-            "Accept": "image/webp,image/jpeg,image/png,image/*,*/*",
-        })
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            data = resp.read()
-            ctype = (resp.headers.get("Content-Type") or "image/webp").split(";")[0].strip()
-        if ctype.startswith("image/") and data:
-            return data, ctype
-    except Exception as e:
-        print(f"  (direkte bildenedlasting feilet for {url}: {e})", file=sys.stderr)
-
-    # Lag 2: weserv-proxy (henter fra sin egen server + resizer)
-    try:
-        proxied = "https://images.weserv.nl/?url=" + urllib.parse.quote(url, safe="") + "&w=400"
-        req = urllib.request.Request(proxied, headers={"User-Agent": USER_AGENT})
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            data = resp.read()
-            ctype = (resp.headers.get("Content-Type") or "image/jpeg").split(";")[0].strip()
-        if ctype.startswith("image/") and data:
-            print(f"  (bilde hentet via weserv-proxy: {url})")
-            return data, ctype
-    except Exception as e:
-        print(f"  (weserv-proxy feilet for {url}: {e})", file=sys.stderr)
-
-    return b"", ""
-
-
-def download_image_as_data_uri(url: str, referer: str) -> str:
-    """Laster ned et bilde server-side og returnerer det som en base64
-    data-URI. Bruker direkte nedlasting med proxy-fallback. Returnerer
-    tom streng hvis alt feiler eller bildet er for stort."""
+def weserv_image_url(url: str) -> str:
+    """Returnerer en images.weserv.nl-URL som peker paa originalbildet.
+    Weserv henter, cacher og krymper bildet paa sine servere (400 px bredde,
+    webp) - det omgaar hotlink-blokkering OG holder data.json paa noen faa KB
+    i stedet for flere MB med innbakt base64. Nettleseren laster bildet
+    direkte fra weserv sitt CDN. Tom streng hvis URL-en er ubrukelig."""
     if not url or not url.startswith("http"):
         return ""
-    data, ctype = _fetch_image_bytes(url, referer)
-    if not data:
-        return ""
-    if len(data) > 600_000:  # dropp bilder over ~600 KB
-        return ""
-    return f"data:{ctype};base64," + base64.b64encode(data).decode("ascii")
+    return (
+        "https://images.weserv.nl/?url="
+        + urllib.parse.quote(url, safe="")
+        + "&w=400&output=webp&q=70"
+    )
 
 
 def validate(payload: dict) -> None:
@@ -491,11 +456,13 @@ def main() -> int:
         except Exception:
             pass
 
-    # Last ned bildene server-side som base64
+    # Legg inn weserv-proxy-URL-er i stedet for aa bake inn bildene som
+    # base64 - nettleseren henter bildene direkte fra weserv sitt CDN,
+    # og data.json holder seg paa noen faa KB.
     for item in payload["fcstpauli_news"]:
-        item["image"] = download_image_as_data_uri(item.get("image", ""), referer="https://www.fcstpauli.com/")
+        item["image"] = weserv_image_url(item.get("image", ""))
     for item in payload["millernton_news"]:
-        item["image"] = download_image_as_data_uri(item.get("image", ""), referer="https://millernton.de/")
+        item["image"] = weserv_image_url(item.get("image", ""))
 
     payload["updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
