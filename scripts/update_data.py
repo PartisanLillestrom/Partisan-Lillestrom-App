@@ -94,27 +94,48 @@ def detect_lang(text: str) -> str:
     return "de" if score >= 0 else "en"
 
 
-def translate_to_no(text: str) -> str:
-    """Oversetter en kort tittel (tysk ELLER engelsk - detekteres automatisk)
-    til norsk via MyMemory sin gratis API. Returnerer originalteksten uendret
-    hvis oversettelsen feiler - da vises originaltittelen i stedet, som
-    fortsatt er lesbar."""
-    if not text:
-        return text
-    src = detect_lang(text)
+def _mymemory(text: str, src: str) -> str:
+    """Ett enkelt kall til MyMemory ({src}|no). Returnerer oversettelsen,
+    eller tom streng hvis kallet feiler, kvoten er brukt opp, API-et svarer
+    med feilstatus, eller 'oversettelsen' er identisk med originalen
+    (dvs. ingen reell oversettelse skjedde)."""
     try:
         q = urllib.parse.quote(text[:490])
         url = f"https://api.mymemory.translated.net/get?q={q}&langpair={src}|no"
         req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
         with urllib.request.urlopen(req, timeout=20) as resp:
             data = json.loads(resp.read().decode("utf-8"))
-        translated = (data.get("responseData") or {}).get("translatedText", "")
-        if translated and "MYMEMORY WARNING" not in translated.upper():
-            return translated
-        return text
+        # MyMemory legger feilmeldinger inni translatedText med status != 200
+        if str(data.get("responseStatus")) != "200":
+            print(f"  (oversettelse {src}|no ga status {data.get('responseStatus')}: {data.get('responseDetails','')[:60]})", file=sys.stderr)
+            return ""
+        translated = ((data.get("responseData") or {}).get("translatedText") or "").strip()
+        if not translated or "MYMEMORY WARNING" in translated.upper():
+            return ""
+        # Identisk svar = ingen reell oversettelse
+        if translated.strip().lower() == text.strip().lower():
+            return ""
+        return translated
     except Exception as e:
         print(f"  (advarsel: oversettelse ({src}|no) feilet for '{text[:40]}...': {e})", file=sys.stderr)
+        return ""
+
+
+def translate_to_no(text: str) -> str:
+    """Oversetter en kort tittel (tysk ELLER engelsk) til norsk. Prover
+    forst spraket som detekteres, deretter det andre som fallback - MT-
+    motoren bak MyMemory takler ofte 'feil' kildesprak helt fint. Returnerer
+    originalteksten uendret hvis begge forsok feiler."""
+    if not text:
         return text
+    src = detect_lang(text)
+    for lang in (src, "en" if src == "de" else "de"):
+        result = _mymemory(text, lang)
+        if result:
+            if lang != src:
+                print(f"  (oversatt via fallback {lang}|no: '{text[:40]}')")
+            return result
+    return text
 
 
 # ---------------------------------------------------------------------------
