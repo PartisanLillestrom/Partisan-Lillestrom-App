@@ -68,15 +68,43 @@ MONTHS_NO = {
 # Oversettelse (gratis, ingen nøkkel)
 # ---------------------------------------------------------------------------
 
-def translate_de_to_no(text: str) -> str:
-    """Oversetter kort tysk tekst til norsk via MyMemory sin gratis API.
-    Returnerer originalteksten uendret hvis oversettelsen feiler - da vises
-    den tyske originaltittelen i stedet, som fortsatt er lesbar."""
+def detect_lang(text: str) -> str:
+    """Enkel heuristikk: er tittelen tysk eller engelsk? Returnerer 'de'
+    eller 'en'. Tyske spesialtegn og smaaord teller for tysk, engelske
+    smaaord for engelsk. Ved tvil antar vi tysk (vanligst for begge kilder)."""
+    t = " " + text.lower() + " "
+    score = 0
+    # Sikre tyske signaler
+    if re.search(r'[äöüß]|„|“', text):
+        score += 2
+    DE_WORDS = ("der", "die", "das", "und", "mit", "für", "fuer", "im", "ein",
+                "eine", "ist", "nicht", "beim", "gegen", "nach", "zum", "zur",
+                "auf", "bei", "wir", "neue", "neuer", "spiel", "sieg")
+    EN_WORDS = ("the", "and", "of", "for", "with", "at", "is", "on",
+                "new", "match", "win", "against", "battle", "first", "our")
+    for w in DE_WORDS:
+        if f" {w} " in t or t.startswith(f" {w} "):
+            score += 1
+    for w in EN_WORDS:
+        if f" {w} " in t:
+            score -= 1
+    # Engelske suffikser (svakt signal - avgjør bare naar tyske ord mangler)
+    if re.search(r'\b\w+(?:tions?|ings?)\b', t):
+        score -= 1
+    return "de" if score >= 0 else "en"
+
+
+def translate_to_no(text: str) -> str:
+    """Oversetter en kort tittel (tysk ELLER engelsk - detekteres automatisk)
+    til norsk via MyMemory sin gratis API. Returnerer originalteksten uendret
+    hvis oversettelsen feiler - da vises originaltittelen i stedet, som
+    fortsatt er lesbar."""
     if not text:
         return text
+    src = detect_lang(text)
     try:
         q = urllib.parse.quote(text[:490])
-        url = f"https://api.mymemory.translated.net/get?q={q}&langpair=de|no"
+        url = f"https://api.mymemory.translated.net/get?q={q}&langpair={src}|no"
         req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
         with urllib.request.urlopen(req, timeout=20) as resp:
             data = json.loads(resp.read().decode("utf-8"))
@@ -85,7 +113,7 @@ def translate_de_to_no(text: str) -> str:
             return translated
         return text
     except Exception as e:
-        print(f"  (advarsel: oversettelse feilet for '{text[:40]}...': {e})", file=sys.stderr)
+        print(f"  (advarsel: oversettelse ({src}|no) feilet for '{text[:40]}...': {e})", file=sys.stderr)
         return text
 
 
@@ -405,7 +433,7 @@ def main() -> int:
     rss_items = fetch_millernton_rss()
     for it in rss_items:
         it["image"] = fetch_og_image(it["url"])
-        it["title_no"] = translate_de_to_no(it["title_de"])
+        it["title_no"] = translate_to_no(it["title_de"])
 
     # --- fcstpauli.com ---
     fcstpauli_items = []
@@ -414,7 +442,7 @@ def main() -> int:
         if not title_de:
             continue
         fcstpauli_items.append({
-            "title_no": translate_de_to_no(title_de),
+            "title_no": translate_to_no(title_de),
             "title_de": title_de,
             "url": url,
             "image": image_url,
