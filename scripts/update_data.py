@@ -258,30 +258,65 @@ def _strip_tags(html_fragment: str) -> str:
     return re.sub(r'\s+', ' ', text).strip()
 
 
+def _parse_schedule_rows(text: str) -> list:
+    """Trekker ut tabellrader som celle-lister fra ENTEN HTML (<tr>/<td>)
+    ELLER markdown-tabeller (| celle | celle |) slik Jina returnerer dem."""
+    rows = []
+
+    # HTML-format
+    for row_match in re.finditer(r'<tr\b[^>]*>(.*?)</tr>', text, re.DOTALL | re.IGNORECASE):
+        cells = re.findall(r'<t[dh]\b[^>]*>(.*?)</t[dh]>', row_match.group(1), re.DOTALL | re.IGNORECASE)
+        if len(cells) >= 6:
+            rows.append([_strip_tags(c) for c in cells[:6]])
+    if rows:
+        return rows
+
+    # Markdown-format (fra Jina): | Wettbewerb | Runde | Datum | Anstoss | Heim | Gast | Ergebnis |
+    for line in text.splitlines():
+        line = line.strip()
+        if not line.startswith("|"):
+            continue
+        if re.match(r'^\|[\s\-|]+\|$', line):  # skillelinje |---|---|
+            continue
+        cells = [c.strip() for c in line.strip("|").split("|")]
+        if len(cells) >= 6:
+            rows.append(cells[:6])
+    return rows
+
+
 def fetch_next_match_fcstpauli(url: str = RAHMENSPIELPLAN_URL) -> dict:
-    """Henter neste kamp direkte fra FC St. Paulis egen Rahmenspielplan-side.
-    Dette er den mest pålitelige kilden: den inkluderer også testkamper
-    (Testspiel) i forkant av sesongen."""
+    """Henter neste kamp fra FC St. Paulis Rahmenspielplan-side.
+    Flerlags: (1) direkte henting, (2) Jina Reader-proxy - samme strategi
+    som nyhetene, slik at kampdata ogsaa kommer gjennom ved IP-blokkering."""
     m_season = re.search(r'(\d{4})-\d{2}', url)
     season_start_year = int(m_season.group(1)) if m_season else datetime.now(timezone.utc).year
 
+    text = ""
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            html_doc = resp.read().decode("utf-8", "replace")
+        text = http_get_text(url)
+        print("Kampplan: hentet direkte")
     except Exception as e:
-        print(f"  (advarsel: henting av rahmenspielplan feilet: {e})", file=sys.stderr)
+        print(f"  (direkte henting av kampplan feilet: {e})", file=sys.stderr)
+        try:
+            text = fetch_via_jina(url)
+            print("Kampplan: hentet via Jina-proxy")
+        except Exception as e2:
+            print(f"  (Jina-henting av kampplan feilet ogsaa: {e2})", file=sys.stderr)
+            return {}
+
+    rader = _parse_schedule_rows(text)
+    if not rader:
+        print("  (advarsel: fant ingen tabellrader i kampplanen)", file=sys.stderr)
         return {}
 
     today = datetime.now(timezone.utc).date()
     kandidater = []
 
-    for row_match in re.finditer(r'<tr\b[^>]*>(.*?)</tr>', html_doc, re.DOTALL | re.IGNORECASE):
-        cells = re.findall(r'<t[dh]\b[^>]*>(.*?)</t[dh]>', row_match.group(1), re.DOTALL | re.IGNORECASE)
-        if len(cells) < 6:
-            continue
-        wettbewerb, _runde, datum, anstot, hjem, gjest = (_strip_tags(c) for c in cells[:6])
+    for celler in rader:
+        wettbewerb, _runde, datum, anstot, hjem, gjest = celler
         if not hjem or not gjest:
+            continue
+        if "wettbewerb" in wettbewerb.lower():  # kolonneoverskrift
             continue
 
         m_dato = re.match(r'(\d{1,2})\.(\d{1,2})\.', datum.strip())
@@ -313,7 +348,7 @@ def fetch_next_match_fcstpauli(url: str = RAHMENSPIELPLAN_URL) -> dict:
         })
 
     if not kandidater:
-        print("  (advarsel: fant ingen kommende kamp med fastsatt dato på rahmenspielplan-siden)", file=sys.stderr)
+        print("  (advarsel: fant ingen kommende kamp med fastsatt dato i kampplanen)", file=sys.stderr)
         return {}
 
     kandidater.sort(key=lambda x: x["dt"])
