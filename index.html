@@ -1098,10 +1098,11 @@ window.addEventListener('partisan_page_change', (e) => {
 // Fallback: hardkodet liste under, brukes hvis data.json ikke kan hentes.
 
 const KJENTE_KAMPER = [
-  { motstander:'Altona 93',        dato:'2026-06-30', tid:'18:00', turnering:'Testspiel',   hjemme:false, stadion:'Adolf-Jäger-Kampfbahn, Hamburg' },
-  { motstander:'Kickers Emden',    dato:'2026-07-04', tid:'18:00', turnering:'Testspiel',   hjemme:false, stadion:'Ostfriesland-Stadion, Emden' },
-  { motstander:'SV Babelsberg 03', dato:'2026-07-11', tid:'15:30', turnering:'Testspiel',   hjemme:false, stadion:'Karl-Liebknecht-Stadion, Babelsberg' },
-  { motstander:'Rot-Weiss Essen',  dato:'2026-08-02', tid:'',      turnering:'DFB-Pokal',   hjemme:false, stadion:'Dato ikke bekreftet' },
+  { motstander:'SV Babelsberg 03',      dato:'2026-07-11', tid:'15:30', turnering:'Testspiel',     hjemme:false, stadion:'Karl-Liebknecht-Stadion, Babelsberg' },
+  { motstander:'AFC Bournemouth',       dato:'2026-07-24', tid:'16:00', turnering:'Testspiel',     hjemme:false, stadion:'' },
+  { motstander:'Deportivo de A Coruña', dato:'2026-08-01', tid:'18:30', turnering:'Testspiel',     hjemme:true,  stadion:'Millerntor-Stadion, Hamburg' },
+  { motstander:'SpVgg Greuther Fürth',  dato:'2026-08-09', tid:'13:30', turnering:'2. Bundesliga', hjemme:true,  stadion:'Millerntor-Stadion, Hamburg' },
+  { motstander:'Rot-Weiß Essen',        dato:'2026-08-23', tid:'18:00', turnering:'DFB-Pokal',     hjemme:false, stadion:'Stadion an der Hafenstraße, Essen' },
 ];
 
 function nesteKampFraListe() {
@@ -1110,8 +1111,8 @@ function nesteKampFraListe() {
 }
 
 async function hentNesteKamp(force) {
-  const CACHE_KEY = 'pl_kamp_v3';
-  const CACHE_TS  = 'pl_kamp_v3_ts';
+  const CACHE_KEY = 'pl_kamp_v4';
+  const CACHE_TS  = 'pl_kamp_v4_ts';
   const btn = null; // knapp fjernet
   let kampCached = false;
 
@@ -1189,7 +1190,6 @@ function visKamp(kamp) {
     const diff = d - now;
     let cd = '';
     if (diff > 0) {
-      // Kalenderdager (midnatt mot midnatt) - ikke 24-timersperioder
       const midnatt = x => new Date(x.getFullYear(), x.getMonth(), x.getDate());
       const dager = Math.round((midnatt(d) - midnatt(now)) / 86400000);
       if (dager > 1) cd = `om ${dager}d`;
@@ -1214,7 +1214,6 @@ function visKamp(kamp) {
   const diff = d - now;
   let cd = '';
   if (diff > 0) {
-    // Kalenderdager (midnatt mot midnatt) - ikke 24-timersperioder
     const midnatt = x => new Date(x.getFullYear(), x.getMonth(), x.getDate());
     const dager = Math.round((midnatt(d) - midnatt(now)) / 86400000);
     const timer = Math.floor(diff/3600000);
