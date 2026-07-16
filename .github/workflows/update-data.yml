@@ -2,12 +2,12 @@ name: Oppdater nyheter og kampdata
 
 on:
   schedule:
-    # Kjører 06/12/16/20 norsk tid. Minutt :17 (ikke :00) - GitHub dropper
-    # oftere kjøringer på hele klokkeslett pga. stor pågang.
-    # Sommertid (CEST = UTC+2):
-    - cron: '17 4,10,14,18 * * *'
-    # Vintertid (CET = UTC+1):
-    - cron: '17 5,11,15,19 * * *'
+    # Tre kjøringer daglig. Skjeve minuttall (:17/:23/:43) - GitHub dropper
+    # oftere kjøringer på hele og halve klokkeslett pga. stor pågang.
+    # Tidene er UTC; norsk tid er +2 om sommeren, +1 om vinteren.
+    - cron: '17 6 * * *'    # morgen (08:17 sommer / 07:17 vinter)
+    - cron: '23 10 * * *'   # formiddag (12:23 / 11:23)
+    - cron: '43 14 * * *'   # ettermiddag (16:43 / 15:43)
   workflow_dispatch:
 
 permissions:
