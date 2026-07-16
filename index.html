@@ -649,7 +649,7 @@ function sp(id,btn){
   if(hdr) hdr.style.display = id === 'hjem' ? 'none' : 'flex';
 
   const bar = document.getElementById('nesteKampBar');
-  if(bar) bar.style.display = id === 'hjem' ? 'flex' : 'none';
+  if(bar) bar.style.display = (id === 'hjem' && _harKamp) ? 'flex' : 'none';
 }
 document.addEventListener('DOMContentLoaded', () => lastFeed());
 </script>
@@ -1105,9 +1105,13 @@ const KJENTE_KAMPER = [
   { motstander:'Rot-Weiß Essen',        dato:'2026-08-23', tid:'18:00', turnering:'DFB-Pokal',     hjemme:false, stadion:'Stadion an der Hafenstraße, Essen' },
 ];
 
+let _harKamp = false; // om kampstripen har reelt innhold å vise
+
 function nesteKampFraListe() {
+  // null når alle kjente datoer er passert - da holdes stripen skjult
+  // til data.json leverer en fersk kamp (bedre enn å blinke en gammel)
   const now = new Date();
-  return KJENTE_KAMPER.find(k => new Date(k.dato + 'T23:59') >= now) || KJENTE_KAMPER[0];
+  return KJENTE_KAMPER.find(k => new Date(k.dato + 'T23:59') >= now) || null;
 }
 
 async function hentNesteKamp(force) {
@@ -1137,8 +1141,11 @@ async function hentNesteKamp(force) {
     } catch(e) {}
   }
 
-  // Vis fallback mens vi henter
-  if (!kampCached) visKamp(nesteKampFraListe());
+  // Vis fallback mens vi henter (hvis listen har en kommende kamp)
+  if (!kampCached) {
+    const fallback = nesteKampFraListe();
+    if (fallback) visKamp(fallback);
+  }
 
   // Hent fersk data fra data.json (skrives av en GitHub Action server-side,
   // siden et direkte kall til Anthropic API fra nettleseren ikke fungerer
@@ -1181,6 +1188,11 @@ function renderNyheter(containerId, items, prikkFarge, harBilde) {
 }
 
 function visKamp(kamp) {
+  _harKamp = true;
+  // Vis stripen (kan ha vært skjult i påvente av data) hvis Hjem er aktiv
+  const ytre = document.getElementById('nesteKampBar');
+  const hjem = document.getElementById('hjem');
+  if (ytre && hjem && hjem.style.display !== 'none') ytre.style.display = 'flex';
   // Oppdater sticky bar
   const bar = document.getElementById('nesteKampBar_innhold');
   if (bar) {
@@ -1252,9 +1264,10 @@ function visKamp(kamp) {
 
 document.addEventListener('DOMContentLoaded', () => {
   hentNesteKamp(false);
-  // Vis bar kun på hjem (standard aktiv side)
+  // Stripen vises av visKamp() så snart en kamp finnes - ellers holdes
+  // den skjult i stedet for å stå med "Laster..." på ubestemt tid
   const bar = document.getElementById('nesteKampBar');
-  if(bar) bar.style.display = 'flex';
+  if(bar && !_harKamp) bar.style.display = 'none';
 });
 
 // ---- SIDEN STIFTELSE ----
