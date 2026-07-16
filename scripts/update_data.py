@@ -27,6 +27,14 @@ import urllib.error
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 
+# Kamptider i Rahmenspielplan er tysk lokaltid (CET/CEST). Norge deler
+# tidssone med Tyskland, saa tidene kan vises direkte i appen.
+try:
+    from zoneinfo import ZoneInfo
+    TZ_DE = ZoneInfo("Europe/Berlin")
+except Exception:  # svaert usannsynlig paa GitHub Actions, men aldri krasj
+    TZ_DE = timezone.utc
+
 DATA_FILE = "data.json"
 
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
@@ -295,7 +303,17 @@ def fetch_article_meta(url: str) -> tuple:
         return "", ""
 
 
-RAHMENSPIELPLAN_URL = "https://www.fcstpauli.com/fu%C3%9Fball/teams/profis/rahmenspielplan-2026-27"
+def rahmenspielplan_urls() -> list:
+    """Bygger kandidat-URLer for kampplanen dynamisk fra dagens dato -
+    ingen manuell oppdatering hver sommer. Sesongen loper juli-juni.
+    Returnerer gjeldende sesong forst, deretter neste (rundt sesongskiftet
+    i juni/juli kan neste sesongs side allerede vaere den riktige)."""
+    now = datetime.now(TZ_DE)
+    start = now.year if now.month >= 7 else now.year - 1
+    return [
+        f"https://www.fcstpauli.com/fu%C3%9Fball/teams/profis/rahmenspielplan-{y}-{str(y + 1)[-2:]}"
+        for y in (start, start + 1)
+    ]
 
 
 def _strip_tags(html_fragment: str) -> str:
@@ -332,12 +350,21 @@ def _parse_schedule_rows(text: str) -> list:
     return rows
 
 
-def fetch_next_match_fcstpauli(url: str = RAHMENSPIELPLAN_URL) -> dict:
+def fetch_next_match_fcstpauli() -> dict:
+    """Prover kandidat-URLene i rekkefolge til en gir en kommende kamp."""
+    for url in rahmenspielplan_urls():
+        resultat = _next_match_fra_url(url)
+        if resultat.get("motstander"):
+            return resultat
+    return {}
+
+
+def _next_match_fra_url(url: str) -> dict:
     """Henter neste kamp fra FC St. Paulis Rahmenspielplan-side.
     Flerlags: (1) direkte henting, (2) Jina Reader-proxy - samme strategi
     som nyhetene, slik at kampdata ogsaa kommer gjennom ved IP-blokkering."""
     m_season = re.search(r'(\d{4})-\d{2}', url)
-    season_start_year = int(m_season.group(1)) if m_season else datetime.now(timezone.utc).year
+    season_start_year = int(m_season.group(1)) if m_season else datetime.now(TZ_DE).year
 
     text = ""
     try:
@@ -357,7 +384,7 @@ def fetch_next_match_fcstpauli(url: str = RAHMENSPIELPLAN_URL) -> dict:
         print("  (advarsel: fant ingen tabellrader i kampplanen)", file=sys.stderr)
         return {}
 
-    today = datetime.now(timezone.utc).date()
+    today = datetime.now(TZ_DE).date()  # kampdatoer er tyske - sammenlign i samme sone
     kandidater = []
 
     for celler in rader:
@@ -373,15 +400,16 @@ def fetch_next_match_fcstpauli(url: str = RAHMENSPIELPLAN_URL) -> dict:
         dag, maned = int(m_dato.group(1)), int(m_dato.group(2))
         aar = season_start_year if maned >= 7 else season_start_year + 1
 
-        time_str = "12:00"
+        # 12:00 brukes kun internt for sortering; uten "Uhr" i kampplanen
+        # er tiden ikke fastsatt, og da skal appen vise bare datoen
         m_tid = re.search(r'(\d{1,2})(?::(\d{2}))?\s*Uhr', anstot)
-        if m_tid:
-            time_str = f"{int(m_tid.group(1)):02d}:{m_tid.group(2) or '00'}"
+        har_tid = bool(m_tid)
+        time_str = f"{int(m_tid.group(1)):02d}:{m_tid.group(2) or '00'}" if m_tid else "12:00"
 
         try:
             dt = datetime.strptime(
                 f"{aar}-{maned:02d}-{dag:02d} {time_str}", "%Y-%m-%d %H:%M"
-            ).replace(tzinfo=timezone.utc)
+            ).replace(tzinfo=TZ_DE)  # tysk lokaltid, IKKE UTC
         except ValueError:
             continue
         if dt.date() < today:
@@ -390,6 +418,7 @@ def fetch_next_match_fcstpauli(url: str = RAHMENSPIELPLAN_URL) -> dict:
         hjemme = "pauli" in hjem.lower()
         kandidater.append({
             "dt": dt,
+            "har_tid": har_tid,
             "motstander": gjest if hjemme else hjem,
             "hjemme": hjemme,
             "turnering": wettbewerb.strip() or "Kamp",
@@ -404,7 +433,8 @@ def fetch_next_match_fcstpauli(url: str = RAHMENSPIELPLAN_URL) -> dict:
     return {
         "motstander": neste["motstander"],
         "dato": neste["dt"].strftime("%Y-%m-%d"),
-        "tid": neste["dt"].strftime("%H:%M"),
+        "tid": neste["dt"].strftime("%H:%M") if neste["har_tid"] else "",
+        "kickoff_iso": neste["dt"].isoformat() if neste["har_tid"] else "",
         "turnering": neste["turnering"],
         "hjemme": neste["hjemme"],
         "stadion": "Millerntor-Stadion, Hamburg" if neste["hjemme"] else "",
