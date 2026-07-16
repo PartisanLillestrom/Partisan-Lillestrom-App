@@ -423,6 +423,8 @@ def weserv_image_url(url: str) -> str:
     direkte fra weserv sitt CDN. Tom streng hvis URL-en er ubrukelig."""
     if not url or not url.startswith("http"):
         return ""
+    if url.startswith("https://images.weserv.nl/"):
+        return url  # allerede pakket inn (gjenbrukt fra forrige data.json)
     return (
         "https://images.weserv.nl/?url="
         + urllib.parse.quote(url, safe="")
@@ -430,11 +432,23 @@ def weserv_image_url(url: str) -> str:
     )
 
 
+def les_gammel_data() -> dict:
+    """Leser eksisterende data.json. Returnerer tom dict hvis filen mangler
+    eller er korrupt - da finnes det rett og slett ingen gammel data aa
+    falle tilbake paa."""
+    try:
+        with open(DATA_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
 def validate(payload: dict) -> None:
-    if not payload.get("fcstpauli_news"):
-        raise ValueError("fcstpauli_news er tom - noe gikk galt under scraping")
-    if not payload.get("millernton_news"):
-        raise ValueError("millernton_news er tom - noe gikk galt under RSS-henting")
+    """Feiler KUN hvis begge nyhetskildene er tomme (etter fallback til
+    forrige data.json). En enkelt kilde som feiler skal aldri blokkere
+    oppdateringer fra den andre."""
+    if not payload.get("fcstpauli_news") and not payload.get("millernton_news"):
+        raise ValueError("Begge nyhetskildene er tomme - noe er alvorlig galt")
     for item in payload["fcstpauli_news"]:
         for field in ("title_no", "title_de", "url"):
             if not item.get(field):
@@ -487,6 +501,16 @@ def main() -> int:
         "next_match": next_match,
     }
 
+    # Per-kilde fallback: hvis én kilde feilet i natt, gjenbruk forrige
+    # liste for AKKURAT den kilden - den andre oppdateres som normalt.
+    gammel = les_gammel_data()
+    if not payload["fcstpauli_news"] and gammel.get("fcstpauli_news"):
+        payload["fcstpauli_news"] = gammel["fcstpauli_news"]
+        print("  (info: fcstpauli-scraping ga ingenting - beholder forrige nyhetsliste)")
+    if not payload["millernton_news"] and gammel.get("millernton_news"):
+        payload["millernton_news"] = gammel["millernton_news"]
+        print("  (info: millernton-RSS ga ingenting - beholder forrige nyhetsliste)")
+
     try:
         validate(payload)
     except ValueError as e:
@@ -496,14 +520,9 @@ def main() -> int:
 
     # Hvis vi ikke fant noen kommende kamp, behold den som allerede ligger
     # i data.json fremfor å skrive over med tomt innhold.
-    if not next_match.get("motstander"):
-        try:
-            with open(DATA_FILE, "r", encoding="utf-8") as f:
-                gammel = json.load(f)
-            payload["next_match"] = gammel.get("next_match", next_match)
-            print("  (info: beholder eksisterende next_match - fant ingen ny kamp)")
-        except Exception:
-            pass
+    if not next_match.get("motstander") and gammel.get("next_match"):
+        payload["next_match"] = gammel["next_match"]
+        print("  (info: beholder eksisterende next_match - fant ingen ny kamp)")
 
     # Legg inn weserv-proxy-URL-er i stedet for aa bake inn bildene som
     # base64 - nettleseren henter bildene direkte fra weserv sitt CDN,
