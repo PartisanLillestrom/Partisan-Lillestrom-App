@@ -1100,6 +1100,7 @@ window.addEventListener('partisan_page_change', (e) => {
 
 const KJENTE_KAMPER = [
   { motstander:'SV Babelsberg 03',      dato:'2026-07-11', tid:'15:30', turnering:'Testspiel',     hjemme:false, stadion:'Karl-Liebknecht-Stadion, Babelsberg' },
+  { motstander:'HNK Velika Gorica',     dato:'2026-07-19', tid:'16:00', turnering:'Testspiel',     hjemme:false, stadion:'Anif, Østerrike' },
   { motstander:'AFC Bournemouth',       dato:'2026-07-24', tid:'16:00', turnering:'Testspiel',     hjemme:false, stadion:'' },
   { motstander:'Deportivo de A Coruña', dato:'2026-08-01', tid:'18:30', turnering:'Testspiel',     hjemme:true,  stadion:'Millerntor-Stadion, Hamburg' },
   { motstander:'SpVgg Greuther Fürth',  dato:'2026-08-09', tid:'13:30', turnering:'2. Bundesliga', hjemme:true,  stadion:'Millerntor-Stadion, Hamburg' },
@@ -1116,8 +1117,8 @@ function nesteKampFraListe() {
 }
 
 async function hentNesteKamp(force) {
-  const CACHE_KEY = 'pl_kamp_v4';
-  const CACHE_TS  = 'pl_kamp_v4_ts';
+  const CACHE_KEY = 'pl_kamp_v5';
+  const CACHE_TS  = 'pl_kamp_v5_ts';
   const btn = null; // knapp fjernet
   let kampCached = false;
 
