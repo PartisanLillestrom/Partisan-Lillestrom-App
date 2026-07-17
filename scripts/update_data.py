@@ -409,25 +409,31 @@ def fetch_next_match_fcstpauli() -> dict:
 
 def _next_match_fra_url(url: str) -> dict:
     """Henter neste kamp fra FC St. Paulis Rahmenspielplan-side.
-    Flerlags: (1) direkte henting, (2) Jina Reader-proxy - samme strategi
-    som nyhetene, slik at kampdata ogsaa kommer gjennom ved IP-blokkering."""
+    Flerlags: (1) direkte henting, (2) Jina Reader-proxy. Viktig: Jina
+    proves ogsaa naar direktehentingen LYKKES men parseren finner null
+    rader - raa HTML kan vaere JS-rendret/div-basert, mens Jina leverer
+    en ren markdown-tabell som parseren alltid forstaar."""
     m_season = re.search(r'(\d{4})-\d{2}', url)
     season_start_year = int(m_season.group(1)) if m_season else datetime.now(TZ_DE).year
 
-    text = ""
+    rader = []
     try:
         text = http_get_text(url)
-        print("Kampplan: hentet direkte")
+        rader = _parse_schedule_rows(text)
+        print(f"Kampplan: hentet direkte ({len(rader)} rader)")
     except Exception as e:
         print(f"  (direkte henting av kampplan feilet: {e})", file=sys.stderr)
+
+    if not rader:
+        # Direkte henting feilet ELLER ga HTML uten gjenkjennbar tabell
         try:
             text = fetch_via_jina(url)
-            print("Kampplan: hentet via Jina-proxy")
+            rader = _parse_schedule_rows(text)
+            print(f"Kampplan: hentet via Jina-proxy ({len(rader)} rader)")
         except Exception as e2:
             print(f"  (Jina-henting av kampplan feilet ogsaa: {e2})", file=sys.stderr)
             return {}
 
-    rader = _parse_schedule_rows(text)
     if not rader:
         print("  (advarsel: fant ingen tabellrader i kampplanen)", file=sys.stderr)
         return {}
