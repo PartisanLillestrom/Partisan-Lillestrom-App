@@ -320,12 +320,16 @@ def bilde_kan_hentes(url: str) -> bool:
         return False
 
 
-def _forste_innholdsbilde(tekst: str) -> str:
+def _forste_innholdsbilde(tekst: str, unngaa: str = "") -> str:
     """Finner forste innholdsbilde i artikkel-HTML/markdown. Hopper over
-    logoer, sponsorbilder og annonser."""
+    logoer, sponsorbilder, annonser - og 'unngaa'-URL-en (den dode
+    og:image-adressen, som ogsaa ligger i <head>-metataggene og ellers
+    ville blitt matchet forst)."""
     pattern = r'(https://(?:api\.fcstpauli\.com|millernton\.de)/[^\s"\'()<>]+\.(?:jpe?g|png|webp)[^\s"\'()<>]*)'
     for m in re.finditer(pattern, tekst):
         kandidat = m.group(1)
+        if unngaa and kandidat == unngaa:
+            continue
         if any(x in kandidat for x in ('/Logos/', '/Ads/', 'Sponsorenlogo', '/logo')):
             continue
         return kandidat
@@ -338,16 +342,23 @@ def verifiser_artikkelbilde(page_url: str, og_bilde: str) -> str:
     egen fallback), eller tom streng hvis ingenting fantes."""
     if bilde_kan_hentes(og_bilde):
         return og_bilde
+    # og:image er dodt - hent artikkelsiden (direkte, saa Jina) og let
+    # etter det forste ekte innholdsbildet
+    tekst = ""
     try:
         req = urllib.request.Request(page_url, headers={"User-Agent": USER_AGENT})
         with urllib.request.urlopen(req, timeout=30) as resp:
-            html = resp.read(400_000).decode("utf-8", "replace")
-        kandidat = _forste_innholdsbilde(html)
-        if kandidat and kandidat != og_bilde and bilde_kan_hentes(kandidat):
+            tekst = resp.read(400_000).decode("utf-8", "replace")
+    except Exception:
+        try:
+            tekst = fetch_via_jina(page_url)
+        except Exception:
+            pass
+    if tekst:
+        kandidat = _forste_innholdsbilde(tekst, unngaa=og_bilde)
+        if kandidat and bilde_kan_hentes(kandidat):
             print(f"  (info: og:image utilgjengelig for {page_url} - bruker innholdsbilde i stedet)")
             return kandidat
-    except Exception:
-        pass
     return og_bilde
 
 
