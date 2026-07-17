@@ -549,10 +549,17 @@ def main() -> int:
         return 1
 
     # Hvis vi ikke fant noen kommende kamp, behold den som allerede ligger
-    # i data.json fremfor å skrive over med tomt innhold.
+    # i data.json - MEN kun hvis den fortsatt er frem i tid. En passert kamp
+    # skal aldri vises som "neste kamp"; da er det bedre aa levere tomt og
+    # la appens egen fallback-liste ta over.
     if not next_match.get("motstander") and gammel.get("next_match"):
-        payload["next_match"] = gammel["next_match"]
-        print("  (info: beholder eksisterende next_match - fant ingen ny kamp)")
+        gammel_dato = (gammel["next_match"] or {}).get("dato", "")
+        idag = datetime.now(TZ_DE).strftime("%Y-%m-%d")
+        if gammel_dato >= idag:
+            payload["next_match"] = gammel["next_match"]
+            print("  (info: beholder eksisterende next_match - fant ingen ny kamp)")
+        else:
+            print(f"  (info: forkaster utdatert next_match fra {gammel_dato} - kampen er spilt)")
 
     # Legg inn weserv-proxy-URL-er i stedet for aa bake inn bildene som
     # base64 - nettleseren henter bildene direkte fra weserv sitt CDN,
