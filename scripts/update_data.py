@@ -284,7 +284,7 @@ def fetch_article_meta(url: str) -> tuple:
     title = fetch_og_title(url)
     image = fetch_og_image(url) if title else ""
     if title:
-        return title, image
+        return title, verifiser_artikkelbilde(url, image)
 
     # Lag 2: via Jina
     try:
@@ -297,10 +297,58 @@ def fetch_article_meta(url: str) -> tuple:
         image = m_img.group(1) if m_img else ""
         if title:
             print(f"  (artikkel-metadata hentet via Jina for {url})")
-        return title, image
+        return title, verifiser_artikkelbilde(url, image)
     except Exception as e:
         print(f"  (Jina-metadata feilet for {url}: {e})", file=sys.stderr)
         return "", ""
+
+
+def bilde_kan_hentes(url: str) -> bool:
+    """Verifiserer via weserv (8-px testhenting) at bildet faktisk finnes.
+    fcstpauli.com sitt CMS peker av og til paa bildevarianter som er slettet
+    (og:image med utdatert versjonsstempel), og da vil vi heller finne et
+    annet bilde enn aa publisere en dod lenke."""
+    if not url or not url.startswith("http"):
+        return False
+    try:
+        test = "https://images.weserv.nl/?url=" + urllib.parse.quote(url, safe="") + "&w=8"
+        req = urllib.request.Request(test, headers={"User-Agent": USER_AGENT})
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            ctype = (resp.headers.get("Content-Type") or "")
+            return resp.status == 200 and ctype.startswith("image/")
+    except Exception:
+        return False
+
+
+def _forste_innholdsbilde(tekst: str) -> str:
+    """Finner forste innholdsbilde i artikkel-HTML/markdown. Hopper over
+    logoer, sponsorbilder og annonser."""
+    pattern = r'(https://(?:api\.fcstpauli\.com|millernton\.de)/[^\s"\'()<>]+\.(?:jpe?g|png|webp)[^\s"\'()<>]*)'
+    for m in re.finditer(pattern, tekst):
+        kandidat = m.group(1)
+        if any(x in kandidat for x in ('/Logos/', '/Ads/', 'Sponsorenlogo', '/logo')):
+            continue
+        return kandidat
+    return ""
+
+
+def verifiser_artikkelbilde(page_url: str, og_bilde: str) -> str:
+    """Returnerer og:image hvis det finnes, ellers forste innholdsbilde
+    fra artikkelsiden. Beholder og:image som siste utvei (frontend har
+    egen fallback), eller tom streng hvis ingenting fantes."""
+    if bilde_kan_hentes(og_bilde):
+        return og_bilde
+    try:
+        req = urllib.request.Request(page_url, headers={"User-Agent": USER_AGENT})
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            html = resp.read(400_000).decode("utf-8", "replace")
+        kandidat = _forste_innholdsbilde(html)
+        if kandidat and kandidat != og_bilde and bilde_kan_hentes(kandidat):
+            print(f"  (info: og:image utilgjengelig for {page_url} - bruker innholdsbilde i stedet)")
+            return kandidat
+    except Exception:
+        pass
+    return og_bilde
 
 
 def rahmenspielplan_urls() -> list:
