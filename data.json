@@ -7,16 +7,16 @@
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FCheftrainer%2FSpiele%2F_1200x630_crop_center-center_82_none%2FWITTERS_2338292.jpg%3Fv%3D1784201268%252C0.4742%252C0.1451&w=400&output=webp&q=70"
     },
     {
-      "title_no": "FC St. Pauli | Billettinformasjon til hjemmekampen mot SpVgg Greuther Fürth...",
-      "title_de": "FC St. Pauli | Ticket-Infos zum Heimspiel gegen die SpVgg Greuther…",
-      "url": "https://www.fcstpauli.com/news/ticket-infos-heimspiel-greuther-fuerth-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FFlaggen-Sticker%2F_1200x630_crop_center-center_82_none%2FWITTERS_2209684.jpg%3Fv%3D1784116195%252C0.5113%252C0.4284&w=400&output=webp&q=70"
+      "title_no": "FC St. Pauli | Kort og grei juli 2026",
+      "title_de": "FC St. Pauli | Kurz und knackig Juli 2026",
+      "url": "https://www.fcstpauli.com/news/fc-st-pauli-kurz-und-knackig-juli-2026",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FFlaggen-Sticker%2F_1200x630_crop_center-center_82_none%2FIMG_7160.jpg%3Fv%3D1783077697%252C0.4386%252C0.4174&w=400&output=webp&q=70"
     },
     {
-      "title_no": "FC St. Pauli | Kampdager planlagt til slutten av september: Kiezkicker…",
-      "title_de": "FC St. Pauli | Spieltage bis Ende September terminiert: Kiezkicker…",
-      "url": "https://www.fcstpauli.com/news/terminierung-spieltage-3-bis-6-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FAllgemein%2FSpielball-2BL%2F_1200x630_crop_center-center_82_none%2FFCP09876.jpg%3Fv%3D1783002174%252C0.5053%252C0.6003&w=400&output=webp&q=70"
+      "title_no": "FC St. Pauli | Våre unge rakkeres barnehagepartnerskap: Trening med moro…",
+      "title_de": "FC St. Pauli | Kita-Kooperationen unserer Rabauken: Bewegung mit Spaß…",
+      "url": "https://www.fcstpauli.com/news/kita-kooperationen-der-fc-st-pauli-rabauken",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FRabauken%2FNews%2FKita-Kooperationen%2F_1200x630_crop_center-center_82_none%2FRabauken-Block-Millerntor.jpeg%3Fv%3D1784307670%252C0.3082%252C0.4053&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -51,5 +51,5 @@
     "hjemme": false,
     "stadion": ""
   },
-  "updated": "2026-07-19T11:34:40Z"
+  "updated": "2026-07-19T12:09:33Z"
 }
