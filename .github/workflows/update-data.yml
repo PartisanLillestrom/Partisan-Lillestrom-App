@@ -2,17 +2,14 @@ name: Oppdater nyheter og kampdata
 
 on:
   schedule:
-    # Seks kjøringer daglig - GitHub dropper jevnlig scheduled-kjøringer,
-    # så vi overbooker og lar naturlig frafall gjøre jobben. Skriptet
-    # committer kun ved faktiske endringer, så ekstra kjøringer er gratis.
-    # Skjeve minuttall (:17/:23/:43) unngår køen på hele/halve klokkeslett.
+    # Tolv kjøringer daglig, én i timen 07-18 norsk sommertid. GitHub
+    # forsinker for tiden scheduled-kjøringer med ~3 timer og dropper en
+    # del helt, så vi overbooker kraftig - naturlig frafall og forsinkelse
+    # gir likevel jevnlige oppdateringer gjennom hele dagen. Skriptet
+    # committer kun ved endringer. Skjeve minuttall unngår køen på :00.
     # Tidene er UTC; norsk tid er +2 om sommeren, +1 om vinteren.
-    - cron: '17 5 * * *'    # 07:17 sommer / 06:17 vinter
-    - cron: '17 7 * * *'    # 09:17 / 08:17
-    - cron: '23 9 * * *'    # 11:23 / 10:23
-    - cron: '23 11 * * *'   # 13:23 / 12:23
-    - cron: '43 13 * * *'   # 15:43 / 14:43
-    - cron: '43 15 * * *'   # 17:43 / 16:43
+    - cron: '17 5,7,9,11,13,15 * * *'   # 07:17, 09:17, 11:17, 13:17, 15:17, 17:17 sommertid
+    - cron: '43 6,8,10,12,14,16 * * *'  # 08:43, 10:43, 12:43, 14:43, 16:43, 18:43 sommertid
   workflow_dispatch:
 
 permissions:
