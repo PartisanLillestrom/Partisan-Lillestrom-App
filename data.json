@@ -1,22 +1,22 @@
 {
   "fcstpauli_news": [
     {
-      "title_no": "FC St. Pauli | Startdato for U23-sesongen er satt -…",
-      "title_de": "FC St. Pauli | Saisonstart der U23 zeitgenau terminiert -…",
-      "url": "https://www.fcstpauli.com/news/saisonstart-der-u23-terminiert-neuer-anbieter-livestreams",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FU23%2FTraining%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-09199.jpg%3Fv%3D1784559353%252C0.4677%252C0.4957&w=400&output=webp&q=70"
+      "title_no": "FC St. Pauli | Ankelskade: Abdoulie Ceesay ute til…",
+      "title_de": "FC St. Pauli | Verletzung am Sprunggelenk: Abdoulie Ceesay fällt bis…",
+      "url": "https://www.fcstpauli.com/news/abdoulie-ceesay-verletzung-trainingslager",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FCeesay%2F_1200x630_crop_center-center_82_none%2FFCS09906.jpg%3Fv%3D1784624224%252C0.4278%252C0.2026&w=400&output=webp&q=70"
     },
     {
-      "title_no": "FC St. Pauli | Billettinformasjon for DFB-cupsluttspillkampen mellom kvinnenes førstelag og…",
-      "title_de": "FC St. Pauli | Ticket-Infos zum DFB-Pokal-Playoff der 1. Frauen gegen…",
-      "url": "https://www.fcstpauli.com/news/ticket-infos-zum-dfb-pokal-playoff-der-1-frauen-gegen-den-sv-meppen",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FAbteilungen%2FFrauenfu%25C3%259Fball%2F0-Saison-2026-2027%2FAllgemein%2FDFB-Pokal%2F_1200x630_crop_center-center_82_none%2FWITTERS_2166482.jpg%3Fv%3D1784284741%252C0.4678%252C0.0999&w=400&output=webp&q=70"
+      "title_no": "FC St. Pauli | Kort og grei juli 2026",
+      "title_de": "FC St. Pauli | Kurz und knackig Juli 2026",
+      "url": "https://www.fcstpauli.com/news/fc-st-pauli-kurz-und-knackig-juli-2026",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FFlaggen-Sticker%2F_1200x630_crop_center-center_82_none%2FIMG_7160.jpg%3Fv%3D1783077697%252C0.4386%252C0.4174&w=400&output=webp&q=70"
     },
     {
-      "title_no": "FC St. Pauli | 2:1 mot HNK Gorica - Oppie og Jones scorer",
-      "title_de": "FC St. Pauli | 2:1 gegen HNK Gorica - Oppie und Jones treffen",
-      "url": "https://www.fcstpauli.com/news/spielbericht-testspiel-hnk-velika-gorica",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FTestspiele%2FHNK-Gorica%2F_1200x630_crop_center-center_82_none%2FFCP00620.jpg%3Fv%3D1784477489%252C0.5283%252C0.4944&w=400&output=webp&q=70"
+      "title_no": "FC St. Pauli | Queer Ally – det er sånn vi liker det!",
+      "title_de": "FC St. Pauli | Queer Ally - that&#x27;s the way we like it!",
+      "url": "https://www.fcstpauli.com/news/fc-st-pauli-mit-eigenem-truck-beim-csd-2026",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FNachhaltigkeit-SVN%2FCSD%2F_1200x630_crop_center-center_82_none%2FWITTERS_2094225.jpg%3Fv%3D1784205996&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -51,5 +51,5 @@
     "hjemme": false,
     "stadion": ""
   },
-  "updated": "2026-07-21T12:12:06Z"
+  "updated": "2026-07-21T17:03:52Z"
 }
