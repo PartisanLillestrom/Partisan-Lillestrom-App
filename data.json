@@ -7,19 +7,26 @@
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FCeesay%2F_1200x630_crop_center-center_82_none%2FFCS09906.jpg%3Fv%3D1784624224%252C0.4278%252C0.2026&w=400&output=webp&q=70"
     },
     {
-      "title_no": "FC St. Pauli | Kort og grei juli 2026",
-      "title_de": "FC St. Pauli | Kurz und knackig Juli 2026",
-      "url": "https://www.fcstpauli.com/news/fc-st-pauli-kurz-und-knackig-juli-2026",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FFlaggen-Sticker%2F_1200x630_crop_center-center_82_none%2FIMG_7160.jpg%3Fv%3D1783077697%252C0.4386%252C0.4174&w=400&output=webp&q=70"
+      "title_no": "FC St. Pauli | «Én målgivende pasning er ikke nok, jeg vil ha flere mål...»",
+      "title_de": "FC St. Pauli | „Ein Assist ist zu wenig, ich will noch mehr Tore…",
+      "url": "https://www.fcstpauli.com/news/arkadiusz-pyrka-trainingslager-2026",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FPyrka%2F_1200x630_crop_center-center_82_none%2FFCS05813.jpg%3Fv%3D1784531567%252C0.4799%252C0.3023&w=400&output=webp&q=70"
     },
     {
-      "title_no": "FC St. Pauli | Queer Ally – det er sånn vi liker det!",
-      "title_de": "FC St. Pauli | Queer Ally - that&#x27;s the way we like it!",
-      "url": "https://www.fcstpauli.com/news/fc-st-pauli-mit-eigenem-truck-beim-csd-2026",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FNachhaltigkeit-SVN%2FCSD%2F_1200x630_crop_center-center_82_none%2FWITTERS_2094225.jpg%3Fv%3D1784205996&w=400&output=webp&q=70"
+      "title_no": "FC St. Pauli | Hvordan 2025/26-sesongen gikk i ungdomsutviklingsprogrammet vårt",
+      "title_de": "FC St. Pauli | So lief die Saison 2025/26 in unserem Grundlagenbereich",
+      "url": "https://www.fcstpauli.com/news/so-lief-die-saison-2025-26-in-unserem-grundlagenbereich",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2025-2026%2FGrundlagenbereich%2F_1200x630_crop_center-center_82_none%2FDSC04644.jpg%3Fv%3D1784633147%252C0.4459%252C0.2953&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
+    {
+      "title_no": "MT Meets – Sanger for sesongen – 02 – DSC: Jeg har sett det",
+      "title_de": "MT Meets – Songs For The Season – 02 – DSC: I’ve Seen It",
+      "url": "https://millernton.de/2026/07/21/fc-st-pauli-mt-meets-songs-for-the-season-02-dsc-ive-seen-it/",
+      "date": "21. juli",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F07%2F02_MT_Blog_2026_Arminia.jpg&w=400&output=webp&q=70"
+    },
     {
       "title_no": "Sted på Millerntor – 21. juli 2026",
       "title_de": "Lage am Millerntor – 21. Juli 2026",
@@ -33,13 +40,6 @@
       "url": "https://millernton.de/2026/07/21/fc-st-pauli-mt-meets-songs-for-the-season-01-sgf-neuanfang/",
       "date": "21. juli",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F07%2F01_MT_Blog_2026_Fuerth.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Bortekamper mot FC St. Pauli – første halvdel av 2026/27-sesongen",
-      "title_de": "Auswärts mit dem FC St. Pauli – Hinrunde 2026/27",
-      "url": "https://millernton.de/2026/07/21/auswaerts-mit-dem-fc-st-pauli-hinrunde-2026-27/",
-      "date": "21. juli",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2025%2F04%2Fsvwfcsp_20250427_stefangroenveld_fcsp17222140.jpg&w=400&output=webp&q=70"
     }
   ],
   "next_match": {
@@ -51,5 +51,5 @@
     "hjemme": false,
     "stadion": ""
   },
-  "updated": "2026-07-21T17:03:52Z"
+  "updated": "2026-07-21T17:57:46Z"
 }
