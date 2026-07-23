@@ -4,19 +4,19 @@
       "title_no": "FC St. Pauli | Lucas Schulze styrker U23-laget",
       "title_de": "FC St. Pauli | Lucas Schulze verstärkt die U23",
       "url": "https://www.fcstpauli.com/news/lucas-schulze-verstaerkt-die-u23",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2025-2026%2FU23%2FNeuzug%25C3%25A4nge%2F_1200x630_crop_center-center_82_none%2FLSchulze-Header.jpg%3Fv%3D1784807860%252C0.4923%252C0.178&w=400&output=webp&q=70"
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2025-2026%2FU23%2FNeuzug%25C3%25A4nge%2F_1200x630_crop_center-center_82_none%2FLSchulze-Header.jpg%3Fv%3D1784811787%252C0.4923%252C0.178&w=400&output=webp&q=70"
     },
     {
       "title_no": "FC St. Pauli | «Jeg vil lede ved å være et godt eksempel og…»",
       "title_de": "FC St. Pauli | „Ich möchte als gutes Beispiel vorangehen und…",
       "url": "https://www.fcstpauli.com/news/marcus-mathisen-interview-trainingslager-2026",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FMathisen%2F_1200x630_crop_center-center_82_none%2FFCS06574-1.jpg%3Fv%3D1784738880&w=400&output=webp&q=70"
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FMathisen%2F_1200x630_crop_center-center_82_none%2FFCS06574-1.jpg%3Fv%3D1784811743&w=400&output=webp&q=70"
     },
     {
       "title_no": "FC St. Pauli | Billettinformasjon for DFB-cupkampen mot Rot-Weiss Essen",
       "title_de": "FC St. Pauli | Ticket-Infos zum DFB-Pokalspiel bei Rot-Weiss Essen",
       "url": "https://www.fcstpauli.com/news/ticket-infos-dfb-pokal-rw-essen",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FDFB-Pokal%2FGegner%2FRW-Essen%2F_1200x630_crop_center-center_82_none%2FWITTERS_2323830.jpg%3Fv%3D1784722271%252C0.4957%252C0.318&w=400&output=webp&q=70"
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FDFB-Pokal%2FGegner%2FRW-Essen%2F_1200x630_crop_center-center_82_none%2FWITTERS_2323830.jpg%3Fv%3D1784811718%252C0.4957%252C0.318&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -51,5 +51,410 @@
     "hjemme": false,
     "stadion": ""
   },
-  "updated": "2026-07-23T18:01:00Z"
+  "kamplogg": [
+    {
+      "nr": 1,
+      "dato": "2026-04-17",
+      "dato_no": "17. april 2026",
+      "kamp": "FC St. Pauli - 1. FC Køln",
+      "resultat": "1-1",
+      "utfall": "Uavgjort"
+    },
+    {
+      "nr": 1,
+      "dato": "2025-12-13",
+      "dato_no": "13. desember 2025",
+      "kamp": "FC St. Pauli - FC Heidenheim",
+      "resultat": "2-1",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2025-11-29",
+      "dato_no": "29. november 2025",
+      "kamp": "FC Bayern München - FC St. Pauli",
+      "resultat": "3-1",
+      "utfall": "Tap"
+    },
+    {
+      "nr": 1,
+      "dato": "2025-11-23",
+      "dato_no": "23. november 2025",
+      "kamp": "FC St. Pauli - FC Union Berlin",
+      "resultat": "0-1",
+      "utfall": "Tap"
+    },
+    {
+      "nr": 1,
+      "dato": "2025-11-01",
+      "dato_no": "1. november 2025",
+      "kamp": "FC St. Pauli - Borussia Mönchengladbach",
+      "resultat": "0-4",
+      "utfall": "Tap"
+    },
+    {
+      "nr": 1,
+      "dato": "2025-08-23",
+      "dato_no": "23. august 2025",
+      "kamp": "FC St. Pauli - Borussia Dortmund",
+      "resultat": "3-3",
+      "utfall": "Uavgjort"
+    },
+    {
+      "nr": 1,
+      "dato": "2025-05-03",
+      "dato_no": "3. mai 2025",
+      "kamp": "FC St. Pauli - VfB Stuttgart",
+      "resultat": "0-1",
+      "utfall": "Tap"
+    },
+    {
+      "nr": 1,
+      "dato": "2024-11-29",
+      "dato_no": "29. november 2024",
+      "kamp": "FC St. Pauli - Holstein Kiel",
+      "resultat": "3-1",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2024-10-26",
+      "dato_no": "26. oktober 2024",
+      "kamp": "FC St. Pauli - Wolfsburg",
+      "resultat": "0-0",
+      "utfall": "Uavgjort"
+    },
+    {
+      "nr": 1,
+      "dato": "2024-08-25",
+      "dato_no": "25. august 2024",
+      "kamp": "FC St. Pauli - FC Heidenheim",
+      "resultat": "0-2",
+      "utfall": "Tap"
+    },
+    {
+      "nr": 1,
+      "dato": "2024-05-03",
+      "dato_no": "3. mai 2024",
+      "kamp": "Hamburger SV - FC St. Pauli",
+      "resultat": "1-0",
+      "utfall": "Tap"
+    },
+    {
+      "nr": 1,
+      "dato": "2024-04-26",
+      "dato_no": "26. april 2024",
+      "kamp": "FC St. Pauli - Hansa Rostock",
+      "resultat": "1-0",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2023-09-30",
+      "dato_no": "30. september 2023",
+      "kamp": "Hertha Berlin - FC St. Pauli",
+      "resultat": "1-2",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2023-08-05",
+      "dato_no": "5. august 2023",
+      "kamp": "FC St. Pauli - Fortuna Düsseldorf",
+      "resultat": "0-0",
+      "utfall": "Uavgjort"
+    },
+    {
+      "nr": 1,
+      "dato": "2023-05-28",
+      "dato_no": "28. mai 2023",
+      "kamp": "FC St. Pauli - Karlsruher SC",
+      "resultat": "1-1",
+      "utfall": "Uavgjort"
+    },
+    {
+      "nr": 1,
+      "dato": "2023-03-11",
+      "dato_no": "11. mars 2023",
+      "kamp": "FC St. Pauli - SpVgg Greuther Fürth",
+      "resultat": "2-1",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2023-02-05",
+      "dato_no": "5. februar 2023",
+      "kamp": "FC St. Pauli - Hannover 96",
+      "resultat": "2-0",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2022-10-29",
+      "dato_no": "29. oktober 2022",
+      "kamp": "FC St. Pauli - SV Darmstadt",
+      "resultat": "1-1",
+      "utfall": "Uavgjort"
+    },
+    {
+      "nr": 1,
+      "dato": "2022-10-22",
+      "dato_no": "22. oktober 2022",
+      "kamp": "Arminia Bielefeld - FC St. Pauli",
+      "resultat": "2-0",
+      "utfall": "Tap"
+    },
+    {
+      "nr": 1,
+      "dato": "2022-07-16",
+      "dato_no": "16. juli 2022",
+      "kamp": "FC St. Pauli - FC Nürnberg",
+      "resultat": "3-2",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2022-03-18",
+      "dato_no": "18. mars 2022",
+      "kamp": "FC St. Pauli - FC Heidenheim",
+      "resultat": "1-0",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2021-10-30",
+      "dato_no": "30. oktober 2021",
+      "kamp": "SV Werder Bremen - FC St. Pauli",
+      "resultat": "1-1",
+      "utfall": "Uavgjort"
+    },
+    {
+      "nr": 1,
+      "dato": "2019-12-21",
+      "dato_no": "21. desember 2019",
+      "kamp": "FC St. Pauli - Arminia Bielefeld",
+      "resultat": "3-0",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2019-11-30",
+      "dato_no": "30. november 2019",
+      "kamp": "FC St. Pauli - Hannover 96",
+      "resultat": "0-1",
+      "utfall": "Tap"
+    },
+    {
+      "nr": 1,
+      "dato": "2019-03-10",
+      "dato_no": "10. mars 2019",
+      "kamp": "FC St. Pauli - Hamburger SV",
+      "resultat": "0-4",
+      "utfall": "Tap"
+    },
+    {
+      "nr": 1,
+      "dato": "2018-09-30",
+      "dato_no": "30. september 2018",
+      "kamp": "Hamburger SV - FC St. Pauli",
+      "resultat": "0-0",
+      "utfall": "Uavgjort"
+    },
+    {
+      "nr": 1,
+      "dato": "2018-08-10",
+      "dato_no": "10. august 2018",
+      "kamp": "FC St. Pauli - SV Darmstadt",
+      "resultat": "2-0",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2018-04-28",
+      "dato_no": "28. april 2018",
+      "kamp": "FC St. Pauli - SpVgg Greuther Fürth",
+      "resultat": "3-0",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2018-03-10",
+      "dato_no": "10. mars 2018",
+      "kamp": "FC St. Pauli - Eintracht Braunschweig",
+      "resultat": "0-0",
+      "utfall": "Uavgjort"
+    },
+    {
+      "nr": 1,
+      "dato": "2017-09-23",
+      "dato_no": "23. september 2017",
+      "kamp": "FC St. Pauli - Fortuna Düsseldorf",
+      "resultat": "1-2",
+      "utfall": "Tap"
+    },
+    {
+      "nr": 1,
+      "dato": "2017-03-18",
+      "dato_no": "18. mars 2017",
+      "kamp": "FC St. Pauli - Hannover 96",
+      "resultat": "0-0",
+      "utfall": "Uavgjort"
+    },
+    {
+      "nr": 1,
+      "dato": "2017-03-10",
+      "dato_no": "10. mars 2017",
+      "kamp": "FC St. Pauli - FC Union Berlin",
+      "resultat": "1-2",
+      "utfall": "Tap"
+    },
+    {
+      "nr": 1,
+      "dato": "2016-09-10",
+      "dato_no": "10. september 2016",
+      "kamp": "FC St. Pauli - DSC Arminia Bielefeld",
+      "resultat": "2-1",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2016-05-15",
+      "dato_no": "15. mai 2016",
+      "kamp": "FC St. Pauli - FC Kaiserslautern",
+      "resultat": "5-2",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2016-02-28",
+      "dato_no": "28. februar 2016",
+      "kamp": "MSV Duisburg - FC St. Pauli",
+      "resultat": "0-2",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2015-10-25",
+      "dato_no": "25. oktober 2015",
+      "kamp": "FC St. Pauli - SC Freiburg",
+      "resultat": "1-0",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2015-08-16",
+      "dato_no": "16. august 2015",
+      "kamp": "FC St. Pauli - SpVgg Greuther Fürth",
+      "resultat": "3-2",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2015-05-03",
+      "dato_no": "3. mai 2015",
+      "kamp": "FC St. Pauli - RB Leipzig",
+      "resultat": "1-0",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2014-09-14",
+      "dato_no": "14. september 2014",
+      "kamp": "FC St. Pauli - 1860 Mûnchen",
+      "resultat": "1-2",
+      "utfall": "Tap"
+    },
+    {
+      "nr": 1,
+      "dato": "2014-05-11",
+      "dato_no": "11. mai 2014",
+      "kamp": "FC St. Pauli - Erzgebirge Aue",
+      "resultat": "2-2",
+      "utfall": "Uavgjort"
+    },
+    {
+      "nr": 1,
+      "dato": "2013-09-14",
+      "dato_no": "14. september 2013",
+      "kamp": "FC St. Pauli - FSV Frankfurt",
+      "resultat": "2-1",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2013-04-13",
+      "dato_no": "13. april 2013",
+      "kamp": "FC St. Pauli - 1860 Munchen",
+      "resultat": "3-1",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2012-09-01",
+      "dato_no": "1. september 2012",
+      "kamp": "FC St. Pauli - SV Sandhausen",
+      "resultat": "2-1",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2011-04-23",
+      "dato_no": "23. april 2011",
+      "kamp": "FC St. Pauli - Werder Bremen",
+      "resultat": "1-3",
+      "utfall": "Tap"
+    },
+    {
+      "nr": 1,
+      "dato": "2010-10-30",
+      "dato_no": "30. oktober 2010",
+      "kamp": "FC St. Pauli - Eintrach Frankfurt",
+      "resultat": "1-3",
+      "utfall": "Tap"
+    },
+    {
+      "nr": 1,
+      "dato": "2010-03-28",
+      "dato_no": "28. mars 2010",
+      "kamp": "FC St. Pauli - Hansa Rostock",
+      "resultat": "2-0",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2009-10-25",
+      "dato_no": "25. oktober 2009",
+      "kamp": "FC St. Pauli - Energie Cottbus",
+      "resultat": "1-1",
+      "utfall": "Uavgjort"
+    },
+    {
+      "nr": 1,
+      "dato": "2009-05-10",
+      "dato_no": "10. mai 2009",
+      "kamp": "FC St. Pauli - FSV Mainz 05",
+      "resultat": "2-0",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2008-08-31",
+      "dato_no": "31. august 2008",
+      "kamp": "FC St. Pauli - Rot-Weiss Oberhausen",
+      "resultat": "4-1",
+      "utfall": "Seier"
+    },
+    {
+      "nr": 1,
+      "dato": "2008-05-02",
+      "dato_no": "2. mai 2008",
+      "kamp": "FC St. Pauli - Erzgebirge Aue",
+      "resultat": "4-2",
+      "utfall": "Seier"
+    }
+  ],
+  "medlemstall": {
+    "betalende": 32
+  },
+  "updated": "2026-07-23T18:34:50Z"
 }
