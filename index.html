@@ -630,11 +630,11 @@ async function lastKamplogg() {
   renderMatches();
 }
 
-function utfallFarge(utfall) {
-  const u = (utfall || '').toLowerCase();
-  if (u === 'seier') return '#27ae60';
-  if (u === 'tap') return '#c0392b';
-  return '#f39c12'; // uavgjort
+function fmtDato(d){
+  if (!d) return '';
+  const p = d.split('-');
+  if (p.length === 3) return p[2] + '/' + p[1] + '/' + p[0];
+  return d;
 }
 function renderMatches(){
   const el = document.getElementById("matchList");
@@ -668,13 +668,12 @@ function renderMatches(){
     if (l) l.textContent = lbl;
   });
 
-  // Render kampliste
+  // Render kampliste (samme utseende som før)
   el.innerHTML = _kamplogg.map(m => {
-    const farge = utfallFarge(m.utfall);
     return`<div class="mr">
-      <span class="info-meta" style="min-width:74px;white-space:nowrap;">${m.dato_no}</span>
+      <span class="info-meta" style="min-width:74px;white-space:nowrap;">${fmtDato(m.dato)}</span>
       <span class="info-val" style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${m.kamp}</span>
-      <span class="heading-bebas" style="font-size:16px;min-width:44px;text-align:right;margin-left:auto;white-space:nowrap;color:${farge};">${m.resultat}</span>
+      <span class="heading-bebas" style="font-size:16px;min-width:36px;text-align:right;margin-left:auto;white-space:normal;">${m.resultat}</span>
     </div>`;
   }).join("");
 }
