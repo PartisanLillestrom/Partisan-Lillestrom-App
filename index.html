@@ -449,11 +449,11 @@ function esc(s) {
         <div class="stat-lbl">År som supporterklubb</div>
       </div>
       <div class="stat-cell" style="background:linear-gradient(90deg,#1a0804 0%,#0a0a0a 100%);">
-        <div class="stat-num">32</div>
+        <div id="stat-med" class="stat-num">32</div>
         <div class="stat-lbl">Betalende medlemmer</div>
       </div>
       <div class="stat-cell" style="background:linear-gradient(90deg,#0a0a0a 0%,#0a0a0a 100%);">
-        <div class="stat-num red">50</div>
+        <div id="stat-kamper" class="stat-num red">50</div>
         <div class="stat-lbl">Kamper sett</div>
       </div>
     </div>
@@ -491,20 +491,20 @@ function esc(s) {
   <div style="flex-shrink:0;padding:16px 14px 16px;">
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">
       <div class="card-bg" style="border-radius:6px;padding:12px 6px;text-align:center;">
-        <div class="stat-num" style="font-size:28px;">50</div>
-        <div class="sub-label" style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;">Totalt</div>
+        <div id="kstat-totalt" class="stat-num" style="font-size:28px;">–</div>
+        <div id="kstat-totalt-lbl" class="sub-label" style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;">Totalt</div>
       </div>
       <div class="card-bg" style="border-radius:6px;padding:12px 6px;text-align:center;">
-        <div class="stat-num" style="font-size:28px;">24</div>
-        <div class="sub-label" style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;">Seier · 48%</div>
+        <div id="kstat-seier" class="stat-num" style="font-size:28px;">–</div>
+        <div id="kstat-seier-lbl" class="sub-label" style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;">Seier</div>
       </div>
       <div class="card-bg" style="border-radius:6px;padding:12px 6px;text-align:center;">
-        <div class="stat-num" style="font-size:28px;">12</div>
-        <div class="sub-label" style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;">Uavg. · 24%</div>
+        <div id="kstat-uavg" class="stat-num" style="font-size:28px;">–</div>
+        <div id="kstat-uavg-lbl" class="sub-label" style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;">Uavgjort</div>
       </div>
       <div class="card-bg" style="border-radius:6px;padding:12px 6px;text-align:center;">
-        <div class="stat-num red" style="font-size:28px;">14</div>
-        <div class="sub-label" style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;">Tap · 28%</div>
+        <div id="kstat-tap" class="stat-num red" style="font-size:28px;">–</div>
+        <div id="kstat-tap-lbl" class="sub-label" style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px;">Tap</div>
       </div>
     </div>
   </div>
@@ -610,31 +610,71 @@ function esc(s) {
 
 <script>
 const LOGO="logo-icon.jpeg";
-let posts=[];
+let _kamplogg=[];
 
-async function lastFeed() {
+async function lastKamplogg() {
   try {
-    const resp = await fetch('feed.json', { cache: 'no-store' });
-    if (resp.ok) posts = await resp.json();
+    const resp = await fetch('data.json', { cache: 'no-store' });
+    if (resp.ok) {
+      const data = await resp.json();
+      if (data.kamplogg) _kamplogg = data.kamplogg;
+      // Oppdater medlemstall dynamisk hvis tilgjengelig
+      if (data.medlemstall && data.medlemstall.betalende) {
+        const el = document.getElementById('stat-med');
+        if (el) el.textContent = data.medlemstall.betalende;
+      }
+    }
   } catch(e) {
-    console.warn('Kunne ikke laste feed.json', e);
+    console.warn('Kunne ikke laste kamplogg fra data.json', e);
   }
   renderMatches();
 }
 
-function fmtDato(d){
-  const mnd={januar:'01',februar:'02',mars:'03',april:'04',mai:'05',juni:'06',juli:'07',august:'08',september:'09',oktober:'10',november:'11',desember:'12'};
-  const p=d.replace('.','').trim().split(/\s+/);
-  if(p.length>=3){const dd=p[0].padStart(2,'0');const mm=mnd[p[1].toLowerCase()]||'00';return dd+'/'+mm+'/'+p[2];}
-  return d;
+function utfallFarge(utfall) {
+  const u = (utfall || '').toLowerCase();
+  if (u === 'seier') return '#27ae60';
+  if (u === 'tap') return '#c0392b';
+  return '#f39c12'; // uavgjort
 }
 function renderMatches(){
-  const k=posts.filter(p=>p.score);
-  document.getElementById("matchList").innerHTML=k.map(m=>{
+  const el = document.getElementById("matchList");
+  if (!el) return;
+  if (!_kamplogg.length) {
+    el.innerHTML = '<div style="text-align:center;padding:30px 14px;color:rgba(255,255,255,.4);">Ingen kamper lastet ennå</div>';
+    return;
+  }
+  // Beregn statistikk fra kamploggen
+  const totalt = _kamplogg.length;
+  const seier = _kamplogg.filter(k => k.utfall && k.utfall.toLowerCase() === 'seier').length;
+  const uavg = _kamplogg.filter(k => k.utfall && k.utfall.toLowerCase().startsWith('uavg')).length;
+  const tap = _kamplogg.filter(k => k.utfall && k.utfall.toLowerCase() === 'tap').length;
+  const pct = n => totalt ? Math.round(n/totalt*100) : 0;
+
+  // Oppdater hero-statistikk
+  const statEl = document.getElementById('stat-kamper');
+  if (statEl) statEl.textContent = totalt;
+
+  // Oppdater Kamper-fane statistikk
+  const ids = [
+    ['kstat-totalt', totalt, 'Totalt'],
+    ['kstat-seier', seier, `Seier · ${pct(seier)}%`],
+    ['kstat-uavg', uavg, `Uavg. · ${pct(uavg)}%`],
+    ['kstat-tap', tap, `Tap · ${pct(tap)}%`],
+  ];
+  ids.forEach(([id, val, lbl]) => {
+    const e = document.getElementById(id);
+    if (e) e.textContent = val;
+    const l = document.getElementById(id + '-lbl');
+    if (l) l.textContent = lbl;
+  });
+
+  // Render kampliste
+  el.innerHTML = _kamplogg.map(m => {
+    const farge = utfallFarge(m.utfall);
     return`<div class="mr">
-      <span class="info-meta" style="min-width:74px;white-space:nowrap;">${fmtDato(m.date)}</span>
+      <span class="info-meta" style="min-width:74px;white-space:nowrap;">${m.dato_no}</span>
       <span class="info-val" style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${m.kamp}</span>
-      <span class="heading-bebas" style="font-size:16px;min-width:36px;text-align:right;margin-left:auto;white-space:normal;">${m.score}</span>
+      <span class="heading-bebas" style="font-size:16px;min-width:44px;text-align:right;margin-left:auto;white-space:nowrap;color:${farge};">${m.resultat}</span>
     </div>`;
   }).join("");
 }
@@ -652,7 +692,7 @@ function sp(id,btn){
   const bar = document.getElementById('nesteKampBar');
   if(bar) bar.style.display = (id === 'hjem' && _harKamp) ? 'flex' : 'none';
 }
-document.addEventListener('DOMContentLoaded', () => lastFeed());
+document.addEventListener('DOMContentLoaded', () => lastKamplogg());
 </script>
 
 </div>
