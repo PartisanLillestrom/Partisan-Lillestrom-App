@@ -527,6 +527,80 @@ def weserv_image_url(url: str) -> str:
     )
 
 
+# ---------------------------------------------------------------------------
+# Kamplogg og medlemsregister (Excel-filer i repo-et)
+# ---------------------------------------------------------------------------
+
+KAMPLOGG_FILE = "Kamplogg_FCSP.xlsx"
+MEDLEMSREGISTER_FILE = "Medlemsregister__Partisan_Lillestrøm.xlsx"
+
+
+def les_kamplogg() -> list:
+    """Leser kamploggen fra Excel-filen. Returnerer en liste med kamper
+    sortert fra nyest til eldst, klar for JSON-serialisering."""
+    try:
+        import openpyxl
+    except ImportError:
+        print("  (advarsel: openpyxl ikke installert - kan ikke lese kamplogg)", file=sys.stderr)
+        return []
+    try:
+        wb = openpyxl.load_workbook(KAMPLOGG_FILE, data_only=True, read_only=True)
+        ws = wb.active
+        kamper = []
+        for row in ws.iter_rows(min_row=3, max_row=ws.max_row, values_only=True):
+            nr, dato, hjemme, borte, resultat, utfall = row[0], row[1], row[2], row[3], row[4], row[5]
+            if nr is None or dato is None:
+                continue
+            if not isinstance(dato, datetime):
+                continue
+            # Bygg kampstreng: "Hjemmelag - Bortelag"
+            kamp_str = f"{hjemme} - {borte}" if hjemme and borte else ""
+            kamper.append({
+                "nr": int(nr) if isinstance(nr, (int, float)) else nr,
+                "dato": dato.strftime("%Y-%m-%d"),
+                "dato_no": f"{dato.day}. {MONTHS_NO[dato.month]} {dato.year}",
+                "kamp": kamp_str,
+                "resultat": str(resultat or ""),
+                "utfall": str(utfall or "").strip(),
+            })
+        wb.close()
+        # Sorter nyest forst
+        kamper.sort(key=lambda k: k["dato"], reverse=True)
+        print(f"Kamplogg: leste {len(kamper)} kamper fra {KAMPLOGG_FILE}")
+        return kamper
+    except FileNotFoundError:
+        print(f"  (info: {KAMPLOGG_FILE} ikke funnet - hopper over kamplogg)", file=sys.stderr)
+        return []
+    except Exception as e:
+        print(f"  (advarsel: kunne ikke lese kamplogg: {e})", file=sys.stderr)
+        return []
+
+
+def les_medlemstall() -> dict:
+    """Leser antall betalende medlemmer (celle C2) fra medlemsregisteret."""
+    try:
+        import openpyxl
+    except ImportError:
+        print("  (advarsel: openpyxl ikke installert - kan ikke lese medlemsregister)", file=sys.stderr)
+        return {}
+    try:
+        wb = openpyxl.load_workbook(MEDLEMSREGISTER_FILE, data_only=True, read_only=True)
+        ws = wb.active
+        betalende = ws.cell(row=2, column=3).value
+        wb.close()
+        if betalende is None:
+            return {}
+        result = {"betalende": int(betalende)}
+        print(f"Medlemsregister: {result['betalende']} betalende medlemmer")
+        return result
+    except FileNotFoundError:
+        print(f"  (info: {MEDLEMSREGISTER_FILE} ikke funnet - hopper over medlemstall)", file=sys.stderr)
+        return {}
+    except Exception as e:
+        print(f"  (advarsel: kunne ikke lese medlemsregister: {e})", file=sys.stderr)
+        return {}
+
+
 def les_gammel_data() -> dict:
     """Leser eksisterende data.json. Returnerer tom dict hvis filen mangler
     eller er korrupt - da finnes det rett og slett ingen gammel data aa
@@ -581,6 +655,10 @@ def main() -> int:
     # --- Neste kamp ---
     next_match = fetch_next_match_fcstpauli()
 
+    # --- Kamplogg og medlemstall (fra Excel-filer i repo-et) ---
+    kamplogg = les_kamplogg()
+    medlemstall = les_medlemstall()
+
     payload = {
         "fcstpauli_news": fcstpauli_items,
         "millernton_news": [
@@ -594,6 +672,8 @@ def main() -> int:
             for it in rss_items
         ],
         "next_match": next_match,
+        "kamplogg": kamplogg,
+        "medlemstall": medlemstall,
     }
 
     # Per-kilde fallback: hvis én kilde feilet i natt, gjenbruk forrige
@@ -605,6 +685,12 @@ def main() -> int:
     if not payload["millernton_news"] and gammel.get("millernton_news"):
         payload["millernton_news"] = gammel["millernton_news"]
         print("  (info: millernton-RSS ga ingenting - beholder forrige nyhetsliste)")
+    if not payload["kamplogg"] and gammel.get("kamplogg"):
+        payload["kamplogg"] = gammel["kamplogg"]
+        print("  (info: kamplogg-lesing feilet - beholder forrige kamplogg)")
+    if not payload["medlemstall"] and gammel.get("medlemstall"):
+        payload["medlemstall"] = gammel["medlemstall"]
+        print("  (info: medlemstall-lesing feilet - beholder forrige tall)")
 
     try:
         validate(payload)
@@ -647,6 +733,9 @@ def main() -> int:
         print(f"  - neste kamp: {payload['next_match']['motstander']} ({payload['next_match']['dato']})")
     else:
         print("  - neste kamp: ikke funnet")
+    print(f"  - {len(payload.get('kamplogg', []))} kamper i kamplogg")
+    if payload.get("medlemstall"):
+        print(f"  - medlemstall: {payload['medlemstall'].get('betalende', '?')} betalende")
     return 0
 
 
