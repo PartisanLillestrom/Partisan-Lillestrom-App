@@ -532,7 +532,7 @@ def weserv_image_url(url: str) -> str:
 # ---------------------------------------------------------------------------
 
 KAMPLOGG_FILE = "Kamplogg FCSP.xlsx"
-MEDLEMSREGISTER_FILE = "Medlemsregister - Partisan Lillestrøm.xlsx"
+ANTALL_BETALENDE_MEDLEMMER = 32  # Oppdateres manuelt etter årsmøtet
 
 
 def les_kamplogg() -> list:
@@ -577,28 +577,9 @@ def les_kamplogg() -> list:
 
 
 def les_medlemstall() -> dict:
-    """Leser antall betalende medlemmer (celle C2) fra medlemsregisteret."""
-    try:
-        import openpyxl
-    except ImportError:
-        print("  (advarsel: openpyxl ikke installert - kan ikke lese medlemsregister)", file=sys.stderr)
-        return {}
-    try:
-        wb = openpyxl.load_workbook(MEDLEMSREGISTER_FILE, data_only=True, read_only=True)
-        ws = wb.active
-        betalende = ws.cell(row=2, column=3).value
-        wb.close()
-        if betalende is None:
-            return {}
-        result = {"betalende": int(betalende)}
-        print(f"Medlemsregister: {result['betalende']} betalende medlemmer")
-        return result
-    except FileNotFoundError:
-        print(f"  (info: {MEDLEMSREGISTER_FILE} ikke funnet - hopper over medlemstall)", file=sys.stderr)
-        return {}
-    except Exception as e:
-        print(f"  (advarsel: kunne ikke lese medlemsregister: {e})", file=sys.stderr)
-        return {}
+    """Returnerer antall betalende medlemmer. Oppdater konstanten
+    ANTALL_BETALENDE_MEDLEMMER øverst i denne seksjonen etter årsmøtet."""
+    return {"betalende": ANTALL_BETALENDE_MEDLEMMER}
 
 
 def les_gammel_data() -> dict:
