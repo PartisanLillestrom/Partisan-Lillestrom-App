@@ -1254,16 +1254,6 @@ function visKamp(kamp) {
   if (bar) {
     const d = new Date(kamp.dato + (kamp.tid ? 'T' + kamp.tid : 'T12:00'));
     const dagKort = d.toLocaleDateString('nb-NO',{weekday:'short',day:'numeric',month:'short'});
-    const now = new Date();
-    const diff = d - now;
-    let cd = '';
-    if (diff > 0) {
-      const midnatt = x => new Date(x.getFullYear(), x.getMonth(), x.getDate());
-      const dager = Math.round((midnatt(d) - midnatt(now)) / 86400000);
-      if (dager > 1) cd = `om ${dager}d`;
-      else if (dager === 1) cd = 'i morgen';
-      else cd = 'i dag!';
-    }
     const hj = kamp.hjemme;
     bar.innerHTML = `
   <span class="heading-bebas" style="font-size:14px;line-height:1;color:rgba(255,255,255,.4);white-space:nowrap;">NESTE KAMP</span>
@@ -1271,7 +1261,6 @@ function visKamp(kamp) {
   <span class="heading-bebas" style="font-size:14px;line-height:1;color:rgba(255,255,255,.85);white-space:nowrap;">${hj?'FC St. Pauli':kamp.motstander} · ${hj?kamp.motstander:'FC St. Pauli'}</span>
   <span class="heading-bebas" style="font-size:14px;line-height:1;color:rgba(255,255,255,.2);margin:0 8px;">·</span>
   <span class="info-meta" style="line-height:1;white-space:nowrap;">${dagKort}${kamp.tid?' '+kamp.tid:''}</span>
-  ${cd?`<span class="info-meta" style="line-height:1;white-space:nowrap;margin-left:8px;">${cd}</span>`:''}
 `;
   }
   const box = document.getElementById('nesteKampBox');
