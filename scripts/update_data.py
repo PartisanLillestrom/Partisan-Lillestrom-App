@@ -531,8 +531,8 @@ def weserv_image_url(url: str) -> str:
 # Kamplogg og medlemsregister (Excel-filer i repo-et)
 # ---------------------------------------------------------------------------
 
-KAMPLOGG_FILE = "Kamplogg_FCSP.xlsx"
-MEDLEMSREGISTER_FILE = "Medlemsregister__Partisan_Lillestrøm.xlsx"
+KAMPLOGG_FILE = "Kamplogg FCSP.xlsx"
+MEDLEMSREGISTER_FILE = "Medlemsregister - Partisan Lillestrøm.xlsx"
 
 
 def les_kamplogg() -> list:
