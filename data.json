@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Lucas Schulze styrker U23-laget",
+      "title_de": "FC St. Pauli | Lucas Schulze verstärkt die U23",
+      "url": "https://www.fcstpauli.com/news/lucas-schulze-verstaerkt-die-u23",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2025-2026%2FU23%2FNeuzug%25C3%25A4nge%2F_1200x630_crop_center-center_82_none%2FLSchulze-Header.jpg%3Fv%3D1784807860%252C0.4923%252C0.178&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | «Jeg vil lede ved å være et godt eksempel og…»",
       "title_de": "FC St. Pauli | „Ich möchte als gutes Beispiel vorangehen und…",
       "url": "https://www.fcstpauli.com/news/marcus-mathisen-interview-trainingslager-2026",
@@ -11,35 +17,29 @@
       "title_de": "FC St. Pauli | Ticket-Infos zum DFB-Pokalspiel bei Rot-Weiss Essen",
       "url": "https://www.fcstpauli.com/news/ticket-infos-dfb-pokal-rw-essen",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FDFB-Pokal%2FGegner%2FRW-Essen%2F_1200x630_crop_center-center_82_none%2FWITTERS_2323830.jpg%3Fv%3D1784722271%252C0.4957%252C0.318&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Ankelskade: Abdoulie Ceesay ute til…",
-      "title_de": "FC St. Pauli | Verletzung am Sprunggelenk: Abdoulie Ceesay fällt bis…",
-      "url": "https://www.fcstpauli.com/news/abdoulie-ceesay-verletzung-trainingslager",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FCeesay%2F_1200x630_crop_center-center_82_none%2FFCS09906.jpg%3Fv%3D1784722292%252C0.4278%252C0.2026&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
+    {
+      "title_no": "Sted på Millerntor – 23. juli 2026",
+      "title_de": "Lage am Millerntor – 23. Juli 2026",
+      "url": "https://millernton.de/2026/07/23/lage-am-millerntor-23-juli-2026/",
+      "date": "23. juli",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "MT Meets – Sanger for sesongen – 05 – FCH: Tubthumbing",
+      "title_de": "MT Meets – Songs For The Season – 05 – FCH: Tubthumbing",
+      "url": "https://millernton.de/2026/07/23/fc-st-pauli-podcast-mt-meets-songs-for-the-season-05-fch-tubthumbing/",
+      "date": "23. juli",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F07%2F04_MT_Blog_2026_FCHeidenheimh.jpg&w=400&output=webp&q=70"
+    },
     {
       "title_no": "MT Meets – Sanger for sesongen – 04 – KSV: Reeperbahn",
       "title_de": "MT Meets – Songs For The Season – 04 – KSV: Reeperbahn",
       "url": "https://millernton.de/2026/07/22/fc-st-pauli-podcast-mt-meets-songs-for-the-season-04-ksv-reeperbahn/",
       "date": "22. juli",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F07%2F06_MT_Blog_2026_Kiel.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Besøkstall i de beste fotballigaene",
-      "title_de": "BesucherInnenzahlen in den höchsten Fußballligen",
-      "url": "https://millernton.de/2026/07/22/besucherinnenzahlen-in-den-hoechsten-fussballligen/",
-      "date": "22. juli",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F04%2Ffcspfcb_20260411_stefangroenveld_fcsp19351946-Kopie.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Sted på Millerntor – 22. juli 2026",
-      "title_de": "Lage am Millerntor – 22. Juli 2026",
-      "url": "https://millernton.de/2026/07/22/lage-am-millerntor-22-juli-2026/",
-      "date": "22. juli",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
     }
   ],
   "next_match": {
@@ -51,5 +51,5 @@
     "hjemme": false,
     "stadion": ""
   },
-  "updated": "2026-07-22T17:51:31Z"
+  "updated": "2026-07-23T12:03:30Z"
 }
