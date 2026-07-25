@@ -1,10 +1,10 @@
 {
   "fcstpauli_news": [
     {
-      "title_no": "FC St. Pauli | Etter en sterk start: Kiezkicker lider et klart tap…",
-      "title_de": "FC St. Pauli | Nach starkem Start: Kiezkicker verlieren deutlich…",
-      "url": "https://www.fcstpauli.com/news/spielbericht-testspiel-afc-bournemouth",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FTestspiele%2FAFC-Bournemouth%2F_1200x630_crop_center-center_82_none%2FHEV09341.jpg%3Fv%3D1784905449&w=400&output=webp&q=70"
+      "title_no": "FC St. Pauli | Oleg Skakun går over til U21-laget til 1. FC Kaiserslautern",
+      "title_de": "FC St. Pauli | Oleg Skakun wechselt zur U21 vom 1. FC Kaiserslautern",
+      "url": "https://www.fcstpauli.com/news/oleg-skakun-verlaesst-den-fc-st-pauli",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2025-2026%2FU23%2FAbg%25C3%25A4nge%2F_1200x630_crop_center-center_82_none%2FSkakun-News.jpg%3Fv%3D1784899403%252C0.5286%252C0.4363&w=400&output=webp&q=70"
     },
     {
       "title_no": "FC St. Pauli | Kort og grei juli 2026",
@@ -21,6 +21,13 @@
   ],
   "millernton_news": [
     {
+      "title_no": "Kvinnelige St. Pauli-historier #40: Barbara",
+      "title_de": "Female St. Pauli Stories #40: Barbara",
+      "url": "https://millernton.de/2026/07/25/female-st-pauli-stories-40-barbara/",
+      "date": "25. juli",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2022%2F03%2FFSPS_Logo_small.jpg&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "MT Meets – Sanger for sesongen – 08 – FCK: Ikke slutt å tro",
       "title_de": "MT Meets – Songs For The Season – 08 – FCK:                 Don’t Stop Believin‘",
       "url": "https://millernton.de/2026/07/24/fc-st-pauli-podcast-mt-meets-songs-for-the-season-08-fck-dont-stop-believin/",
@@ -33,13 +40,6 @@
       "url": "https://millernton.de/2026/07/24/%ce%b1%ce%bd%cf%84%ce%af%ce%bf-manos/",
       "date": "24. juli",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F04%2FFCSPm05_20241005_stefangroenveld_fcsp19530401-Kopie.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Sted på Millerntor – 24. juli 2026",
-      "title_de": "Lage am Millerntor – 24. Juli 2026",
-      "url": "https://millernton.de/2026/07/24/lage-am-millerntor-24-juli-2026/",
-      "date": "24. juli",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
     }
   ],
   "next_match": {},
@@ -448,5 +448,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-07-25T05:53:59Z"
+  "updated": "2026-07-25T10:47:55Z"
 }
