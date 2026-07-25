@@ -607,7 +607,7 @@ function esc(s) {
 
 <div class="bnav">
   <button class="bb active" onclick="sp('hjem',this)"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg><span class="bb-label">Hjem</span></button>
-  <button class="bb" onclick="sp('arr',this)"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="bb-label">Arr.</span></button>
+  <button class="bb" onclick="sp('arr',this)"><span style="position:relative;"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span id="arrBadge" style="display:none;position:absolute;top:-3px;right:-5px;width:8px;height:8px;background:#c0392b;border-radius:50%;border:2px solid #0a0a0a;"></span></span><span class="bb-label">Arr.</span></button>
   <button class="bb" onclick="sp('kamper',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3c0 0 2 4 0 9s0 9 0 9M3 12h18"/></svg><span class="bb-label">Kamplogg</span></button>
   <button class="bb" onclick="sp('logoer',this)"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg><span class="bb-label">Logoer</span></button>
   <button class="bb" onclick="sp('om',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg><span class="bb-label">Om oss</span></button>
@@ -689,7 +689,12 @@ function sp(id,btn){
   document.getElementById(id).classList.add("active");
   if(btn)btn.classList.add("active");
   
-  if(id==='arr') { visArr('alle'); setTimeout(() => { lastAlleRSVP(); lastAlleKommentarer(); }, 100); }
+  if(id==='arr') {
+    visArr('alle'); setTimeout(() => { lastAlleRSVP(); lastAlleKommentarer(); }, 100);
+    localStorage.setItem('pl_arr_sist_sett', new Date().toISOString().split('T')[0]);
+    const badge = document.getElementById('arrBadge');
+    if (badge) badge.style.display = 'none';
+  }
 
   const hdr = document.querySelector('.hdr');
   if(hdr) hdr.style.display = id === 'hjem' ? 'none' : 'flex';
@@ -743,6 +748,12 @@ if (_fdb) {
   _fdb.ref('arrangementer').on('value', snap => {
     _skyArr = snap.exists() ? Object.values(snap.val()) : [];
     visArr(_gjeldendeFilter);
+    // Badge: sjekk om det finnes arrangementer opprettet etter sist besøk
+    const sist = localStorage.getItem('pl_arr_sist_sett') || '0';
+    const harNye = _skyArr.some(a => a.opprettet && a.opprettet > sist);
+    const badge = document.getElementById('arrBadge');
+    const erPaaArr = document.getElementById('arr') && document.getElementById('arr').classList.contains('active');
+    if (badge) badge.style.display = (harNye && !erPaaArr) ? 'block' : 'none';
   });
   _fdb.ref('arr_slettet').on('value', snap => {
     _skySlettet = snap.exists() ? Object.keys(snap.val()) : [];
