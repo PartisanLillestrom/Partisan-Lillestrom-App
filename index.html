@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>Partisan Lillestrøm</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2a1509">
+<link rel="apple-touch-icon" href="logo-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik+Dirt&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -14,7 +19,7 @@
 #hjem{height:calc(var(--app-h,100vh) - 90px);}
 #kamper{height:calc(var(--app-h,100vh) - 112px);}
 #logoer,#om,#medlem{height:calc(var(--app-h,100vh) - 112px);}
-#arr{height:calc(var(--app-h,100vh) - 112px);background:linear-gradient(180deg,#2a1509 0%,#0a0a0a 30%);}
+#arr{height:calc(var(--app-h,100vh) - 112px);}
 :root{
   --red:#c0392b;
   --brown:#3d1f14;
@@ -1606,6 +1611,7 @@ document.addEventListener('keydown', function(e) {
 
 // Oppdatert sendKommentar bruker data-event-id
 </script>
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}</script>
 
 </body>
 </html>
