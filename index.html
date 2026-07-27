@@ -20,6 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik+Dirt&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 *::-webkit-scrollbar{display:none;}
 *{-ms-overflow-style:none;scrollbar-width:none;}
 #hjem.active{display:flex!important;}
@@ -473,6 +474,12 @@ function esc(s) {
   </div>
 
   <div style="flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:12px 14px 40px;">
+    <div style="display:flex;justify-content:flex-end;margin-bottom:8px;">
+      <button id="oppdaterBtn" onclick="oppdaterNyheter()" style="background:none;border:none;color:rgba(255,255,255,.4);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;padding:4px 0;display:flex;align-items:center;gap:4px;">
+        <svg id="oppdaterIkon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+        Oppdater
+      </button>
+    </div>
     <div class="sec">
       <div class="sec-hdr">
         <span class="sec-title">FC St. Pauli</span>
@@ -1305,6 +1312,16 @@ function oppdaterTid() {
   if (el) el.textContent = ar;
 }
 document.addEventListener('DOMContentLoaded', oppdaterTid);
+
+async function oppdaterNyheter() {
+  const btn = document.getElementById('oppdaterBtn');
+  const ikon = document.getElementById('oppdaterIkon');
+  if (btn) btn.style.color = 'rgba(255,255,255,.7)';
+  if (ikon) ikon.style.animation = 'spin .8s linear infinite';
+  await hentNesteKamp(true);
+  if (ikon) ikon.style.animation = '';
+  if (btn) btn.style.color = 'rgba(255,255,255,.4)';
+}
 </script>
 
 <script>
