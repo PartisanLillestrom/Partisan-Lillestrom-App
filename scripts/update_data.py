@@ -3,8 +3,9 @@
 Henter ferske nyheter (fcstpauli.com + millernton.de) og neste kamp for
 FC St. Pauli - HELT GRATIS, uten Anthropic API:
 
-  - fcstpauli.com: lenker scrapes fra nyhetssiden, og:title/og:image
-    hentes fra hver artikkelside. Prøver /news/ OG /fussball/aktuelles.
+  - fcstpauli.com: artikkel-lenker hentes primaert via Bluesky sitt
+    offentlige API (@fcstpauli.com), med direkte scraping og Jina Reader
+    som fallback. og:title/og:image hentes fra hver artikkelside.
   - millernton.de: uendret - RSS-feed + og:image (som før).
   - Oversettelse tysk -> norsk: MyMemory sin gratis oversettelses-API
     (ingen nøkkel nødvendig, https://mymemory.translated.net/).
@@ -242,16 +243,53 @@ def fetch_fcstpauli_news_urls(limit: int = 3) -> list:
     """Henter de nyeste artikkel-lenkene fra fcstpauli.com.
 
     Flerlags-strategi slik at dette ALLTID fungerer fra GitHub Actions:
-      1. Direkte henting med fulle nettleser-headere (raskest)
-      2. Jina Reader-proxy (r.jina.ai) - Jinas servere henter siden,
-         omgar ev. IP-blokkering av GitHub/sky-IP-er
+      1. Bluesky API (paalitelig, strukturert JSON, ingen blokkering)
+      2. Direkte henting med fulle nettleser-headere
+      3. Jina Reader-proxy (r.jina.ai)
     """
+
+    # --- Lag 1: Bluesky API ---
+    try:
+        bsky_url = "https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=fcstpauli.com&limit=30"
+        req = urllib.request.Request(bsky_url, headers={"Accept": "application/json", "User-Agent": USER_AGENT})
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+        urls, seen = [], set()
+        for item in data.get("feed", []):
+            post = item.get("post", {})
+            record = post.get("record", {})
+            # Sjekk embed for externe lenker (facets/embed)
+            embed = post.get("embed", {})
+            external = (embed.get("external") or {})
+            uri = external.get("uri", "")
+            if uri and "/news/" in uri and "fcstpauli.com" in uri:
+                uri = uri.split("?")[0].rstrip("/")
+                if uri not in seen:
+                    seen.add(uri)
+                    urls.append(uri)
+            # Sjekk ogsaa facets i teksten for lenker
+            for facet in record.get("facets", []):
+                for feature in facet.get("features", []):
+                    furi = feature.get("uri", "")
+                    if furi and "/news/" in furi and "fcstpauli.com" in furi:
+                        furi = furi.split("?")[0].rstrip("/")
+                        if furi not in seen:
+                            seen.add(furi)
+                            urls.append(furi)
+            if len(urls) >= limit:
+                break
+        print(f"Bluesky API: fant {len(urls)} artikkel-lenker fra @fcstpauli.com")
+        if urls:
+            return urls[:limit]
+    except Exception as e:
+        print(f"  (Bluesky API feilet: {e})", file=sys.stderr)
+
     kandidat_sider = [
         "https://www.fcstpauli.com/news/",
         "https://www.fcstpauli.com/fussball/aktuelles",
     ]
 
-    # --- Lag 1: direkte ---
+    # --- Lag 2: direkte ---
     for page_url in kandidat_sider:
         try:
             html = http_get_text(page_url)
@@ -262,7 +300,7 @@ def fetch_fcstpauli_news_urls(limit: int = 3) -> list:
         except Exception as e:
             print(f"  (direkte henting av {page_url} feilet: {e})", file=sys.stderr)
 
-    # --- Lag 2: Jina Reader-proxy ---
+    # --- Lag 3: Jina Reader-proxy ---
     for page_url in kandidat_sider:
         try:
             md = fetch_via_jina(page_url)
