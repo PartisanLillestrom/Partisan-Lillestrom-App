@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | FC St. Pauli øker antallet kontantløse betalingsterminaler",
+      "title_de": "FC St. Pauli | Der FC St. Pauli erhöht die Anzahl der Cashless-Kassen",
+      "url": "https://www.fcstpauli.com/news/der-fc-st-pauli-erhoeht-die-anzahl-der-cashless-kassen",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FSteinwappen%2F_1200x630_crop_center-center_82_none%2FSteinwappen-FCSP.jpg%3Fv%3D1785233231%252C0.4938%252C0.4261&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Billettinformasjon for hjemmekampen mot 1. FC…",
       "title_de": "FC St. Pauli | Ticket-Infos zum Heimspiel gegen den 1. FC…",
       "url": "https://www.fcstpauli.com/news/ticket-infos-heimspiel-kaiserslautern-2627",
@@ -11,12 +17,6 @@
       "title_de": "FC St. Pauli | Gegnercheck Deportivo de A Coruña: LaLiga-Rückkehr…",
       "url": "https://www.fcstpauli.com/news/gegnercheck-deportivo-laliga-rueckkehr-und-namensaenderung",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FTestspiele%2F0-Allgemein%2F_1200x630_crop_center-center_82_none%2Foncedepor0723.png%3Fv%3D1785233761%252C0.5026%252C0.3151&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | FC St. Pauli dominerer den tyske ligaen…",
-      "title_de": "FC St. Pauli | Der FC St. Pauli dominiert die Deutschen…",
-      "url": "https://www.fcstpauli.com/news/der-fc-st-pauli-dominiert-die-deutschen-teqball-meisterschaften-in-hannover",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FAbteilungen%2FFreizeitsport%2FTeqball%2FTeqball-DM-2026%2F_1200x630_crop_center-center_82_none%2FIMG_9939.jpg%3Fv%3D1785323073%252C0.5406%252C0.3615&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -448,5 +448,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-07-30T12:16:19Z"
+  "updated": "2026-07-30T14:53:54Z"
 }
