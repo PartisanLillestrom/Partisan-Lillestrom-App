@@ -255,27 +255,53 @@ def fetch_fcstpauli_news_urls(limit: int = 5) -> list:
         with urllib.request.urlopen(req, timeout=20) as resp:
             data = json.loads(resp.read().decode("utf-8"))
         urls, seen = [], set()
+
+        def _legg_til(u):
+            if u and "/news/" in u and "fcstpauli.com" in u:
+                u = u.split("?")[0].rstrip("/")
+                if u not in seen:
+                    seen.add(u)
+                    urls.append(u)
+
+        def _resolve_short(u):
+            """Foelg forkortede lenker (fcsp.in) for aa finne faktisk URL."""
+            if not u:
+                return u
+            if "fcsp.in" in u or ("fcstpauli" not in u and len(u) < 40):
+                try:
+                    req2 = urllib.request.Request(u, method="HEAD", headers={"User-Agent": USER_AGENT})
+                    req2.add_header("Accept", "*/*")
+                    with urllib.request.urlopen(req2, timeout=10) as resp2:
+                        return resp2.url
+                except Exception:
+                    try:
+                        req2 = urllib.request.Request(u, headers={"User-Agent": USER_AGENT})
+                        with urllib.request.urlopen(req2, timeout=10) as resp2:
+                            return resp2.url
+                    except Exception:
+                        pass
+            return u
+
         for item in data.get("feed", []):
             post = item.get("post", {})
             record = post.get("record", {})
-            # Sjekk embed for externe lenker (facets/embed)
-            embed = post.get("embed", {})
-            external = (embed.get("external") or {})
-            uri = external.get("uri", "")
-            if uri and "/news/" in uri and "fcstpauli.com" in uri:
-                uri = uri.split("?")[0].rstrip("/")
-                if uri not in seen:
-                    seen.add(uri)
-                    urls.append(uri)
-            # Sjekk ogsaa facets i teksten for lenker
+            # 1. embed.external.uri (vanligste for lenkeposter)
+            for embed_loc in [post.get("embed", {}), record.get("embed", {})]:
+                external = (embed_loc.get("external") or {})
+                _legg_til(_resolve_short(external.get("uri", "")))
+                # Sjekk ogsaa record_with_media embedder
+                media_embed = embed_loc.get("media", {})
+                _legg_til(_resolve_short((media_embed.get("external") or {}).get("uri", "")))
+                rec_embed = embed_loc.get("record", {})
+                _legg_til(_resolve_short((rec_embed.get("external") or {}).get("uri", "")))
+            # 2. facets (klikkbare lenker i teksten)
             for facet in record.get("facets", []):
                 for feature in facet.get("features", []):
-                    furi = feature.get("uri", "")
-                    if furi and "/news/" in furi and "fcstpauli.com" in furi:
-                        furi = furi.split("?")[0].rstrip("/")
-                        if furi not in seen:
-                            seen.add(furi)
-                            urls.append(furi)
+                    _legg_til(_resolve_short(feature.get("uri", "")))
+            # 3. Ren tekst-soek (lenker uten facet-markering)
+            tekst = record.get("text", "")
+            for m in re.finditer(r'https?://[^\s)"\'<>]+', tekst):
+                _legg_til(_resolve_short(m.group(0)))
             if len(urls) >= limit:
                 break
         print(f"Bluesky API: fant {len(urls)} artikkel-lenker fra @fcstpauli.com")
