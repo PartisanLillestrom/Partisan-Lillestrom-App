@@ -151,7 +151,7 @@ def translate_to_no(text: str) -> str:
 # MillernTon (uendret: RSS + og:image)
 # ---------------------------------------------------------------------------
 
-def fetch_millernton_rss(limit: int = 3) -> list:
+def fetch_millernton_rss(limit: int = 5) -> list:
     """Henter de nyeste innleggene direkte fra MillernTon sin RSS-feed."""
     try:
         req = urllib.request.Request(
@@ -239,7 +239,7 @@ def _extract_news_links(text: str, limit: int) -> list:
     return urls
 
 
-def fetch_fcstpauli_news_urls(limit: int = 3) -> list:
+def fetch_fcstpauli_news_urls(limit: int = 5) -> list:
     """Henter de nyeste artikkel-lenkene fra fcstpauli.com.
 
     Flerlags-strategi slik at dette ALLTID fungerer fra GitHub Actions:
@@ -660,7 +660,7 @@ def main() -> int:
 
     # --- fcstpauli.com ---
     fcstpauli_items = []
-    for url in fetch_fcstpauli_news_urls(limit=3):
+    for url in fetch_fcstpauli_news_urls(limit=5):
         title_de, image_url = fetch_article_meta(url)
         if not title_de:
             continue
