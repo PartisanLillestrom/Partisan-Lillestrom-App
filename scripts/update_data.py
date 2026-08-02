@@ -250,7 +250,7 @@ def fetch_fcstpauli_news_urls(limit: int = 5) -> list:
 
     # --- Lag 1: Bluesky API ---
     try:
-        bsky_url = "https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=fcstpauli.com&limit=30"
+        bsky_url = "https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=fcstpauli.com&limit=100"
         req = urllib.request.Request(bsky_url, headers={"Accept": "application/json", "User-Agent": USER_AGENT})
         with urllib.request.urlopen(req, timeout=20) as resp:
             data = json.loads(resp.read().decode("utf-8"))
