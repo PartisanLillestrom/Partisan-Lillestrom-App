@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Billettinformasjon til kampen på Arminia Bielefeld",
+      "title_de": "FC St. Pauli | Ticket-Infos zum Spiel bei Arminia Bielefeld",
+      "url": "https://www.fcstpauli.com/news/ticket-infos-zum-spiel-bei-arminia-bielefeld-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FGegner%2FBielefeld%2F_1200x630_crop_center-center_82_none%2F2526_MD01_DSCF95_RC_0056.jpg%3Fv%3D1785493016%252C0.4394%252C0.4122&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Midtbanespiller Jackson Irvine flytter til Japan",
       "title_de": "FC St. Pauli | Mittelfeldspieler Jackson Irvine wechselt nach Japan",
       "url": "https://www.fcstpauli.com/news/mittelfeldspieler-jackson-irvine-wechselt-nach-japan",
@@ -23,12 +29,6 @@
       "title_de": "FC St. Pauli | Einladung zur 23. AFM-Ü50-Veranstaltung",
       "url": "https://www.fcstpauli.com/news/einladung-zur-23-afm-ue50-veranstaltung",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FHaupttrib%25C3%25BCne%2F_1200x630_crop_center-center_82_none%2FMillerntor-Stadion-TK-Rasen.jpg%3Fv%3D1785253743%252C0.4993%252C0.5349&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Rawley St. John er ute med en kneskade frem til…",
-      "title_de": "FC St. Pauli | Rawley St. John fällt mit einer Knieverletzung bis auf…",
-      "url": "https://www.fcstpauli.com/news/verletzung-rawley-st-john",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FSt.-John%2F_1200x630_crop_center-center_82_none%2FWITTERS_2338334.jpg%3Fv%3D1785763823%252C0.7007%252C0.3568&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -474,5 +474,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-08-05T12:26:00Z"
+  "updated": "2026-08-05T15:00:14Z"
 }
