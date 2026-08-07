@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | «Nå starter det virkelig, og vi er alle spente»",
+      "title_de": "FC St. Pauli | „Jetzt geht&#x27;s richtig los und wir alle freuen uns“",
+      "url": "https://www.fcstpauli.com/news/marcel-rapp-vor-heimspiel-fuerth-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FCheftrainer%2FMillerntor%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-028431.jpg%3Fv%3D1786105324%252C0.4786%252C0.4094&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | FCSP denne helgen, uke 32, 2026",
       "title_de": "FC St. Pauli | FCSP am Wochenende KW32 2026",
       "url": "https://www.fcstpauli.com/news/fcsp-am-wochenende-kw32-2026",
@@ -23,12 +29,6 @@
       "title_de": "FC St. Pauli | Ticket-Infos zum Spiel bei Arminia Bielefeld",
       "url": "https://www.fcstpauli.com/news/ticket-infos-zum-spiel-bei-arminia-bielefeld-2627",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FGegner%2FBielefeld%2F_1200x630_crop_center-center_82_none%2F2526_MD01_DSCF95_RC_0056.jpg%3Fv%3D1786011731%252C0.4394%252C0.4122&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Midtbanespiller Jackson Irvine flytter til Japan",
-      "title_de": "FC St. Pauli | Mittelfeldspieler Jackson Irvine wechselt nach Japan",
-      "url": "https://www.fcstpauli.com/news/mittelfeldspieler-jackson-irvine-wechselt-nach-japan",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FAbschiede%2FIrvine%2F_1200x630_crop_center-center_82_none%2FIMG_5776.jpg%3Fv%3D1786011743%252C0.4932%252C0.5&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -474,5 +474,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-08-07T14:20:47Z"
+  "updated": "2026-08-07T15:32:36Z"
 }
