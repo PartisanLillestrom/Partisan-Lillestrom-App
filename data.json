@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Ben Voll: «Selvfølgelig hjelper det å ha et slikt initiativ i…»",
+      "title_de": "FC St. Pauli | Ben Voll: „Es hilft natürlich, mit so einer Aktion in…",
+      "url": "https://www.fcstpauli.com/news/ben-voll-nach-auftaktspiel-fuerth-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FVoll%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-0187.jpg%3Fv%3D1786342751%252C0.4863%252C0.3242&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Ny ballsal på hovedtribunen feirer åpningen på…",
       "title_de": "FC St. Pauli | Neuer Ballsaal in der Haupttribüne feiert beim…",
       "url": "https://www.fcstpauli.com/news/ballsaal-in-der-haupttribuene-puenktlich-zum-saisonstart-2627-fertig",
@@ -23,12 +29,6 @@
       "title_de": "FC St. Pauli | FCSP-Präsident Oke Göttlich: „Es geht immer weiter…",
       "url": "https://www.fcstpauli.com/news/fcsp-praesident-oke-goettlich-vor-saisonstart-2627",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FAllgemeine-Fotos%2F_1200x630_crop_center-center_82_none%2FHEV07916.jpg%3Fv%3D1786012026%252C0.4843%252C0.3767&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | «Forberedt» til kampstart: Rapps lag legger grunnlaget mot Fürth…",
-      "title_de": "FC St. Pauli | „Gewappnet“ für den Start: Rapp-Elf legt gegen Fürth…",
-      "url": "https://www.fcstpauli.com/news/vorbericht-heimspiel-fuerth-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FTestspiele%2FDeportivo-de-A-Coru%25C3%25B1a%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-8686.jpg%3Fv%3D1786176545%252C0.7709%252C0.4795&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -474,5 +474,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-08-11T08:16:21Z"
+  "updated": "2026-08-11T09:38:41Z"
 }
