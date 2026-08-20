@@ -690,10 +690,8 @@ function renderMatches(){
 
   // Render kampliste med klikkbare rader for oppmøte
   el.innerHTML = _kamplogg.map((m, i) => {
-    const farge = m.utfall && m.utfall.toLowerCase() === 'seier' ? 'rgba(46,204,113,.15)' :
-                  m.utfall && m.utfall.toLowerCase() === 'tap' ? 'rgba(192,57,43,.15)' : '';
     const kampId = m.dato.replace(/-/g,'');
-    return`<div class="mr" style="flex-wrap:wrap;cursor:pointer;${farge ? 'background:'+farge+';border-radius:4px;margin:0 -4px;padding:10px 4px;' : ''}" data-kid="${kampId}" onclick="toggleOppmote('${kampId}')">
+    return`<div class="mr" style="flex-wrap:wrap;cursor:pointer;" data-kid="${kampId}" onclick="toggleOppmote('${kampId}')">
       <span class="info-meta" style="min-width:74px;white-space:nowrap;">${fmtDato(m.dato)}</span>
       <span class="info-val" style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(m.kamp)}</span>
       <span class="heading-bebas" style="font-size:16px;min-width:36px;text-align:right;margin-left:auto;white-space:normal;">${esc(m.resultat)}</span>
