@@ -695,6 +695,10 @@ function renderMatches(){
       <span class="info-meta" style="min-width:74px;white-space:nowrap;">${fmtDato(m.dato)}</span>
       <span class="info-val" style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(m.kamp)}</span>
       <span class="heading-bebas" style="font-size:16px;min-width:36px;text-align:right;margin-left:auto;white-space:normal;">${esc(m.resultat)}</span>
+      <span id="oppAnt_${kampId}" style="display:none;font-size:10px;color:rgba(255,255,255,.4);min-width:28px;text-align:right;white-space:nowrap;">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        <span class="oppAntTall"></span>
+      </span>
       <div id="opp_${kampId}" class="opp-panel" style="display:none;width:100%;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,.08);">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
           <div id="oppListe_${kampId}" style="display:flex;flex-wrap:wrap;gap:4px;flex:1;min-width:0;"></div>
@@ -729,6 +733,16 @@ async function lastAlleOppmote() {
         btn.textContent = '✓ Registrert';
       } else if (btn) {
         btn.textContent = 'Jeg var der!';
+      }
+      // Oppdater antall-badge
+      const antEl = document.getElementById('oppAnt_' + kampId);
+      if (antEl) {
+        if (oppmote.length > 0) {
+          antEl.style.display = '';
+          antEl.querySelector('.oppAntTall').textContent = oppmote.length;
+        } else {
+          antEl.style.display = 'none';
+        }
       }
     });
   });
