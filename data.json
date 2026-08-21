@@ -16,7 +16,7 @@
       "title_no": "FC St. Pauli | «Det er spesielt å feire debuten min for denne klubben»",
       "title_de": "FC St. Pauli | „Es ist besonders, das Debüt für diesen Club zu feiern“",
       "url": "https://www.fcstpauli.com/news/presserunde-sam-klein-vor-dfb-pokal-rw-essen-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FKlein%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-05429.jpg%3Fv%3D1787303913%252C0.4663%252C0.1636&w=400&output=webp&q=70"
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FKlein%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-05429.jpg%3Fv%3D1787212611%252C0.4663%252C0.1636&w=400&output=webp&q=70"
     },
     {
       "title_no": "FC St. Pauli | FC St. Pauli renoverer rullestoltribunen",
@@ -28,7 +28,7 @@
       "title_no": "FC St. Pauli | FC St. Pauli utformer minnestedet på…",
       "title_de": "FC St. Pauli | Der FC St. Pauli gestaltet den Gedenkort auf dem…",
       "url": "https://www.fcstpauli.com/news/neugestaltung-gedenkort-harald-stender-platz",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FS%25C3%25BCdkurvenvorplatz%2FUmbau-Gedenkort%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-0594.jpg%3Fv%3D1787212665%252C0.3498%252C0.5048&w=400&output=webp&q=70"
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FS%25C3%25BCdkurvenvorplatz%2FUmbau-Gedenkort%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-0594.jpg%3Fv%3D1787303917%252C0.3498%252C0.5048&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -482,5 +482,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-08-21T13:30:22Z"
+  "updated": "2026-08-21T14:00:38Z"
 }
