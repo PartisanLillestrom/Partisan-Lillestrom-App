@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Med maksimal intensitet: Rapps lag sikter mot en tøff kamp…",
+      "title_de": "FC St. Pauli | Mit höchster Intensität: Rapp-Elf will schwere…",
+      "url": "https://www.fcstpauli.com/news/vorbericht-dfb-pokal-rw-essen-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2F1-Allgemeine-Fotos%2F_1200x630_crop_center-center_82_none%2FHEV09886.jpg%3Fv%3D1787389413%252C0.439%252C0.3212&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Jannik Robatsch flytter til SK Beveren på utlån",
       "title_de": "FC St. Pauli | Jannik Robatsch wechselt auf Leihbasis zu SK Beveren",
       "url": "https://www.fcstpauli.com/news/jannik-robatsch-ausleihe-sk-beveren",
@@ -23,12 +29,6 @@
       "title_de": "FC St. Pauli | Gegnercheck RW Essen: Quotenkönig Janssen und etliche…",
       "url": "https://www.fcstpauli.com/news/gegnercheck-dfb-pokal-rw-essen",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FGegner%2FEssen%2F_1200x630_crop_center-center_82_none%2F251220_EP_RWE_FFE_7508675.jpeg%3Fv%3D1787303650%252C0.4835%252C0.5298&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | «Det er spesielt å feire debuten min for denne klubben»",
-      "title_de": "FC St. Pauli | „Es ist besonders, das Debüt für diesen Club zu feiern“",
-      "url": "https://www.fcstpauli.com/news/presserunde-sam-klein-vor-dfb-pokal-rw-essen-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FKlein%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-05429.jpg%3Fv%3D1787303913%252C0.4663%252C0.1636&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -482,5 +482,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-08-22T09:45:32Z"
+  "updated": "2026-08-22T10:56:47Z"
 }
