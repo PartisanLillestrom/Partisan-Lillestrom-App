@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Uavgjort i serieåpningen: 1. kvinnelag spiller 2-2 mot…",
+      "title_de": "FC St. Pauli | Remis zum Ligaauftakt: 1. Frauen trennen sich 2:2 von…",
+      "url": "https://www.fcstpauli.com/news/spielbericht-1-frauen-vs-aurich-heim",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FAbteilungen%2FFrauenfu%25C3%259Fball%2F0-Saison-2026-2027%2FLigaspiele%2F1_Aurich_Heim%2F_1200x630_crop_center-center_82_none%2FEDI04710.jpg%3Fv%3D1787582550%252C0.6259%252C0.3344&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Teqball-laget ser etter unge spillere",
       "title_de": "FC St. Pauli | Teqball-Team sucht Nachwuchspieler*innen",
       "url": "https://www.fcstpauli.com/news/teqball-suche-nachwuchs",
@@ -23,15 +29,16 @@
       "title_de": "FC St. Pauli | Jannik Robatsch wechselt auf Leihbasis zu SK Beveren",
       "url": "https://www.fcstpauli.com/news/jannik-robatsch-ausleihe-sk-beveren",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FRobatsch%2F_1200x630_crop_center-center_82_none%2FWITTERS_2338301.jpg%3Fv%3D1787304437%252C0.4207%252C0.1763&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | «Vi forbereder oss på en skikkelig cupkamp»",
-      "title_de": "FC St. Pauli | „Wir stellen uns auf ein richtiges Pokalspiel ein“",
-      "url": "https://www.fcstpauli.com/news/cheftrainer-marcel-rapp-vor-dfb-pokal-rw-essen-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FCheftrainer%2FSpiele%2F_1200x630_crop_center-center_82_none%2FWITTERS_2351180.jpg%3Fv%3D1787323040%252C0.2909%252C0.1988&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
+    {
+      "title_no": "«Vi trenger rett og slett å få en bedre start på andre omgang.»",
+      "title_de": "„Wir müssen einfach besser aus der Halbzeit rauskommen“",
+      "url": "https://millernton.de/2026/08/24/wir-muessen-einfach-besser-aus-der-halbzeit-rauskommen/",
+      "date": "24. august",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F08%2Frot-weiss-essen-v-st-pauli-dfb-cup-2026-272.jpg&w=400&output=webp&q=70"
+    },
     {
       "title_no": "Etter kampen – Rot-Weiss Essen (A) – 1. runde DFB-cupen – sesongen 2026/27",
       "title_de": "Nach dem Spiel – Rot-Weiss Essen (A) – 1. Runde DFB Pokal – Saison 2026/27",
@@ -59,13 +66,6 @@
       "url": "https://millernton.de/2026/08/23/rwe-fcsp-auch-drumherum-wenig/",
       "date": "23. august",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F08%2FRWE_FCSP_VAR.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Rot-Weiss Essen: Klubb- og fanscene",
-      "title_de": "Rot-Weiss Essen: Verein und Fanszene",
-      "url": "https://millernton.de/2026/08/22/rot-weiss-essen-verein-und-fanszene/",
-      "date": "22. august",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F08%2Fspvgg-greuther-furth-v-rot-weiss-essen-2-bundesliga-playoff-leg-two.jpg&w=400&output=webp&q=70"
     }
   ],
   "next_match": {},
@@ -482,5 +482,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-08-24T14:04:38Z"
+  "updated": "2026-08-24T15:20:49Z"
 }
