@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Teqball-laget ser etter unge spillere",
+      "title_de": "FC St. Pauli | Teqball-Team sucht Nachwuchspieler*innen",
+      "url": "https://www.fcstpauli.com/news/teqball-suche-nachwuchs",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FAbteilungen%2FFreizeitsport%2FTeqball%2FSuche-Nachwuchs-August-2026%2F_1200x630_crop_center-center_82_none%2FTeqColor-0376.jpg%3Fv%3D1787384085%252C0.6026%252C0.5&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | 0:2 mot RW Essen - Rapps lag mister DFB-cupen tidlig",
       "title_de": "FC St. Pauli | 0:2 bei RW Essen - Rapp-Elf mit frühem Aus im DFB-Pokal",
       "url": "https://www.fcstpauli.com/news/spielbericht-dfb-pokal-rw-essen-2627",
@@ -23,12 +29,6 @@
       "title_de": "FC St. Pauli | „Wir stellen uns auf ein richtiges Pokalspiel ein“",
       "url": "https://www.fcstpauli.com/news/cheftrainer-marcel-rapp-vor-dfb-pokal-rw-essen-2627",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FCheftrainer%2FSpiele%2F_1200x630_crop_center-center_82_none%2FWITTERS_2351180.jpg%3Fv%3D1787323040%252C0.2909%252C0.1988&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | FCSP denne helgen, uke 34, 2026",
-      "title_de": "FC St. Pauli | FCSP am Wochenende KW34 2026",
-      "url": "https://www.fcstpauli.com/news/fcsp-am-wochenende-kw34-2026",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFCSP-am-WE%2F2627%2F_1200x630_crop_center-center_82_none%2FFCS4066.jpg%3Fv%3D1787303641%252C0.4839%252C0.6041&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -482,5 +482,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-08-24T08:06:11Z"
+  "updated": "2026-08-24T09:28:51Z"
 }
