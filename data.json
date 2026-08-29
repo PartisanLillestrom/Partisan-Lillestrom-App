@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | FCSP lanserer sangkonkurranse for ny nasjonalsang",
+      "title_de": "FC St. Pauli | FCSP startet Song-Contest für neue Hymne",
+      "url": "https://www.fcstpauli.com/news/der-fc-st-pauli-startet-song-contest-fuer-neue-hymne",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FAllgemeine-Fotos%2F_1200x630_crop_center-center_82_none%2FWITTERS_2257757.jpg%3Fv%3D1787843228%252C0.5257%252C0.5424&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | For tre poeng mot FCK: Som lag må vi ta et hakk videre…",
       "title_de": "FC St. Pauli | Für drei Punkte gegen den FCK: Als Team eine Schippe…",
       "url": "https://www.fcstpauli.com/news/vorbericht-heimspiel-1-fc-kaiserslautern-2627",
@@ -23,12 +29,6 @@
       "title_de": "FC St. Pauli | Das geht am Wochenende",
       "url": "https://www.fcstpauli.com/news/fcsp-am-wochenende-kw35-2026",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFCSP-am-WE%2F_1200x630_crop_center-center_82_none%2FIMG_0319.jpg%3Fv%3D1787915037%252C0.4934%252C0.5349&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | «Jeg vil være positiv og gjøre guttene sterke»",
-      "title_de": "FC St. Pauli | „Ich will positiv sein und die Jungs stark machen“",
-      "url": "https://www.fcstpauli.com/news/presserunde-david-nemeth-heimspiel-1-fc-kaiserslautern-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FNemeth%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-05658.jpg%3Fv%3D1787842852%252C0.4184%252C0.2889&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -482,5 +482,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-08-29T11:41:11Z"
+  "updated": "2026-08-29T12:49:47Z"
 }
