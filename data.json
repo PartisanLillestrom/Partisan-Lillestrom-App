@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Ceesays lynraske mål er ikke nok - Kiezkicker…",
+      "title_de": "FC St. Pauli | Ceesays Blitz-Tor reicht nicht - Kiezkicker…",
+      "url": "https://www.fcstpauli.com/news/spielbericht-heimspiel-1-fc-kaiserslautern-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2F1-Ligaspiele-Pokalspiele%2F03-Kaiserslautern-H%2F_1200x630_crop_center-center_82_none%2FWITTERS_2357179.jpg%3Fv%3D1788095994%252C0.7049%252C0.526&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Ligaens beste forsvarskamper: U23 sikter mot å beseire…",
       "title_de": "FC St. Pauli | Beste Defensive der Liga zu Gast: U23 will gegen…",
       "url": "https://www.fcstpauli.com/news/vorbericht-u23-heimspiel-1-fc-phoenix-luebeck-2627",
@@ -23,12 +29,6 @@
       "title_de": "FC St. Pauli | „Es wird darum gehen, wie wir auftreten“",
       "url": "https://www.fcstpauli.com/news/cheftrainer-marcel-rapp-vor-heimspiel-1-fc-kaiserslautern-2627",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FCheftrainer%2FMillerntor%2F_1200x630_crop_center-center_82_none%2FWITTERS_2349661.jpg%3Fv%3D1787920745%252C0.3263%252C0.2992&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Veldedighetsturnering i golf samler inn 30 000 euro til lokale helter…",
-      "title_de": "FC St. Pauli | Charity-Golfturnier bringt 30.000 Euro für Kiezhelden…",
-      "url": "https://www.fcstpauli.com/news/30000-euro-fuer-kiezhelden-bei-charity-golfturnier-des-fc-st-pauli",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FVerein%2FVeranstaltungen-Events%2FGolfturnier-2026%2F_1200x630_crop_center-center_82_none%2F830186%2FPB_FCSPGolf26082026_0085.jpg%3Fv%3D1787915029%252C0.4855%252C0.5522&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -482,5 +482,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-08-30T12:12:24Z"
+  "updated": "2026-08-30T15:22:20Z"
 }
