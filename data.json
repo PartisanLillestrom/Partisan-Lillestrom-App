@@ -1,10 +1,16 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Motstandersjekk Arminia Bielefeld: Høy intensitet og…",
+      "title_de": "FC St. Pauli | Gegnercheck Arminia Bielefeld: Hohe Intensität und…",
+      "url": "https://www.fcstpauli.com/news/gegnercheck-auswaertsspiel-arminia-bielefeld-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FGegner%2FBielefeld%2F_1200x630_crop_center-center_82_none%2F2627_MD02_DSCFCE_RC_1598.jpg%3Fv%3D1788178076%252C0.5766%252C0.3289&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | 1:2 mot Kaiserslautern - Ceesays lynraske mål er nok…",
       "title_de": "FC St. Pauli | 1:2 gegen Kaiserslautern - Ceesays Blitz-Tor reicht…",
       "url": "https://www.fcstpauli.com/news/spielbericht-heimspiel-1-fc-kaiserslautern-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2F1-Ligaspiele-Pokalspiele%2F03-Kaiserslautern-H%2F_1200x630_crop_center-center_82_none%2FWITTERS_2357179.jpg%3Fv%3D1788162230%252C0.7049%252C0.526&w=400&output=webp&q=70"
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2F1-Ligaspiele-Pokalspiele%2F03-Kaiserslautern-H%2F_1200x630_crop_center-center_82_none%2FWITTERS_2357179.jpg%3Fv%3D1788095994%252C0.7049%252C0.526&w=400&output=webp&q=70"
     },
     {
       "title_no": "FC St. Pauli | Ligaens beste forsvarskamper: U23 sikter mot å beseire…",
@@ -23,12 +29,6 @@
       "title_de": "FC St. Pauli | Für drei Punkte gegen den FCK: Als Team eine Schippe…",
       "url": "https://www.fcstpauli.com/news/vorbericht-heimspiel-1-fc-kaiserslautern-2627",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2F1-Allgemeine-Fotos%2F_1200x630_crop_center-center_82_none%2FWITTERS_2347801.jpg%3Fv%3D1787919392%252C0.4943%252C0.2397&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | «Det handler om hvordan vi presterer»",
-      "title_de": "FC St. Pauli | „Es wird darum gehen, wie wir auftreten“",
-      "url": "https://www.fcstpauli.com/news/cheftrainer-marcel-rapp-vor-heimspiel-1-fc-kaiserslautern-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FCheftrainer%2FMillerntor%2F_1200x630_crop_center-center_82_none%2FWITTERS_2349661.jpg%3Fv%3D1787920745%252C0.3263%252C0.2992&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -482,5 +482,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-01T10:11:07Z"
+  "updated": "2026-09-01T12:00:28Z"
 }
