@@ -33,6 +33,13 @@
   ],
   "millernton_news": [
     {
+      "title_no": "Beliggenhet på Millerntor – 3. september 2026",
+      "title_de": "Lage am Millerntor – 03. September 2026",
+      "url": "https://millernton.de/2026/09/03/lage-am-millerntor-03-september-2026/",
+      "date": "3. september",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "Beliggenhet på Millerntor – 2. september 2026",
       "title_de": "Lage am Millerntor – 02. September 2026",
       "url": "https://millernton.de/2026/09/02/lage-am-millerntor-02-september-2026/",
@@ -59,13 +66,6 @@
       "url": "https://millernton.de/2026/09/01/lage-am-millerntor-01-september-2026/",
       "date": "1. september",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "1. Kvinner: 0-0 mot VfL Wolfsburg II",
-      "title_de": "1. Frauen: 0:0 beim VfL Wolfsburg II",
-      "url": "https://millernton.de/2026/09/01/1-frauen-00-beim-vfl-wolfsburg-ii/",
-      "date": "1. september",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F09%2FElsterweg_Anzeigentafel.jpg&w=400&output=webp&q=70"
     }
   ],
   "next_match": {},
@@ -482,5 +482,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-02T18:45:52Z"
+  "updated": "2026-09-03T09:54:50Z"
 }
