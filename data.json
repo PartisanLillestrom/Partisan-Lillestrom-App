@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Hva skjer denne helgen",
+      "title_de": "FC St. Pauli | Das geht am Wochenende",
+      "url": "https://www.fcstpauli.com/news/fcsp-am-wochenende-kw36-2026",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFCSP-am-WE%2F2627%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-01310.jpg%3Fv%3D1788441540%252C0.3584%252C0.4817&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Mot et sterkt hjemmelag fra Bielefeld: Minimer feil,…",
       "title_de": "FC St. Pauli | Bei heimstarken Bielefeldern: Fehler minimieren,…",
       "url": "https://www.fcstpauli.com/news/vorbericht-auswaertsspiel-arminia-bielefeld-2627",
@@ -23,15 +29,16 @@
       "title_de": "FC St. Pauli | Neuer Spielanalyst: Alexander Rudies unterstützt ab…",
       "url": "https://www.fcstpauli.com/news/alexander-rudies-neuer-spielanalyst",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FTrainerteam%2FRudies%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-09353.jpg%3Fv%3D1788343461%252C0.4935%252C0.4297&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Motstandersjekk Arminia Bielefeld: Høy intensitet og…",
-      "title_de": "FC St. Pauli | Gegnercheck Arminia Bielefeld: Hohe Intensität und…",
-      "url": "https://www.fcstpauli.com/news/gegnercheck-auswaertsspiel-arminia-bielefeld-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FGegner%2FBielefeld%2F_1200x630_crop_center-center_82_none%2F2627_MD02_DSCFCE_RC_1598.jpg%3Fv%3D1788178076%252C0.5766%252C0.3289&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
+    {
+      "title_no": "Beliggenhet på Millerntor – 4. september 2026",
+      "title_de": "Lage am Millerntor – 04. September 2026",
+      "url": "https://millernton.de/2026/09/04/lage-am-millerntor-04-september-2026/",
+      "date": "4. september",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
+    },
     {
       "title_no": "Forhåndsvisning: Arminia Bielefeld – FC St. Pauli (kampdag 4, 26/27)",
       "title_de": "Vorbericht: Arminia Bielefeld – FC St. Pauli (4. Spieltag, 26/27)",
@@ -59,13 +66,6 @@
       "url": "https://millernton.de/2026/09/02/fc-st-pauli-podcast-202627-sp04-vds-bielefeld/",
       "date": "2. september",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2023%2F04%2Ffcsp-bie_20230429_stefangroenveld_1437221118.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Til slutt, sikkerhet.",
-      "title_de": "Endlich Gewissheit",
-      "url": "https://millernton.de/2026/09/01/endlich-gewissheit/",
-      "date": "1. september",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F08%2Ffcsp-20260809_stefangroenveld_1355414.jpg&w=400&output=webp&q=70"
     }
   ],
   "next_match": {},
@@ -482,5 +482,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-03T19:26:27Z"
+  "updated": "2026-09-04T09:42:49Z"
 }
