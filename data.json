@@ -4,7 +4,7 @@
       "title_no": "FC St. Pauli | 2:3: U23 taper mot Hannover 96 II",
       "title_de": "FC St. Pauli | 2:3: U23 verliert bei Hannover 96 II",
       "url": "https://www.fcstpauli.com/news/spielbericht-u23-auswaertsspiel-hannover-96-ii-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FU23%2FLigaspiele%2F07-Hannover-96-A%2F_1200x630_crop_center-center_82_none%2F845007%2FHannover-96-II-vs-FC-St.-Pauli-II-04.09.2026_33.jpg%3Fv%3D1788596624%252C0.625%252C0.3876&w=400&output=webp&q=70"
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FU23%2FLigaspiele%2F07-Hannover-96-A%2F_1200x630_crop_center-center_82_none%2F845007%2FHannover-96-II-vs-FC-St.-Pauli-II-04.09.2026_33.jpg%3Fv%3D1788638885%252C0.6276%252C0.4012&w=400&output=webp&q=70"
     },
     {
       "title_no": "FC St. Pauli | 2-2 i Bielefeld: Innbytter Ceesay sørger for uavgjort med en baklengs…",
@@ -33,6 +33,13 @@
   ],
   "millernton_news": [
     {
+      "title_no": "«Vi må bli farligere foran mål fra en kontrollert posisjon.»",
+      "title_de": "„Aus der Kontrolle müssen wir torgefährlicher werden“",
+      "url": "https://millernton.de/2026/09/05/aus-der-kontrolle-muessen-wir-torgefaehrlicher-werden/",
+      "date": "5. september",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F09%2Fdsc-arminia-bielefeld-v-st-pauli-2-bundesliga-2026-272.jpg&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "Arminia Bielefeld vs. FC St. Pauli 2:2 – Nesten ingen gjennombrudd, ingen gjennombrudd i det hele tatt",
       "title_de": "Arminia Bielefeld vs. FC St. Pauli 2:2 – Kaum Durchbrüche, kein Durchbruch",
       "url": "https://millernton.de/2026/09/05/arminia-bielefeld-vs-fc-st-pauli-22-kaum-durchbrueche-kein-durchbruch/",
@@ -58,13 +65,6 @@
       "title_de": "Lage am Millerntor – 03. September 2026",
       "url": "https://millernton.de/2026/09/03/lage-am-millerntor-03-september-2026/",
       "date": "3. september",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Beliggenhet på Millerntor – 2. september 2026",
-      "title_de": "Lage am Millerntor – 02. September 2026",
-      "url": "https://millernton.de/2026/09/02/lage-am-millerntor-02-september-2026/",
-      "date": "2. september",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
     }
   ],
@@ -482,5 +482,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-05T18:34:03Z"
+  "updated": "2026-09-06T05:30:50Z"
 }
