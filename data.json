@@ -1,6 +1,18 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | U17 feirer derbyseieren mot HSV",
+      "title_de": "FC St. Pauli | U17 feiert Derbysieg gegen den HSV",
+      "url": "https://www.fcstpauli.com/news/yr-nachberichte-kw-37-2026",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FLeistungsbereich%2F_1200x630_crop_center-center_82_none%2F0G5A2057.jpg%3Fv%3D1788779028%252C0.5114%252C0.5341&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "FC St. Pauli | Ti uforsiktige minutter er alt som skal til: 1. Damelaget taper…",
+      "title_de": "FC St. Pauli | Zehn unachtsame Minuten reichen: 1. Frauen unterliegen…",
+      "url": "https://www.fcstpauli.com/news/spielbericht-1-frauen-heimspiel-kiel",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FAbteilungen%2FFrauenfu%25C3%259Fball%2F0-Saison-2026-2027%2FLigaspiele%2F3_Kiel_Heim%2F_1200x630_crop_center-center_82_none%2FEDI00343.jpg%3Fv%3D1788775114%252C0.58%252C0.5241&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | 2:3: U23 taper mot Hannover 96 II",
       "title_de": "FC St. Pauli | 2:3: U23 verliert bei Hannover 96 II",
       "url": "https://www.fcstpauli.com/news/spielbericht-u23-auswaertsspiel-hannover-96-ii-2627",
@@ -17,18 +29,6 @@
       "title_de": "FC St. Pauli | Das geht am Wochenende",
       "url": "https://www.fcstpauli.com/news/fcsp-am-wochenende-kw36-2026",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFCSP-am-WE%2F2627%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-01310.jpg%3Fv%3D1788441540%252C0.3584%252C0.4817&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Mot et sterkt hjemmelag fra Bielefeld: Minimer feil,…",
-      "title_de": "FC St. Pauli | Bei heimstarken Bielefeldern: Fehler minimieren,…",
-      "url": "https://www.fcstpauli.com/news/vorbericht-auswaertsspiel-arminia-bielefeld-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2F1-Allgemeine-Fotos%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-04160.jpg%3Fv%3D1788355444%252C0.4777%252C0.4179&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | «Jeg tror poengene kommer»",
-      "title_de": "FC St. Pauli | „Ich glaube daran, dass die Punkte kommen werden“",
-      "url": "https://www.fcstpauli.com/news/cheftrainer-marcel-rapp-vor-auswaertsspiel-arminia-bielefeld-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FCheftrainer%2FTraining%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-00771.jpg%3Fv%3D1788360419%252C0.5336%252C0.1596&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -490,5 +490,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-07T13:00:23Z"
+  "updated": "2026-09-07T16:30:23Z"
 }
