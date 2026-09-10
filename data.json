@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | «Vi er ivrige etter å få våre tre første poeng»",
+      "title_de": "FC St. Pauli | „Wir brennen darauf, den ersten Dreier einzufahren“",
+      "url": "https://www.fcstpauli.com/news/cheftrainer-marcel-rapp-vor-wolfsburg-heim-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FCheftrainer%2FPKs%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-00396.jpg%3Fv%3D1789049709%252C0.4987%252C0.3752&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Billettinformasjon for hjemmekampen mot Karlsruher SC 2627",
       "title_de": "FC St. Pauli | Ticket-Infos Heimspiel Karlsruher SC 2627",
       "url": "https://www.fcstpauli.com/news/ticket-infos-heimspiel-karlsruher-sc-2627",
@@ -23,12 +29,6 @@
       "title_de": "FC St. Pauli | Ticket-Infos zum Auswärtsspiel bei Hannover 96 2627",
       "url": "https://www.fcstpauli.com/news/ticket-infos-zum-auswaertsspiel-bei-hannover-96-2627",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FGegner%2FHannover%2F_1200x630_crop_center-center_82_none%2FDSC05806.jpg%3Fv%3D1788934998%252C0.3524%252C0.3847&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | «Jeg gleder meg til å være tilbake med fansen...»",
-      "title_de": "FC St. Pauli | „Ich kann es kaum abwarten, wieder mit den Fans zu…",
-      "url": "https://www.fcstpauli.com/news/presserunde-connor-metcalfe-vor-vfl-wolfsburg-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FMetcalfe%2F_1200x630_crop_center-center_82_none%2FSTP1943.jpg%3Fv%3D1788872178%252C0.3794%252C0.4198&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -490,5 +490,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-10T11:47:26Z"
+  "updated": "2026-09-10T15:00:52Z"
 }
