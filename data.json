@@ -1,6 +1,18 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Billettinformasjon for hjemmekampen mot Karlsruher SC 2627",
+      "title_de": "FC St. Pauli | Ticket-Infos Heimspiel Karlsruher SC 2627",
+      "url": "https://www.fcstpauli.com/news/ticket-infos-heimspiel-karlsruher-sc-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FAllgemeine-Fotos%2F_1200x630_crop_center-center_82_none%2F2627_MD01_STPSGF_JP_00193.jpg%3Fv%3D1789026166%252C0.3888%252C0.509&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "FC St. Pauli | Motstandersjekk VfL Wolfsburg: Målsyke Wolves og…",
+      "title_de": "FC St. Pauli | Gegnercheck VfL Wolfsburg: Torhungrige Wölfe und…",
+      "url": "https://www.fcstpauli.com/news/gegnercheck-vfl-wolfsburg-heimspiel-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FGegner%2FWolfsburg%2F_1200x630_crop_center-center_82_none%2F2627_MD01_WOBFCK_JP_000262_D5MT35h8.jpg%3Fv%3D1788951916%252C0.5009%252C0.4589&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | FC St. Pauli åpner fanshop 15. september i…",
       "title_de": "FC St. Pauli | FC St. Pauli eröffnet am 15. September Fanshop im…",
       "url": "https://www.fcstpauli.com/news/fc-st-pauli-eroeffnet-am-15-september-fanshop-im-westfield",
@@ -17,23 +29,11 @@
       "title_de": "FC St. Pauli | „Ich kann es kaum abwarten, wieder mit den Fans zu…",
       "url": "https://www.fcstpauli.com/news/presserunde-connor-metcalfe-vor-vfl-wolfsburg-2627",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FMetcalfe%2F_1200x630_crop_center-center_82_none%2FSTP1943.jpg%3Fv%3D1788872178%252C0.3794%252C0.4198&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Nesten 100 medlemmer deltok på informasjonskvelden om representantskapet…",
-      "title_de": "FC St. Pauli | Fast 100 Mitglieder beim Infoabend zum Aufsichtsrat…",
-      "url": "https://www.fcstpauli.com/news/bericht-infoveranstaltung-aufsichtsrat-2026",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FGremien%2FAufsichtsrat%2FInfo-Abend-Aufsichtsrat-Clubheim%2F_1200x630_crop_center-center_82_none%2FImage-25.jpg%3Fv%3D1788858218%252C0.473%252C0.2409&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | U17 feirer derbyseieren mot HSV",
-      "title_de": "FC St. Pauli | U17 feiert Derbysieg gegen den HSV",
-      "url": "https://www.fcstpauli.com/news/yr-nachberichte-kw-37-2026",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FLeistungsbereich%2F_1200x630_crop_center-center_82_none%2F0G5A2057.jpg%3Fv%3D1788779028%252C0.5114%252C0.5341&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
     {
-      "title_no": "Sola skinte i New York 10. september 2001.",
+      "title_no": "Beliggenhet på Millerntor – 10. september 2026",
       "title_de": "Lage am Millerntor – 10. September 2026",
       "url": "https://millernton.de/2026/09/10/lage-am-millerntor-10-september-2026/",
       "date": "10. september",
@@ -490,5 +490,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-10T09:48:57Z"
+  "updated": "2026-09-10T11:47:26Z"
 }
