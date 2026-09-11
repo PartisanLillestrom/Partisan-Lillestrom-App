@@ -1,16 +1,22 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Hva skjer denne helgen",
+      "title_de": "FC St. Pauli | Das geht am Wochenende",
+      "url": "https://www.fcstpauli.com/news/fcsp-am-wochenende-kw37-2026",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFCSP-am-WE%2F2627%2F_1200x630_crop_center-center_82_none%2FFCS05885.jpg%3Fv%3D1789120329%252C0.4961%252C0.4086&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | «Vi er ivrige etter å få våre tre første poeng»",
       "title_de": "FC St. Pauli | „Wir brennen darauf, den ersten Dreier einzufahren“",
       "url": "https://www.fcstpauli.com/news/cheftrainer-marcel-rapp-vor-wolfsburg-heim-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FCheftrainer%2FPKs%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-00396.jpg%3Fv%3D1789049709%252C0.4987%252C0.3752&w=400&output=webp&q=70"
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FCheftrainer%2FPKs%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-00396.jpg%3Fv%3D1789120312%252C0.4987%252C0.3752&w=400&output=webp&q=70"
     },
     {
       "title_no": "FC St. Pauli | Billettinformasjon for hjemmekampen mot Karlsruher SC 2627",
       "title_de": "FC St. Pauli | Ticket-Infos Heimspiel Karlsruher SC 2627",
       "url": "https://www.fcstpauli.com/news/ticket-infos-heimspiel-karlsruher-sc-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FAllgemeine-Fotos%2F_1200x630_crop_center-center_82_none%2F2627_MD01_STPSGF_JP_00193.jpg%3Fv%3D1789026166%252C0.3888%252C0.509&w=400&output=webp&q=70"
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FAllgemeine-Fotos%2F_1200x630_crop_center-center_82_none%2F2627_MD01_STPSGF_JP_00193.jpg%3Fv%3D1789120343%252C0.3888%252C0.509&w=400&output=webp&q=70"
     },
     {
       "title_no": "FC St. Pauli | Motstandersjekk VfL Wolfsburg: Målsyke Wolves og…",
@@ -23,12 +29,6 @@
       "title_de": "FC St. Pauli | FC St. Pauli eröffnet am 15. September Fanshop im…",
       "url": "https://www.fcstpauli.com/news/fc-st-pauli-eroeffnet-am-15-september-fanshop-im-westfield",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMerch%2FFanshops%2FAllgemein%2F_1200x630_crop_center-center_82_none%2FFCS5556.jpg%3Fv%3D1788938940%252C0.602%252C0.3928&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Billettinformasjon for bortekampen mot Hannover 96 2627",
-      "title_de": "FC St. Pauli | Ticket-Infos zum Auswärtsspiel bei Hannover 96 2627",
-      "url": "https://www.fcstpauli.com/news/ticket-infos-zum-auswaertsspiel-bei-hannover-96-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FGegner%2FHannover%2F_1200x630_crop_center-center_82_none%2FDSC05806.jpg%3Fv%3D1788934998%252C0.3524%252C0.3847&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -490,5 +490,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-11T09:47:08Z"
+  "updated": "2026-09-11T11:47:33Z"
 }
