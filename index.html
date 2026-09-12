@@ -753,27 +753,27 @@ async function lastAlleOppmote() {
     const statsEl = document.getElementById('oppmoteStats');
     if (statsEl && sortert.length > 0) {
       const maks = sortert[0][1];
-      statsEl.innerHTML = `
-        <div class="sec-title-style" style="font-size:14px;margin-bottom:10px;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px;"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-          Oppmøtestatistikk
-        </div>
-        <div class="card-bg" style="padding:12px 14px;">
-          ${sortert.map((e, i) => {
-            const bredde = Math.max(8, (e[1] / maks) * 100);
-            return `<div style="display:flex;align-items:center;gap:8px;${i > 0 ? 'margin-top:8px;' : ''}">
-              <span style="font-size:12px;color:rgba(255,255,255,.7);min-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(e[0])}</span>
-              <div style="flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;">
-                <div style="width:${bredde}%;height:100%;background:var(--grad-accent);border-radius:3px;"></div>
-              </div>
-              <span class="heading-bebas" style="font-size:14px;min-width:20px;text-align:right;">${e[1]}</span>
-            </div>`;
-          }).join('')}
-        </div>`;
+      let rader = '';
+      for (let i = 0; i < sortert.length; i++) {
+        const navn = esc(sortert[i][0]);
+        const ant = sortert[i][1];
+        const bredde = Math.max(8, (ant / maks) * 100);
+        const mt = i > 0 ? 'margin-top:8px;' : '';
+        rader += '<div style="display:flex;align-items:center;gap:8px;' + mt + '">'
+          + '<span style="font-size:12px;color:rgba(255,255,255,.7);min-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + navn + '</span>'
+          + '<div style="flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;">'
+          + '<div style="width:' + bredde + '%;height:100%;background:var(--grad-accent);border-radius:3px;"></div>'
+          + '</div>'
+          + '<span class="heading-bebas" style="font-size:14px;min-width:20px;text-align:right;">' + ant + '</span>'
+          + '</div>';
+      }
+      statsEl.innerHTML = '<div class="sec-title-style" style="font-size:14px;margin-bottom:10px;">'
+        + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px;"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>'
+        + 'Oppmøtestatistikk</div>'
+        + '<div class="card-bg" style="padding:12px 14px;">' + rader + '</div>';
     } else if (statsEl) {
       statsEl.innerHTML = '';
     }
-    });
   });
 }
 
