@@ -33,6 +33,13 @@
   ],
   "millernton_news": [
     {
+      "title_no": "Forhåndsvisning: FC St. Pauli – VfL Wolfsburg (kampdag 5, 26/27)",
+      "title_de": "Vorbericht: FC St. Pauli – VfL Wolfsburg (5. Spieltag, 26/27)",
+      "url": "https://millernton.de/2026/09/11/vorbericht-fc-st-pauli-vfl-wolfsburg-5-spieltag-26-27/",
+      "date": "11. september",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F09%2Ffcspwob_20260516_stefangroenveld_fcsp15572240.jpg&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "«Nazisvin» – Rot-Weiss Essen forklarer årsaken til tiltale",
       "title_de": "„Nazi-Schweine“ – Rot-Weiss Essen erklärt Grund für Anzeige",
       "url": "https://millernton.de/2026/09/11/nazi-schweine-rot-weiss-essen-erklaert-anzeige/",
@@ -59,13 +66,6 @@
       "url": "https://millernton.de/2026/09/10/202627-sp5-fc-st-pauli-vds-vfl-wolfsburg/",
       "date": "10. september",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F05%2Ffcspwob_20260516_stefangroenveld_fcsp17472266.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Resultatkrise – ja/nei/kanskje",
-      "title_de": "Ergebniskrise – ja/nein/vielleicht",
-      "url": "https://millernton.de/2026/09/09/ergebniskrise-ja-nein-vielleicht/",
-      "date": "9. september",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F09%2Ffcsp1fck_20260830_stefangroenveld_fcsp12480550.jpg&w=400&output=webp&q=70"
     }
   ],
   "next_match": {},
@@ -490,5 +490,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-11T18:37:24Z"
+  "updated": "2026-09-12T09:25:14Z"
 }
