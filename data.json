@@ -1,6 +1,18 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | «Å vinne er den beste følelsen i verden»",
+      "title_de": "FC St. Pauli | „Zu gewinnen ist das beste Gefühl der Welt“",
+      "url": "https://www.fcstpauli.com/news/stimmen-heimspiel-vfl-wolfsburg-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2F1-Ligaspiele-Pokalspiele%2F05-Wolfsburg-H%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-2390.jpg%3Fv%3D1789251657%252C0.5118%252C0.5355&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "FC St. Pauli | Millerntor-stadionet rocker: FCSP sikrer sin første seier for sesongen…",
+      "title_de": "FC St. Pauli | Das Millerntor steht Kopf: FCSP holt ersten Saisonsieg…",
+      "url": "https://www.fcstpauli.com/news/spielbericht-heimspiel-vfl-wolfsburg-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2F1-Ligaspiele-Pokalspiele%2F05-Wolfsburg-H%2F_1200x630_crop_center-center_82_none%2FHEV01031.jpg%3Fv%3D1789249048%252C0.4941%252C0.5817&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | FC St. Pauli skal spille en vennskapskamp mot Borussia Mönchengladbach",
       "title_de": "FC St. Pauli | FC St. Pauli testet gegen Borussia Mönchengladbach",
       "url": "https://www.fcstpauli.com/news/fc-st-pauli-testet-gegen-borussia-moenchengladbach",
@@ -17,21 +29,16 @@
       "title_de": "FC St. Pauli | Sabah, Wardius und Weber unterzeichnen Profiverträge",
       "url": "https://www.fcstpauli.com/news/sabah-wardius-und-weber-unterzeichnen-profivertraege",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FU23%2FNeuzug%25C3%25A4nge%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-00446.jpg%3Fv%3D1789139308%252C0.4763%252C0.5724&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Hva skjer denne helgen",
-      "title_de": "FC St. Pauli | Das geht am Wochenende",
-      "url": "https://www.fcstpauli.com/news/fcsp-am-wochenende-kw37-2026",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFCSP-am-WE%2F2627%2F_1200x630_crop_center-center_82_none%2FFCS05885.jpg%3Fv%3D1789120329%252C0.4961%252C0.4086&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | «Vi er ivrige etter å få våre tre første poeng»",
-      "title_de": "FC St. Pauli | „Wir brennen darauf, den ersten Dreier einzufahren“",
-      "url": "https://www.fcstpauli.com/news/cheftrainer-marcel-rapp-vor-wolfsburg-heim-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FCheftrainer%2FPKs%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-00396.jpg%3Fv%3D1789120312%252C0.4987%252C0.3752&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
+    {
+      "title_no": "Den velfortjente lønnen",
+      "title_de": "Der verdiente Lohn",
+      "url": "https://millernton.de/2026/09/13/der-verdiente-lohn/",
+      "date": "12. september",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F09%2Ffcspwob_20260912_stefangroenveld_fcsp22310663.jpg&w=400&output=webp&q=70"
+    },
     {
       "title_no": "Forhåndsvisning: FC St. Pauli – VfL Wolfsburg (kampdag 5, 26/27)",
       "title_de": "Vorbericht: FC St. Pauli – VfL Wolfsburg (5. Spieltag, 26/27)",
@@ -59,13 +66,6 @@
       "url": "https://millernton.de/2026/09/10/lage-am-millerntor-10-september-2026/",
       "date": "10. september",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Før kampen – VfL Wolfsburg (H) – Kamprunde 5 – Sesongen 2026/27",
-      "title_de": "Vor dem Spiel – VfL Wolfsburg (H) – Spieltag 5 – Saison 2026/27",
-      "url": "https://millernton.de/2026/09/10/202627-sp5-fc-st-pauli-vds-vfl-wolfsburg/",
-      "date": "10. september",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F05%2Ffcspwob_20260516_stefangroenveld_fcsp17472266.jpg&w=400&output=webp&q=70"
     }
   ],
   "next_match": {},
@@ -490,5 +490,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-12T18:44:24Z"
+  "updated": "2026-09-13T06:15:13Z"
 }
