@@ -1,6 +1,18 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | «Jeg vil vise at jeg kan score mål på dette nivået...»",
+      "title_de": "FC St. Pauli | „Ich möchte zeigen, dass ich auf diesem Niveau Tore…",
+      "url": "https://www.fcstpauli.com/news/presserunde-youssoupha-niang-auswaertsspiel-energie-cottbus-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FNiang%2F_1200x630_crop_center-center_82_none%2FHEV00881.jpg%3Fv%3D1789475282%252C0.3614%252C0.4949&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "FC St. Pauli | Billettinformasjon for bortekampen mot SV Darmstadt 98 2627",
+      "title_de": "FC St. Pauli | Ticket-Infos Auswärtsspiel SV Darmstadt 98 2627",
+      "url": "https://www.fcstpauli.com/news/ticket-infos-auswaertsspiel-sv-darmstadt-98-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FGegner%2FDarmstadt%2F_1200x630_crop_center-center_82_none%2FLS4_7029_KWSArmbH_20260517013605.jpg%3Fv%3D1789552542%252C0.5028%252C0.4354&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | TRIBUNER 2026 – Fotball, kultur og kreativitet på…",
       "title_de": "FC St. Pauli | STANDS 2026 – Fußball, Kultur und Kreativität am…",
       "url": "https://www.fcstpauli.com/news/stands-2026-fussball-kultur-und-kreativitaet-am-millerntor",
@@ -17,18 +29,6 @@
       "title_de": "FC St. Pauli | Fanshop Reeperbahn wird wieder zur Reeperbahn Festival…",
       "url": "https://www.fcstpauli.com/news/fanshop-reeperbahn-wird-wieder-zur-reeperbahn-festival-venue-26",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMerch%2FFanshops%2FReeperbahn%2F_1200x630_crop_center-center_82_none%2FFanshop-Reeperbahn.jpg%3Fv%3D1789376107%252C0.2674%252C0.3047&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | «Å vinne er den beste følelsen i verden»",
-      "title_de": "FC St. Pauli | „Zu gewinnen ist das beste Gefühl der Welt“",
-      "url": "https://www.fcstpauli.com/news/stimmen-heimspiel-vfl-wolfsburg-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2F1-Ligaspiele-Pokalspiele%2F05-Wolfsburg-H%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-2390.jpg%3Fv%3D1789251657%252C0.5118%252C0.5355&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Millerntor-stadionet rocker: FCSP sikrer sin første seier for sesongen…",
-      "title_de": "FC St. Pauli | Das Millerntor steht Kopf: FCSP holt ersten Saisonsieg…",
-      "url": "https://www.fcstpauli.com/news/spielbericht-heimspiel-vfl-wolfsburg-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2F1-Ligaspiele-Pokalspiele%2F05-Wolfsburg-H%2F_1200x630_crop_center-center_82_none%2FHEV01031.jpg%3Fv%3D1789249048%252C0.4941%252C0.5817&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -498,5 +498,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-16T09:59:53Z"
+  "updated": "2026-09-16T12:01:13Z"
 }
