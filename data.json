@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Billettinformasjon for vennskapskampen mot Borussia Mönchengladbach…",
+      "title_de": "FC St. Pauli | Ticket-Infos Testspiel gegen Borussia Mönchengladbach…",
+      "url": "https://www.fcstpauli.com/news/ticket-infos-testspiel-gegen-borussia-moenchengladbach-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FGegengerade%2F_1200x630_crop_center-center_82_none%2FHEV00540.jpg%3Fv%3D1789563395%252C0.5016%252C0.6741&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | «Jeg vil vise at jeg kan score mål på dette nivået...»",
       "title_de": "FC St. Pauli | „Ich möchte zeigen, dass ich auf diesem Niveau Tore…",
       "url": "https://www.fcstpauli.com/news/presserunde-youssoupha-niang-auswaertsspiel-energie-cottbus-2627",
@@ -23,12 +29,6 @@
       "title_de": "FC St. Pauli | St. Pauli Song Contest startet am 22. September",
       "url": "https://www.fcstpauli.com/news/st-pauli-song-contest-startet-am-22-september",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FAllgemeine-Fotos%2F_1200x630_crop_center-center_82_none%2FHEV00840.jpg%3Fv%3D1789464012%252C0.5453%252C0.6065&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Reeperbahn-fanbutikken blir nok en gang Reeperbahn-festivalen…",
-      "title_de": "FC St. Pauli | Fanshop Reeperbahn wird wieder zur Reeperbahn Festival…",
-      "url": "https://www.fcstpauli.com/news/fanshop-reeperbahn-wird-wieder-zur-reeperbahn-festival-venue-26",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMerch%2FFanshops%2FReeperbahn%2F_1200x630_crop_center-center_82_none%2FFanshop-Reeperbahn.jpg%3Fv%3D1789376107%252C0.2674%252C0.3047&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -498,5 +498,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-16T12:01:13Z"
+  "updated": "2026-09-16T15:26:16Z"
 }
