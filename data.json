@@ -1,6 +1,18 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Motstandersjekk Energie Cottbus: Offensivt sterk…",
+      "title_de": "FC St. Pauli | Gegnercheck Energie Cottbus: Offensivstarker…",
+      "url": "https://www.fcstpauli.com/news/gegnercheck-energie-cottbus-auswaertsspiel-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FGegner%2FCottbus%2F_1200x630_crop_center-center_82_none%2F2627_MD01_FCEH96_FD_135.jpg%3Fv%3D1789646690%252C0.5237%252C0.5657&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "FC St. Pauli | St. Pauli sangkonkurranse: Slik kan du delta – og…",
+      "title_de": "FC St. Pauli | St. Pauli Song Contest: So könnt ihr mitmachen – und…",
+      "url": "https://www.fcstpauli.com/news/st-pauli-song-contest-so-koennt-ihr-mitmachen-und-so-laeuft-die-auswahl",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FGegengerade%2F_1200x630_crop_center-center_82_none%2FFCS05885.jpg%3Fv%3D1789644626%252C0.4627%252C0.4805&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Billettinformasjon for vennskapskampen mot Borussia Mönchengladbach…",
       "title_de": "FC St. Pauli | Ticket-Infos Testspiel gegen Borussia Mönchengladbach…",
       "url": "https://www.fcstpauli.com/news/ticket-infos-testspiel-gegen-borussia-moenchengladbach-2627",
@@ -17,18 +29,6 @@
       "title_de": "FC St. Pauli | Ticket-Infos Auswärtsspiel SV Darmstadt 98 2627",
       "url": "https://www.fcstpauli.com/news/ticket-infos-auswaertsspiel-sv-darmstadt-98-2627",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FGegner%2FDarmstadt%2F_1200x630_crop_center-center_82_none%2FLS4_7029_KWSArmbH_20260517013605.jpg%3Fv%3D1789552542%252C0.5028%252C0.4354&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | TRIBUNER 2026 – Fotball, kultur og kreativitet på…",
-      "title_de": "FC St. Pauli | STANDS 2026 – Fußball, Kultur und Kreativität am…",
-      "url": "https://www.fcstpauli.com/news/stands-2026-fussball-kultur-und-kreativitaet-am-millerntor",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FVerein%2FVeranstaltungen-Events%2FSTANDS%2F_1200x630_crop_center-center_82_none%2FSTANDS-2025.jpg%3Fv%3D1789120984%252C0.5387%252C0.5174&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | St. Pauli sangkonkurranse starter 22. september",
-      "title_de": "FC St. Pauli | St. Pauli Song Contest startet am 22. September",
-      "url": "https://www.fcstpauli.com/news/st-pauli-song-contest-startet-am-22-september",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FAllgemeine-Fotos%2F_1200x630_crop_center-center_82_none%2FHEV00840.jpg%3Fv%3D1789464012%252C0.5453%252C0.6065&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -498,5 +498,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-17T12:03:15Z"
+  "updated": "2026-09-17T15:34:05Z"
 }
