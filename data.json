@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Kaars kontrer Butler: Kiezkicker kjemper seg inn i…",
+      "title_de": "FC St. Pauli | Kaars kontert Butler: Kiezkicker erkämpfen sich in…",
+      "url": "https://www.fcstpauli.com/news/spielbericht-auswaertsspiel-energie-cottbus",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2F1-Ligaspiele-Pokalspiele%2F06-Cottbus-A%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-03484.jpg%3Fv%3D1789910455%252C0.6305%252C0.3606&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Kiezkicker besøker Cottbus: Med momentum inn i…",
       "title_de": "FC St. Pauli | Kiezkicker zu Gast in Cottbus: Mit Rückenwind in die…",
       "url": "https://www.fcstpauli.com/news/vorbericht-cottbus-auswaerts-2627",
@@ -23,12 +29,6 @@
       "title_de": "FC St. Pauli | Gegnercheck Energie Cottbus: Offensivstarker…",
       "url": "https://www.fcstpauli.com/news/gegnercheck-energie-cottbus-auswaertsspiel-2627",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FGegner%2FCottbus%2F_1200x630_crop_center-center_82_none%2F2627_MD01_FCEH96_FD_135.jpg%3Fv%3D1789646690%252C0.5237%252C0.5657&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | St. Pauli sangkonkurranse: Slik kan du delta – og…",
-      "title_de": "FC St. Pauli | St. Pauli Song Contest: So könnt ihr mitmachen – und…",
-      "url": "https://www.fcstpauli.com/news/st-pauli-song-contest-so-koennt-ihr-mitmachen-und-so-laeuft-die-auswahl",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FGegengerade%2F_1200x630_crop_center-center_82_none%2FFCS05885.jpg%3Fv%3D1789644626%252C0.4627%252C0.4805&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -506,5 +506,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-20T11:47:38Z"
+  "updated": "2026-09-20T14:43:06Z"
 }
