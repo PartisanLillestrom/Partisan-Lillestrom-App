@@ -1,6 +1,24 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Fire St. Pauli-spillere på landslagsoppdrag: Metcalfe to ganger…",
+      "title_de": "FC St. Pauli | Vier Kiezkicker auf Länderspielreise: Metcalfe zweimal…",
+      "url": "https://www.fcstpauli.com/news/kiezkicker-auf-laenderspielreise-september-26",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FMetcalfe%2F_1200x630_crop_center-center_82_none%2FHEV00928.jpg%3Fv%3D1789829806%252C0.4538%252C0.5266&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "FC St. Pauli | Mål sluppet inn på overtid: 1. Damelaget går i oppløsning…",
+      "title_de": "FC St. Pauli | Gegentor in der Nachspielzeit: 1. Frauen trennen sich…",
+      "url": "https://www.fcstpauli.com/news/spielbericht-1-frauen-vs-hannover-heim-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FAbteilungen%2FFrauenfu%25C3%259Fball%2F0-Saison-2026-2027%2FLigaspiele%2F5_Hannover_Heim%2F_1200x630_crop_center-center_82_none%2FEDI07489.jpeg%3Fv%3D1789995664%252C0.6812%252C0.345&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "FC St. Pauli | U17 feirer en knallseier mot Hansa Rostock",
+      "title_de": "FC St. Pauli | U17 feiert Kantersieg gegen Hansa Rostock",
+      "url": "https://www.fcstpauli.com/news/yr-nachberichte-kw39-2026",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FLeistungsbereich%2F_1200x630_crop_center-center_82_none%2F0G5A6035.jpg%3Fv%3D1789983875%252C0.6819%252C0.2953&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | FC St. Pauli blir den første tyske…",
       "title_de": "FC St. Pauli | Der FC St. Pauli tritt als erster deutscher…",
       "url": "https://www.fcstpauli.com/news/der-fc-st-pauli-tritt-als-erster-deutscher-profiverein-der-union-of-european-clubs-bei",
@@ -11,24 +29,6 @@
       "title_de": "FC St. Pauli | Kaars kontert Butler: Kiezkicker erkämpfen sich in…",
       "url": "https://www.fcstpauli.com/news/spielbericht-auswaertsspiel-energie-cottbus",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2F1-Ligaspiele-Pokalspiele%2F06-Cottbus-A%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-03484.jpg%3Fv%3D1789980288%252C0.614%252C0.4089&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Kiezkicker besøker Cottbus: Med momentum inn i…",
-      "title_de": "FC St. Pauli | Kiezkicker zu Gast in Cottbus: Mit Rückenwind in die…",
-      "url": "https://www.fcstpauli.com/news/vorbericht-cottbus-auswaerts-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2F1-Ligaspiele-Pokalspiele%2F05-Wolfsburg-H%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-01065.jpg%3Fv%3D1789812032%252C0.5289%252C0.4737&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | «Vi vil gi fansen vår en borteseier»",
-      "title_de": "FC St. Pauli | „Wir wollen unseren Fans einen Auswärtssieg schenken“",
-      "url": "https://www.fcstpauli.com/news/cheftrainer-marcel-rapp-vor-auswaertsspiel-energie-cottbus-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FCheftrainer%2FSpiele%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-01111.jpg%3Fv%3D1789741937%252C0.6823%252C0.4663&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Hva skjer denne helgen",
-      "title_de": "FC St. Pauli | Das geht am Wochenende",
-      "url": "https://www.fcstpauli.com/news/fcsp-am-wochenende-kw38-2026",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFCSP-am-WE%2F2627%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-2107.jpg%3Fv%3D1789660194%252C0.224%252C0.4357&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -506,5 +506,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-21T13:19:20Z"
+  "updated": "2026-09-21T17:06:21Z"
 }
