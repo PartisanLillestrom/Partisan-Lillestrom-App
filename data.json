@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | FC St. Pauli blir den første tyske…",
+      "title_de": "FC St. Pauli | Der FC St. Pauli tritt als erster deutscher…",
+      "url": "https://www.fcstpauli.com/news/der-fc-st-pauli-tritt-als-erster-deutscher-profiverein-der-union-of-european-clubs-bei",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FSteinwappen%2F_1200x630_crop_center-center_82_none%2FSteinwappen-FCSP.jpg%3Fv%3D1789120451%252C0.4938%252C0.4261&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Kaars kontrer Butler: Kiezkicker kjemper seg inn i…",
       "title_de": "FC St. Pauli | Kaars kontert Butler: Kiezkicker erkämpfen sich in…",
       "url": "https://www.fcstpauli.com/news/spielbericht-auswaertsspiel-energie-cottbus",
@@ -23,15 +29,16 @@
       "title_de": "FC St. Pauli | Das geht am Wochenende",
       "url": "https://www.fcstpauli.com/news/fcsp-am-wochenende-kw38-2026",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFCSP-am-WE%2F2627%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-2107.jpg%3Fv%3D1789660194%252C0.224%252C0.4357&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Motstandersjekk Energie Cottbus: Offensivt sterk…",
-      "title_de": "FC St. Pauli | Gegnercheck Energie Cottbus: Offensivstarker…",
-      "url": "https://www.fcstpauli.com/news/gegnercheck-energie-cottbus-auswaertsspiel-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FGegner%2FCottbus%2F_1200x630_crop_center-center_82_none%2F2627_MD01_FCEH96_FD_135.jpg%3Fv%3D1789646690%252C0.5237%252C0.5657&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
+    {
+      "title_no": "«Vi har vist at vi er et lag.»",
+      "title_de": "„Wir haben gezeigt, dass wir ein Team sind.“",
+      "url": "https://millernton.de/2026/09/21/wir-haben-gezeigt-dass-wir-ein-team-sind/",
+      "date": "21. september",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F08%2Ffcsp1fck_20260830_stefangroenveld_fcsp13350558.jpg&w=400&output=webp&q=70"
+    },
     {
       "title_no": "1. Kvinner: Seieren mot Hannover 96 forsvant sent i kampen",
       "title_de": "1. Frauen: Den Sieg gegen Hannover 96 spät aus der Hand gegeben",
@@ -59,13 +66,6 @@
       "url": "https://millernton.de/2026/09/18/lage-am-millerntor-18-september-2026/",
       "date": "18. september",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Den herlige smerten ved valg",
-      "title_de": "Die schöne Qual der Wahl",
-      "url": "https://millernton.de/2026/09/17/die-schoene-qual-der-wahl/",
-      "date": "17. september",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F09%2Ffcsp1fck_20260830_stefangroenveld_fcsp12480550.jpg&w=400&output=webp&q=70"
     }
   ],
   "next_match": {},
@@ -506,5 +506,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-21T10:47:49Z"
+  "updated": "2026-09-21T13:19:20Z"
 }
