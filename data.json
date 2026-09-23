@@ -1,6 +1,18 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Kampdag og familieleir på vennskapskampen mot…",
+      "title_de": "FC St. Pauli | Spieltags- und Familycamp beim Testspiel gegen…",
+      "url": "https://www.fcstpauli.com/news/spieltags-und-familycamp-beim-testspiel-gegen-borussia-moenchengladbach-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FRabauken%2FNews%2FSpieltagscamp-Testspiel-BMG%2F_1200x630_crop_center-center_82_none%2FWhatsApp-Image-2026-09-18-at-13.56.57-2.jpeg%3Fv%3D1789988856%252C0.461%252C0.4518&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "FC St. Pauli | Livlig aktivitet på Millerntor: Gatefestival på…",
+      "title_de": "FC St. Pauli | Buntes Treiben am Millerntor: Straßenfest beim…",
+      "url": "https://www.fcstpauli.com/news/rahmenprogramm-testspiel-borussia-moenchengladbach",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FAllgemeine-Fotos%2F_1200x630_crop_center-center_82_none%2FEinlaufen-FCSP-BMG.jpg%3Fv%3D1790166436%252C0.5121%252C0.5651&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Barn til kurvene! Ungdomsbasketballspillere kommer i gang og…",
       "title_de": "FC St. Pauli | Kinder an die Körbe! Basketballjugend legt los und…",
       "url": "https://www.fcstpauli.com/news/saisonstart-fcsp-basketball",
@@ -17,18 +29,6 @@
       "title_de": "FC St. Pauli | Vier Kiezkicker auf Länderspielreise: Metcalfe zweimal…",
       "url": "https://www.fcstpauli.com/news/kiezkicker-auf-laenderspielreise-september-26",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FMetcalfe%2F_1200x630_crop_center-center_82_none%2FHEV00928.jpg%3Fv%3D1789829806%252C0.4538%252C0.5266&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Mål sluppet inn på overtid: 1. Damelaget går i oppløsning…",
-      "title_de": "FC St. Pauli | Gegentor in der Nachspielzeit: 1. Frauen trennen sich…",
-      "url": "https://www.fcstpauli.com/news/spielbericht-1-frauen-vs-hannover-heim-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FAbteilungen%2FFrauenfu%25C3%259Fball%2F0-Saison-2026-2027%2FLigaspiele%2F5_Hannover_Heim%2F_1200x630_crop_center-center_82_none%2FEDI07489.jpeg%3Fv%3D1789995664%252C0.6812%252C0.345&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | U17 feirer en knallseier mot Hansa Rostock",
-      "title_de": "FC St. Pauli | U17 feiert Kantersieg gegen Hansa Rostock",
-      "url": "https://www.fcstpauli.com/news/yr-nachberichte-kw39-2026",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FLeistungsbereich%2F_1200x630_crop_center-center_82_none%2F0G5A6035.jpg%3Fv%3D1789983875%252C0.6819%252C0.2953&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -506,5 +506,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-23T12:06:14Z"
+  "updated": "2026-09-23T15:28:01Z"
 }
