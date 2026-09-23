@@ -33,6 +33,20 @@
   ],
   "millernton_news": [
     {
+      "title_no": "Beliggenhet på Millerntor – 23. september 2026",
+      "title_de": "Lage am Millerntor – 23. September 2026",
+      "url": "https://millernton.de/2026/09/23/lage-am-millerntor-23-september-2026/",
+      "date": "23. september",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "Etter kampen – FC Energie Cottbus (A) – Kamprunde 6 – Sesongen 2026/27",
+      "title_de": "Nach dem Spiel – FC Energie Cottbus (A) – Spieltag 6 – Saison 2026/27",
+      "url": "https://millernton.de/2026/09/22/fc-st-pauli-podcast-nds-sp6-energie-cottbus/",
+      "date": "22. september",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F09%2FNDS-Cottbus.jpg&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "Beliggenhet på Millerntor – 22. september 2026",
       "title_de": "Lage am Millerntor – 22. September 2026",
       "url": "https://millernton.de/2026/09/22/lage-am-millerntor-22-september-2026/",
@@ -52,20 +66,6 @@
       "url": "https://millernton.de/2026/09/21/wir-haben-gezeigt-dass-wir-ein-team-sind/",
       "date": "21. september",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F08%2Ffcsp1fck_20260830_stefangroenveld_fcsp13350558.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "1. Kvinner: Seieren mot Hannover 96 forsvant sent i kampen",
-      "title_de": "1. Frauen: Den Sieg gegen Hannover 96 spät aus der Hand gegeben",
-      "url": "https://millernton.de/2026/09/21/fc-st-pauli-1-frauen-hannover-96/",
-      "date": "21. september",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F09%2FEDI07147.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Beliggenhet på Millerntor – 21. september 2026",
-      "title_de": "Lage am Millerntor – 21. September 2026",
-      "url": "https://millernton.de/2026/09/21/lage-am-millerntor-21-september-2026/",
-      "date": "21. september",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
     }
   ],
   "next_match": {},
@@ -506,5 +506,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-22T17:15:42Z"
+  "updated": "2026-09-23T10:03:00Z"
 }
