@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Ikke glem å slå på alarmen!",
+      "title_de": "FC St. Pauli | Alarm schlagen nicht vergessen",
+      "url": "https://www.fcstpauli.com/news/alarm-schlagen-nicht-vergessen",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FVerein%2FMuseum%2F2026%2FVeranstaltung-Rechtsruck%2F_1200x630_crop_center-center_82_none%2FALF03759.jpg%3Fv%3D1790245405%252C0.673%252C0.5106&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Hva skjer denne helgen",
       "title_de": "FC St. Pauli | Das geht am Wochenende",
       "url": "https://www.fcstpauli.com/news/fcsp-am-wochenende-kw39-2026",
@@ -23,12 +29,6 @@
       "title_de": "FC St. Pauli | Die 1. Frauen des FC St. Pauli trennen sich von Coach…",
       "url": "https://www.fcstpauli.com/news/1-frauen-trennen-sich-von-coach-jan-philipp-kalla",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FAbteilungen%2FFrauenfu%25C3%259Fball%2F0-Saison-2026-2027%2FAllgemein%2FKalla%2F_1200x630_crop_center-center_82_none%2FEDI09555.jpeg%3Fv%3D1790145104%252C0.3859%252C0.277&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Kampdag og familieleir på vennskapskampen mot…",
-      "title_de": "FC St. Pauli | Spieltags- und Familycamp beim Testspiel gegen…",
-      "url": "https://www.fcstpauli.com/news/spieltags-und-familycamp-beim-testspiel-gegen-borussia-moenchengladbach-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FRabauken%2FNews%2FSpieltagscamp-Testspiel-BMG%2F_1200x630_crop_center-center_82_none%2FWhatsApp-Image-2026-09-18-at-13.56.57-2.jpeg%3Fv%3D1789988856%252C0.461%252C0.4518&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -506,5 +506,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-25T10:14:43Z"
+  "updated": "2026-09-25T12:11:19Z"
 }
