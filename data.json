@@ -1,18 +1,6 @@
 {
   "fcstpauli_news": [
     {
-      "title_no": "FC St. Pauli | TRIBUNER 2026: FC St. Pauli bringer fotball, kultur…",
-      "title_de": "FC St. Pauli | STANDS 2026: Der FC St. Pauli bringt Fußball, Kultur…",
-      "url": "https://www.fcstpauli.com/news/rueckblick-stands-2026",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FVerein%2FVeranstaltungen-Events%2FSTANDS%2F2026%2F_1200x630_crop_center-center_82_none%2FStands_003.jpg%3Fv%3D1790593496%252C0.4932%252C0.3929&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Tre seire, ingen mål sluppet inn: FCSP blinde fotballag…",
-      "title_de": "FC St. Pauli | Drei Siege, kein Gegentor: FCSP-Blindenfußballteam…",
-      "url": "https://www.fcstpauli.com/news/fcsp-blindenfussballteam-gewinnt-19-masters",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FAbteilungen%2FBlindenfu%25C3%259Fball%2FSaison-2026%2FMasters-2026%2F_1200x630_crop_center-center_82_none%2Fmasters19_20260927_stefangroenveld_14121014.jpg%3Fv%3D1790591262%252C0.4733%252C0.5382&w=400&output=webp&q=70"
-    },
-    {
       "title_no": "FC St. Pauli | Hamburgs årets ungdomsspiller: En stor pris…",
       "title_de": "FC St. Pauli | Hamburgs Jugendspieler des Jahres: Große Auszeichnung…",
       "url": "https://www.fcstpauli.com/news/hamburgs-jugendspieler-des-jahres-grosse-auszeichnung-fuer-wissou-kaba",
@@ -29,6 +17,18 @@
       "title_de": "FC St. Pauli | Das geht am Wochenende",
       "url": "https://www.fcstpauli.com/news/fcsp-am-wochenende-kw39-2026",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFCSP-am-WE%2F2627%2F_1200x630_crop_center-center_82_none%2FFCP5384.jpg%3Fv%3D1790265241%252C0.5108%252C0.2783&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "FC St. Pauli | «Hold tankene vidåpne» - 19....",
+      "title_de": "FC St. Pauli | „Keep your mind wide open“ - 19.…",
+      "url": "https://www.fcstpauli.com/news/19-blindenfussball-masters-fc-st-pauli",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FAbteilungen%2FBlindenfu%25C3%259Fball%2FSaison-2025%2FMasters%2F_1200x630_crop_center-center_82_none%2Fmaster18_20250727_stefangroenveld_1712612.jpg%3Fv%3D1790063620%252C0.5278%252C0.4245&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "FC St. Pauli | Billettinformasjon for hjemmekampen mot 1. FC Nürnberg",
+      "title_de": "FC St. Pauli | Ticket-Infos zum Heimspiel gegen den 1. FC Nürnberg",
+      "url": "https://www.fcstpauli.com/news/ticket-infos-heimspiel-nuernberg-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FAllgemeine-Fotos%2F_1200x630_crop_center-center_82_none%2F2627_MD01_STPSGF_JP_00193.jpg%3Fv%3D1790153148%252C0.3708%252C0.5061&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -506,5 +506,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-29T18:39:49Z"
+  "updated": "2026-09-29T19:38:52Z"
 }
