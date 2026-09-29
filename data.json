@@ -33,6 +33,20 @@
   ],
   "millernton_news": [
     {
+      "title_no": "Beliggenhet på Millerntor – 29. september 2026",
+      "title_de": "Lage am Millerntor – 29. September 2026",
+      "url": "https://millernton.de/2026/09/29/lage-am-millerntor-29-september-2026/",
+      "date": "29. september",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "Anmeldelse: FC St. Pauli og stadionkalender 2027",
+      "title_de": "Rezension: FC St. Pauli- und Stadionkalender 2027",
+      "url": "https://millernton.de/2026/09/29/rezension-fc-st-pauli-und-stadionkalender-2027/",
+      "date": "29. september",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F09%2FFCSTPauli_Kalender_DeliusClasing.jpg&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "Beliggenhet på Millerntor – 28. september 2026",
       "title_de": "Lage am Millerntor – 28. September 2026",
       "url": "https://millernton.de/2026/09/28/lage-am-millerntor-28-september-2026/",
@@ -51,20 +65,6 @@
       "title_de": "Lage am Millerntor – 25. September 2026",
       "url": "https://millernton.de/2026/09/25/lage-am-millerntor-25-september-2026/",
       "date": "25. september",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Paulis kvinnelige førstelag skiller lag med Jan-Philipp Kalla",
-      "title_de": "FC St. Pauli 1. Frauen trennt sich von Jan-Philipp Kalla",
-      "url": "https://millernton.de/2026/09/25/fc-st-pauli-1-frauen-trennt-sich-von-jan-philipp-kalla/",
-      "date": "25. september",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F09%2FEDI07275.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Beliggenhet på Millerntor – 24. september 2026",
-      "title_de": "Lage am Millerntor – 24. September 2026",
-      "url": "https://millernton.de/2026/09/24/lage-am-millerntor-24-september-2026/",
-      "date": "24. september",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
     }
   ],
@@ -506,5 +506,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-28T20:46:50Z"
+  "updated": "2026-09-29T08:02:54Z"
 }
