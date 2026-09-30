@@ -1,6 +1,24 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Louis Oppie: «Det er rart å tape midt i sesongen…»",
+      "title_de": "FC St. Pauli | Louis Oppie: „Schon komisch, mitten in der Saison eine…",
+      "url": "https://www.fcstpauli.com/news/presserunde-louis-oppie-laenderspielpause",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FOppie%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-04936.jpg%3Fv%3D1790257593%252C0.5%252C0.2226&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "FC St. Pauli | TRIBUNER 2026: FC St. Pauli bringer fotball, kultur…",
+      "title_de": "FC St. Pauli | STANDS 2026: Der FC St. Pauli bringt Fußball, Kultur…",
+      "url": "https://www.fcstpauli.com/news/rueckblick-stands-2026",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FVerein%2FVeranstaltungen-Events%2FSTANDS%2F2026%2F_1200x630_crop_center-center_82_none%2FStands_003.jpg%3Fv%3D1790593496%252C0.4932%252C0.3929&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "FC St. Pauli | Tre seire, ingen mål sluppet inn: FCSP blinde fotballag…",
+      "title_de": "FC St. Pauli | Drei Siege, kein Gegentor: FCSP-Blindenfußballteam…",
+      "url": "https://www.fcstpauli.com/news/fcsp-blindenfussballteam-gewinnt-19-masters",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FAbteilungen%2FBlindenfu%25C3%259Fball%2FSaison-2026%2FMasters-2026%2F_1200x630_crop_center-center_82_none%2Fmasters19_20260927_stefangroenveld_14121014.jpg%3Fv%3D1790591262%252C0.4733%252C0.5382&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Hamburgs årets ungdomsspiller: En stor pris…",
       "title_de": "FC St. Pauli | Hamburgs Jugendspieler des Jahres: Große Auszeichnung…",
       "url": "https://www.fcstpauli.com/news/hamburgs-jugendspieler-des-jahres-grosse-auszeichnung-fuer-wissou-kaba",
@@ -11,27 +29,23 @@
       "title_de": "FC St. Pauli | Alarm schlagen nicht vergessen",
       "url": "https://www.fcstpauli.com/news/alarm-schlagen-nicht-vergessen",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FVerein%2FMuseum%2F2026%2FVeranstaltung-Rechtsruck%2F_1200x630_crop_center-center_82_none%2FALF03759.jpg%3Fv%3D1790245405%252C0.673%252C0.5106&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Hva skjer denne helgen",
-      "title_de": "FC St. Pauli | Das geht am Wochenende",
-      "url": "https://www.fcstpauli.com/news/fcsp-am-wochenende-kw39-2026",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFCSP-am-WE%2F2627%2F_1200x630_crop_center-center_82_none%2FFCP5384.jpg%3Fv%3D1790265241%252C0.5108%252C0.2783&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | «Hold tankene vidåpne» - 19....",
-      "title_de": "FC St. Pauli | „Keep your mind wide open“ - 19.…",
-      "url": "https://www.fcstpauli.com/news/19-blindenfussball-masters-fc-st-pauli",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FAbteilungen%2FBlindenfu%25C3%259Fball%2FSaison-2025%2FMasters%2F_1200x630_crop_center-center_82_none%2Fmaster18_20250727_stefangroenveld_1712612.jpg%3Fv%3D1790063620%252C0.5278%252C0.4245&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Billettinformasjon for hjemmekampen mot 1. FC Nürnberg",
-      "title_de": "FC St. Pauli | Ticket-Infos zum Heimspiel gegen den 1. FC Nürnberg",
-      "url": "https://www.fcstpauli.com/news/ticket-infos-heimspiel-nuernberg-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FAllgemeine-Fotos%2F_1200x630_crop_center-center_82_none%2F2627_MD01_STPSGF_JP_00193.jpg%3Fv%3D1790153148%252C0.3708%252C0.5061&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
+    {
+      "title_no": "Beliggenhet på Millerntor – 30. september 2026",
+      "title_de": "Lage am Millerntor – 30. September 2026",
+      "url": "https://millernton.de/2026/09/30/lage-am-millerntor-30-september-2026/",
+      "date": "30. september",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "Hymnene til klubbene i 2. Bundesliga",
+      "title_de": "Die Hymnen der Vereine in der 2. Bundesliga",
+      "url": "https://millernton.de/2026/09/30/die-hymnen-der-vereine-in-der-2-bundesliga/",
+      "date": "30. september",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F01%2Ffcsp__20260123_stefangroenveld_21401519.jpg&w=400&output=webp&q=70"
+    },
     {
       "title_no": "Beliggenhet på Millerntor – 29. september 2026",
       "title_de": "Lage am Millerntor – 29. September 2026",
@@ -51,20 +65,6 @@
       "title_de": "Lage am Millerntor – 28. September 2026",
       "url": "https://millernton.de/2026/09/28/lage-am-millerntor-28-september-2026/",
       "date": "28. september",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Kvinnelige St. Pauli-historier #41: Aga",
-      "title_de": "Female St. Pauli Stories #41: Aga",
-      "url": "https://millernton.de/2026/09/25/female-st-pauli-stories-41-aga/",
-      "date": "25. september",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F09%2FFSPS_Aga.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Beliggenhet på Millerntor – 25. september 2026",
-      "title_de": "Lage am Millerntor – 25. September 2026",
-      "url": "https://millernton.de/2026/09/25/lage-am-millerntor-25-september-2026/",
-      "date": "25. september",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
     }
   ],
@@ -506,5 +506,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-29T19:38:52Z"
+  "updated": "2026-09-30T11:12:16Z"
 }
