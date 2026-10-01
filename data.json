@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | FC St. Pauli og CORRECTIV inviterer deg til en faktaquiz…",
+      "title_de": "FC St. Pauli | Der FC St. Pauli und CORRECTIV laden zum Faktenquiz…",
+      "url": "https://www.fcstpauli.com/news/der-fc-st-pauli-und-correctiv-laden-zum-faktenquiz-ins-fcsp-museum",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FSteinwappen%2F_1200x630_crop_center-center_82_none%2FSteinwappen-FCSP.jpg%3Fv%3D1789120451%252C0.4938%252C0.4261&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Billettinformasjon for kampen mot 1. FC Magdeburg",
       "title_de": "FC St. Pauli | Ticket-Infos zum Spiel beim 1. FC Magdeburg",
       "url": "https://www.fcstpauli.com/news/ticket-infos-auswaertsspiel-magdeburg-2627",
@@ -23,15 +29,16 @@
       "title_de": "FC St. Pauli | Drei Siege, kein Gegentor: FCSP-Blindenfußballteam…",
       "url": "https://www.fcstpauli.com/news/fcsp-blindenfussballteam-gewinnt-19-masters",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FAbteilungen%2FBlindenfu%25C3%259Fball%2FSaison-2026%2FMasters-2026%2F_1200x630_crop_center-center_82_none%2Fmasters19_20260927_stefangroenveld_14121014.jpg%3Fv%3D1790591262%252C0.4733%252C0.5382&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Hamburgs årets ungdomsspiller: En stor pris…",
-      "title_de": "FC St. Pauli | Hamburgs Jugendspieler des Jahres: Große Auszeichnung…",
-      "url": "https://www.fcstpauli.com/news/hamburgs-jugendspieler-des-jahres-grosse-auszeichnung-fuer-wissou-kaba",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FU23%2FLigaspiele%2F06-Ph%25C3%25B6nix-H%2F_1200x630_crop_center-center_82_none%2FIMG_1518.jpeg%3Fv%3D1790412880%252C0.4833%252C0.3846&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
+    {
+      "title_no": "Sted på Millerntor – 1. oktober 2026",
+      "title_de": "Lage am Millerntor – 01. Oktober 2026",
+      "url": "https://millernton.de/2026/10/01/lage-am-millerntor-01-oktober-2026/",
+      "date": "1. oktober",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
+    },
     {
       "title_no": "Tilpasningsdyktig med rom for forbedring",
       "title_de": "Anpassungsfähig mit Luft nach oben",
@@ -59,13 +66,6 @@
       "url": "https://millernton.de/2026/09/29/lage-am-millerntor-29-september-2026/",
       "date": "29. september",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Anmeldelse: FC St. Pauli og stadionkalender 2027",
-      "title_de": "Rezension: FC St. Pauli- und Stadionkalender 2027",
-      "url": "https://millernton.de/2026/09/29/rezension-fc-st-pauli-und-stadionkalender-2027/",
-      "date": "29. september",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F09%2FFCSTPauli_Kalender_DeliusClasing.jpg&w=400&output=webp&q=70"
     }
   ],
   "next_match": {},
@@ -506,5 +506,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-09-30T19:37:06Z"
+  "updated": "2026-10-01T11:39:26Z"
 }
