@@ -1,6 +1,18 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | 30 år med WBK – «Edruskapsgalla» 14. november",
+      "title_de": "FC St. Pauli | 30 Jahre WBK – „Sober-Gala“ am 14. November",
+      "url": "https://www.fcstpauli.com/news/einladung-gala-wbk-2026",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FHaupttrib%25C3%25BCne%2FKiezklappe%2F_1200x630_crop_center-center_82_none%2FKiezklappe-Gruppenfoto.jpg%3Fv%3D1791290934%252C0.5009%252C0.5261&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "FC St. Pauli | Fra Kiezhelden til HEARTCORE ST. PAULI",
+      "title_de": "FC St. Pauli | Aus Kiezhelden wird HEARTCORE ST. PAULI",
+      "url": "https://www.fcstpauli.com/news/aus-kiezhelden-wird-heartcore-st-pauli",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FNachhaltigkeit-SVN%2FHEARTCORE-ST.-PAULI%2FMural-S%25C3%25BCdtrib%25C3%25BCne%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-05478.jpg%3Fv%3D1791291206%252C0.5003%252C0.6477&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | FCSPs prestasjonsområde feirer seire - U14 i Berlin den…",
       "title_de": "FC St. Pauli | FCSP-Leistungsbereich feiert Siege - U14 in Berlin auf…",
       "url": "https://www.fcstpauli.com/news/fcsp-leistungsbereich-feiert-zwei-siege-u14-in-berlin-auf-dem-podium",
@@ -17,18 +29,6 @@
       "title_de": "FC St. Pauli | Verdientes Remis gegen Gladbach - Jones trifft…",
       "url": "https://www.fcstpauli.com/news/spielbericht-test-borussia-moenchengladbach-2627",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FTestspiele%2FBorussia-M%25C3%25B6nchengladbach%2F_1200x630_crop_center-center_82_none%2FFCS01998.jpg%3Fv%3D1791043266%252C0.581%252C0.296&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Rapp før testen mot Gladbach: «Vi skal spille på vårt maksimale…»",
-      "title_de": "FC St. Pauli | Rapp vor Test gegen Gladbach: „Wir werden maximal…",
-      "url": "https://www.fcstpauli.com/news/vorbericht-testspiel-borussia-moenchengladbach-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FCheftrainer%2FTraining%2F_1200x630_crop_center-center_82_none%2FRapp-NL-02102026.jpg%3Fv%3D1790946423%252C0.5287%252C0.3191&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Hva skjer denne helgen",
-      "title_de": "FC St. Pauli | Das geht am Wochenende",
-      "url": "https://www.fcstpauli.com/news/fcsp-am-wochenende-kw40-2026",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFCSP-am-WE%2F2627%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-4668.jpg%3Fv%3D1790861539%252C0.6005%252C0.5645&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -506,5 +506,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-10-06T12:04:31Z"
+  "updated": "2026-10-06T13:36:04Z"
 }
