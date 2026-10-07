@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Invitasjon til den årlige generalforsamlingen i…",
+      "title_de": "FC St. Pauli | Einladung zur ordentlichen Mitgliederversammlung des…",
+      "url": "https://www.fcstpauli.com/news/einladung-mitgliederversammlung-2026",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FVerein%2FMitgliederversammlung%2F2024%2F_1200x630_crop_center-center_82_none%2FFCP07252.jpg%3Fv%3D1791212926&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Tre år etter 7. oktober: Arrangement med…",
       "title_de": "FC St. Pauli | Drei Jahre nach dem 7. Oktober: Veranstaltung mit…",
       "url": "https://www.fcstpauli.com/news/veranstaltung-mit-ueberlebenden-des-nova-festivals-am-millerntor",
@@ -23,12 +29,6 @@
       "title_de": "FC St. Pauli | Aus Kiezhelden wird HEARTCORE ST. PAULI",
       "url": "https://www.fcstpauli.com/news/aus-kiezhelden-wird-heartcore-st-pauli",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FNachhaltigkeit-SVN%2FHEARTCORE-ST.-PAULI%2FMural-S%25C3%25BCdtrib%25C3%25BCne%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-05478.jpg%3Fv%3D1791291206%252C0.5003%252C0.6477&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | FCSPs prestasjonsområde feirer seire - U14 i Berlin den…",
-      "title_de": "FC St. Pauli | FCSP-Leistungsbereich feiert Siege - U14 in Berlin auf…",
-      "url": "https://www.fcstpauli.com/news/fcsp-leistungsbereich-feiert-zwei-siege-u14-in-berlin-auf-dem-podium",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FLeistungsbereich%2F_1200x630_crop_center-center_82_none%2F0G5A2557.jpg%3Fv%3D1791197656%252C0.7073%252C0.4822&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -506,5 +506,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-10-07T13:54:07Z"
+  "updated": "2026-10-07T19:23:41Z"
 }
