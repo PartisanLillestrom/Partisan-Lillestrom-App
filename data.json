@@ -1,37 +1,44 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Billettinformasjon for hjemmekampen mot VfL Bochum",
+      "title_de": "FC St. Pauli | Ticket-Infos zum Heimspiel gegen den VfL Bochum",
+      "url": "https://www.fcstpauli.com/news/ticket-infos-heimspiel-vfl-bochum-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FGegengerade%2F_1200x630_crop_center-center_82_none%2FWITTERS_2371457.jpg%3Fv%3D1791460698&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Invitasjon til den årlige generalforsamlingen i…",
       "title_de": "FC St. Pauli | Einladung zur ordentlichen Mitgliederversammlung des…",
       "url": "https://www.fcstpauli.com/news/einladung-mitgliederversammlung-2026",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FVerein%2FMitgliederversammlung%2F2024%2F_1200x630_crop_center-center_82_none%2FFCP07252.jpg%3Fv%3D1791212926&w=400&output=webp&q=70"
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FVerein%2FMitgliederversammlung%2F2024%2F_1200x630_crop_center-center_82_none%2FFCP07252.jpg%3Fv%3D1791460770&w=400&output=webp&q=70"
     },
     {
       "title_no": "FC St. Pauli | Tre år etter 7. oktober: Arrangement med…",
       "title_de": "FC St. Pauli | Drei Jahre nach dem 7. Oktober: Veranstaltung mit…",
       "url": "https://www.fcstpauli.com/news/veranstaltung-mit-ueberlebenden-des-nova-festivals-am-millerntor",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FSteinwappen%2F_1200x630_crop_center-center_82_none%2FSteinwappen-FCSP.jpg%3Fv%3D1790857026%252C0.4938%252C0.4261&w=400&output=webp&q=70"
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FSteinwappen%2F_1200x630_crop_center-center_82_none%2FSteinwappen-FCSP.jpg%3Fv%3D1791460806%252C0.4938%252C0.4261&w=400&output=webp&q=70"
     },
     {
       "title_no": "FC St. Pauli | Pyrka etter 1-1-kampen mot Gladbach: «Prestasjonen var også god i…»",
       "title_de": "FC St. Pauli | Pyrka nach 1:1 gegen Gladbach: „Die Leistung auch in…",
       "url": "https://www.fcstpauli.com/news/presserunde-arkadiusz-pyrka-vor-heimspiel-karlsruher-sc-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FPyrka%2F_1200x630_crop_center-center_82_none%2FWITTERS_2371943.jpg%3Fv%3D1791281597%252C0.5431%252C0.2179&w=400&output=webp&q=70"
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FPyrka%2F_1200x630_crop_center-center_82_none%2FWITTERS_2371943.jpg%3Fv%3D1791460863%252C0.5431%252C0.2179&w=400&output=webp&q=70"
     },
     {
       "title_no": "FC St. Pauli | 30 år med WBK – «Edruskapsgalla» 14. november",
       "title_de": "FC St. Pauli | 30 Jahre WBK – „Sober-Gala“ am 14. November",
       "url": "https://www.fcstpauli.com/news/einladung-gala-wbk-2026",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FGegengerade%2FTrockendock%2F_1200x630_crop_center-center_82_none%2FPXEN4058.jpg%3Fv%3D1791296723%252C0.497%252C0.4719&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Fra Kiezhelden til HEARTCORE ST. PAULI",
-      "title_de": "FC St. Pauli | Aus Kiezhelden wird HEARTCORE ST. PAULI",
-      "url": "https://www.fcstpauli.com/news/aus-kiezhelden-wird-heartcore-st-pauli",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FNachhaltigkeit-SVN%2FHEARTCORE-ST.-PAULI%2FMural-S%25C3%25BCdtrib%25C3%25BCne%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-05478.jpg%3Fv%3D1791291206%252C0.5003%252C0.6477&w=400&output=webp&q=70"
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FGegengerade%2FTrockendock%2F_1200x630_crop_center-center_82_none%2FPXEN4058.jpg%3Fv%3D1791460876%252C0.497%252C0.4719&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
+    {
+      "title_no": "Sted på Millerntor – 8. oktober 2026",
+      "title_de": "Lage am Millerntor – 08. Oktober 2026",
+      "url": "https://millernton.de/2026/10/08/lage-am-millerntor-08-oktober-2026/",
+      "date": "8. oktober",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
+    },
     {
       "title_no": "Før kampen – Karlsruher (H) – Kamprunde 7 – Sesongen 2026/2027",
       "title_de": "Vor dem Spiel – Karlsruher (H) – Spieltag 7 – Saison 2026/2027",
@@ -58,13 +65,6 @@
       "title_de": "Lage am Millerntor – 02. Oktober 2026",
       "url": "https://millernton.de/2026/10/02/lage-am-millerntor-02-oktober-2026/",
       "date": "2. oktober",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Sted på Millerntor – 1. oktober 2026",
-      "title_de": "Lage am Millerntor – 01. Oktober 2026",
-      "url": "https://millernton.de/2026/10/01/lage-am-millerntor-01-oktober-2026/",
-      "date": "1. oktober",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
     }
   ],
@@ -506,5 +506,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-10-07T20:08:19Z"
+  "updated": "2026-10-08T12:05:08Z"
 }
