@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Dødlig stilling i derbyet er brutt: 1. kvinnelag feirer første…",
+      "title_de": "FC St. Pauli | Der Knoten platzt im Derby: 1. Frauen feiern ersten…",
+      "url": "https://www.fcstpauli.com/news/spielbericht-1-frauen-heimspiel-hsv-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FAbteilungen%2FFrauenfu%25C3%259Fball%2F0-Saison-2026-2027%2FLigaspiele%2F7-HSV-U21-Heim%2F_1200x630_crop_center-center_82_none%2FEDI05252.jpeg%3Fv%3D1791801449%252C0.5547%252C0.5106&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | 2-0 mot KSC: Kiezkicker sikrer andreplassen…",
       "title_de": "FC St. Pauli | 2:0 gegen den KSC: Kiezkicker fahren zweiten…",
       "url": "https://www.fcstpauli.com/news/spielbericht-heimspiel-karlsruher-sc-2627",
@@ -23,15 +29,16 @@
       "title_de": "FC St. Pauli | Abteilung Fußball Frauen und Mädchen stimmt für…",
       "url": "https://www.fcstpauli.com/news/abteilung-fussball-frauen-und-maedchen-stimmt-fuer-herausloesung-der-1-frauen",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FAbteilungen%2FFrauenfu%25C3%259Fball%2F0-Saison-2026-2027%2FAllgemein%2FSonstiges%2F_1200x630_crop_center-center_82_none%2FEDI03080.jpeg%3Fv%3D1791540625%252C0.5434%252C0.486&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Hva skjer denne helgen",
-      "title_de": "FC St. Pauli | Das geht am Wochenende",
-      "url": "https://www.fcstpauli.com/news/fcsp-am-wochenende-kw41-2026",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFCSP-am-WE%2F_1200x630_crop_center-center_82_none%2FFCP08192.jpg%3Fv%3D1791537631%252C0.5057%252C0.4775&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
+    {
+      "title_no": "Sted på Millerntor – 13. oktober 2026",
+      "title_de": "Lage am Millerntor – 13. Oktober 2026",
+      "url": "https://millernton.de/2026/10/13/lage-am-millerntor-13-oktober-2026/",
+      "date": "13. oktober",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
+    },
     {
       "title_no": "«Jeg synes det var en veldig profesjonell seier.»",
       "title_de": "„I think it was a very professional win.“",
@@ -59,13 +66,6 @@
       "url": "https://millernton.de/2026/10/12/lage-am-millerntor-12-oktober-2026/",
       "date": "12. oktober",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli vs. Karlsruher SC 2:0 – Lite kontroll, litt flaks, men fortsatt en fortjent seier.",
-      "title_de": "FC St. Pauli vs. Karlsruher SC 2:0 – Wenig Kontrolle, etwas Glück, trotzdem verdient",
-      "url": "https://millernton.de/2026/10/12/fc-st-pauli-vs-karlsruher-sc-20-glueckliche-reifeleistung/",
-      "date": "12. oktober",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F10%2Ffcspksc_20261011_stefangroenveld_fcsp14421153.jpg&w=400&output=webp&q=70"
     }
   ],
   "next_match": {},
@@ -506,5 +506,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-10-12T23:13:04Z"
+  "updated": "2026-10-13T12:45:56Z"
 }
