@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Ida-Ehre-skolen som en elitefotballskole…",
+      "title_de": "FC St. Pauli | Ida-Ehre-Schule als Eliteschule des Fußballs…",
+      "url": "https://www.fcstpauli.com/news/ida-ehre-schule-als-eliteschule-des-fussballs-ausgezeichnet",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FNLZ-allgemein%2FIda-Ehre-Schule%2F_1200x630_crop_center-center_82_none%2FFCP06875.jpg%3Fv%3D1792074466%252C0.4926%252C0.4063&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Blandet hjemmekamphelg: «Action Team»…",
       "title_de": "FC St. Pauli | Durchwachsenes Heimspiel-Wochenende: „Action Team“…",
       "url": "https://www.fcstpauli.com/news/durchwachsenes-heimspiel-wochenende-action-team-kaempft-um-wichtige-punkte",
@@ -23,12 +29,6 @@
       "title_de": "FC St. Pauli | Gegnercheck Hannover 96: Doppeltes Wiedersehen und ein…",
       "url": "https://fcstpauli.com/news/gegnercheck-hannover-96-doppeltes-wiedersehen-und-fehlendes-zielwasser",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FGegner%2FHannover%2F_1200x630_crop_center-center_82_none%2FWITTERS_1734888.jpg%3Fv%3D1791983349%252C0.4588%252C0.2773&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | St. Pauli sangkonkurranse: Fristen for påmelding er over, mer…",
-      "title_de": "FC St. Pauli | St. Pauli Song Contest: Frist für Eingabe endet, mehr…",
-      "url": "https://www.fcstpauli.com/news/st-pauli-song-contest-frist-fuer-eingabe-endet-mehr-zeit-zum-reinhoeren-beginnt",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FAllgemeine-Fotos%2F_1200x630_crop_center-center_82_none%2FHEV00840.jpg%3Fv%3D1791983340%252C0.5453%252C0.6065&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -506,5 +506,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-10-15T12:05:27Z"
+  "updated": "2026-10-15T15:37:47Z"
 }
