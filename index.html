@@ -1189,7 +1189,7 @@ async function lastTipping() {
 
   if (mittTipp) {
     html += `<div style="text-align:center;margin-top:14px;">`;
-    html += `<div class="sub-label" style="margin-bottom:6px;">Ditt tipp</div>`;
+    html += `<div class="sub-label" style="margin-bottom:6px;">Du har tippet</div>`;
     html += `<span class="tipp-rad-res" style="font-size:28px;">${mittTipp.h} — ${mittTipp.b}</span>`;
     if (open) {
       html += `<div style="margin-top:8px;"><button onclick="fjernTipp('${kampId}')" style="background:none;border:1px solid rgba(255,255,255,.15);border-radius:4px;color:rgba(255,255,255,.4);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:4px 12px;cursor:pointer;">Endre tipp</button></div>`;
