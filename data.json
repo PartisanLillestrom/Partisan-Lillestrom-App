@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Hva skjer denne helgen",
+      "title_de": "FC St. Pauli | Das geht am Wochenende",
+      "url": "https://www.fcstpauli.com/news/fcsp-am-wochenende-kw42-2026",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFCSP-am-WE%2F2627%2F_1200x630_crop_center-center_82_none%2FHEN05245.jpg%3Fv%3D1792052644%252C0.297%252C0.3538&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Ida-Ehre-skolen som en elitefotballskole…",
       "title_de": "FC St. Pauli | Ida-Ehre-Schule als Eliteschule des Fußballs…",
       "url": "https://www.fcstpauli.com/news/ida-ehre-schule-als-eliteschule-des-fussballs-ausgezeichnet",
@@ -23,12 +29,6 @@
       "title_de": "FC St. Pauli | Großes Interesse an Pressekonferenz und Faktenquiz…",
       "url": "https://www.fcstpauli.com/news/grosses-interesse-an-pressekonferenz-und-faktenquiz-beim-fc-st-pauli",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FVerein%2FVeranstaltungen-Events%2FWoche-Pressefreiheit-2026%2F_1200x630_crop_center-center_82_none%2FPK-Faktenquiz.jpg%3Fv%3D1792049792%252C0.2448%252C0.4117&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Motstandersjekk Hannover 96: Dobbel gjenforening og en…",
-      "title_de": "FC St. Pauli | Gegnercheck Hannover 96: Doppeltes Wiedersehen und ein…",
-      "url": "https://fcstpauli.com/news/gegnercheck-hannover-96-doppeltes-wiedersehen-und-fehlendes-zielwasser",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FGegner%2FHannover%2F_1200x630_crop_center-center_82_none%2FWITTERS_1734888.jpg%3Fv%3D1791983349%252C0.4588%252C0.2773&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -514,5 +514,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-10-16T09:53:49Z"
+  "updated": "2026-10-16T11:53:11Z"
 }
