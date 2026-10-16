@@ -1,6 +1,11 @@
 # Endringslogg — Partisan Lillestrøm App
 
-## v2.1 — 27. juli 2026
+## v2.2 — 16. oktober 2026
+- **Pipeline:** OpenLigaDB som kilde for kampplan (erstatter upålitelig scraping av fcstpauli.com)
+- **Pipeline:** Stadion-oppslag for bortekamper (OpenLigaDB mangler location-data)
+- **Data:** KJENTE_KAMPER oppdatert med alle kamper oktober–desember 2026
+
+## v2.1 — 28. juli 2026
 - **Sikkerhet:** XSS-escaping på tittel, sted, beskrivelse og opprettet-av i arrangementkort
 - **Sikkerhet:** Firebase databaseregler med feltvalidering og lengdebegrensninger
 - **Feilretting:** Fjernet 40 linjer død nesteKampBox-kode
@@ -11,6 +16,7 @@
 - **Ny funksjon:** Varselprikk på Arr.-fanen ved nye arrangementer
 - **Ny funksjon:** Oppdater-knapp på Hjem-fanen for å hente ferske nyheter
 - **Ny funksjon:** Nyhetslenker åpnes via Google Translate (tysk → norsk)
+- **Pipeline:** Bluesky API som primærkilde for FC St. Pauli-nyheter (erstatter upålitelig scraping)
 - **Meta:** Open Graph-tagger for Facebook-forhåndsvisning (regnbueskalle-ikon)
 
 ## v2.0 — Tidligere versjon
