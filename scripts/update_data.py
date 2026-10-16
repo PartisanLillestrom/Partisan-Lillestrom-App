@@ -9,8 +9,9 @@ FC St. Pauli - HELT GRATIS, uten Anthropic API:
   - millernton.de: uendret - RSS-feed + og:image (som før).
   - Oversettelse tysk -> norsk: MyMemory sin gratis oversettelses-API
     (ingen nøkkel nødvendig, https://mymemory.translated.net/).
-  - Neste kamp: scrapes direkte fra FC St. Paulis egen rahmenspielplan-side,
-    som også inkluderer testkamper for sesongstart - ingen tredjeparts-API.
+  - Neste kamp: hentes fra OpenLigaDB (api.openligadb.de), et gratis
+    JSON-API for tysk fotball - ingen noekkel noedvendig, paalitelig
+    strukturert data som erstatter upaalitelig scraping av fcstpauli.com.
 
 Resultatet skrives til data.json i repo-roten. Hvis noe feiler underveis
 lar vi eksisterende data.json stå urørt og avslutter med feilkode 1, slik
@@ -426,147 +427,137 @@ def verifiser_artikkelbilde(page_url: str, og_bilde: str) -> str:
     return og_bilde
 
 
-def rahmenspielplan_urls() -> list:
-    """Bygger kandidat-URLer for kampplanen dynamisk fra dagens dato -
-    ingen manuell oppdatering hver sommer. Sesongen loper juli-juni.
-    Returnerer gjeldende sesong forst, deretter neste (rundt sesongskiftet
-    i juni/juli kan neste sesongs side allerede vaere den riktige)."""
+# ---------------------------------------------------------------------------
+# OpenLigaDB — paalitelig JSON-API for 2. Bundesliga-kamper
+# Gratis, ingen noekkel, returnerer alle kamper for sesongen.
+# Erstatter upaalitelig scraping av fcstpauli.com/rahmenspielplan.
+# ---------------------------------------------------------------------------
+
+STPAULI_TEAM_ID = 98  # FC St. Paulis team-ID i OpenLigaDB
+
+# Stadion-oppslag for bortekamper (OpenLigaDB har location=null).
+# Hjemmekamper er alltid Millerntor. Oppdater ved behov.
+BORTE_STADION = {
+    "Holstein Kiel":          "Holstein-Stadion, Kiel",
+    "SpVgg Greuther Fürth":   "Sportpark Ronhof, Fürth",
+    "Arminia Bielefeld":      "SchücoArena, Bielefeld",
+    "DSC Arminia Bielefeld":  "SchücoArena, Bielefeld",
+    "VfL Wolfsburg":          "Volkswagen Arena, Wolfsburg",
+    "FC Energie Cottbus":     "Stadion der Freundschaft, Cottbus",
+    "Karlsruher SC":          "BBBank Wildpark, Karlsruhe",
+    "Hannover 96":            "Heinz von Heiden Arena, Hannover",
+    "SV Darmstadt 98":        "Merck-Stadion am Böllenfalltor, Darmstadt",
+    "1. FC Nürnberg":         "Max-Morlock-Stadion, Nürnberg",
+    "1. FC Magdeburg":        "MDCC-Arena, Magdeburg",
+    "SG Dynamo Dresden":      "Rudolf-Harbig-Stadion, Dresden",
+    "1. FC Heidenheim 1846":  "Voith-Arena, Heidenheim",
+    "VfL Osnabrück":          "Bremer Brücke, Osnabrück",
+    "Hertha BSC":             "Olympiastadion, Berlin",
+    "VfL Bochum":             "Vonovia Ruhrstadion, Bochum",
+    "Eintracht Braunschweig": "Eintracht-Stadion, Braunschweig",
+    "1. FC Kaiserslautern":   "Fritz-Walter-Stadion, Kaiserslautern",
+}
+
+
+def _openligadb_sesong() -> int:
+    """Returnerer sesongaar for OpenLigaDB (2026 for 2026/27-sesongen).
+    Sesongen starter i juli/august."""
     now = datetime.now(TZ_DE)
-    start = now.year if now.month >= 7 else now.year - 1
-    return [
-        f"https://www.fcstpauli.com/fu%C3%9Fball/teams/profis/rahmenspielplan-{y}-{str(y + 1)[-2:]}"
-        for y in (start, start + 1)
-    ]
-
-
-def _strip_tags(html_fragment: str) -> str:
-    """Fjerner HTML-tagger og dekoder entiteter, returnerer ren tekst."""
-    import html as html_mod
-    text = re.sub(r'<[^>]+>', ' ', html_fragment)
-    text = html_mod.unescape(text)
-    return re.sub(r'\s+', ' ', text).strip()
-
-
-def _parse_schedule_rows(text: str) -> list:
-    """Trekker ut tabellrader som celle-lister fra ENTEN HTML (<tr>/<td>)
-    ELLER markdown-tabeller (| celle | celle |) slik Jina returnerer dem."""
-    rows = []
-
-    # HTML-format
-    for row_match in re.finditer(r'<tr\b[^>]*>(.*?)</tr>', text, re.DOTALL | re.IGNORECASE):
-        cells = re.findall(r'<t[dh]\b[^>]*>(.*?)</t[dh]>', row_match.group(1), re.DOTALL | re.IGNORECASE)
-        if len(cells) >= 6:
-            rows.append([_strip_tags(c) for c in cells[:6]])
-    if rows:
-        return rows
-
-    # Markdown-format (fra Jina): | Wettbewerb | Runde | Datum | Anstoss | Heim | Gast | Ergebnis |
-    for line in text.splitlines():
-        line = line.strip()
-        if not line.startswith("|"):
-            continue
-        if re.match(r'^\|[\s\-|]+\|$', line):  # skillelinje |---|---|
-            continue
-        cells = [c.strip() for c in line.strip("|").split("|")]
-        if len(cells) >= 6:
-            rows.append(cells[:6])
-    return rows
+    return now.year if now.month >= 7 else now.year - 1
 
 
 def fetch_next_match_fcstpauli() -> dict:
-    """Prover kandidat-URLene i rekkefolge til en gir en kommende kamp."""
-    for url in rahmenspielplan_urls():
-        resultat = _next_match_fra_url(url)
+    """Henter neste kamp for FC St. Pauli fra OpenLigaDB (2. Bundesliga).
+    Faller tilbake til forrige sesong hvis gjeldende sesong ikke har data
+    (rundt sesongskiftet i juni/juli)."""
+    for sesong in (_openligadb_sesong(), _openligadb_sesong() + 1):
+        resultat = _next_match_openligadb(sesong)
         if resultat.get("motstander"):
             return resultat
+    print("  (advarsel: fant ingen kommende St. Pauli-kamp i OpenLigaDB)", file=sys.stderr)
     return {}
 
 
-def _next_match_fra_url(url: str) -> dict:
-    """Henter neste kamp fra FC St. Paulis Rahmenspielplan-side.
-    Flerlags: (1) direkte henting, (2) Jina Reader-proxy. Viktig: Jina
-    proves ogsaa naar direktehentingen LYKKES men parseren finner null
-    rader - raa HTML kan vaere JS-rendret/div-basert, mens Jina leverer
-    en ren markdown-tabell som parseren alltid forstaar."""
-    m_season = re.search(r'(\d{4})-\d{2}', url)
-    season_start_year = int(m_season.group(1)) if m_season else datetime.now(TZ_DE).year
-
-    rader = []
+def _next_match_openligadb(sesong: int) -> dict:
+    """Henter alle 2. Bundesliga-kamper for en sesong fra OpenLigaDB og
+    returnerer neste uspilte FC St. Pauli-kamp."""
+    url = f"https://api.openligadb.de/getmatchdata/bl2/{sesong}"
     try:
-        text = http_get_text(url)
-        rader = _parse_schedule_rows(text)
-        print(f"Kampplan: hentet direkte ({len(rader)} rader)")
-    except Exception as e:
-        print(f"  (direkte henting av kampplan feilet: {e})", file=sys.stderr)
-
-    if not rader:
-        # Direkte henting feilet ELLER ga HTML uten gjenkjennbar tabell
-        try:
-            text = fetch_via_jina(url)
-            rader = _parse_schedule_rows(text)
-            print(f"Kampplan: hentet via Jina-proxy ({len(rader)} rader)")
-        except Exception as e2:
-            print(f"  (Jina-henting av kampplan feilet ogsaa: {e2})", file=sys.stderr)
-            return {}
-
-    if not rader:
-        print("  (advarsel: fant ingen tabellrader i kampplanen)", file=sys.stderr)
-        return {}
-
-    today = datetime.now(TZ_DE).date()  # kampdatoer er tyske - sammenlign i samme sone
-    kandidater = []
-
-    for celler in rader:
-        wettbewerb, _runde, datum, anstot, hjem, gjest = celler
-        if not hjem or not gjest:
-            continue
-        if "wettbewerb" in wettbewerb.lower():  # kolonneoverskrift
-            continue
-
-        m_dato = re.match(r'(\d{1,2})\.(\d{1,2})\.', datum.strip())
-        if not m_dato:
-            continue
-        dag, maned = int(m_dato.group(1)), int(m_dato.group(2))
-        aar = season_start_year if maned >= 7 else season_start_year + 1
-
-        # 12:00 brukes kun internt for sortering; uten "Uhr" i kampplanen
-        # er tiden ikke fastsatt, og da skal appen vise bare datoen
-        m_tid = re.search(r'(\d{1,2})(?::(\d{2}))?\s*Uhr', anstot)
-        har_tid = bool(m_tid)
-        time_str = f"{int(m_tid.group(1)):02d}:{m_tid.group(2) or '00'}" if m_tid else "12:00"
-
-        try:
-            dt = datetime.strptime(
-                f"{aar}-{maned:02d}-{dag:02d} {time_str}", "%Y-%m-%d %H:%M"
-            ).replace(tzinfo=TZ_DE)  # tysk lokaltid, IKKE UTC
-        except ValueError:
-            continue
-        if dt.date() < today:
-            continue
-
-        hjemme = "pauli" in hjem.lower()
-        kandidater.append({
-            "dt": dt,
-            "har_tid": har_tid,
-            "motstander": gjest if hjemme else hjem,
-            "hjemme": hjemme,
-            "turnering": wettbewerb.strip() or "Kamp",
+        req = urllib.request.Request(url, headers={
+            "Accept": "application/json",
+            "User-Agent": USER_AGENT,
         })
-
-    if not kandidater:
-        print("  (advarsel: fant ingen kommende kamp med fastsatt dato i kampplanen)", file=sys.stderr)
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+    except Exception as e:
+        print(f"  (OpenLigaDB-henting feilet for sesong {sesong}: {e})", file=sys.stderr)
         return {}
 
-    kandidater.sort(key=lambda x: x["dt"])
-    neste = kandidater[0]
+    if not isinstance(data, list):
+        print(f"  (OpenLigaDB: uventet dataformat for sesong {sesong})", file=sys.stderr)
+        return {}
+
+    # Filtrer St. Pauli-kamper som ikke er spilt ennaa
+    kommende = []
+    for m in data:
+        t1_id = m.get("team1", {}).get("teamId")
+        t2_id = m.get("team2", {}).get("teamId")
+        if STPAULI_TEAM_ID not in (t1_id, t2_id):
+            continue
+        if m.get("matchIsFinished", False):
+            continue
+        kommende.append(m)
+
+    if not kommende:
+        print(f"  (OpenLigaDB sesong {sesong}: ingen kommende St. Pauli-kamper)")
+        return {}
+
+    # Sorter etter kamptidspunkt
+    kommende.sort(key=lambda x: x.get("matchDateTime", ""))
+    neste = kommende[0]
+
+    hjemme = neste["team1"]["teamId"] == STPAULI_TEAM_ID
+    motstander_obj = neste["team2"] if hjemme else neste["team1"]
+    motstander = motstander_obj.get("teamName", "")
+
+    # matchDateTime er tysk lokaltid (CET/CEST), f.eks. "2026-10-11T11:30:00"
+    dt_str = neste.get("matchDateTime", "")
+    dato = ""
+    tid = ""
+    kickoff_iso = ""
+    if dt_str:
+        try:
+            dt = datetime.strptime(dt_str[:19], "%Y-%m-%dT%H:%M:%S")
+            dt = dt.replace(tzinfo=TZ_DE)
+            dato = dt.strftime("%Y-%m-%d")
+            tid = dt.strftime("%H:%M")
+            kickoff_iso = dt.isoformat()
+        except ValueError:
+            dato = dt_str[:10]
+
+    # Stadion
+    if hjemme:
+        stadion = "Millerntor-Stadion, Hamburg"
+    else:
+        stadion = BORTE_STADION.get(motstander, "")
+
+    # Turneringsnavn — OpenLigaDB gir "2. Fußball-Bundesliga 2026/2027"
+    turnering = neste.get("leagueName", "2. Bundesliga")
+    # Forkort til "2. Bundesliga" for visning i appen
+    if "bundesliga" in turnering.lower():
+        turnering = "2. Bundesliga"
+
+    spilldag = neste.get("group", {}).get("groupOrderID", "")
+
+    print(f"OpenLigaDB: neste kamp = {motstander} ({dato} {tid}), spilldag {spilldag}")
     return {
-        "motstander": neste["motstander"],
-        "dato": neste["dt"].strftime("%Y-%m-%d"),
-        "tid": neste["dt"].strftime("%H:%M") if neste["har_tid"] else "",
-        "kickoff_iso": neste["dt"].isoformat() if neste["har_tid"] else "",
-        "turnering": neste["turnering"],
-        "hjemme": neste["hjemme"],
-        "stadion": "Millerntor-Stadion, Hamburg" if neste["hjemme"] else "",
+        "motstander": motstander,
+        "dato": dato,
+        "tid": tid,
+        "kickoff_iso": kickoff_iso,
+        "turnering": turnering,
+        "hjemme": hjemme,
+        "stadion": stadion,
     }
 
 
