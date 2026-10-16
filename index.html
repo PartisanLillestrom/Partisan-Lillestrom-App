@@ -26,7 +26,7 @@
 #hjem.active{display:flex!important;}
 #hjem{height:calc(var(--app-h,100vh) - 98px);}
 #kamper{height:calc(var(--app-h,100vh) - 120px);}
-#logoer,#om,#medlem,#tabell,#galleri{height:calc(var(--app-h,100vh) - 120px);}
+#logoer,#om,#medlem,#tabell,#galleri,#tipping{height:calc(var(--app-h,100vh) - 120px);}
 #arr{height:calc(var(--app-h,100vh) - 120px);}
 :root{
   --red:#c0392b;
@@ -357,6 +357,39 @@ input,select,textarea{font-size:16px !important;-webkit-text-size-adjust:100%;} 
 .galleri-upload-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:10px;border:1px dashed rgba(255,255,255,.2);border-radius:8px;background:none;color:rgba(255,255,255,.5);font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;margin-bottom:12px;}
 .galleri-upload-btn:active{background:rgba(255,255,255,.05);}
 
+/* TIPPING */
+.tipp-kamp-kort{padding:14px;margin-bottom:14px;}
+.tipp-kamp-lag{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.04em;text-align:center;}
+.tipp-kamp-info{font-family:'Barlow Condensed',sans-serif;font-size:12px;color:rgba(255,255,255,.4);text-align:center;margin-top:4px;}
+.tipp-skjema{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;}
+.tipp-input{width:52px;text-align:center;font-family:'Bebas Neue',sans-serif;font-size:26px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:6px;color:#fff;padding:6px 0;-moz-appearance:textfield;}
+.tipp-input::-webkit-outer-spin-button,.tipp-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.tipp-vs{font-family:'Bebas Neue',sans-serif;font-size:16px;color:rgba(255,255,255,.3);}
+.tipp-send-btn{display:block;width:100%;margin-top:12px;padding:10px;border:1px solid transparent;background-origin:border-box;background-clip:padding-box,border-box;background-image:linear-gradient(90deg,#3d1208,#1a0804),var(--grad-accent);border-radius:6px;color:#fff;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.06em;cursor:pointer;}
+.tipp-send-btn:disabled{opacity:.4;cursor:not-allowed;}
+.tipp-liste{margin-top:14px;}
+.tipp-rad{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.04);}
+.tipp-rad:last-child{border-bottom:none;}
+.tipp-rad-navn{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,.8);}
+.tipp-rad-res{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;}
+.tipp-rad-poeng{font-family:'Bebas Neue',sans-serif;font-size:14px;padding:2px 8px;border-radius:4px;min-width:28px;text-align:center;}
+.tipp-3{background:rgba(46,204,113,.25);color:#2ecc71;}
+.tipp-2{background:rgba(52,152,219,.25);color:#3498db;}
+.tipp-1{background:rgba(241,196,15,.25);color:#f1c40f;}
+.tipp-0{background:rgba(255,255,255,.05);color:rgba(255,255,255,.3);}
+.tipp-toppliste-rad{display:flex;align-items:center;padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.04);}
+.tipp-toppliste-rad:last-child{border-bottom:none;}
+.tipp-toppliste-plass{font-family:'Bebas Neue',sans-serif;font-size:18px;color:rgba(255,255,255,.3);width:28px;text-align:center;flex-shrink:0;}
+.tipp-toppliste-navn{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;color:rgba(255,255,255,.8);flex:1;}
+.tipp-toppliste-info{font-family:'Barlow Condensed',sans-serif;font-size:11px;color:rgba(255,255,255,.35);flex:1;text-align:right;}
+.tipp-toppliste-poeng{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;min-width:36px;text-align:right;}
+.tipp-frist-tag{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:3px;margin-top:6px;}
+.tipp-open{background:rgba(46,204,113,.15);color:#2ecc71;}
+.tipp-closed{background:rgba(192,57,43,.15);color:#c0392b;}
+.tipp-tab-row{display:flex;gap:0;margin-bottom:14px;border-bottom:1px solid rgba(255,255,255,.08);}
+.tipp-tab{flex:1;text-align:center;padding:10px 6px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.35);cursor:pointer;border:none;background:none;border-bottom:2px solid transparent;}
+.tipp-tab.active{color:#fff;border-bottom-color:#c0392b;}
+
 /* KALENDER-KNAPP */
 .kal-btn{background:none;border:1px solid rgba(255,255,255,.15);border-radius:4px;color:rgba(255,255,255,.5);font-size:11px;font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.04em;padding:3px 8px;cursor:pointer;white-space:nowrap;text-transform:uppercase;}
 .kal-btn:active{background:rgba(255,255,255,.08);}
@@ -578,6 +611,43 @@ function esc(s) {
   </div>
 </div>
 
+<!-- TIPPING -->
+<div id="tipping" class="page" style="padding:16px 14px 60px;overflow-y:auto;overscroll-behavior:contain;">
+  <div class="sec-title-style" style="margin-bottom:12px;">Kamptipping</div>
+
+  <div class="tipp-tab-row">
+    <button class="tipp-tab active" onclick="visTippFane('kamp',this)">Neste kamp</button>
+    <button class="tipp-tab" onclick="visTippFane('toppliste',this)">Toppliste</button>
+    <button class="tipp-tab" onclick="visTippFane('historikk',this)">Historikk</button>
+  </div>
+
+  <div id="tippKampFane">
+    <div id="tippKampKort" class="card-bg tipp-kamp-kort">
+      <div style="text-align:center;padding:10px;color:rgba(255,255,255,.4);font-size:13px;">
+        <span style="display:inline-block;animation:spin 1s linear infinite;font-size:18px;">⟳</span><br>Laster kampdata…
+      </div>
+    </div>
+    <div id="tippAndre" class="card-bg" style="padding:10px 8px;display:none;">
+      <div class="sub-label" style="padding:4px 10px 8px;">Alle tips</div>
+      <div id="tippAndreListe"></div>
+    </div>
+  </div>
+
+  <div id="tippTopplisteFane" style="display:none;">
+    <div id="tippToppliste" class="card-bg" style="padding:10px 8px;">
+      <div style="text-align:center;padding:20px;color:rgba(255,255,255,.4);font-size:13px;">Laster toppliste…</div>
+    </div>
+  </div>
+
+  <div id="tippHistorikkFane" style="display:none;">
+    <div id="tippHistorikk"></div>
+  </div>
+
+  <div style="text-align:center;margin-top:10px;">
+    <span class="info-meta" style="font-size:10px;color:rgba(255,255,255,.25);">Poeng: 3 = riktig resultat · 2 = riktig utfall+målforskjell · 1 = riktig utfall · 0 = feil</span>
+  </div>
+</div>
+
 <!-- GALLERI -->
 <div id="galleri" class="page" style="padding:16px 14px 60px;overflow-y:auto;overscroll-behavior:contain;">
   <div class="sec-title-style" style="margin-bottom:12px;">Bildegalleri</div>
@@ -683,14 +753,18 @@ function esc(s) {
 <div class="bnav">
   <button class="bb active" onclick="sp('hjem',this)"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg><span class="bb-label">Hjem</span></button>
   <button class="bb" onclick="sp('arr',this)"><span style="position:relative;"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span id="arrBadge" style="display:none;position:absolute;top:-3px;right:-5px;width:8px;height:8px;background:#c0392b;border-radius:50%;border:2px solid #0a0a0a;"></span></span><span class="bb-label">Arr.</span></button>
-  <button class="bb" onclick="sp('kamper',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3c0 0 2 4 0 9s0 9 0 9M3 12h18"/></svg><span class="bb-label">Kamplogg</span></button>
   <button class="bb" onclick="sp('tabell',this)"><svg viewBox="0 0 24 24"><path d="M16 3h5v5M4 20L21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg><span class="bb-label">Tabell</span></button>
+  <button class="bb" onclick="sp('tipping',this)"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M20 12l-8 4-8-4"/></svg><span class="bb-label">Tipping</span></button>
   <button class="bb" onclick="toggleMeny()"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg><span class="bb-label">Meny</span></button>
 </div>
 
 <!-- HAMBURGER MENY OVERLAY -->
 <div class="hmeny-overlay" id="hmenyOverlay" onclick="lukkMeny()">
   <div class="hmeny-panel" onclick="event.stopPropagation()">
+    <button class="hmeny-item" onclick="spMeny('kamper')">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3c0 0 2 4 0 9s0 9 0 9M3 12h18"/></svg>
+      Kamplogg
+    </button>
     <button class="hmeny-item" onclick="spMeny('galleri')">
       <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
       Galleri
@@ -897,6 +971,7 @@ function sp(id,btn){
     if (badge) badge.style.display = 'none';
   }
   if(id==='tabell') hentTabell();
+  if(id==='tipping') lastTipping();
 
   const hdr = document.querySelector('.hdr');
   if(hdr) hdr.style.display = id === 'hjem' ? 'none' : 'flex';
@@ -924,6 +999,7 @@ function spMeny(id){
   const bar = document.getElementById('nesteKampBar');
   if(bar) bar.style.display = 'none';
   if(id==='galleri') lastGalleri();
+  if(id==='tipping') lastTipping();
 }
 
 document.addEventListener('DOMContentLoaded', () => lastKamplogg());
@@ -1043,6 +1119,353 @@ async function lastOppBilder(files) {
   }
   document.getElementById('galleriInput').value = '';
   lastGalleri();
+}
+
+// ---- KAMPTIPPING ----
+const TIPPING_REF = 'https://partisan-lillestrom-default-rtdb.europe-west1.firebasedatabase.app/tipping';
+const TIPPING_POENG_REF = 'https://partisan-lillestrom-default-rtdb.europe-west1.firebasedatabase.app/tipping_poeng';
+
+let _tippLastet = false;
+let _tippNesteKamp = null;
+
+function visTippFane(fane, btn) {
+  document.querySelectorAll('.tipp-tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  document.getElementById('tippKampFane').style.display = fane === 'kamp' ? 'block' : 'none';
+  document.getElementById('tippTopplisteFane').style.display = fane === 'toppliste' ? 'block' : 'none';
+  document.getElementById('tippHistorikkFane').style.display = fane === 'historikk' ? 'block' : 'none';
+  if (fane === 'toppliste') lastTippToppliste();
+  if (fane === 'historikk') lastTippHistorikk();
+}
+
+function lagKampId(kamp) {
+  // Lager en unik ID basert på dato og motstander
+  return (kamp.dato + '_' + (kamp.motstander || '').replace(/[^a-zA-Z0-9]/g, '')).substring(0, 60);
+}
+
+function finnNesteKamp2BL() {
+  const now = new Date();
+  return KJENTE_KAMPER.find(k => k.turnering === '2. Bundesliga' && new Date(k.dato + 'T' + (k.tid || '15:00')) > now) || null;
+}
+
+function erTippOpen(kamp) {
+  if (!kamp) return false;
+  const kampstart = new Date(kamp.dato + 'T' + (kamp.tid || '15:00'));
+  return new Date() < kampstart;
+}
+
+async function lastTipping() {
+  const kamp = finnNesteKamp2BL();
+  _tippNesteKamp = kamp;
+  const kort = document.getElementById('tippKampKort');
+  if (!kort) return;
+
+  if (!kamp) {
+    kort.innerHTML = '<div style="text-align:center;padding:20px;color:rgba(255,255,255,.4);font-size:13px;">Ingen kommende 2. Bundesliga-kamp funnet</div>';
+    return;
+  }
+
+  const kampId = lagKampId(kamp);
+  const open = erTippOpen(kamp);
+  const d = new Date(kamp.dato + 'T' + (kamp.tid || '15:00'));
+  const dagStr = d.toLocaleDateString('nb-NO', { weekday: 'long', day: 'numeric', month: 'long' });
+  const hjemme = kamp.hjemme ? 'FC St. Pauli' : esc(kamp.motstander);
+  const borte = kamp.hjemme ? esc(kamp.motstander) : 'FC St. Pauli';
+
+  // Sjekk om brukeren allerede har tippet
+  const navn = localStorage.getItem('pl_navn') || '';
+  let mittTipp = null;
+  if (navn) {
+    try {
+      const resp = await fetch(TIPPING_REF + '/' + kampId + '/' + encodeURIComponent(navn) + '.json');
+      const data = await resp.json();
+      if (data) mittTipp = data;
+    } catch(e) {}
+  }
+
+  let html = `<div class="tipp-kamp-lag">${hjemme} — ${borte}</div>`;
+  html += `<div class="tipp-kamp-info">${dagStr} kl. ${kamp.tid || '15:00'} · ${esc(kamp.stadion || '')}</div>`;
+  html += `<div style="text-align:center;"><span class="tipp-frist-tag ${open ? 'tipp-open' : 'tipp-closed'}">${open ? '🟢 Åpen for tipping' : '🔴 Tippefrist utløpt'}</span></div>`;
+
+  if (mittTipp) {
+    html += `<div style="text-align:center;margin-top:14px;">`;
+    html += `<div class="sub-label" style="margin-bottom:6px;">Ditt tipp</div>`;
+    html += `<span class="tipp-rad-res" style="font-size:28px;">${mittTipp.h} — ${mittTipp.b}</span>`;
+    if (open) {
+      html += `<div style="margin-top:8px;"><button onclick="fjernTipp('${kampId}')" style="background:none;border:1px solid rgba(255,255,255,.15);border-radius:4px;color:rgba(255,255,255,.4);font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:4px 12px;cursor:pointer;">Endre tipp</button></div>`;
+    }
+    html += `</div>`;
+  } else if (open) {
+    html += `<div class="tipp-skjema">`;
+    html += `<input type="number" id="tippHjemme" class="tipp-input" min="0" max="20" placeholder="0">`;
+    html += `<span class="tipp-vs">—</span>`;
+    html += `<input type="number" id="tippBorte" class="tipp-input" min="0" max="20" placeholder="0">`;
+    html += `</div>`;
+    if (!navn) {
+      html += `<div style="margin-top:10px;"><input type="text" id="tippNavn" class="form-field" placeholder="Navnet ditt" style="border-radius:6px;text-align:center;"></div>`;
+    }
+    html += `<button class="tipp-send-btn" onclick="sendTipp('${kampId}')">Send inn tipp</button>`;
+  } else {
+    html += `<div style="text-align:center;margin-top:14px;color:rgba(255,255,255,.4);font-size:13px;">Du tippet ikke på denne kampen</div>`;
+  }
+
+  kort.innerHTML = html;
+
+  // Last andre tips
+  await lastAndreTips(kampId, kamp);
+}
+
+async function lastAndreTips(kampId, kamp) {
+  const container = document.getElementById('tippAndre');
+  const liste = document.getElementById('tippAndreListe');
+  if (!container || !liste) return;
+  try {
+    const resp = await fetch(TIPPING_REF + '/' + kampId + '.json');
+    const data = await resp.json();
+    if (!data || Object.keys(data).length === 0) {
+      container.style.display = 'none';
+      return;
+    }
+
+    // Sjekk om kampen har et faktisk resultat (for poengberegning)
+    let faktisk = null;
+    try {
+      const now = new Date();
+      const sesong = now.getMonth() >= 6 ? now.getFullYear() : now.getFullYear() - 1;
+      const mResp = await fetch(`https://api.openligadb.de/getmatchdata/bl2/${sesong}`);
+      const kamper = await mResp.json();
+      const match = kamper.find(m => {
+        const mDato = m.matchDateTimeUTC ? m.matchDateTimeUTC.substring(0, 10) : '';
+        return mDato === kamp.dato && m.matchIsFinished;
+      });
+      if (match && match.matchResults && match.matchResults.length) {
+        const endResult = match.matchResults.find(r => r.resultTypeID === 2) || match.matchResults[0];
+        faktisk = { h: endResult.pointsTeam1, b: endResult.pointsTeam2 };
+      }
+    } catch(e) {}
+
+    const entries = Object.entries(data).map(([navn, d]) => {
+      let poeng = null;
+      if (faktisk) {
+        poeng = beregnPoeng(d.h, d.b, faktisk.h, faktisk.b);
+      }
+      return { navn, ...d, poeng };
+    });
+    entries.sort((a, b) => (b.poeng ?? -1) - (a.poeng ?? -1));
+
+    let html = '';
+    if (faktisk) {
+      html += `<div style="text-align:center;padding:8px 0 10px;border-bottom:1px solid rgba(255,255,255,.06);"><span class="sub-label">Resultat</span><br><span class="tipp-rad-res" style="font-size:22px;">${faktisk.h} — ${faktisk.b}</span></div>`;
+    }
+    entries.forEach(e => {
+      html += `<div class="tipp-rad">`;
+      html += `<span class="tipp-rad-navn">${esc(e.navn)}</span>`;
+      html += `<span style="display:flex;align-items:center;gap:8px;">`;
+      html += `<span class="tipp-rad-res">${e.h} — ${e.b}</span>`;
+      if (e.poeng !== null) {
+        html += `<span class="tipp-rad-poeng tipp-${e.poeng}">${e.poeng}p</span>`;
+      }
+      html += `</span></div>`;
+    });
+    liste.innerHTML = html;
+    container.style.display = 'block';
+
+    // Hvis kampen er ferdig, oppdater poeng i Firebase
+    if (faktisk) {
+      oppdaterPoeng(kampId, entries, kamp);
+    }
+  } catch(e) {
+    console.warn('Kunne ikke laste tips', e);
+  }
+}
+
+function beregnPoeng(tH, tB, fH, fB) {
+  tH = parseInt(tH); tB = parseInt(tB);
+  fH = parseInt(fH); fB = parseInt(fB);
+  // Riktig resultat
+  if (tH === fH && tB === fB) return 3;
+  // Riktig utfall + riktig målforskjell
+  const tDiff = tH - tB;
+  const fDiff = fH - fB;
+  if (tDiff === fDiff) return 2;
+  // Riktig utfall (seier/uavgjort/tap)
+  const tUtfall = tDiff > 0 ? 1 : tDiff < 0 ? -1 : 0;
+  const fUtfall = fDiff > 0 ? 1 : fDiff < 0 ? -1 : 0;
+  if (tUtfall === fUtfall) return 1;
+  return 0;
+}
+
+async function sendTipp(kampId) {
+  let navn = localStorage.getItem('pl_navn') || '';
+  const navnFelt = document.getElementById('tippNavn');
+  if (navnFelt) {
+    navn = navnFelt.value.trim();
+    if (!navn) { alert('Skriv inn navnet ditt.'); return; }
+    localStorage.setItem('pl_navn', navn);
+  }
+  if (!navn) { alert('Skriv inn navnet ditt (gå til Arrangementer for å sette navn).'); return; }
+
+  const hEl = document.getElementById('tippHjemme');
+  const bEl = document.getElementById('tippBorte');
+  const h = parseInt(hEl?.value);
+  const b = parseInt(bEl?.value);
+  if (isNaN(h) || isNaN(b) || h < 0 || b < 0) {
+    alert('Skriv inn et gyldig resultat.');
+    return;
+  }
+
+  try {
+    const payload = { h, b, ts: Date.now() };
+    const resp = await fetch(TIPPING_REF + '/' + kampId + '/' + encodeURIComponent(navn) + '.json', {
+      method: 'PUT',
+      body: JSON.stringify(payload)
+    });
+    if (!resp.ok) throw new Error('Kunne ikke lagre tipp');
+    lastTipping();
+  } catch(e) {
+    console.warn('Feil ved lagring av tipp', e);
+    alert('Kunne ikke lagre tippet. Prøv igjen.');
+  }
+}
+
+async function fjernTipp(kampId) {
+  const navn = localStorage.getItem('pl_navn') || '';
+  if (!navn) return;
+  try {
+    await fetch(TIPPING_REF + '/' + kampId + '/' + encodeURIComponent(navn) + '.json', { method: 'DELETE' });
+    lastTipping();
+  } catch(e) {
+    console.warn('Kunne ikke fjerne tipp', e);
+  }
+}
+
+async function oppdaterPoeng(kampId, entries, kamp) {
+  // Oppdaterer sesongens poeng i Firebase
+  const now = new Date();
+  const sesong = now.getMonth() >= 6 ? now.getFullYear() : now.getFullYear() - 1;
+  for (const e of entries) {
+    if (e.poeng === null) continue;
+    try {
+      // Hent eksisterende poeng
+      const ref = TIPPING_POENG_REF + '/' + sesong + '/' + encodeURIComponent(e.navn);
+      const resp = await fetch(ref + '.json');
+      const data = await resp.json();
+      const eksisterende = data || { total: 0, kamper: 0, detaljer: {} };
+      // Sjekk om denne kampen allerede er telt
+      if (eksisterende.detaljer && eksisterende.detaljer[kampId] !== undefined) continue;
+      // Oppdater
+      eksisterende.total = (eksisterende.total || 0) + e.poeng;
+      eksisterende.kamper = (eksisterende.kamper || 0) + 1;
+      if (!eksisterende.detaljer) eksisterende.detaljer = {};
+      eksisterende.detaljer[kampId] = e.poeng;
+      await fetch(ref + '.json', { method: 'PUT', body: JSON.stringify(eksisterende) });
+    } catch(err) {
+      console.warn('Poengoppdatering feilet for', e.navn, err);
+    }
+  }
+}
+
+async function lastTippToppliste() {
+  const el = document.getElementById('tippToppliste');
+  if (!el) return;
+  try {
+    const now = new Date();
+    const sesong = now.getMonth() >= 6 ? now.getFullYear() : now.getFullYear() - 1;
+    const resp = await fetch(TIPPING_POENG_REF + '/' + sesong + '.json');
+    const data = await resp.json();
+    if (!data) {
+      el.innerHTML = '<div style="text-align:center;padding:20px;color:rgba(255,255,255,.4);font-size:13px;">Ingen poeng ennå. Tipp på neste kamp!</div>';
+      return;
+    }
+    const liste = Object.entries(data).map(([navn, d]) => ({
+      navn,
+      total: d.total || 0,
+      kamper: d.kamper || 0,
+      snitt: d.kamper ? ((d.total || 0) / d.kamper).toFixed(1) : '0.0'
+    }));
+    liste.sort((a, b) => b.total - a.total || b.kamper - a.kamper);
+
+    let html = '';
+    liste.forEach((e, i) => {
+      html += `<div class="tipp-toppliste-rad">`;
+      html += `<span class="tipp-toppliste-plass">${i + 1}</span>`;
+      html += `<span class="tipp-toppliste-navn">${esc(e.navn)}</span>`;
+      html += `<span class="tipp-toppliste-info">${e.kamper} kamper · snitt ${e.snitt}</span>`;
+      html += `<span class="tipp-toppliste-poeng">${e.total}</span>`;
+      html += `</div>`;
+    });
+    el.innerHTML = html;
+  } catch(e) {
+    console.warn('Kunne ikke laste toppliste', e);
+    el.innerHTML = '<div style="text-align:center;padding:20px;color:rgba(255,255,255,.4);font-size:13px;">Kunne ikke laste toppliste.</div>';
+  }
+}
+
+async function lastTippHistorikk() {
+  const el = document.getElementById('tippHistorikk');
+  if (!el) return;
+  try {
+    const resp = await fetch(TIPPING_REF + '.json');
+    const data = await resp.json();
+    if (!data) {
+      el.innerHTML = '<div style="text-align:center;padding:20px;color:rgba(255,255,255,.4);font-size:13px;">Ingen tidligere tips.</div>';
+      return;
+    }
+    // Finn ferdige kamper
+    const now = new Date();
+    const sesong = now.getMonth() >= 6 ? now.getFullYear() : now.getFullYear() - 1;
+    let kampResultater = {};
+    try {
+      const mResp = await fetch(`https://api.openligadb.de/getmatchdata/bl2/${sesong}`);
+      const kamper = await mResp.json();
+      kamper.forEach(m => {
+        if (m.matchIsFinished && m.matchResults && m.matchResults.length) {
+          const d = m.matchDateTimeUTC ? m.matchDateTimeUTC.substring(0, 10) : '';
+          const endResult = m.matchResults.find(r => r.resultTypeID === 2) || m.matchResults[0];
+          kampResultater[d] = { h: endResult.pointsTeam1, b: endResult.pointsTeam2, t1: m.team1?.shortName || m.team1?.teamName, t2: m.team2?.shortName || m.team2?.teamName };
+        }
+      });
+    } catch(e) {}
+
+    // Sorter kamper nyeste først
+    const kampIder = Object.keys(data).sort().reverse();
+    let html = '';
+    for (const kampId of kampIder) {
+      const dato = kampId.substring(0, 10);
+      const kampData = KJENTE_KAMPER.find(k => k.dato === dato && k.turnering === '2. Bundesliga');
+      if (!kampData) continue;
+      const faktisk = kampResultater[dato];
+      if (!faktisk) continue; // Vis bare ferdige kamper i historikk
+
+      const hjemme = kampData.hjemme ? 'St. Pauli' : kampData.motstander.substring(0, 15);
+      const borte = kampData.hjemme ? kampData.motstander.substring(0, 15) : 'St. Pauli';
+      const d = new Date(dato);
+      const dagStr = d.toLocaleDateString('nb-NO', { day: 'numeric', month: 'short' });
+
+      html += `<div class="card-bg" style="padding:10px;margin-bottom:10px;">`;
+      html += `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">`;
+      html += `<span style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:rgba(255,255,255,.7);">${esc(hjemme)} — ${esc(borte)}</span>`;
+      html += `<span class="tipp-rad-res" style="font-size:16px;">${faktisk.h} — ${faktisk.b}</span>`;
+      html += `</div>`;
+      html += `<div class="info-meta" style="margin-bottom:6px;">${dagStr}</div>`;
+
+      const tips = Object.entries(data[kampId]).map(([navn, d]) => ({
+        navn,
+        h: d.h, b: d.b,
+        poeng: beregnPoeng(d.h, d.b, faktisk.h, faktisk.b)
+      }));
+      tips.sort((a, b) => b.poeng - a.poeng);
+      tips.forEach(t => {
+        html += `<div class="tipp-rad"><span class="tipp-rad-navn">${esc(t.navn)}</span><span style="display:flex;align-items:center;gap:8px;"><span class="tipp-rad-res" style="font-size:15px;">${t.h} — ${t.b}</span><span class="tipp-rad-poeng tipp-${t.poeng}">${t.poeng}p</span></span></div>`;
+      });
+      html += `</div>`;
+    }
+    if (!html) html = '<div style="text-align:center;padding:20px;color:rgba(255,255,255,.4);font-size:13px;">Ingen ferdige kamper med tips ennå.</div>';
+    el.innerHTML = html;
+  } catch(e) {
+    console.warn('Kunne ikke laste historikk', e);
+    el.innerHTML = '<div style="text-align:center;padding:20px;color:rgba(255,255,255,.4);font-size:13px;">Kunne ikke laste historikk.</div>';
+  }
 }
 
 // ---- LEGG TIL I KALENDER (ICS) ----
