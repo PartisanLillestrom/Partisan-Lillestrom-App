@@ -999,19 +999,29 @@ function visBilde(idx) {
     + `<div style="text-align:center;"><img src="${esc(b.url)}" alt="${esc(b.tekst||'Bilde')}">`
     + (b.tekst ? `<div style="color:rgba(255,255,255,.7);font-size:13px;margin-top:10px;">${esc(b.tekst)}</div>` : '')
     + (b.av ? `<div style="color:rgba(255,255,255,.35);font-size:11px;margin-top:4px;">Av ${esc(b.av)}</div>` : '')
+    + `<button onclick="slettBilde('${esc(b.id)}')" style="margin-top:14px;background:none;border:1px solid rgba(255,255,255,.2);border-radius:6px;color:rgba(255,255,255,.5);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:6px 16px;cursor:pointer;">Slett bilde</button>`
     + `</div>`;
   document.body.appendChild(lb);
 }
 
+async function slettBilde(id) {
+  if (!confirm('Er du sikker på at du vil slette dette bildet?')) return;
+  try {
+    const resp = await fetch(GALLERI_REF + '/' + id + '.json', { method: 'DELETE' });
+    if (!resp.ok) throw new Error('Sletting feilet');
+    document.querySelector('.galleri-lightbox')?.remove();
+    lastGalleri();
+  } catch(e) {
+    console.warn('Kunne ikke slette bilde', e);
+    alert('Kunne ikke slette bildet. Prøv igjen.');
+  }
+}
+
 async function lastOppBilder(files) {
   if (!files || !files.length) return;
-  let navn = localStorage.getItem('pl_navn');
-  if (!navn) {
-    navn = prompt('Skriv inn navnet ditt:');
-    if (!navn || !navn.trim()) return;
-    navn = navn.trim();
-    localStorage.setItem('pl_navn', navn);
-  }
+  const beskrivelse = prompt('Hvilken kamp eller arrangement er bildet fra?');
+  if (!beskrivelse || !beskrivelse.trim()) return;
+  const navn = localStorage.getItem('pl_navn') || '';
   const grid = document.getElementById('galleriGrid');
   const tom = document.getElementById('galleriTom');
   for (const file of files) {
@@ -1023,7 +1033,7 @@ async function lastOppBilder(files) {
         reader.onerror = rej;
         reader.readAsDataURL(file);
       });
-      const payload = { url: dataUrl, tekst: '', av: navn, ts: Date.now() };
+      const payload = { url: dataUrl, tekst: beskrivelse.trim(), av: navn, ts: Date.now() };
       const resp = await fetch(GALLERI_REF + '.json', { method: 'POST', body: JSON.stringify(payload) });
       if (!resp.ok) throw new Error('Feil ved opplasting');
     } catch(e) {
