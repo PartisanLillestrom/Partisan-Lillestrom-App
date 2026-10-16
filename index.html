@@ -1005,8 +1005,13 @@ function visBilde(idx) {
 
 async function lastOppBilder(files) {
   if (!files || !files.length) return;
-  const navn = localStorage.getItem('pl_navn');
-  if (!navn) { alert('Skriv inn navnet ditt først (gå til Arrangementer for å sette navn).'); return; }
+  let navn = localStorage.getItem('pl_navn');
+  if (!navn) {
+    navn = prompt('Skriv inn navnet ditt:');
+    if (!navn || !navn.trim()) return;
+    navn = navn.trim();
+    localStorage.setItem('pl_navn', navn);
+  }
   const grid = document.getElementById('galleriGrid');
   const tom = document.getElementById('galleriTom');
   for (const file of files) {
