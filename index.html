@@ -617,7 +617,7 @@ function esc(s) {
 
   <div class="tipp-tab-row">
     <button class="tipp-tab active" onclick="visTippFane('kamp',this)">Neste kamp</button>
-    <button class="tipp-tab" onclick="visTippFane('toppliste',this)">Toppliste</button>
+    <button class="tipp-tab" onclick="visTippFane('toppliste',this)">Rangering</button>
     <button class="tipp-tab" onclick="visTippFane('historikk',this)">Historikk</button>
   </div>
 
@@ -635,7 +635,7 @@ function esc(s) {
 
   <div id="tippTopplisteFane" style="display:none;">
     <div id="tippToppliste" class="card-bg" style="padding:10px 8px;">
-      <div style="text-align:center;padding:20px;color:rgba(255,255,255,.4);font-size:13px;">Laster toppliste…</div>
+      <div style="text-align:center;padding:20px;color:rgba(255,255,255,.4);font-size:13px;">Laster rangering…</div>
     </div>
   </div>
 
@@ -1204,7 +1204,7 @@ async function lastTipping() {
     if (!navn) {
       html += `<div style="margin-top:10px;"><input type="text" id="tippNavn" class="form-field" placeholder="Navnet ditt" style="border-radius:6px;text-align:center;"></div>`;
     }
-    html += `<button class="tipp-send-btn" onclick="sendTipp('${kampId}')">Send inn tipp</button>`;
+    html += `<button class="tipp-send-btn" onclick="sendTipp('${kampId}')">Tipp!</button>`;
   } else {
     html += `<div style="text-align:center;margin-top:14px;color:rgba(255,255,255,.4);font-size:13px;">Du tippet ikke på denne kampen</div>`;
   }
@@ -1374,7 +1374,7 @@ async function lastTippToppliste() {
     const resp = await fetch(TIPPING_POENG_REF + '/' + sesong + '.json');
     const data = await resp.json();
     if (!data) {
-      el.innerHTML = '<div style="text-align:center;padding:20px;color:rgba(255,255,255,.4);font-size:13px;">Ingen poeng ennå. Tipp på neste kamp!</div>';
+      el.innerHTML = '<div style="text-align:center;padding:20px;color:rgba(255,255,255,.4);font-size:13px;">Ingen poeng ennå — tipp på neste kamp!</div>';
       return;
     }
     const liste = Object.entries(data).map(([navn, d]) => ({
@@ -1397,7 +1397,7 @@ async function lastTippToppliste() {
     el.innerHTML = html;
   } catch(e) {
     console.warn('Kunne ikke laste toppliste', e);
-    el.innerHTML = '<div style="text-align:center;padding:20px;color:rgba(255,255,255,.4);font-size:13px;">Kunne ikke laste toppliste.</div>';
+    el.innerHTML = '<div style="text-align:center;padding:20px;color:rgba(255,255,255,.4);font-size:13px;">Kunne ikke laste rangering.</div>';
   }
 }
 
