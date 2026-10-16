@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | Opphetet duell i Hannover: Rapps lag sikter mot en toppkamp…",
+      "title_de": "FC St. Pauli | Heißes Duell in Hannover: Rapp-Elf will Topspiel für…",
+      "url": "https://www.fcstpauli.com/news/vorbericht-auswaertsspiel-hannover-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2F1-Ligaspiele-Pokalspiele%2F05-Wolfsburg-H%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-00935.jpg%3Fv%3D1792155771%252C0.5236%252C0.3305&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Hva skjer denne helgen",
       "title_de": "FC St. Pauli | Das geht am Wochenende",
       "url": "https://www.fcstpauli.com/news/fcsp-am-wochenende-kw42-2026",
@@ -23,12 +29,6 @@
       "title_de": "FC St. Pauli | „Wir haben weiterhin auf das vertraut, was wir uns vor…",
       "url": "https://www.fcstpauli.com/news/presserunde-mathias-rasmussen-auswaertsspiel-hannover-2627",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FRasmussen%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-09164.jpg%3Fv%3D1791984301%252C0.5%252C0.1794&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Stor interesse for pressekonferanse og faktaquiz…",
-      "title_de": "FC St. Pauli | Großes Interesse an Pressekonferenz und Faktenquiz…",
-      "url": "https://www.fcstpauli.com/news/grosses-interesse-an-pressekonferenz-und-faktenquiz-beim-fc-st-pauli",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FVerein%2FVeranstaltungen-Events%2FWoche-Pressefreiheit-2026%2F_1200x630_crop_center-center_82_none%2FPK-Faktenquiz.jpg%3Fv%3D1792049792%252C0.2448%252C0.4117&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -514,5 +514,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-10-16T11:53:11Z"
+  "updated": "2026-10-16T15:23:38Z"
 }
