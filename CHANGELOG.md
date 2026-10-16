@@ -1,5 +1,16 @@
 # Endringslogg — Partisan Lillestrøm App
 
+## v2.4 — 16. oktober 2026
+- **Ny funksjon:** Kamptipping — tipp resultat på 2. Bundesliga-kamper, poengberegning og toppliste
+- **Navigasjon:** Bunnav: Hjem, Arr., Tabell, Tipping, ☰ Meny — Kamplogg flyttet til hamburgermeny
+
+## v2.3 — 16. oktober 2026
+- **Ny funksjon:** Hamburgermeny (☰) med Galleri, Logoer, Om oss og Bli medlem
+- **Ny funksjon:** Tabell-fane med live 2. Bundesliga-tabell fra OpenLigaDB (St. Pauli-rad uthevet)
+- **Ny funksjon:** Bildegalleri — last opp og vis bilder fra kamper og arrangementer (Firebase)
+- **Ny funksjon:** «Legg til i kalender»-knapp (📅) på neste-kamp-stripen (genererer ICS-fil)
+- **Navigasjon:** Bunnav redusert til 5 knapper: Hjem, Arr., Kamplogg, Tabell, ☰ Meny
+
 ## v2.2 — 16. oktober 2026
 - **Pipeline:** OpenLigaDB som kilde for kampplan (erstatter upålitelig scraping av fcstpauli.com)
 - **Pipeline:** Stadion-oppslag for bortekamper (OpenLigaDB mangler location-data)
