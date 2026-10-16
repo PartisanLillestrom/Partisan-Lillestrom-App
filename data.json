@@ -33,6 +33,13 @@
   ],
   "millernton_news": [
     {
+      "title_no": "Forhåndsvisning: Hannover 96 – FC St. Pauli (kamprunde 8, 26/27)",
+      "title_de": "Vorbericht: Hannover 96 – FC St. Pauli (8. Spieltag, 26/27)",
+      "url": "https://millernton.de/2026/10/16/vorbericht-hannover-96-fc-st-pauli-8-spieltag-26-27/",
+      "date": "16. oktober",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2024%2F04%2FPB_H96FCSP210424_0106.jpg&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "Før kampen – Hannover 96 (A) – Kamprunde 8 – Sesongen 2026/27",
       "title_de": "Vor dem Spiel – Hannover 96 (A) – Spieltag 8 – Saison 2026/27",
       "url": "https://millernton.de/2026/10/15/fc-st-pauli-podcast-2627-vds-h96-a/",
@@ -59,13 +66,6 @@
       "url": "https://millernton.de/2026/10/13/lage-am-millerntor-13-oktober-2026/",
       "date": "13. oktober",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "«Jeg synes det var en veldig profesjonell seier.»",
-      "title_de": "„I think it was a very professional win.“",
-      "url": "https://millernton.de/2026/10/12/i-think-it-was-a-very-professional-win/",
-      "date": "12. oktober",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F10%2Ffcspksc_20261011_stefangroenveld_fcsp150511571.jpg&w=400&output=webp&q=70"
     }
   ],
   "next_match": {},
@@ -506,5 +506,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-10-15T17:20:39Z"
+  "updated": "2026-10-16T05:53:45Z"
 }
