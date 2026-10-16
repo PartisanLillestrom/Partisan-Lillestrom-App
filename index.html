@@ -24,10 +24,10 @@
 *::-webkit-scrollbar{display:none;}
 *{-ms-overflow-style:none;scrollbar-width:none;}
 #hjem.active{display:flex!important;}
-#hjem{height:calc(var(--app-h,100vh) - 90px);}
-#kamper{height:calc(var(--app-h,100vh) - 112px);}
-#logoer,#om,#medlem{height:calc(var(--app-h,100vh) - 112px);}
-#arr{height:calc(var(--app-h,100vh) - 112px);}
+#hjem{height:calc(var(--app-h,100vh) - 98px);}
+#kamper{height:calc(var(--app-h,100vh) - 120px);}
+#logoer,#om,#medlem,#tabell,#galleri{height:calc(var(--app-h,100vh) - 120px);}
+#arr{height:calc(var(--app-h,100vh) - 120px);}
 :root{
   --red:#c0392b;
   --brown:#3d1f14;
@@ -310,16 +310,17 @@ input,select,textarea{font-size:16px !important;-webkit-text-size-adjust:100%;} 
 .il{color:rgba(255,255,255,.4);font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:11px;}
 
 /* BOTTOM NAV */
-.bnav{position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;background:#0a0a0a;display:flex;z-index:200;height:54px;border-top:2px solid transparent;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1 0 0 0;}
+.bnav{position:fixed;bottom:0;left:0;right:0;max-width:480px;margin:0 auto;background:#0a0a0a;display:flex;z-index:200;height:62px;border-top:2px solid transparent;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1 0 0 0;}
 
 .bb{
-  flex:1;padding:10px 4px 8px;background:none;border:none;cursor:pointer;
-  display:flex;flex-direction:column;align-items:center;gap:3px;
+  flex:1;padding:8px 4px 6px;background:none;border:none;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
   color:rgba(255,255,255,.4);
   font-family:'Barlow Condensed',sans-serif;
-  font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  -webkit-tap-highlight-color:transparent;
 }
-.bb svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.bb svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
 .bb.active{color:#fff;}
 .bb.active svg{filter:drop-shadow(0 0 1px #c0392b);stroke:url(#iconGrad);}
 .bb.active span.bb-label{
@@ -329,6 +330,36 @@ input,select,textarea{font-size:16px !important;-webkit-text-size-adjust:100%;} 
   background-clip:text;
 }
 
+/* HAMBURGER MENY */
+.hmeny-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:300;opacity:0;pointer-events:none;transition:opacity .25s ease;}
+.hmeny-overlay.open{opacity:1;pointer-events:auto;}
+.hmeny-panel{position:fixed;bottom:62px;right:0;width:220px;max-width:80vw;background:#131010;border:1px solid rgba(255,255,255,.1);border-bottom:none;border-radius:12px 12px 0 0;z-index:301;transform:translateY(100%);transition:transform .25s ease;padding:12px 0;box-shadow:0 -4px 20px rgba(0,0,0,.5);}
+.hmeny-overlay.open .hmeny-panel{transform:translateY(0);}
+.hmeny-item{display:flex;align-items:center;gap:12px;padding:14px 20px;color:rgba(255,255,255,.7);font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border:none;background:none;width:100%;text-align:left;}
+.hmeny-item:active{background:rgba(255,255,255,.05);}
+.hmeny-item svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+
+/* TABELL */
+.tabell-table{width:100%;border-collapse:collapse;font-family:'Barlow Condensed',sans-serif;font-size:13px;}
+.tabell-table th{color:rgba(255,255,255,.4);font-weight:600;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:6px 4px;text-align:center;border-bottom:1px solid rgba(255,255,255,.1);}
+.tabell-table th:nth-child(2){text-align:left;}
+.tabell-table td{padding:7px 4px;text-align:center;border-bottom:1px solid rgba(255,255,255,.04);color:rgba(255,255,255,.7);}
+.tabell-table td:nth-child(2){text-align:left;color:#fff;font-weight:600;}
+.tabell-table tr.stpauli-row td{color:#fff;font-weight:700;}
+.tabell-table tr.stpauli-row{background:rgba(192,57,43,.15);border-left:2px solid #c0392b;}
+
+/* GALLERI */
+.galleri-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
+.galleri-thumb{aspect-ratio:1;object-fit:cover;width:100%;border-radius:4px;cursor:pointer;}
+.galleri-lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:600;display:flex;align-items:center;justify-content:center;padding:20px;}
+.galleri-lightbox img{max-width:100%;max-height:80vh;border-radius:8px;}
+.galleri-close{position:absolute;top:16px;right:16px;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;}
+.galleri-upload-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:10px;border:1px dashed rgba(255,255,255,.2);border-radius:8px;background:none;color:rgba(255,255,255,.5);font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;margin-bottom:12px;}
+.galleri-upload-btn:active{background:rgba(255,255,255,.05);}
+
+/* KALENDER-KNAPP */
+.kal-btn{background:none;border:1px solid rgba(255,255,255,.15);border-radius:4px;color:rgba(255,255,255,.5);font-size:11px;font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.04em;padding:3px 8px;cursor:pointer;white-space:nowrap;text-transform:uppercase;}
+.kal-btn:active{background:rgba(255,255,255,.08);}
 
 /* PÅMELDING */
 .pameldt-liste{margin-top:10px;border-top:1px solid rgba(255,255,255,.06);padding-top:10px;}
@@ -534,6 +565,35 @@ function esc(s) {
   </div>
 </div>
 
+<!-- TABELL -->
+<div id="tabell" class="page" style="padding:16px 14px 60px;overflow-y:auto;overscroll-behavior:contain;">
+  <div class="sec-title-style" style="margin-bottom:12px;">2. Bundesliga</div>
+  <div id="tabellInnhold" class="card-bg" style="padding:10px 8px;overflow-x:auto;">
+    <div style="text-align:center;padding:20px;color:rgba(255,255,255,.4);font-size:13px;">
+      <span style="display:inline-block;animation:spin 1s linear infinite;font-size:18px;">⟳</span><br>Laster tabell…
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:10px;">
+    <span class="info-meta" style="font-size:10px;color:rgba(255,255,255,.25);">Data fra OpenLigaDB</span>
+  </div>
+</div>
+
+<!-- GALLERI -->
+<div id="galleri" class="page" style="padding:16px 14px 60px;overflow-y:auto;overscroll-behavior:contain;">
+  <div class="sec-title-style" style="margin-bottom:12px;">Bildegalleri</div>
+  <div style="margin-bottom:12px;">
+    <label class="galleri-upload-btn" for="galleriInput">
+      <svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Last opp bilde
+    </label>
+    <input type="file" id="galleriInput" accept="image/*" multiple style="display:none;" onchange="lastOppBilder(this.files)">
+  </div>
+  <div id="galleriGrid" class="galleri-grid"></div>
+  <div id="galleriTom" style="text-align:center;padding:40px 20px;color:rgba(255,255,255,.3);font-size:13px;">
+    Ingen bilder ennå. Last opp bilder fra kamper og arrangementer!
+  </div>
+</div>
+
 <!-- FEED -->
 <div id="logoer" class="page" style="padding:16px 14px 60px;overflow-y:auto;overscroll-behavior:contain;">
   <div class="sec-title-style" style="margin-bottom:16px;">Våre logoer</div>
@@ -604,7 +664,7 @@ function esc(s) {
 </div>
 
 <!-- NESTE KAMP STICKY BAR -->
-<div id="nesteKampBar" style="position:fixed;bottom:54px;left:0;right:0;max-width:480px;margin:0 auto;background:#0a0a0a;border-top:2px solid transparent;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1 0 0 0;z-index:199;padding:7px 14px 7px;box-shadow:0 4px 0 4px #0a0a0a;">
+<div id="nesteKampBar" style="position:fixed;bottom:62px;left:0;right:0;max-width:480px;margin:0 auto;background:#0a0a0a;border-top:2px solid transparent;border-image:linear-gradient(90deg,#fff 0%,#e8a878 60%,#c0392b 100%) 1 0 0 0;z-index:199;padding:7px 14px 7px;box-shadow:0 4px 0 4px #0a0a0a;">
   <div id="nesteKampBar_innhold" style="display:flex;align-items:center;justify-content:center;gap:0;width:100%;overflow:hidden;">
     <span class="info-meta" style="font-size:12px;">Laster...</span>
   </div>
@@ -624,9 +684,30 @@ function esc(s) {
   <button class="bb active" onclick="sp('hjem',this)"><svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg><span class="bb-label">Hjem</span></button>
   <button class="bb" onclick="sp('arr',this)"><span style="position:relative;"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span id="arrBadge" style="display:none;position:absolute;top:-3px;right:-5px;width:8px;height:8px;background:#c0392b;border-radius:50%;border:2px solid #0a0a0a;"></span></span><span class="bb-label">Arr.</span></button>
   <button class="bb" onclick="sp('kamper',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3c0 0 2 4 0 9s0 9 0 9M3 12h18"/></svg><span class="bb-label">Kamplogg</span></button>
-  <button class="bb" onclick="sp('logoer',this)"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg><span class="bb-label">Logoer</span></button>
-  <button class="bb" onclick="sp('om',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg><span class="bb-label">Om oss</span></button>
-  <button class="bb" onclick="sp('medlem',this)"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg><span class="bb-label">Bli medlem</span></button>
+  <button class="bb" onclick="sp('tabell',this)"><svg viewBox="0 0 24 24"><path d="M16 3h5v5M4 20L21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg><span class="bb-label">Tabell</span></button>
+  <button class="bb" onclick="toggleMeny()"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg><span class="bb-label">Meny</span></button>
+</div>
+
+<!-- HAMBURGER MENY OVERLAY -->
+<div class="hmeny-overlay" id="hmenyOverlay" onclick="lukkMeny()">
+  <div class="hmeny-panel" onclick="event.stopPropagation()">
+    <button class="hmeny-item" onclick="spMeny('galleri')">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+      Galleri
+    </button>
+    <button class="hmeny-item" onclick="spMeny('logoer')">
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      Logoer
+    </button>
+    <button class="hmeny-item" onclick="spMeny('om')">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+      Om oss
+    </button>
+    <button class="hmeny-item" onclick="spMeny('medlem')">
+      <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+      Bli medlem
+    </button>
+  </div>
 </div>
 
 <script>
@@ -807,13 +888,15 @@ function sp(id,btn){
   document.querySelectorAll(".bb").forEach(b=>b.classList.remove("active"));
   document.getElementById(id).classList.add("active");
   if(btn)btn.classList.add("active");
-  
+  lukkMeny();
+
   if(id==='arr') {
     visArr('alle'); setTimeout(() => { lastAlleRSVP(); lastAlleKommentarer(); }, 100);
     localStorage.setItem('pl_arr_sist_sett', new Date().toISOString().split('T')[0]);
     const badge = document.getElementById('arrBadge');
     if (badge) badge.style.display = 'none';
   }
+  if(id==='tabell') hentTabell();
 
   const hdr = document.querySelector('.hdr');
   if(hdr) hdr.style.display = id === 'hjem' ? 'none' : 'flex';
@@ -821,7 +904,161 @@ function sp(id,btn){
   const bar = document.getElementById('nesteKampBar');
   if(bar) bar.style.display = (id === 'hjem' && _harKamp) ? 'flex' : 'none';
 }
+
+// Hamburger meny
+function toggleMeny(){
+  const o = document.getElementById('hmenyOverlay');
+  o.classList.toggle('open');
+}
+function lukkMeny(){
+  const o = document.getElementById('hmenyOverlay');
+  if(o) o.classList.remove('open');
+}
+function spMeny(id){
+  lukkMeny();
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".bb").forEach(b=>b.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  const hdr = document.querySelector('.hdr');
+  if(hdr) hdr.style.display = 'flex';
+  const bar = document.getElementById('nesteKampBar');
+  if(bar) bar.style.display = 'none';
+  if(id==='galleri') lastGalleri();
+}
+
 document.addEventListener('DOMContentLoaded', () => lastKamplogg());
+
+// ---- TABELL (2. Bundesliga fra OpenLigaDB) ----
+let _tabellLastet = false;
+async function hentTabell() {
+  if (_tabellLastet) return;
+  const el = document.getElementById('tabellInnhold');
+  if (!el) return;
+  try {
+    const now = new Date();
+    const sesong = now.getMonth() >= 6 ? now.getFullYear() : now.getFullYear() - 1;
+    const resp = await fetch(`https://api.openligadb.de/getbltable/bl2/${sesong}`);
+    if (!resp.ok) throw new Error('Feil ved henting av tabell');
+    const lag = await resp.json();
+    if (!lag.length) { el.innerHTML = '<div style="padding:20px;text-align:center;color:rgba(255,255,255,.4);font-size:13px;">Ingen tabelldata tilgjengelig</div>'; return; }
+    let html = '<table class="tabell-table"><thead><tr><th>#</th><th>Lag</th><th>K</th><th>S</th><th>U</th><th>T</th><th>MF</th><th>P</th></tr></thead><tbody>';
+    lag.forEach((t, i) => {
+      const erStp = t.teamName && t.teamName.includes('St. Pauli');
+      const cls = erStp ? ' class="stpauli-row"' : '';
+      const diff = t.goalDiff > 0 ? '+' + t.goalDiff : t.goalDiff;
+      html += `<tr${cls}><td>${i+1}</td><td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(t.shortName || t.teamName)}</td><td>${t.matches}</td><td>${t.won}</td><td>${t.draw}</td><td>${t.lost}</td><td style="font-size:11px;">${diff}</td><td style="font-weight:700;">${t.points}</td></tr>`;
+    });
+    html += '</tbody></table>';
+    el.innerHTML = html;
+    _tabellLastet = true;
+  } catch(e) {
+    console.warn('Kunne ikke hente tabell', e);
+    el.innerHTML = '<div style="padding:20px;text-align:center;color:rgba(255,255,255,.4);font-size:13px;">Kunne ikke laste tabell. Prøv igjen senere.</div>';
+  }
+}
+
+// ---- GALLERI (Firebase Storage via Realtime Database) ----
+const GALLERI_REF = 'https://partisan-lillestrom-default-rtdb.europe-west1.firebasedatabase.app/galleri';
+let _galleriBilder = [];
+async function lastGalleri() {
+  const grid = document.getElementById('galleriGrid');
+  const tom = document.getElementById('galleriTom');
+  if (!grid) return;
+  try {
+    const resp = await fetch(GALLERI_REF + '.json');
+    const data = await resp.json();
+    _galleriBilder = [];
+    if (data) {
+      Object.entries(data).forEach(([k, v]) => {
+        _galleriBilder.push({ id: k, ...v });
+      });
+      _galleriBilder.sort((a, b) => (b.ts || 0) - (a.ts || 0));
+    }
+    if (_galleriBilder.length === 0) {
+      grid.innerHTML = '';
+      if (tom) tom.style.display = 'block';
+    } else {
+      if (tom) tom.style.display = 'none';
+      grid.innerHTML = _galleriBilder.map((b, i) =>
+        `<img class="galleri-thumb" src="${esc(b.url)}" alt="${esc(b.tekst||'Bilde')}" onclick="visBilde(${i})" loading="lazy">`
+      ).join('');
+    }
+  } catch(e) {
+    console.warn('Kunne ikke laste galleri', e);
+    if (tom) { tom.style.display = 'block'; tom.textContent = 'Kunne ikke laste galleri.'; }
+  }
+}
+
+function visBilde(idx) {
+  const b = _galleriBilder[idx];
+  if (!b) return;
+  const lb = document.createElement('div');
+  lb.className = 'galleri-lightbox';
+  lb.onclick = () => lb.remove();
+  lb.innerHTML = `<button class="galleri-close" onclick="this.parentElement.remove()">✕</button>`
+    + `<div style="text-align:center;"><img src="${esc(b.url)}" alt="${esc(b.tekst||'Bilde')}">`
+    + (b.tekst ? `<div style="color:rgba(255,255,255,.7);font-size:13px;margin-top:10px;">${esc(b.tekst)}</div>` : '')
+    + (b.av ? `<div style="color:rgba(255,255,255,.35);font-size:11px;margin-top:4px;">Av ${esc(b.av)}</div>` : '')
+    + `</div>`;
+  document.body.appendChild(lb);
+}
+
+async function lastOppBilder(files) {
+  if (!files || !files.length) return;
+  const navn = localStorage.getItem('pl_navn');
+  if (!navn) { alert('Skriv inn navnet ditt først (gå til Arrangementer for å sette navn).'); return; }
+  const grid = document.getElementById('galleriGrid');
+  const tom = document.getElementById('galleriTom');
+  for (const file of files) {
+    if (file.size > 5 * 1024 * 1024) { alert('Maks 5 MB per bilde.'); continue; }
+    try {
+      const dataUrl = await new Promise((res, rej) => {
+        const reader = new FileReader();
+        reader.onload = () => res(reader.result);
+        reader.onerror = rej;
+        reader.readAsDataURL(file);
+      });
+      const payload = { url: dataUrl, tekst: '', av: navn, ts: Date.now() };
+      const resp = await fetch(GALLERI_REF + '.json', { method: 'POST', body: JSON.stringify(payload) });
+      if (!resp.ok) throw new Error('Feil ved opplasting');
+    } catch(e) {
+      console.warn('Opplasting feilet', e);
+      alert('Kunne ikke laste opp bilde. Prøv igjen.');
+    }
+  }
+  document.getElementById('galleriInput').value = '';
+  lastGalleri();
+}
+
+// ---- LEGG TIL I KALENDER (ICS) ----
+function lagICS(motstander, dato, tid, stadion, hjemme) {
+  const start = new Date(dato + 'T' + (tid || '15:00'));
+  const slutt = new Date(start.getTime() + 2 * 3600000); // 2 timer
+  const fmt = d => d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+  const tittel = hjemme
+    ? `FC St. Pauli vs ${motstander}`
+    : `${motstander} vs FC St. Pauli`;
+  const ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Partisan Lillestrøm//Kamp//NO',
+    'BEGIN:VEVENT',
+    'DTSTART:' + fmt(start),
+    'DTEND:' + fmt(slutt),
+    'SUMMARY:' + tittel,
+    'LOCATION:' + (stadion || ''),
+    'DESCRIPTION:' + (hjemme ? 'Hjemmekamp' : 'Bortekamp') + ' - 2. Bundesliga',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'kamp-' + dato + '.ics';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
 </script>
 
 <script>
@@ -1408,6 +1645,7 @@ function visKamp(kamp) {
   <span class="heading-bebas" style="font-size:14px;line-height:1;color:rgba(255,255,255,.85);white-space:nowrap;">${hj?'FC St. Pauli':kamp.motstander} · ${hj?kamp.motstander:'FC St. Pauli'}</span>
   <span class="heading-bebas" style="font-size:14px;line-height:1;color:rgba(255,255,255,.2);margin:0 8px;">·</span>
   <span class="info-meta" style="line-height:1;white-space:nowrap;">${dagKort}${kamp.tid?' '+kamp.tid:''}</span>
+  <button class="kal-btn" style="margin-left:8px;" onclick="lagICS('${(kamp.motstander||'').replace(/'/g,"\\'")}','${kamp.dato}','${kamp.tid||'15:00'}','${(kamp.stadion||'').replace(/'/g,"\\'")}',${!!kamp.hjemme})">📅</button>
 `;
   }
 }
