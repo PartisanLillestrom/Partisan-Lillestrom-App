@@ -1252,7 +1252,10 @@ async function lastAndreTips(kampId, kamp) {
       const kamper = await mResp.json();
       const match = kamper.find(m => {
         const mDato = m.matchDateTimeUTC ? m.matchDateTimeUTC.substring(0, 10) : '';
-        return mDato === kamp.dato && m.matchIsFinished;
+        if (mDato !== kamp.dato || !m.matchIsFinished) return false;
+        const t1 = (m.team1 && m.team1.teamName) ? m.team1.teamName.toLowerCase() : '';
+        const t2 = (m.team2 && m.team2.teamName) ? m.team2.teamName.toLowerCase() : '';
+        return t1.includes('pauli') || t2.includes('pauli');
       });
       if (match && match.matchResults && match.matchResults.length) {
         const endResult = match.matchResults.find(r => r.resultTypeID === 2) || match.matchResults[0];
@@ -1436,6 +1439,9 @@ async function lastTippHistorikk() {
       const kamper = await mResp.json();
       kamper.forEach(m => {
         if (m.matchIsFinished && m.matchResults && m.matchResults.length) {
+          const t1 = (m.team1 && m.team1.teamName) ? m.team1.teamName.toLowerCase() : '';
+          const t2 = (m.team2 && m.team2.teamName) ? m.team2.teamName.toLowerCase() : '';
+          if (!t1.includes('pauli') && !t2.includes('pauli')) return;
           const d = m.matchDateTimeUTC ? m.matchDateTimeUTC.substring(0, 10) : '';
           const endResult = m.matchResults.find(r => r.resultTypeID === 2) || m.matchResults[0];
           kampResultater[d] = { h: endResult.pointsTeam1, b: endResult.pointsTeam2, t1: m.team1?.shortName || m.team1?.teamName, t2: m.team2?.shortName || m.team2?.teamName };
@@ -1972,7 +1978,7 @@ const KJENTE_KAMPER = [
   { motstander:'VfL Wolfsburg',         dato:'2026-09-12', tid:'20:30', turnering:'2. Bundesliga', hjemme:true,  stadion:'Millerntor-Stadion, Hamburg' },
   { motstander:'FC Energie Cottbus',    dato:'2026-09-20', tid:'13:30', turnering:'2. Bundesliga', hjemme:false, stadion:'Stadion der Freundschaft, Cottbus' },
   { motstander:'Karlsruher SC',         dato:'2026-10-11', tid:'11:30', turnering:'2. Bundesliga', hjemme:true,  stadion:'Millerntor-Stadion, Hamburg' },
-  { motstander:'Hannover 96',           dato:'2026-10-17', tid:'18:30', turnering:'2. Bundesliga', hjemme:false, stadion:'Heinz von Heiden Arena, Hannover' },
+  { motstander:'Hannover 96',           dato:'2026-10-17', tid:'20:30', turnering:'2. Bundesliga', hjemme:false, stadion:'Heinz von Heiden Arena, Hannover' },
   { motstander:'SV Darmstadt 98',       dato:'2026-10-23', tid:'16:30', turnering:'2. Bundesliga', hjemme:false, stadion:'Merck-Stadion am Böllenfalltor, Darmstadt' },
   { motstander:'1. FC Nürnberg',        dato:'2026-11-01', tid:'12:30', turnering:'2. Bundesliga', hjemme:true,  stadion:'Millerntor-Stadion, Hamburg' },
   { motstander:'1. FC Magdeburg',       dato:'2026-11-08', tid:'12:30', turnering:'2. Bundesliga', hjemme:false, stadion:'MDCC-Arena, Magdeburg' },
