@@ -1165,7 +1165,12 @@ async function oppdaterTipping() {
   const ikon = document.getElementById('tippOppdaterIkon');
   if (btn) btn.style.pointerEvents = 'none';
   if (ikon) ikon.style.animation = 'spin .6s linear infinite';
+  // Oppdater alle faner, ikke bare neste kamp
   await lastTipping();
+  const topplisteFane = document.getElementById('tippTopplisteFane');
+  const historikkFane = document.getElementById('tippHistorikkFane');
+  if (topplisteFane && topplisteFane.style.display !== 'none') await lastTippToppliste();
+  if (historikkFane && historikkFane.style.display !== 'none') await lastTippHistorikk();
   if (ikon) ikon.style.animation = '';
   if (btn) btn.style.pointerEvents = '';
 }
