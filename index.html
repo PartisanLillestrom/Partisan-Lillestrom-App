@@ -1160,7 +1160,16 @@ function lagKampId(kamp) {
 
 function finnNesteKamp2BL() {
   const now = new Date();
-  return KJENTE_KAMPER.find(k => k.turnering === '2. Bundesliga' && new Date(k.dato + 'T' + (k.tid || '15:00')) > now) || null;
+  // Vis siste kamp i 24 timer etter kampslutt (ca. 26 timer etter avspark)
+  const bl2 = KJENTE_KAMPER.filter(k => k.turnering === '2. Bundesliga');
+  for (let i = bl2.length - 1; i >= 0; i--) {
+    const k = bl2[i];
+    const start = new Date(k.dato + 'T' + (k.tid || '15:00'));
+    const visTil = new Date(start.getTime() + 26 * 60 * 60 * 1000); // avspark + 26t (≈ kampslutt + 24t)
+    if (start <= now && now < visTil) return k;
+  }
+  // Ellers vis neste kommende kamp
+  return bl2.find(k => new Date(k.dato + 'T' + (k.tid || '15:00')) > now) || null;
 }
 
 function erTippOpen(kamp) {
