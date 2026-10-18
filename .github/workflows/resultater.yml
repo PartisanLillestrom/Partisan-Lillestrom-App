@@ -1,0 +1,28 @@
+name: Hent kampresultater
+
+on:
+  # Kjør automatisk etter typiske kamptider (fredager, lørdager, søndager)
+  schedule:
+    # Fredager kl. 22:30 og 23:30 CET (20:30/21:30 UTC)
+    - cron: '30 20,21 * * 5'
+    # Lørdager kl. 16:00, 17:00, 18:30, 20:30, 22:30 CET
+    - cron: '0 14,15 * * 6'
+    - cron: '30 16,18,20 * * 6'
+    # Søndager kl. 15:30, 18:00, 20:30 CET
+    - cron: '30 13,18 * * 0'
+    - cron: '0 16 * * 0'
+  # Manuell kjøring
+  workflow_dispatch:
+
+jobs:
+  hent-resultater:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Hent resultater fra FotMob
+        run: python scripts/hent_resultater.py
