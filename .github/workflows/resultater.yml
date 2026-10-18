@@ -24,5 +24,10 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Hent resultater fra FotMob
+      - name: Installer avhengigheter
+        run: pip install cryptography
+
+      - name: Hent resultater fra OpenLigaDB
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: python scripts/hent_resultater.py
