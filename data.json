@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | «Vi skapte for få sjanser til tross for vår dominans i kampen...»",
+      "title_de": "FC St. Pauli | „Aus der Spieldominanz haben wir zu wenig Chancen…",
+      "url": "https://www.fcstpauli.com/news/stimmen-auswaertsspiel-hannover-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2F1-Ligaspiele-Pokalspiele%2F08-Hannover-A%2F_1200x630_crop_center-center_82_none%2FWITTERS_2377309.jpg%3Fv%3D1792268295%252C0.4594%252C0.3213&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | 1-1 i Hannover - Kiezkicker med sin fjerde uavgjort i…",
       "title_de": "FC St. Pauli | 1:1 in Hannover - Kiezkicker mit viertem Remis in der…",
       "url": "https://www.fcstpauli.com/news/spielbericht-auswaertsspiel-hannover-2627",
@@ -23,12 +29,6 @@
       "title_de": "FC St. Pauli | Ida-Ehre-Schule als Eliteschule des Fußballs…",
       "url": "https://www.fcstpauli.com/news/ida-ehre-schule-als-eliteschule-des-fussballs-ausgezeichnet",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FNLZ-allgemein%2FIda-Ehre-Schule%2F_1200x630_crop_center-center_82_none%2FFCP06875.jpg%3Fv%3D1792074466%252C0.4926%252C0.4063&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Blandet hjemmekamphelg: «Action Team»…",
-      "title_de": "FC St. Pauli | Durchwachsenes Heimspiel-Wochenende: „Action Team“…",
-      "url": "https://www.fcstpauli.com/news/durchwachsenes-heimspiel-wochenende-action-team-kaempft-um-wichtige-punkte",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FAbteilungen%2FBowling%2FStart-2.-Liga-2026%2F_1200x630_crop_center-center_82_none%2FBowling-Action-Team.jpg%3Fv%3D1791993595%252C0.4527%252C0.4899&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -514,5 +514,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-10-18T14:38:22Z"
+  "updated": "2026-10-18T16:07:20Z"
 }
