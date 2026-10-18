@@ -21,7 +21,11 @@ RESULTATER_REF = f"{FIREBASE_DB}/kampresultater"
 def hent_fotmob():
     """Henter lagdata fra FotMob API."""
     req = urllib.request.Request(FOTMOB_API, headers={
-        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36"
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:130.0) Gecko/20100101 Firefox/130.0",
+        "Accept": "application/json",
+        "Accept-Language": "en-US,en;q=0.5",
+        "Referer": "https://www.fotmob.com/",
+        "x-fm-req": "eyJib2R5Ijp7fX0=",
     })
     with urllib.request.urlopen(req, timeout=15) as resp:
         return json.loads(resp.read().decode())
