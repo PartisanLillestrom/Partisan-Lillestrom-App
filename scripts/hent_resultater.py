@@ -4,12 +4,14 @@ Henter kampresultater for FC St. Pauli fra OpenLigaDB
 og lagrer dem i Firebase Realtime Database.
 
 Kjøres av GitHub Actions etter kampdager.
+Bruker Google Service Account for autentisering mot Firebase.
 """
 
 import json
+import os
 import sys
 import urllib.request
-from datetime import datetime
+from datetime import datetime, timezone
 
 # OpenLigaDB: bl2 = 2. Bundesliga
 OPENLIGA_API = "https://api.openligadb.de/getmatchdata/bl2"
@@ -20,6 +22,61 @@ RESULTATER_REF = f"{FIREBASE_DB}/kampresultater"
 ST_PAULI_NAMES = ["st. pauli", "st pauli", "fc st. pauli"]
 
 
+def hent_access_token():
+    """Genererer et OAuth2 access token fra service account."""
+    import base64
+    import hashlib
+    import hmac
+    import time
+
+    sa_json = os.environ.get("FIREBASE_SERVICE_ACCOUNT", "")
+    if not sa_json:
+        print("ADVARSEL: Ingen FIREBASE_SERVICE_ACCOUNT satt, prøver uten autentisering.")
+        return None
+
+    sa = json.loads(sa_json)
+    # Bygg JWT
+    header = base64.urlsafe_b64encode(json.dumps({
+        "alg": "RS256", "typ": "JWT"
+    }).encode()).rstrip(b"=")
+
+    now = int(time.time())
+    claims = base64.urlsafe_b64encode(json.dumps({
+        "iss": sa["client_email"],
+        "scope": "https://www.googleapis.com/auth/firebase.database https://www.googleapis.com/auth/userinfo.email",
+        "aud": "https://oauth2.googleapis.com/token",
+        "iat": now,
+        "exp": now + 3600
+    }).encode()).rstrip(b"=")
+
+    signing_input = header + b"." + claims
+
+    # RS256-signering med private key
+    from cryptography.hazmat.primitives import hashes, serialization
+    from cryptography.hazmat.primitives.asymmetric import padding
+
+    private_key = serialization.load_pem_private_key(
+        sa["private_key"].encode(), password=None
+    )
+    signature = private_key.sign(signing_input, padding.PKCS1v15(), hashes.SHA256())
+    sig_b64 = base64.urlsafe_b64encode(signature).rstrip(b"=")
+
+    jwt_token = (signing_input + b"." + sig_b64).decode()
+
+    # Bytt JWT mot access token
+    token_url = "https://oauth2.googleapis.com/token"
+    token_data = urllib.parse.urlencode({
+        "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer",
+        "assertion": jwt_token
+    }).encode()
+    req = urllib.request.Request(token_url, data=token_data, headers={
+        "Content-Type": "application/x-www-form-urlencoded"
+    })
+    with urllib.request.urlopen(req, timeout=10) as resp:
+        token_resp = json.loads(resp.read().decode())
+    return token_resp["access_token"]
+
+
 def er_st_pauli(lagnavn):
     """Sjekker om et lagnavn er St. Pauli."""
     return any(n in lagnavn.lower() for n in ST_PAULI_NAMES)
@@ -27,7 +84,7 @@ def er_st_pauli(lagnavn):
 
 def hent_sesong():
     """Beregner gjeldende sesong (2026 = 2026/27-sesongen)."""
-    now = datetime.utcnow()
+    now = datetime.now(timezone.utc)
     return now.year if now.month >= 7 else now.year - 1
 
 
@@ -53,9 +110,11 @@ def hent_firebase_resultater():
         return {}
 
 
-def lagre_resultat(dato, data):
-    """Lagrer et kampresultat i Firebase."""
+def lagre_resultat(dato, data, access_token):
+    """Lagrer et kampresultat i Firebase med autentisering."""
     url = f"{RESULTATER_REF}/{dato}.json"
+    if access_token:
+        url += f"?access_token={access_token}"
     payload = json.dumps(data).encode()
     req = urllib.request.Request(url, data=payload, method="PUT", headers={
         "Content-Type": "application/json"
@@ -79,7 +138,7 @@ def finn_ferdige_st_pauli_kamper(matches):
         if not er_st_pauli(hjemme) and not er_st_pauli(borte):
             continue
 
-        # Hent sluttresultat (siste i matchResults-listen)
+        # Hent sluttresultat
         results = match.get("matchResults", [])
         if not results:
             continue
@@ -120,6 +179,18 @@ def main():
     sesong = hent_sesong()
     print(f"Sesong: {sesong}/{sesong + 1}")
 
+    # Autentisering mot Firebase
+    print("Henter Firebase access token...")
+    try:
+        access_token = hent_access_token()
+        if access_token:
+            print("Access token hentet OK")
+        else:
+            print("Kjører uten autentisering")
+    except Exception as e:
+        print(f"Kunne ikke hente access token: {e}")
+        sys.exit(1)
+
     print("Henter data fra OpenLigaDB...")
     try:
         matches = hent_openligadb(sesong)
@@ -148,7 +219,7 @@ def main():
                 continue
 
         print(f"  Lagrer: {kamp['hjemmelag']} {kamp['h']}-{kamp['b']} {kamp['bortelag']} ({dato})")
-        lagre_resultat(dato, kamp)
+        lagre_resultat(dato, kamp, access_token)
         nye += 1
 
     print(f"Ferdig! {nye} nye/oppdaterte resultater lagret.")
