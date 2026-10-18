@@ -1,0 +1,32 @@
+name: Firebase backup
+
+on:
+  schedule:
+    # Hver mandag kl 03:00 UTC (05:00 norsk tid)
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Installer avhengigheter
+        run: pip install cryptography
+
+      - name: Ta backup av Firebase
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: python scripts/backup_database.py
+
+      - name: Last opp backup som artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: firebase-backup-${{ github.run_id }}
+          path: backups/
+          retention-days: 90
