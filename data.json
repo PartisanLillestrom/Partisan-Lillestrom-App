@@ -33,6 +33,13 @@
   ],
   "millernton_news": [
     {
+      "title_no": "Hannover 96 mot FC St. Pauli 1:1 – Poetisk rettferdighet og tannløs dominans",
+      "title_de": "Hannover 96 vs. FC St. Pauli 1:1 – Ausgleichende Gerechtigkeit und zahnlose Dominanz",
+      "url": "https://millernton.de/2026/10/18/hannover-96-vs-fc-st-pauli-11-ausgleichende-gerechtigkeit-und-zahnlose-dominanz/",
+      "date": "18. oktober",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F10%2FWhatsApp-Image-2026-10-18-at-12.12.28.jpg&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "Sted på Millerntor – 16. oktober 2026",
       "title_de": "Lage am Millerntor – 16. Oktober 2026",
       "url": "https://millernton.de/2026/10/16/lage-am-millerntor-16-oktober-2026/",
@@ -58,13 +65,6 @@
       "title_de": "Lage am Millerntor – 15. Oktober 2026",
       "url": "https://millernton.de/2026/10/15/lage-am-millerntor-15-oktober-2026/",
       "date": "15. oktober",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Sted på Millerntor – 14. oktober 2026",
-      "title_de": "Lage am Millerntor – 14. Oktober 2026",
-      "url": "https://millernton.de/2026/10/14/lage-am-millerntor-14-oktober-2026/",
-      "date": "14. oktober",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
     }
   ],
@@ -514,5 +514,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-10-18T09:40:42Z"
+  "updated": "2026-10-18T11:41:13Z"
 }
