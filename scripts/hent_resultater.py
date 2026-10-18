@@ -1,33 +1,44 @@
 #!/usr/bin/env python3
 """
-Henter kampresultater for FC St. Pauli fra FotMob
+Henter kampresultater for FC St. Pauli fra OpenLigaDB
 og lagrer dem i Firebase Realtime Database.
 
 Kjøres av GitHub Actions etter kampdager.
 """
 
 import json
-import os
 import sys
 import urllib.request
+from datetime import datetime
 
-FOTMOB_TEAM_ID = 8152  # FC St. Pauli
-FOTMOB_API = f"https://www.fotmob.com/api/teams?id={FOTMOB_TEAM_ID}"
+# OpenLigaDB: bl2 = 2. Bundesliga
+OPENLIGA_API = "https://api.openligadb.de/getmatchdata/bl2"
 
 FIREBASE_DB = "https://partisan-lillestrom-default-rtdb.europe-west1.firebasedatabase.app"
 RESULTATER_REF = f"{FIREBASE_DB}/kampresultater"
 
+ST_PAULI_NAMES = ["st. pauli", "st pauli", "fc st. pauli"]
 
-def hent_fotmob():
-    """Henter lagdata fra FotMob API."""
-    req = urllib.request.Request(FOTMOB_API, headers={
-        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:130.0) Gecko/20100101 Firefox/130.0",
-        "Accept": "application/json",
-        "Accept-Language": "en-US,en;q=0.5",
-        "Referer": "https://www.fotmob.com/",
-        "x-fm-req": "eyJib2R5Ijp7fX0=",
+
+def er_st_pauli(lagnavn):
+    """Sjekker om et lagnavn er St. Pauli."""
+    return any(n in lagnavn.lower() for n in ST_PAULI_NAMES)
+
+
+def hent_sesong():
+    """Beregner gjeldende sesong (2026 = 2026/27-sesongen)."""
+    now = datetime.utcnow()
+    return now.year if now.month >= 7 else now.year - 1
+
+
+def hent_openligadb(sesong):
+    """Henter alle kamper for sesongen fra OpenLigaDB."""
+    url = f"{OPENLIGA_API}/{sesong}"
+    print(f"Henter fra: {url}")
+    req = urllib.request.Request(url, headers={
+        "User-Agent": "PartisanLillestrom/1.0"
     })
-    with urllib.request.urlopen(req, timeout=15) as resp:
+    with urllib.request.urlopen(req, timeout=20) as resp:
         return json.loads(resp.read().decode())
 
 
@@ -53,107 +64,73 @@ def lagre_resultat(dato, data):
         return json.loads(resp.read().decode())
 
 
-def finn_ferdige_kamper(team_data):
-    """Finner ferdige kamper fra FotMob team-data."""
+def finn_ferdige_st_pauli_kamper(matches):
+    """Finner ferdige St. Pauli-kamper fra OpenLigaDB-data."""
     ferdige = []
 
-    # FotMob team API returnerer fixtures under fixtures.allFixtures.fixtures
-    # eller under overview.fixtures
-    fixtures = None
+    for match in matches:
+        if not match.get("matchIsFinished", False):
+            continue
 
-    # Prøv ulike stier i responsen
-    if "fixtures" in team_data:
-        fix_data = team_data["fixtures"]
-        if "allFixtures" in fix_data:
-            all_fix = fix_data["allFixtures"]
-            if "fixtures" in all_fix:
-                fixtures = all_fix["fixtures"]
-        # Alternativ: fixtures kan være en liste direkte
-        if not fixtures and isinstance(fix_data, list):
-            fixtures = fix_data
+        hjemme = match.get("team1", {}).get("teamName", "")
+        borte = match.get("team2", {}).get("teamName", "")
 
-    if "overview" in team_data:
-        ov = team_data["overview"]
-        if "fixtures" in ov:
-            fixtures = ov["fixtures"]
+        # Filtrer: bare St. Pauli-kamper
+        if not er_st_pauli(hjemme) and not er_st_pauli(borte):
+            continue
 
-    if not fixtures:
-        print("Kunne ikke finne fixtures i FotMob-data.")
-        print("Tilgjengelige nøkler:", list(team_data.keys()) if isinstance(team_data, dict) else "ikke dict")
-        # Skriv ut strukturen for debugging
-        for key in team_data.keys() if isinstance(team_data, dict) else []:
-            val = team_data[key]
-            if isinstance(val, dict):
-                print(f"  {key}: {list(val.keys())[:10]}")
-            elif isinstance(val, list):
-                print(f"  {key}: liste med {len(val)} elementer")
-            else:
-                print(f"  {key}: {type(val).__name__}")
-        return ferdige
+        # Hent sluttresultat (siste i matchResults-listen)
+        results = match.get("matchResults", [])
+        if not results:
+            continue
 
-    for match in fixtures:
-        # Sjekk ulike mulige strukturer
-        finished = False
-        home_score = None
-        away_score = None
-        home_name = ""
-        away_name = ""
-        match_date = ""
+        # Bruk resulttype 2 (sluttresultat) om tilgjengelig, ellers siste
+        slutt = None
+        for r in results:
+            if r.get("resultTypeID") == 2:
+                slutt = r
+                break
+        if not slutt:
+            slutt = results[-1]
 
-        if isinstance(match, dict):
-            # Status
-            status = match.get("status", {})
-            if isinstance(status, dict):
-                finished = status.get("finished", False)
-            else:
-                finished = match.get("finished", False)
+        h_score = slutt.get("pointsTeam1")
+        b_score = slutt.get("pointsTeam2")
+        if h_score is None or b_score is None:
+            continue
 
-            if not finished:
-                continue
+        # Dato fra matchDateTime (format: "2026-10-04T15:30:00")
+        match_dt = match.get("matchDateTime", match.get("matchDateTimeUTC", ""))
+        if not match_dt:
+            continue
+        dato = match_dt[:10]  # YYYY-MM-DD
 
-            # Lag og score
-            home = match.get("home", match.get("homeTeam", {}))
-            away = match.get("away", match.get("awayTeam", {}))
-
-            if isinstance(home, dict):
-                home_name = home.get("name", home.get("shortName", ""))
-                home_score = home.get("score", None)
-            if isinstance(away, dict):
-                away_name = away.get("name", away.get("shortName", ""))
-                away_score = away.get("score", None)
-
-            # Dato
-            match_date = match.get("utcTime", match.get("matchDate", ""))
-            if match_date and "T" in match_date:
-                match_date = match_date[:10]  # YYYY-MM-DD
-            elif match_date and len(match_date) == 8:
-                # YYYYMMDD format
-                match_date = f"{match_date[:4]}-{match_date[4:6]}-{match_date[6:8]}"
-
-        if finished and home_score is not None and away_score is not None and match_date:
-            ferdige.append({
-                "dato": match_date,
-                "hjemmelag": home_name,
-                "bortelag": away_name,
-                "h": int(home_score),
-                "b": int(away_score),
-                "ferdig": True
-            })
+        ferdige.append({
+            "dato": dato,
+            "hjemmelag": hjemme,
+            "bortelag": borte,
+            "h": int(h_score),
+            "b": int(b_score),
+            "ferdig": True
+        })
 
     return ferdige
 
 
 def main():
-    print("Henter data fra FotMob...")
+    sesong = hent_sesong()
+    print(f"Sesong: {sesong}/{sesong + 1}")
+
+    print("Henter data fra OpenLigaDB...")
     try:
-        team_data = hent_fotmob()
+        matches = hent_openligadb(sesong)
     except Exception as e:
-        print(f"Feil ved henting fra FotMob: {e}")
+        print(f"Feil ved henting fra OpenLigaDB: {e}")
         sys.exit(1)
 
-    print("Finner ferdige kamper...")
-    ferdige = finn_ferdige_kamper(team_data)
-    print(f"Fant {len(ferdige)} ferdige kamper")
+    print(f"Hentet {len(matches)} kamper totalt")
+
+    ferdige = finn_ferdige_st_pauli_kamper(matches)
+    print(f"Fant {len(ferdige)} ferdige St. Pauli-kamper")
 
     if not ferdige:
         print("Ingen ferdige kamper å oppdatere.")
@@ -166,7 +143,6 @@ def main():
     for kamp in ferdige:
         dato = kamp["dato"]
         if dato in eksisterende:
-            # Sjekk om resultatet er det samme
             eks = eksisterende[dato]
             if eks.get("h") == kamp["h"] and eks.get("b") == kamp["b"]:
                 continue
