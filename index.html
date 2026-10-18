@@ -1129,7 +1129,16 @@ async function lastOppBilder(files) {
 
 // ---- KAMPTIPPING ----
 const TIPPING_REF = 'https://partisan-lillestrom-default-rtdb.europe-west1.firebasedatabase.app/tipping';
-const TIPPING_POENG_REF = 'https://partisan-lillestrom-default-rtdb.europe-west1.firebasedatabase.app/tipping_poeng';
+const RESULTATER_REF = 'https://partisan-lillestrom-default-rtdb.europe-west1.firebasedatabase.app/kampresultater';
+
+async function hentKampResultat(dato) {
+  try {
+    const resp = await fetch(RESULTATER_REF + '/' + dato + '.json');
+    const data = await resp.json();
+    if (data && data.ferdig) return { h: data.h, b: data.b };
+  } catch(e) {}
+  return null;
+}
 
 let _tippLastet = false;
 let _tippNesteKamp = null;
@@ -1248,25 +1257,8 @@ async function lastAndreTips(kampId, kamp) {
       return;
     }
 
-    // Sjekk om kampen har et faktisk resultat (for poengberegning)
-    let faktisk = null;
-    try {
-      const now = new Date();
-      const sesong = now.getMonth() >= 6 ? now.getFullYear() : now.getFullYear() - 1;
-      const mResp = await fetch(`https://api.openligadb.de/getmatchdata/bl2/${sesong}`);
-      const kamper = await mResp.json();
-      const match = kamper.find(m => {
-        const mDato = m.matchDateTimeUTC ? m.matchDateTimeUTC.substring(0, 10) : '';
-        if (mDato !== kamp.dato || !m.matchIsFinished) return false;
-        const t1 = (m.team1 && m.team1.teamName) ? m.team1.teamName.toLowerCase() : '';
-        const t2 = (m.team2 && m.team2.teamName) ? m.team2.teamName.toLowerCase() : '';
-        return t1.includes('pauli') || t2.includes('pauli');
-      });
-      if (match && match.matchResults && match.matchResults.length) {
-        const endResult = match.matchResults.find(r => r.resultTypeID === 2) || match.matchResults[0];
-        faktisk = { h: endResult.pointsTeam1, b: endResult.pointsTeam2 };
-      }
-    } catch(e) {}
+    // Sjekk om kampen har et faktisk resultat fra Firebase (fylt av GitHub Actions via FotMob)
+    const faktisk = await hentKampResultat(kamp.dato);
 
     const entries = Object.entries(data).map(([navn, d]) => {
       let poeng = null;
@@ -1294,10 +1286,6 @@ async function lastAndreTips(kampId, kamp) {
     liste.innerHTML = html;
     container.style.display = 'block';
 
-    // Hvis kampen er ferdig, oppdater poeng i Firebase
-    if (faktisk) {
-      oppdaterPoeng(kampId, entries, kamp);
-    }
   } catch(e) {
     console.warn('Kunne ikke laste tips', e);
   }
@@ -1363,50 +1351,55 @@ async function fjernTipp(kampId) {
   }
 }
 
-async function oppdaterPoeng(kampId, entries, kamp) {
-  // Oppdaterer sesongens poeng i Firebase
-  const now = new Date();
-  const sesong = now.getMonth() >= 6 ? now.getFullYear() : now.getFullYear() - 1;
-  for (const e of entries) {
-    if (e.poeng === null) continue;
-    try {
-      // Hent eksisterende poeng
-      const ref = TIPPING_POENG_REF + '/' + sesong + '/' + encodeURIComponent(e.navn);
-      const resp = await fetch(ref + '.json');
-      const data = await resp.json();
-      const eksisterende = data || { total: 0, kamper: 0, detaljer: {} };
-      // Sjekk om denne kampen allerede er telt
-      if (eksisterende.detaljer && eksisterende.detaljer[kampId] !== undefined) continue;
-      // Oppdater
-      eksisterende.total = (eksisterende.total || 0) + e.poeng;
-      eksisterende.kamper = (eksisterende.kamper || 0) + 1;
-      if (!eksisterende.detaljer) eksisterende.detaljer = {};
-      eksisterende.detaljer[kampId] = e.poeng;
-      await fetch(ref + '.json', { method: 'PUT', body: JSON.stringify(eksisterende) });
-    } catch(err) {
-      console.warn('Poengoppdatering feilet for', e.navn, err);
-    }
-  }
-}
-
 async function lastTippToppliste() {
   const el = document.getElementById('tippToppliste');
   if (!el) return;
   try {
-    const now = new Date();
-    const sesong = now.getMonth() >= 6 ? now.getFullYear() : now.getFullYear() - 1;
-    const resp = await fetch(TIPPING_POENG_REF + '/' + sesong + '.json');
-    const data = await resp.json();
-    if (!data) {
+    // Hent alle tips
+    const resp = await fetch(TIPPING_REF + '.json');
+    const alleTips = await resp.json();
+    if (!alleTips) {
       el.innerHTML = '<div style="text-align:center;padding:20px;color:rgba(255,255,255,.4);font-size:13px;">Ingen poeng ennå — tipp på neste kamp!</div>';
       return;
     }
-    const liste = Object.entries(data).map(([navn, d]) => ({
+    // Hent alle kampresultater fra Firebase
+    let kampResultater = {};
+    try {
+      const rResp = await fetch(RESULTATER_REF + '.json');
+      const rData = await rResp.json();
+      if (rData) kampResultater = rData;
+    } catch(e) {}
+
+    // Beregn poeng dynamisk fra tips + resultater
+    const poengPerNavn = {};
+    for (const kampId of Object.keys(alleTips)) {
+      const dato = kampId.substring(0, 10);
+      const kampData = KJENTE_KAMPER.find(k => k.dato === dato && k.turnering === '2. Bundesliga');
+      if (!kampData) continue;
+      const faktisk = kampResultater[dato];
+      if (!faktisk || !faktisk.ferdig) continue;
+
+      const tips = alleTips[kampId];
+      for (const [navn, d] of Object.entries(tips)) {
+        const p = beregnPoeng(d.h, d.b, faktisk.h, faktisk.b);
+        if (!poengPerNavn[navn]) poengPerNavn[navn] = { total: 0, kamper: 0 };
+        poengPerNavn[navn].total += p;
+        poengPerNavn[navn].kamper += 1;
+      }
+    }
+
+    const liste = Object.entries(poengPerNavn).map(([navn, d]) => ({
       navn,
-      total: d.total || 0,
-      kamper: d.kamper || 0,
-      snitt: d.kamper ? ((d.total || 0) / d.kamper).toFixed(1) : '0.0'
+      total: d.total,
+      kamper: d.kamper,
+      snitt: d.kamper ? (d.total / d.kamper).toFixed(1) : '0.0'
     }));
+
+    if (liste.length === 0) {
+      el.innerHTML = '<div style="text-align:center;padding:20px;color:rgba(255,255,255,.4);font-size:13px;">Ingen poeng ennå — venter på kampresultater.</div>';
+      return;
+    }
+
     liste.sort((a, b) => b.total - a.total || b.kamper - a.kamper);
 
     let html = '';
@@ -1435,23 +1428,12 @@ async function lastTippHistorikk() {
       el.innerHTML = '<div style="text-align:center;padding:20px;color:rgba(255,255,255,.4);font-size:13px;">Ingen tidligere tips.</div>';
       return;
     }
-    // Finn ferdige kamper
-    const now = new Date();
-    const sesong = now.getMonth() >= 6 ? now.getFullYear() : now.getFullYear() - 1;
+    // Hent resultater fra Firebase (fylt av GitHub Actions via FotMob)
     let kampResultater = {};
     try {
-      const mResp = await fetch(`https://api.openligadb.de/getmatchdata/bl2/${sesong}`);
-      const kamper = await mResp.json();
-      kamper.forEach(m => {
-        if (m.matchIsFinished && m.matchResults && m.matchResults.length) {
-          const t1 = (m.team1 && m.team1.teamName) ? m.team1.teamName.toLowerCase() : '';
-          const t2 = (m.team2 && m.team2.teamName) ? m.team2.teamName.toLowerCase() : '';
-          if (!t1.includes('pauli') && !t2.includes('pauli')) return;
-          const d = m.matchDateTimeUTC ? m.matchDateTimeUTC.substring(0, 10) : '';
-          const endResult = m.matchResults.find(r => r.resultTypeID === 2) || m.matchResults[0];
-          kampResultater[d] = { h: endResult.pointsTeam1, b: endResult.pointsTeam2, t1: m.team1?.shortName || m.team1?.teamName, t2: m.team2?.shortName || m.team2?.teamName };
-        }
-      });
+      const rResp = await fetch(RESULTATER_REF + '.json');
+      const rData = await rResp.json();
+      if (rData) kampResultater = rData;
     } catch(e) {}
 
     // Sorter kamper nyeste først
@@ -1462,7 +1444,7 @@ async function lastTippHistorikk() {
       const kampData = KJENTE_KAMPER.find(k => k.dato === dato && k.turnering === '2. Bundesliga');
       if (!kampData) continue;
       const faktisk = kampResultater[dato];
-      if (!faktisk) continue; // Vis bare ferdige kamper i historikk
+      if (!faktisk || !faktisk.ferdig) continue; // Vis bare ferdige kamper i historikk
 
       const hjemme = kampData.hjemme ? 'St. Pauli' : kampData.motstander.substring(0, 15);
       const borte = kampData.hjemme ? kampData.motstander.substring(0, 15) : 'St. Pauli';
