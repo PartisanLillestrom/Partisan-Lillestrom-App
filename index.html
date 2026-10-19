@@ -960,10 +960,21 @@ function toggleOppmote(kampId) {
 async function toggleVarDer(kampId) {
   if (!_fdb) return;
   if (!_mittNavn) {
-    const n = prompt('Hva heter du?');
-    if (!n || !n.trim()) return;
-    _mittNavn = n.trim();
-    localStorage.setItem('pl_navn', _mittNavn);
+    // Vis inline navnefelt i oppmøte-panelet
+    const panel = document.getElementById('opp_' + kampId);
+    if (!panel) return;
+    let navnDiv = document.getElementById('opp_navn_' + kampId);
+    if (!navnDiv) {
+      navnDiv = document.createElement('div');
+      navnDiv.id = 'opp_navn_' + kampId;
+      navnDiv.style.cssText = 'display:flex;gap:6px;margin-bottom:8px;';
+      navnDiv.innerHTML = '<input type="text" id="opp_navn_inp_' + kampId + '" class="form-field" placeholder="Navnet ditt" style="flex:1;border-radius:6px;font-size:14px;">'
+        + '<button onclick="bekreftOppNavn(\'' + kampId + '\')" style="background:var(--accent);color:#fff;border:none;border-radius:6px;padding:6px 14px;font-family:\'Barlow Condensed\',sans-serif;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;">OK</button>';
+      panel.insertBefore(navnDiv, panel.firstChild);
+    }
+    navnDiv.style.display = 'flex';
+    document.getElementById('opp_navn_inp_' + kampId)?.focus();
+    return;
   }
   const ref = _fdb.ref('oppmote/' + kampId + '/' + _fbKey(_mittNavn));
   const snap = await ref.get();
@@ -972,6 +983,16 @@ async function toggleVarDer(kampId) {
   } else {
     await ref.set(_mittNavn);
   }
+}
+function bekreftOppNavn(kampId) {
+  const inp = document.getElementById('opp_navn_inp_' + kampId);
+  const n = inp ? inp.value.trim() : '';
+  if (!n) { inp?.focus(); return; }
+  _mittNavn = n;
+  localStorage.setItem('pl_navn', _mittNavn);
+  const navnDiv = document.getElementById('opp_navn_' + kampId);
+  if (navnDiv) navnDiv.style.display = 'none';
+  toggleVarDer(kampId);
 }
 function sp(id,btn){
   document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
@@ -1096,8 +1117,30 @@ function visBilde(idx) {
   document.body.appendChild(lb);
 }
 
-async function slettBilde(id) {
-  if (!confirm('Er du sikker på at du vil slette dette bildet?')) return;
+function slettBilde(id) {
+  // Vis inline bekreftelse i lightbox i stedet for confirm()
+  const btn = event?.target;
+  if (!btn) return;
+  const wrapper = btn.parentElement;
+  if (!wrapper) return;
+  // Fjern slett-knappen og vis bekreftelse
+  btn.style.display = 'none';
+  const bekr = document.createElement('div');
+  bekr.style.cssText = 'margin-top:14px;display:flex;gap:8px;justify-content:center;align-items:center;';
+  bekr.innerHTML = '<span style="color:rgba(255,255,255,.6);font-size:13px;">Slette bildet?</span>'
+    + '<button onclick="bekreftSlett(\'' + esc(id) + '\')" style="background:#c0392b;border:none;border-radius:6px;color:#fff;font-family:\'Barlow Condensed\',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 14px;cursor:pointer;">Ja, slett</button>'
+    + '<button onclick="avbrytSlett(this)" style="background:none;border:1px solid rgba(255,255,255,.2);border-radius:6px;color:rgba(255,255,255,.5);font-family:\'Barlow Condensed\',sans-serif;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:6px 14px;cursor:pointer;">Avbryt</button>';
+  wrapper.appendChild(bekr);
+}
+function avbrytSlett(btn) {
+  const wrapper = btn.closest('div[style*="justify-content:center"]');
+  if (wrapper) {
+    const slettBtn = wrapper.parentElement?.querySelector('button[onclick^="slettBilde"]');
+    if (slettBtn) slettBtn.style.display = '';
+    wrapper.remove();
+  }
+}
+async function bekreftSlett(id) {
   try {
     const resp = await fetch(GALLERI_REF + '/' + id + '.json', { method: 'DELETE' });
     if (!resp.ok) throw new Error('Sletting feilet');
@@ -1109,10 +1152,42 @@ async function slettBilde(id) {
   }
 }
 
-async function lastOppBilder(files) {
+function lastOppBilder(files) {
   if (!files || !files.length) return;
-  const beskrivelse = prompt('Hvilken kamp eller arrangement er bildet fra?');
-  if (!beskrivelse || !beskrivelse.trim()) return;
+  // Lagre filene midlertidig og vis inline beskrivelse-felt
+  window._galleriVentendeFiles = files;
+  let form = document.getElementById('galleriBeskrivelseForm');
+  if (!form) {
+    form = document.createElement('div');
+    form.id = 'galleriBeskrivelseForm';
+    form.style.cssText = 'display:flex;gap:6px;margin-bottom:12px;';
+    form.innerHTML = '<input type="text" id="galleriBeskrivelseInp" class="form-field" placeholder="Hvilken kamp eller arrangement?" style="flex:1;border-radius:6px;font-size:14px;">'
+      + '<button onclick="bekreftGalleriOpplasting()" style="background:var(--accent);color:#fff;border:none;border-radius:6px;padding:6px 14px;font-family:\'Barlow Condensed\',sans-serif;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;">Last opp</button>'
+      + '<button onclick="avbrytGalleriOpplasting()" style="background:none;border:1px solid rgba(255,255,255,.2);border-radius:6px;color:rgba(255,255,255,.5);font-family:\'Barlow Condensed\',sans-serif;font-size:12px;font-weight:600;padding:6px 10px;cursor:pointer;">✕</button>';
+    const grid = document.getElementById('galleriGrid');
+    grid.parentElement.insertBefore(form, grid);
+  }
+  form.style.display = 'flex';
+  document.getElementById('galleriBeskrivelseInp')?.focus();
+}
+function avbrytGalleriOpplasting() {
+  window._galleriVentendeFiles = null;
+  const form = document.getElementById('galleriBeskrivelseForm');
+  if (form) form.style.display = 'none';
+  document.getElementById('galleriInput').value = '';
+}
+async function bekreftGalleriOpplasting() {
+  const inp = document.getElementById('galleriBeskrivelseInp');
+  const beskrivelse = inp ? inp.value.trim() : '';
+  if (!beskrivelse) { inp?.focus(); return; }
+  const files = window._galleriVentendeFiles;
+  if (!files || !files.length) return;
+  // Skjul formen
+  const form = document.getElementById('galleriBeskrivelseForm');
+  if (form) form.style.display = 'none';
+  if (inp) inp.value = '';
+  window._galleriVentendeFiles = null;
+  document.getElementById('galleriInput').value = '';
   const navn = localStorage.getItem('pl_navn') || '';
   const grid = document.getElementById('galleriGrid');
   const tom = document.getElementById('galleriTom');
