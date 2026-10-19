@@ -810,6 +810,7 @@ async function lastKamplogg() {
     if (resp.ok) {
       const data = await resp.json();
       if (data.kamplogg) _kamplogg = data.kamplogg;
+      settKampplan(data);
       // Oppdater medlemstall dynamisk hvis tilgjengelig
       if (data.medlemstall && data.medlemstall.betalende) {
         const el = document.getElementById('stat-med');
@@ -1112,33 +1113,32 @@ function visBilde(idx) {
     + `<div style="text-align:center;"><img src="${esc(b.url)}" alt="${esc(b.tekst||'Bilde')}">`
     + (b.tekst ? `<div style="color:rgba(255,255,255,.7);font-size:13px;margin-top:10px;">${esc(b.tekst)}</div>` : '')
     + (b.av ? `<div style="color:rgba(255,255,255,.35);font-size:11px;margin-top:4px;">Av ${esc(b.av)}</div>` : '')
-    + `<button onclick="slettBilde('${esc(b.id)}')" style="margin-top:14px;background:none;border:1px solid rgba(255,255,255,.2);border-radius:6px;color:rgba(255,255,255,.5);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:6px 16px;cursor:pointer;">Slett bilde</button>`
+    + `<button onclick="slettBilde('${esc(b.id)}', this)" style="margin-top:14px;background:none;border:1px solid rgba(255,255,255,.2);border-radius:6px;color:rgba(255,255,255,.5);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:6px 16px;cursor:pointer;">Slett bilde</button>`
     + `</div>`;
   document.body.appendChild(lb);
 }
 
-function slettBilde(id) {
-  // Vis inline bekreftelse i lightbox i stedet for confirm()
-  const btn = event?.target;
-  if (!btn) return;
+function slettBilde(id, btn) {
+  // Vis inline bekreftelse i lightbox i stedet for confirm().
+  // btn sendes inn fra onclick (this) - ingen avhengighet til global event.
+  if (!btn || !btn.parentElement) return;
   const wrapper = btn.parentElement;
-  if (!wrapper) return;
-  // Fjern slett-knappen og vis bekreftelse
+  if (wrapper.querySelector('#galleriSlettBekreft')) return; // allerede vist
   btn.style.display = 'none';
   const bekr = document.createElement('div');
+  bekr.id = 'galleriSlettBekreft';
   bekr.style.cssText = 'margin-top:14px;display:flex;gap:8px;justify-content:center;align-items:center;';
   bekr.innerHTML = '<span style="color:rgba(255,255,255,.6);font-size:13px;">Slette bildet?</span>'
     + '<button onclick="bekreftSlett(\'' + esc(id) + '\')" style="background:#c0392b;border:none;border-radius:6px;color:#fff;font-family:\'Barlow Condensed\',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 14px;cursor:pointer;">Ja, slett</button>'
-    + '<button onclick="avbrytSlett(this)" style="background:none;border:1px solid rgba(255,255,255,.2);border-radius:6px;color:rgba(255,255,255,.5);font-family:\'Barlow Condensed\',sans-serif;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:6px 14px;cursor:pointer;">Avbryt</button>';
+    + '<button onclick="avbrytSlett()" style="background:none;border:1px solid rgba(255,255,255,.2);border-radius:6px;color:rgba(255,255,255,.5);font-family:\'Barlow Condensed\',sans-serif;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:6px 14px;cursor:pointer;">Avbryt</button>';
   wrapper.appendChild(bekr);
 }
-function avbrytSlett(btn) {
-  const wrapper = btn.closest('div[style*="justify-content:center"]');
-  if (wrapper) {
-    const slettBtn = wrapper.parentElement?.querySelector('button[onclick^="slettBilde"]');
-    if (slettBtn) slettBtn.style.display = '';
-    wrapper.remove();
-  }
+function avbrytSlett() {
+  const bekr = document.getElementById('galleriSlettBekreft');
+  if (!bekr) return;
+  const slettBtn = bekr.parentElement?.querySelector('button[onclick^="slettBilde"]');
+  if (slettBtn) slettBtn.style.display = '';
+  bekr.remove();
 }
 async function bekreftSlett(id) {
   try {
@@ -1154,8 +1154,11 @@ async function bekreftSlett(id) {
 
 function lastOppBilder(files) {
   if (!files || !files.length) return;
-  // Lagre filene midlertidig og vis inline beskrivelse-felt
-  window._galleriVentendeFiles = files;
+  // VIKTIG: ta en kopi av FileList-en som en vanlig array. Nar vi senere
+  // nullstiller <input type="file">.value for aa tillate ny opplasting av
+  // samme fil, tommes den opprinnelige FileList-en - File-objektene i en
+  // array overlever derimot og kan leses som normalt.
+  window._galleriVentendeFiles = Array.from(files);
   let form = document.getElementById('galleriBeskrivelseForm');
   if (!form) {
     form = document.createElement('div');
@@ -1238,6 +1241,25 @@ function visTippFane(fane, btn) {
   if (fane === 'historikk') lastTippHistorikk();
 }
 
+// Kampplan for 2. Bundesliga. Fylles fra data.json, som GitHub Actions
+// oppdaterer fra OpenLigaDB 12 ganger daglig. DFL fastsetter avsparkstider
+// bare noen uker i forveien, så en hardkodet liste blir uunngåelig utdatert
+// - og da stengte tippefristen på feil klokkeslett. KJENTE_KAMPER beholdes
+// som nødløsning offline og før data.json har rukket å laste.
+let _kampplan = null;
+
+function kamper2BL() {
+  if (_kampplan && _kampplan.length) return _kampplan;
+  return KJENTE_KAMPER.filter(k => k.turnering === '2. Bundesliga');
+}
+
+// Kalles fra begge stedene som leser data.json
+function settKampplan(data) {
+  if (data && Array.isArray(data.kampplan) && data.kampplan.length) {
+    _kampplan = data.kampplan;
+  }
+}
+
 function lagKampId(kamp) {
   // Lager en unik ID basert på dato og motstander
   return (kamp.dato + '_' + (kamp.motstander || '').replace(/[^a-zA-Z0-9]/g, '')).substring(0, 60);
@@ -1246,7 +1268,7 @@ function lagKampId(kamp) {
 function finnNesteKamp2BL() {
   const now = new Date();
   // Vis siste kamp i 24 timer etter kampslutt (ca. 26 timer etter avspark)
-  const bl2 = KJENTE_KAMPER.filter(k => k.turnering === '2. Bundesliga');
+  const bl2 = kamper2BL();
   for (let i = bl2.length - 1; i >= 0; i--) {
     const k = bl2[i];
     const start = new Date(k.dato + 'T' + (k.tid || '15:00'));
@@ -1468,7 +1490,7 @@ async function lastTippToppliste() {
     const poengPerNavn = {};
     for (const kampId of Object.keys(alleTips)) {
       const dato = kampId.substring(0, 10);
-      const kampData = KJENTE_KAMPER.find(k => k.dato === dato && k.turnering === '2. Bundesliga');
+      const kampData = kamper2BL().find(k => k.dato === dato);
       if (!kampData) continue;
       const faktisk = kampResultater[dato];
       if (!faktisk || !faktisk.ferdig) continue;
@@ -1535,7 +1557,7 @@ async function lastTippHistorikk() {
     let html = '';
     for (const kampId of kampIder) {
       const dato = kampId.substring(0, 10);
-      const kampData = KJENTE_KAMPER.find(k => k.dato === dato && k.turnering === '2. Bundesliga');
+      const kampData = kamper2BL().find(k => k.dato === dato);
       if (!kampData) continue;
       const faktisk = kampResultater[dato];
       if (!faktisk || !faktisk.ferdig) continue; // Vis bare ferdige kamper i historikk
@@ -2126,6 +2148,7 @@ async function hentNesteKamp(force) {
     const resp = await fetch('data.json', { cache: 'no-store' });
     if (!resp.ok) throw new Error('data.json mangler');
     const data = await resp.json();
+    settKampplan(data);
 
     // Neste kamp – vis kun hvis kampdato ikke er passert
     if (!kampCached && data.next_match && data.next_match.dato) {
