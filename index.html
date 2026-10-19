@@ -495,6 +495,16 @@ function _fbKey(s) { return String(s).replace(/[.#$\[\]\/]/g, '_'); }
 function esc(s) {
   return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
+
+// Migrasjon: tidligere brukte appen to ulike navnenøkler (pl_mitt_navn og pl_navn).
+// Nå brukes kun pl_navn. Kopier over fra gammel nøkkel hvis brukeren har den.
+try {
+  const _gammelNavn = localStorage.getItem('pl_mitt_navn');
+  const _nyNavn = localStorage.getItem('pl_navn');
+  if (_gammelNavn && !_nyNavn) {
+    localStorage.setItem('pl_navn', _gammelNavn);
+  }
+} catch(e) {}
 </script>
 </head>
 <body>
@@ -953,7 +963,7 @@ async function toggleVarDer(kampId) {
     const n = prompt('Hva heter du?');
     if (!n || !n.trim()) return;
     _mittNavn = n.trim();
-    localStorage.setItem('pl_mitt_navn', _mittNavn);
+    localStorage.setItem('pl_navn', _mittNavn);
   }
   const ref = _fdb.ref('oppmote/' + kampId + '/' + _fbKey(_mittNavn));
   const snap = await ref.get();
@@ -1613,7 +1623,7 @@ function lagreArr() {
 
   // Husk navnet til neste gang
   _mittNavn = navn;
-  localStorage.setItem('pl_mitt_navn', navn);
+  localStorage.setItem('pl_navn', navn);
 
   const nytt = { id: 'u_' + Date.now(), type, tittel, dato, sted, beskr, opprettet: new Date().toISOString().split('T')[0], opprettetAv: navn };
 
@@ -2142,7 +2152,7 @@ async function oppdaterNyheter() {
 <script>
 // ---- PÅMELDING ----
 
-let _mittNavn = localStorage.getItem('pl_mitt_navn') || '';
+let _mittNavn = localStorage.getItem('pl_navn') || '';
 
 // Hent delt lagring (Firebase hvis konfigurert, ellers localStorage lokalt)
 async function getRSVP(eventId) {
@@ -2256,7 +2266,7 @@ async function bekreftNavn(eventId) {
   const navn = input?.value.trim();
   if (!navn) { input?.focus(); return; }
   _mittNavn = navn;
-  localStorage.setItem('pl_mitt_navn', navn);
+  localStorage.setItem('pl_navn', navn);
   lukkModal();
   await meldPaa(eventId, '');
 }
@@ -2335,7 +2345,7 @@ function bekreftKommNavn(eventId) {
   const navn = inp ? inp.value.trim() : '';
   if (!navn) { if(inp) inp.focus(); return; }
   _mittNavn = navn;
-  localStorage.setItem('pl_mitt_navn', navn);
+  localStorage.setItem('pl_navn', navn);
   const navnDiv = document.getElementById('komm_navn_' + eventId);
   if (navnDiv) navnDiv.style.display = 'none';
   sendKommentar(eventId);
