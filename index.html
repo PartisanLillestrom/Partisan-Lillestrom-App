@@ -1219,11 +1219,20 @@ async function bekreftGalleriOpplasting() {
 const TIPPING_REF = 'https://partisan-lillestrom-default-rtdb.europe-west1.firebasedatabase.app/tipping';
 const RESULTATER_REF = 'https://partisan-lillestrom-default-rtdb.europe-west1.firebasedatabase.app/kampresultater';
 
-async function hentKampResultat(dato) {
+async function hentKampResultat(kamp) {
+  if (!kamp) return null;
   try {
-    const resp = await fetch(RESULTATER_REF + '/' + dato + '.json');
+    // Rask vei: resultatet ligger normalt på kampens egen dato
+    const resp = await fetch(RESULTATER_REF + '/' + kamp.dato + '.json');
     const data = await resp.json();
     if (data && data.ferdig) return { h: data.h, b: data.b };
+    // Er kampen omberammet, kan resultatet ligge på en annen dato. Da må
+    // hele noden gjennomsøkes på matchId.
+    if (kamp.matchId != null && kamp.matchId !== '') {
+      const alle = await (await fetch(RESULTATER_REF + '.json')).json();
+      const treff = resultatForKamp(kamp, alle || {});
+      if (treff && treff.ferdig) return { h: treff.h, b: treff.b };
+    }
   } catch(e) {}
   return null;
 }
@@ -1260,9 +1269,50 @@ function settKampplan(data) {
   }
 }
 
+// Tippe-nøkkel for en kamp. Bruker OpenLigaDBs matchId når den finnes,
+// fordi datoen IKKE er stabil: DFL fastsetter helgen for hele sesongen,
+// men dag og klokkeslett kommer i bolker gjennom sesongen. Flyttes en
+// kamp fra lørdag til søndag, endrer datoen seg - og et tipp lagret under
+// den gamle datoen ville mistet koblingen til resultatet og stilltiende
+// sluttet å gi poeng. matchId følger kampen gjennom omberamminger.
 function lagKampId(kamp) {
-  // Lager en unik ID basert på dato og motstander
+  if (kamp && kamp.matchId != null && kamp.matchId !== '') {
+    return 'm' + kamp.matchId;
+  }
+  return lagKampIdLegacy(kamp);
+}
+
+// Den gamle dato-baserte nøkkelen. Beholdes for å kunne lese tips som
+// ble lagret før matchId ble innført, og som fallback når kampplanen
+// mangler matchId (f.eks. KJENTE_KAMPER-nødløsningen offline).
+function lagKampIdLegacy(kamp) {
+  if (!kamp) return '';
   return (kamp.dato + '_' + (kamp.motstander || '').replace(/[^a-zA-Z0-9]/g, '')).substring(0, 60);
+}
+
+// Finn kampen en lagret tippe-nøkkel hører til. Nye nøkler er 'm<matchId>',
+// gamle er '<dato>_<motstander>' - begge må kunne slås opp.
+function kampFraKampId(kampId) {
+  const kamper = kamper2BL();
+  const m = /^m(.+)$/.exec(kampId);
+  if (m) {
+    const funnet = kamper.find(k => String(k.matchId) === m[1]);
+    if (funnet) return funnet;
+  }
+  return kamper.find(k => k.dato === kampId.substring(0, 10)) || null;
+}
+
+// Finn resultatet for en kamp. matchId først, slik at oppslaget tåler at
+// kampen er flyttet; dato som fallback for resultater lagret før matchId
+// kom inn i kampresultater-noden.
+function resultatForKamp(kamp, kampResultater) {
+  if (!kamp || !kampResultater) return null;
+  if (kamp.matchId != null && kamp.matchId !== '') {
+    for (const r of Object.values(kampResultater)) {
+      if (r && r.matchId != null && String(r.matchId) === String(kamp.matchId)) return r;
+    }
+  }
+  return kampResultater[kamp.dato] || null;
 }
 
 function finnNesteKamp2BL() {
@@ -1318,15 +1368,21 @@ async function lastTipping() {
   const hjemme = kamp.hjemme ? 'FC St. Pauli' : esc(kamp.motstander);
   const borte = kamp.hjemme ? esc(kamp.motstander) : 'FC St. Pauli';
 
-  // Sjekk om brukeren allerede har tippet
+  // Sjekk om brukeren allerede har tippet. Prøv den gamle dato-baserte
+  // nøkkelen i tillegg, slik at et tipp lagret før matchId ble innført
+  // fortsatt vises i stedet for at kortet ser ut som om man ikke har tippet.
   const navn = localStorage.getItem('pl_navn') || '';
   let mittTipp = null;
   if (navn) {
-    try {
-      const resp = await fetch(TIPPING_REF + '/' + kampId + '/' + encodeURIComponent(_fbKey(navn)) + '.json');
-      const data = await resp.json();
-      if (data) mittTipp = data;
-    } catch(e) {}
+    const legacyId = lagKampIdLegacy(kamp);
+    const idKandidater = legacyId && legacyId !== kampId ? [kampId, legacyId] : [kampId];
+    for (const id of idKandidater) {
+      try {
+        const resp = await fetch(TIPPING_REF + '/' + id + '/' + encodeURIComponent(_fbKey(navn)) + '.json');
+        const data = await resp.json();
+        if (data) { mittTipp = data; break; }
+      } catch(e) {}
+    }
   }
 
   let html = `<div class="tipp-kamp-lag">${hjemme} — ${borte}</div>`;
@@ -1366,15 +1422,26 @@ async function lastAndreTips(kampId, kamp) {
   const liste = document.getElementById('tippAndreListe');
   if (!container || !liste) return;
   try {
-    const resp = await fetch(TIPPING_REF + '/' + kampId + '.json');
-    const data = await resp.json();
-    if (!data || Object.keys(data).length === 0) {
+    // Slå sammen tips under ny og gammel nøkkel, slik at tips lagret før
+    // matchId ble innført fortsatt vises. Nyeste tipp per navn vinner.
+    const legacyId = lagKampIdLegacy(kamp);
+    const idKandidater = legacyId && legacyId !== kampId ? [legacyId, kampId] : [kampId];
+    const data = {};
+    for (const id of idKandidater) {
+      const resp = await fetch(TIPPING_REF + '/' + id + '.json');
+      const del = await resp.json();
+      if (!del) continue;
+      for (const [navn, tipp] of Object.entries(del)) {
+        if (!data[navn] || (tipp.ts || 0) >= (data[navn].ts || 0)) data[navn] = tipp;
+      }
+    }
+    if (Object.keys(data).length === 0) {
       container.style.display = 'none';
       return;
     }
 
-    // Sjekk om kampen har et faktisk resultat fra Firebase (fylt av GitHub Actions via FotMob)
-    const faktisk = await hentKampResultat(kamp.dato);
+    // Sjekk om kampen har et faktisk resultat fra Firebase (fylt av GitHub Actions)
+    const faktisk = await hentKampResultat(kamp);
 
     const entries = Object.entries(data).map(([navn, d]) => {
       let poeng = null;
@@ -1460,7 +1527,13 @@ async function fjernTipp(kampId) {
   const navn = localStorage.getItem('pl_navn') || '';
   if (!navn) return;
   try {
-    await fetch(TIPPING_REF + '/' + kampId + '/' + encodeURIComponent(_fbKey(navn)) + '.json', { method: 'DELETE' });
+    // Slett under begge nøklene, ellers kan et gammelt dato-basert tipp
+    // ligge igjen og dukke opp som om det aldri ble fjernet.
+    const legacyId = lagKampIdLegacy(_tippNesteKamp);
+    const idKandidater = legacyId && legacyId !== kampId ? [kampId, legacyId] : [kampId];
+    for (const id of idKandidater) {
+      await fetch(TIPPING_REF + '/' + id + '/' + encodeURIComponent(_fbKey(navn)) + '.json', { method: 'DELETE' });
+    }
     lastTipping();
   } catch(e) {
     console.warn('Kunne ikke fjerne tipp', e);
@@ -1486,22 +1559,38 @@ async function lastTippToppliste() {
       if (rData) kampResultater = rData;
     } catch(e) {}
 
-    // Beregn poeng dynamisk fra tips + resultater
-    const poengPerNavn = {};
+    // Beregn poeng dynamisk fra tips + resultater.
+    //
+    // Samme kamp kan ligge under flere tippe-nøkler: en gammel dato-basert
+    // og en ny matchId-basert, eller to datoer hvis kampen ble omberammet.
+    // Derfor samles beste tipp per (kamp, navn) FØRST, og summeres etterpå.
+    // Uten den sperren ville den som tippet under to nøkler fått poengene
+    // sine tellet dobbelt.
+    const besteTipp = {};   // "kampnøkkel|navn" -> { poeng, ts }
     for (const kampId of Object.keys(alleTips)) {
-      const dato = kampId.substring(0, 10);
-      const kampData = kamper2BL().find(k => k.dato === dato);
+      const kampData = kampFraKampId(kampId);
       if (!kampData) continue;
-      const faktisk = kampResultater[dato];
+      const faktisk = resultatForKamp(kampData, kampResultater);
       if (!faktisk || !faktisk.ferdig) continue;
+
+      // Én identitet per kamp, uansett hvilken nøkkel tippet ligger under
+      const kampNokkel = kampData.matchId != null && kampData.matchId !== ''
+        ? 'm' + kampData.matchId : kampData.dato;
 
       const tips = alleTips[kampId];
       for (const [navn, d] of Object.entries(tips)) {
-        const p = beregnPoeng(d.h, d.b, faktisk.h, faktisk.b);
-        if (!poengPerNavn[navn]) poengPerNavn[navn] = { total: 0, kamper: 0 };
-        poengPerNavn[navn].total += p;
-        poengPerNavn[navn].kamper += 1;
+        const n = kampNokkel + '|' + navn;
+        const ts = d.ts || 0;
+        if (besteTipp[n] && besteTipp[n].ts >= ts) continue;  // behold nyeste
+        besteTipp[n] = { navn, poeng: beregnPoeng(d.h, d.b, faktisk.h, faktisk.b), ts };
       }
+    }
+
+    const poengPerNavn = {};
+    for (const { navn, poeng } of Object.values(besteTipp)) {
+      if (!poengPerNavn[navn]) poengPerNavn[navn] = { total: 0, kamper: 0 };
+      poengPerNavn[navn].total += poeng;
+      poengPerNavn[navn].kamper += 1;
     }
 
     const liste = Object.entries(poengPerNavn).map(([navn, d]) => ({
@@ -1552,19 +1641,34 @@ async function lastTippHistorikk() {
       if (rData) kampResultater = rData;
     } catch(e) {}
 
-    // Sorter kamper nyeste først
-    const kampIder = Object.keys(data).sort().reverse();
-    let html = '';
-    for (const kampId of kampIder) {
-      const dato = kampId.substring(0, 10);
-      const kampData = kamper2BL().find(k => k.dato === dato);
+    // Grupper tips per KAMP, ikke per tippe-nøkkel. En kamp kan ligge under
+    // både en gammel dato-basert og en ny matchId-basert nøkkel, og ville
+    // ellers blitt rendret som to kort. Nyeste tipp per navn vinner.
+    const perKamp = new Map();
+    for (const kampId of Object.keys(data)) {
+      const kampData = kampFraKampId(kampId);
       if (!kampData) continue;
-      const faktisk = kampResultater[dato];
-      if (!faktisk || !faktisk.ferdig) continue; // Vis bare ferdige kamper i historikk
+      const faktisk = resultatForKamp(kampData, kampResultater);
+      if (!faktisk || !faktisk.ferdig) continue; // Vis bare ferdige kamper
 
+      const nokkel = kampData.matchId != null && kampData.matchId !== ''
+        ? 'm' + kampData.matchId : kampData.dato;
+      if (!perKamp.has(nokkel)) perKamp.set(nokkel, { kampData, faktisk, tips: {} });
+      const bolk = perKamp.get(nokkel);
+      for (const [navn, t] of Object.entries(data[kampId])) {
+        const forrige = bolk.tips[navn];
+        if (!forrige || (t.ts || 0) >= (forrige.ts || 0)) bolk.tips[navn] = t;
+      }
+    }
+
+    // Nyeste kamp først
+    const sortert = [...perKamp.values()].sort((a, b) => b.kampData.dato.localeCompare(a.kampData.dato));
+
+    let html = '';
+    for (const { kampData, faktisk, tips: tippObj } of sortert) {
       const hjemme = kampData.hjemme ? 'St. Pauli' : kampData.motstander.substring(0, 15);
       const borte = kampData.hjemme ? kampData.motstander.substring(0, 15) : 'St. Pauli';
-      const d = new Date(dato);
+      const d = new Date(kampData.dato);
       const dagStr = d.toLocaleDateString('nb-NO', { day: 'numeric', month: 'short' });
 
       html += `<div class="card-bg" style="padding:10px;margin-bottom:10px;">`;
@@ -1574,10 +1678,10 @@ async function lastTippHistorikk() {
       html += `</div>`;
       html += `<div class="info-meta" style="margin-bottom:6px;">${dagStr}</div>`;
 
-      const tips = Object.entries(data[kampId]).map(([navn, d]) => ({
+      const tips = Object.entries(tippObj).map(([navn, t]) => ({
         navn,
-        h: d.h, b: d.b,
-        poeng: beregnPoeng(d.h, d.b, faktisk.h, faktisk.b)
+        h: t.h, b: t.b,
+        poeng: beregnPoeng(t.h, t.b, faktisk.h, faktisk.b)
       }));
       tips.sort((a, b) => b.poeng - a.poeng);
       tips.forEach(t => {
