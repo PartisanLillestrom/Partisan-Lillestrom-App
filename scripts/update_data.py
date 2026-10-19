@@ -342,11 +342,38 @@ def fetch_fcstpauli_news_urls(limit: int = 5) -> list:
     return []
 
 
+def rydd_tittel(t: str) -> str:
+    """Fjerner klubbnavn-prefiks/suffiks og avsluttende ellipse fra en raa
+    og:title.
+
+    fcstpauli.com sin CMS setter "FC St. Pauli | " foran hver og:title og
+    korter den ned med ellipse. Prefikset spiser ~15 tegn av nyhetskortet
+    paa noe medlemmene allerede vet. Ellipsen er verre enn kosmetisk:
+    oversettelses-API-et faar et fragment der objektet mangler og gjetter
+    feil - "1. Frauen bezwingen..." ble oversatt til "Kvinnene taper...",
+    altsaa stikk motsatt av resultatet (de vant 5-1). Vi rydder derfor
+    FOER teksten sendes til oversetting.
+
+    Suffiks-regelen er ankret til slutten av strengen med vilje. Den gamle
+    varianten brukte '.*$' og ville kappe en tittel som "1:1 in Hannover -
+    FC St. Pauli jubelt" midt i setningen."""
+    if not t:
+        return t
+    t = t.strip()
+    # Klubbnavn som prefiks: "FC St. Pauli | Tittel"
+    t = re.sub(r'^FC St\.?\s*Pauli\s*[|\u2013\u2014-]\s*', '', t)
+    # Klubbnavn som suffiks: "Tittel | FC St. Pauli"
+    t = re.sub(r'\s*[|\u2013\u2014-]\s*FC St\.?\s*Pauli\s*$', '', t)
+    # Avsluttende ellipse (\u2026 eller ...)
+    t = re.sub(r'\s*(?:\u2026|\.\.\.)\s*$', '', t)
+    return t.strip()
+
+
 def fetch_article_meta(url: str) -> tuple:
     """Henter (tittel, bilde-URL) for en artikkel. Prover direkte og:tags
     forst, deretter Jina-proxyen (som gir 'Title:'-linje + markdown-bilder)."""
     # Lag 1: direkte og:title / og:image
-    title = fetch_og_title(url)
+    title = rydd_tittel(fetch_og_title(url))
     image = fetch_og_image(url) if title else ""
     if title:
         return title, verifiser_artikkelbilde(url, image)
@@ -355,9 +382,7 @@ def fetch_article_meta(url: str) -> tuple:
     try:
         md = fetch_via_jina(url)
         m_title = re.match(r'Title:\s*(.+)', md)
-        title = m_title.group(1).strip() if m_title else ""
-        # Fjern " | FC St. Pauli"-suffiks o.l.
-        title = re.sub(r'\s*[|\u2013-]\s*FC St\.? Pauli.*$', '', title).strip()
+        title = rydd_tittel(m_title.group(1) if m_title else "")
         m_img = re.search(r'!\[[^\]]*\]\((https://[^)\s]+)\)', md)
         image = m_img.group(1) if m_img else ""
         if title:
