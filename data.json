@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "FC St. Pauli | U19 taper byderby, U17 taper…",
+      "title_de": "FC St. Pauli | U19 verliert Stadtderby, U17 besiegt den…",
+      "url": "https://www.fcstpauli.com/news/yr-nachberichte-kw43-2026",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FLeistungsbereich%2F_1200x630_crop_center-center_82_none%2FWITTERS_2377556.jpg%3Fv%3D1792405684%252C0.4855%252C0.3994&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FC St. Pauli | Søndagsskudd på Weser: 1. Kvinnene taper…",
       "title_de": "FC St. Pauli | Sonntagsschüsse an der Weser: 1. Frauen bezwingen…",
       "url": "https://www.fcstpauli.com/news/spielbericht-1-frauen-vs-werder-auswaerts-2627",
@@ -23,12 +29,6 @@
       "title_de": "FC St. Pauli | 1:1 in Hannover - Kiezkicker mit viertem Remis in der…",
       "url": "https://www.fcstpauli.com/news/spielbericht-auswaertsspiel-hannover-2627",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2F1-Ligaspiele-Pokalspiele%2F08-Hannover-A%2F_1200x630_crop_center-center_82_none%2FFCS06257.jpg%3Fv%3D1792269209%252C0.564%252C0.4555&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "FC St. Pauli | Opphetet duell i Hannover: Rapps lag sikter mot en toppkamp…",
-      "title_de": "FC St. Pauli | Heißes Duell in Hannover: Rapp-Elf will Topspiel für…",
-      "url": "https://www.fcstpauli.com/news/vorbericht-auswaertsspiel-hannover-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2F1-Ligaspiele-Pokalspiele%2F05-Wolfsburg-H%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-00935.jpg%3Fv%3D1792155771%252C0.5236%252C0.3305&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -77,6 +77,280 @@
     "hjemme": false,
     "stadion": "Merck-Stadion am Böllenfalltor, Darmstadt"
   },
+  "kampplan": [
+    {
+      "motstander": "SpVgg Greuther Fürth",
+      "dato": "2026-08-09",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": true,
+      "stadion": "Millerntor-Stadion, Hamburg"
+    },
+    {
+      "motstander": "Holstein Kiel",
+      "dato": "2026-08-14",
+      "tid": "18:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": false,
+      "stadion": "Holstein-Stadion, Kiel"
+    },
+    {
+      "motstander": "1. FC Kaiserslautern",
+      "dato": "2026-08-30",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": true,
+      "stadion": "Millerntor-Stadion, Hamburg"
+    },
+    {
+      "motstander": "DSC Arminia Bielefeld",
+      "dato": "2026-09-04",
+      "tid": "18:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": false,
+      "stadion": "SchücoArena, Bielefeld"
+    },
+    {
+      "motstander": "VfL Wolfsburg",
+      "dato": "2026-09-12",
+      "tid": "20:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": true,
+      "stadion": "Millerntor-Stadion, Hamburg"
+    },
+    {
+      "motstander": "Energie Cottbus",
+      "dato": "2026-09-20",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": false,
+      "stadion": ""
+    },
+    {
+      "motstander": "Karlsruher SC",
+      "dato": "2026-10-11",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": true,
+      "stadion": "Millerntor-Stadion, Hamburg"
+    },
+    {
+      "motstander": "Hannover 96",
+      "dato": "2026-10-17",
+      "tid": "20:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": false,
+      "stadion": "Heinz von Heiden Arena, Hannover"
+    },
+    {
+      "motstander": "SV Darmstadt 98",
+      "dato": "2026-10-23",
+      "tid": "18:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": false,
+      "stadion": "Merck-Stadion am Böllenfalltor, Darmstadt"
+    },
+    {
+      "motstander": "1. FC Nürnberg",
+      "dato": "2026-11-01",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": true,
+      "stadion": "Millerntor-Stadion, Hamburg"
+    },
+    {
+      "motstander": "1. FC Magdeburg",
+      "dato": "2026-11-08",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": false,
+      "stadion": "MDCC-Arena, Magdeburg"
+    },
+    {
+      "motstander": "VfL Bochum",
+      "dato": "2026-11-21",
+      "tid": "20:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": true,
+      "stadion": "Millerntor-Stadion, Hamburg"
+    },
+    {
+      "motstander": "Dynamo Dresden",
+      "dato": "2026-11-28",
+      "tid": "13:00",
+      "turnering": "2. Bundesliga",
+      "hjemme": false,
+      "stadion": ""
+    },
+    {
+      "motstander": "1. FC Heidenheim 1846",
+      "dato": "2026-12-06",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": true,
+      "stadion": "Millerntor-Stadion, Hamburg"
+    },
+    {
+      "motstander": "VfL Osnabrück",
+      "dato": "2026-12-13",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": false,
+      "stadion": "Bremer Brücke, Osnabrück"
+    },
+    {
+      "motstander": "Hertha BSC",
+      "dato": "2026-12-20",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": true,
+      "stadion": "Millerntor-Stadion, Hamburg"
+    },
+    {
+      "motstander": "Eintracht Braunschweig",
+      "dato": "2027-01-17",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": false,
+      "stadion": "Eintracht-Stadion, Braunschweig"
+    },
+    {
+      "motstander": "SpVgg Greuther Fürth",
+      "dato": "2027-01-24",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": false,
+      "stadion": "Sportpark Ronhof, Fürth"
+    },
+    {
+      "motstander": "Holstein Kiel",
+      "dato": "2027-01-31",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": true,
+      "stadion": "Millerntor-Stadion, Hamburg"
+    },
+    {
+      "motstander": "1. FC Kaiserslautern",
+      "dato": "2027-02-07",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": false,
+      "stadion": "Fritz-Walter-Stadion, Kaiserslautern"
+    },
+    {
+      "motstander": "DSC Arminia Bielefeld",
+      "dato": "2027-02-14",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": true,
+      "stadion": "Millerntor-Stadion, Hamburg"
+    },
+    {
+      "motstander": "VfL Wolfsburg",
+      "dato": "2027-02-21",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": false,
+      "stadion": "Volkswagen Arena, Wolfsburg"
+    },
+    {
+      "motstander": "Energie Cottbus",
+      "dato": "2027-02-28",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": true,
+      "stadion": "Millerntor-Stadion, Hamburg"
+    },
+    {
+      "motstander": "Karlsruher SC",
+      "dato": "2027-03-03",
+      "tid": "18:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": false,
+      "stadion": "BBBank Wildpark, Karlsruhe"
+    },
+    {
+      "motstander": "Hannover 96",
+      "dato": "2027-03-07",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": true,
+      "stadion": "Millerntor-Stadion, Hamburg"
+    },
+    {
+      "motstander": "SV Darmstadt 98",
+      "dato": "2027-03-14",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": true,
+      "stadion": "Millerntor-Stadion, Hamburg"
+    },
+    {
+      "motstander": "1. FC Nürnberg",
+      "dato": "2027-03-21",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": false,
+      "stadion": "Max-Morlock-Stadion, Nürnberg"
+    },
+    {
+      "motstander": "1. FC Magdeburg",
+      "dato": "2027-04-04",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": true,
+      "stadion": "Millerntor-Stadion, Hamburg"
+    },
+    {
+      "motstander": "VfL Bochum",
+      "dato": "2027-04-11",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": false,
+      "stadion": "Vonovia Ruhrstadion, Bochum"
+    },
+    {
+      "motstander": "Dynamo Dresden",
+      "dato": "2027-04-18",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": true,
+      "stadion": "Millerntor-Stadion, Hamburg"
+    },
+    {
+      "motstander": "1. FC Heidenheim 1846",
+      "dato": "2027-04-25",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": false,
+      "stadion": "Voith-Arena, Heidenheim"
+    },
+    {
+      "motstander": "VfL Osnabrück",
+      "dato": "2027-05-09",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": true,
+      "stadion": "Millerntor-Stadion, Hamburg"
+    },
+    {
+      "motstander": "Hertha BSC",
+      "dato": "2027-05-16",
+      "tid": "13:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": false,
+      "stadion": "Olympiastadion, Berlin"
+    },
+    {
+      "motstander": "Eintracht Braunschweig",
+      "dato": "2027-05-23",
+      "tid": "15:30",
+      "turnering": "2. Bundesliga",
+      "hjemme": true,
+      "stadion": "Millerntor-Stadion, Hamburg"
+    }
+  ],
   "kamplogg": [
     {
       "nr": 1,
@@ -514,5 +788,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-10-19T13:55:40Z"
+  "updated": "2026-10-19T16:49:20Z"
 }
