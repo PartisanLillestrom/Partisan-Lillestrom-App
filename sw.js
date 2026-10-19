@@ -1,7 +1,9 @@
 // Service worker for Partisan Lillestrøm PWA
 // Gjør appen installerbar og cacher kjernefiler for raskere lasting.
+// CACHE_VERSION oppdateres av GitHub Actions (update_data.py) ved endringer.
 
-const CACHE_NAME = 'partisan-v1';
+const CACHE_VERSION = '2026-10-19';
+const CACHE_NAME = 'partisan-' + CACHE_VERSION;
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -11,7 +13,7 @@ const CORE_ASSETS = [
   './manifest.json'
 ];
 
-// Installer: cache kjernefiler
+// Installer: cache kjernefiler, ta over umiddelbart
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE_NAME)
@@ -20,7 +22,7 @@ self.addEventListener('install', e => {
   );
 });
 
-// Aktiver: rydd opp gamle cacher
+// Aktiver: rydd opp ALLE gamle cacher, ta kontroll over klienter
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
@@ -34,7 +36,6 @@ self.addEventListener('fetch', e => {
   e.respondWith(
     fetch(e.request)
       .then(res => {
-        // Cache en kopi av vellykkede GET-forespørsler
         if (e.request.method === 'GET' && res.status === 200) {
           const clone = res.clone();
           caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
