@@ -69,6 +69,7 @@
     }
   ],
   "next_match": {
+    "matchId": 83648,
     "motstander": "SV Darmstadt 98",
     "dato": "2026-10-23",
     "tid": "18:30",
@@ -79,6 +80,7 @@
   },
   "kampplan": [
     {
+      "matchId": 83511,
       "motstander": "SpVgg Greuther Fürth",
       "dato": "2026-08-09",
       "tid": "13:30",
@@ -87,6 +89,7 @@
       "stadion": "Millerntor-Stadion, Hamburg"
     },
     {
+      "matchId": 83533,
       "motstander": "Holstein Kiel",
       "dato": "2026-08-14",
       "tid": "18:30",
@@ -95,6 +98,7 @@
       "stadion": "Holstein-Stadion, Kiel"
     },
     {
+      "matchId": 83539,
       "motstander": "1. FC Kaiserslautern",
       "dato": "2026-08-30",
       "tid": "13:30",
@@ -103,6 +107,7 @@
       "stadion": "Millerntor-Stadion, Hamburg"
     },
     {
+      "matchId": 83559,
       "motstander": "DSC Arminia Bielefeld",
       "dato": "2026-09-04",
       "tid": "18:30",
@@ -111,6 +116,7 @@
       "stadion": "SchücoArena, Bielefeld"
     },
     {
+      "matchId": 83565,
       "motstander": "VfL Wolfsburg",
       "dato": "2026-09-12",
       "tid": "20:30",
@@ -119,14 +125,16 @@
       "stadion": "Millerntor-Stadion, Hamburg"
     },
     {
+      "matchId": 83607,
       "motstander": "Energie Cottbus",
       "dato": "2026-09-20",
       "tid": "13:30",
       "turnering": "2. Bundesliga",
       "hjemme": false,
-      "stadion": ""
+      "stadion": "Stadion der Freundschaft, Cottbus"
     },
     {
+      "matchId": 83608,
       "motstander": "Karlsruher SC",
       "dato": "2026-10-11",
       "tid": "13:30",
@@ -135,6 +143,7 @@
       "stadion": "Millerntor-Stadion, Hamburg"
     },
     {
+      "matchId": 83627,
       "motstander": "Hannover 96",
       "dato": "2026-10-17",
       "tid": "20:30",
@@ -143,6 +152,7 @@
       "stadion": "Heinz von Heiden Arena, Hannover"
     },
     {
+      "matchId": 83648,
       "motstander": "SV Darmstadt 98",
       "dato": "2026-10-23",
       "tid": "18:30",
@@ -151,6 +161,7 @@
       "stadion": "Merck-Stadion am Böllenfalltor, Darmstadt"
     },
     {
+      "matchId": 83664,
       "motstander": "1. FC Nürnberg",
       "dato": "2026-11-01",
       "tid": "13:30",
@@ -159,6 +170,7 @@
       "stadion": "Millerntor-Stadion, Hamburg"
     },
     {
+      "matchId": 83686,
       "motstander": "1. FC Magdeburg",
       "dato": "2026-11-08",
       "tid": "13:30",
@@ -167,6 +179,7 @@
       "stadion": "MDCC-Arena, Magdeburg"
     },
     {
+      "matchId": 83691,
       "motstander": "VfL Bochum",
       "dato": "2026-11-21",
       "tid": "20:30",
@@ -175,14 +188,16 @@
       "stadion": "Millerntor-Stadion, Hamburg"
     },
     {
+      "matchId": 83710,
       "motstander": "Dynamo Dresden",
       "dato": "2026-11-28",
       "tid": "13:00",
       "turnering": "2. Bundesliga",
       "hjemme": false,
-      "stadion": ""
+      "stadion": "Rudolf-Harbig-Stadion, Dresden"
     },
     {
+      "matchId": 83729,
       "motstander": "1. FC Heidenheim 1846",
       "dato": "2026-12-06",
       "tid": "13:30",
@@ -191,6 +206,7 @@
       "stadion": "Millerntor-Stadion, Hamburg"
     },
     {
+      "matchId": 83751,
       "motstander": "VfL Osnabrück",
       "dato": "2026-12-13",
       "tid": "13:30",
@@ -199,6 +215,7 @@
       "stadion": "Bremer Brücke, Osnabrück"
     },
     {
+      "matchId": 83753,
       "motstander": "Hertha BSC",
       "dato": "2026-12-20",
       "tid": "13:30",
@@ -207,6 +224,7 @@
       "stadion": "Millerntor-Stadion, Hamburg"
     },
     {
+      "matchId": 83776,
       "motstander": "Eintracht Braunschweig",
       "dato": "2027-01-17",
       "tid": "13:30",
@@ -215,6 +233,7 @@
       "stadion": "Eintracht-Stadion, Braunschweig"
     },
     {
+      "matchId": 83867,
       "motstander": "SpVgg Greuther Fürth",
       "dato": "2027-01-24",
       "tid": "13:30",
@@ -223,6 +242,7 @@
       "stadion": "Sportpark Ronhof, Fürth"
     },
     {
+      "matchId": 83870,
       "motstander": "Holstein Kiel",
       "dato": "2027-01-31",
       "tid": "13:30",
@@ -231,6 +251,7 @@
       "stadion": "Millerntor-Stadion, Hamburg"
     },
     {
+      "matchId": 83889,
       "motstander": "1. FC Kaiserslautern",
       "dato": "2027-02-07",
       "tid": "13:30",
@@ -239,6 +260,7 @@
       "stadion": "Fritz-Walter-Stadion, Kaiserslautern"
     },
     {
+      "matchId": 83896,
       "motstander": "DSC Arminia Bielefeld",
       "dato": "2027-02-14",
       "tid": "13:30",
@@ -247,6 +269,7 @@
       "stadion": "Millerntor-Stadion, Hamburg"
     },
     {
+      "matchId": 83905,
       "motstander": "VfL Wolfsburg",
       "dato": "2027-02-21",
       "tid": "13:30",
@@ -255,6 +278,7 @@
       "stadion": "Volkswagen Arena, Wolfsburg"
     },
     {
+      "matchId": 83914,
       "motstander": "Energie Cottbus",
       "dato": "2027-02-28",
       "tid": "13:30",
@@ -263,6 +287,7 @@
       "stadion": "Millerntor-Stadion, Hamburg"
     },
     {
+      "matchId": 83926,
       "motstander": "Karlsruher SC",
       "dato": "2027-03-03",
       "tid": "18:30",
@@ -271,6 +296,7 @@
       "stadion": "BBBank Wildpark, Karlsruhe"
     },
     {
+      "matchId": 83932,
       "motstander": "Hannover 96",
       "dato": "2027-03-07",
       "tid": "13:30",
@@ -279,6 +305,7 @@
       "stadion": "Millerntor-Stadion, Hamburg"
     },
     {
+      "matchId": 83942,
       "motstander": "SV Darmstadt 98",
       "dato": "2027-03-14",
       "tid": "13:30",
@@ -287,6 +314,7 @@
       "stadion": "Millerntor-Stadion, Hamburg"
     },
     {
+      "matchId": 83952,
       "motstander": "1. FC Nürnberg",
       "dato": "2027-03-21",
       "tid": "13:30",
@@ -295,6 +323,7 @@
       "stadion": "Max-Morlock-Stadion, Nürnberg"
     },
     {
+      "matchId": 83960,
       "motstander": "1. FC Magdeburg",
       "dato": "2027-04-04",
       "tid": "13:30",
@@ -303,6 +332,7 @@
       "stadion": "Millerntor-Stadion, Hamburg"
     },
     {
+      "matchId": 83970,
       "motstander": "VfL Bochum",
       "dato": "2027-04-11",
       "tid": "13:30",
@@ -311,6 +341,7 @@
       "stadion": "Vonovia Ruhrstadion, Bochum"
     },
     {
+      "matchId": 83978,
       "motstander": "Dynamo Dresden",
       "dato": "2027-04-18",
       "tid": "13:30",
@@ -319,6 +350,7 @@
       "stadion": "Millerntor-Stadion, Hamburg"
     },
     {
+      "matchId": 83986,
       "motstander": "1. FC Heidenheim 1846",
       "dato": "2027-04-25",
       "tid": "13:30",
@@ -327,6 +359,7 @@
       "stadion": "Voith-Arena, Heidenheim"
     },
     {
+      "matchId": 84050,
       "motstander": "VfL Osnabrück",
       "dato": "2027-05-09",
       "tid": "13:30",
@@ -335,6 +368,7 @@
       "stadion": "Millerntor-Stadion, Hamburg"
     },
     {
+      "matchId": 84059,
       "motstander": "Hertha BSC",
       "dato": "2027-05-16",
       "tid": "13:30",
@@ -343,6 +377,7 @@
       "stadion": "Olympiastadion, Berlin"
     },
     {
+      "matchId": 84068,
       "motstander": "Eintracht Braunschweig",
       "dato": "2027-05-23",
       "tid": "15:30",
@@ -788,5 +823,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-10-19T17:31:09Z"
+  "updated": "2026-10-19T18:18:29Z"
 }
