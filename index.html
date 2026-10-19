@@ -801,7 +801,6 @@ try {
 </div>
 
 <script>
-const LOGO="logo-icon.jpeg";
 let _kamplogg=[];
 
 async function lastKamplogg() {
@@ -969,7 +968,7 @@ async function toggleVarDer(kampId) {
       navnDiv = document.createElement('div');
       navnDiv.id = 'opp_navn_' + kampId;
       navnDiv.style.cssText = 'display:flex;gap:6px;margin-bottom:8px;';
-      navnDiv.innerHTML = '<input type="text" id="opp_navn_inp_' + kampId + '" class="form-field" placeholder="Navnet ditt" style="flex:1;border-radius:6px;font-size:14px;">'
+      navnDiv.innerHTML = '<input type="text" id="opp_navn_inp_' + kampId + '" class="form-field" maxlength="100" placeholder="Navnet ditt" style="flex:1;border-radius:6px;font-size:14px;">'
         + '<button onclick="bekreftOppNavn(\'' + kampId + '\')" style="background:var(--accent);color:#fff;border:none;border-radius:6px;padding:6px 14px;font-family:\'Barlow Condensed\',sans-serif;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;">OK</button>';
       panel.insertBefore(navnDiv, panel.firstChild);
     }
@@ -1043,9 +1042,13 @@ function spMeny(id){
 document.addEventListener('DOMContentLoaded', () => lastKamplogg());
 
 // ---- TABELL (2. Bundesliga fra OpenLigaDB) ----
-let _tabellLastet = false;
-async function hentTabell() {
-  if (_tabellLastet) return;
+// _tabellHentet hindret tidligere ALL ny henting etter første gang, så
+// tabellen ble stående uendret resten av økta - også etter en kamp. Nå
+// caches den i 10 minutter, og force=true henter uansett.
+let _tabellHentetTs = 0;
+const TABELL_CACHE_MS = 10 * 60 * 1000;
+async function hentTabell(force) {
+  if (!force && _tabellHentetTs && Date.now() - _tabellHentetTs < TABELL_CACHE_MS) return;
   const el = document.getElementById('tabellInnhold');
   if (!el) return;
   try {
@@ -1064,14 +1067,17 @@ async function hentTabell() {
     });
     html += '</tbody></table>';
     el.innerHTML = html;
-    _tabellLastet = true;
+    _tabellHentetTs = Date.now();
   } catch(e) {
     console.warn('Kunne ikke hente tabell', e);
     el.innerHTML = '<div style="padding:20px;text-align:center;color:rgba(255,255,255,.4);font-size:13px;">Kunne ikke laste tabell. Prøv igjen senere.</div>';
   }
 }
 
-// ---- GALLERI (Firebase Storage via Realtime Database) ----
+// ---- GALLERI ----
+// Bildene lagres som base64 data-URL-er direkte i Realtime Database.
+// Det er ikke Firebase Storage, og det skalerer dårlig - hvert bilde
+// ligger inne i JSON-noden og lastes med hele galleriet.
 const GALLERI_REF = 'https://partisan-lillestrom-default-rtdb.europe-west1.firebasedatabase.app/galleri';
 let _galleriBilder = [];
 async function lastGalleri() {
@@ -1164,7 +1170,7 @@ function lastOppBilder(files) {
     form = document.createElement('div');
     form.id = 'galleriBeskrivelseForm';
     form.style.cssText = 'display:flex;gap:6px;margin-bottom:12px;';
-    form.innerHTML = '<input type="text" id="galleriBeskrivelseInp" class="form-field" placeholder="Hvilken kamp eller arrangement?" style="flex:1;border-radius:6px;font-size:14px;">'
+    form.innerHTML = '<input type="text" id="galleriBeskrivelseInp" class="form-field" maxlength="500" placeholder="Hvilken kamp eller arrangement?" style="flex:1;border-radius:6px;font-size:14px;">'
       + '<button onclick="bekreftGalleriOpplasting()" style="background:var(--accent);color:#fff;border:none;border-radius:6px;padding:6px 14px;font-family:\'Barlow Condensed\',sans-serif;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;">Last opp</button>'
       + '<button onclick="avbrytGalleriOpplasting()" style="background:none;border:1px solid rgba(255,255,255,.2);border-radius:6px;color:rgba(255,255,255,.5);font-family:\'Barlow Condensed\',sans-serif;font-size:12px;font-weight:600;padding:6px 10px;cursor:pointer;">✕</button>';
     const grid = document.getElementById('galleriGrid');
@@ -1179,6 +1185,55 @@ function avbrytGalleriOpplasting() {
   if (form) form.style.display = 'none';
   document.getElementById('galleriInput').value = '';
 }
+// Bildene lagres som base64 i Realtime Database, og lastGalleri() henter
+// HELE noden hver gang galleriet åpnes. Et ukrympet telefonbilde på 1,4 MB
+// blir ~1,9 mill. tegn, så 50 bilder ville betydd 93 MB nedlasting per
+// åpning - og Firebase Spark-planen gir 10 GB i måneden. Krymping til
+// 1600 px gir typisk 320-380 kB, altså ~500 000 tegn: godt innenfor
+// regelgrensen på 2 000 000, og fire ganger raskere galleri.
+const GALLERI_MAKS_PX = 1600;        // lengste side etter krymping
+const GALLERI_MAKS_TEGN = 1900000;   // margin ned til regelens 2 000 000
+const GALLERI_MAKS_FIL = 25 * 1024 * 1024;  // vern mot å dekode noe absurd
+
+async function krympBilde(file) {
+  // EXIF-rotasjon: uten 'from-image' havner telefonbilder på siden.
+  // Eldre nettlesere kjenner ikke options-objektet, derfor to forsøk.
+  let bitmap;
+  try {
+    bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
+  } catch(e) {
+    try {
+      bitmap = await createImageBitmap(file);
+    } catch(e2) {
+      // Formatet kan ikke dekodes av canvas - typisk HEIC i Chrome/Firefox.
+      // Tidligere ble slike filer lastet opp rått og viste seg aldri.
+      throw new Error('format');
+    }
+  }
+
+  const skala = Math.min(1, GALLERI_MAKS_PX / Math.max(bitmap.width, bitmap.height));
+  const bredde = Math.max(1, Math.round(bitmap.width * skala));
+  const hoyde = Math.max(1, Math.round(bitmap.height * skala));
+
+  const canvas = document.createElement('canvas');
+  canvas.width = bredde;
+  canvas.height = hoyde;
+  const ctx = canvas.getContext('2d');
+  // Hvit bunn: JPEG har ingen alfakanal, og uten dette blir gjennomsiktige
+  // PNG-områder svarte.
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, bredde, hoyde);
+  ctx.drawImage(bitmap, 0, 0, bredde, hoyde);
+  if (bitmap.close) bitmap.close();
+
+  // Senk kvaliteten i trinn hvis bildet fortsatt er for stort
+  for (const kvalitet of [0.8, 0.65, 0.5]) {
+    const url = canvas.toDataURL('image/jpeg', kvalitet);
+    if (url.length <= GALLERI_MAKS_TEGN) return url;
+  }
+  throw new Error('stor');
+}
+
 async function bekreftGalleriOpplasting() {
   const inp = document.getElementById('galleriBeskrivelseInp');
   const beskrivelse = inp ? inp.value.trim() : '';
@@ -1195,20 +1250,21 @@ async function bekreftGalleriOpplasting() {
   const grid = document.getElementById('galleriGrid');
   const tom = document.getElementById('galleriTom');
   for (const file of files) {
-    if (file.size > 5 * 1024 * 1024) { alert('Maks 5 MB per bilde.'); continue; }
+    if (file.size > GALLERI_MAKS_FIL) { alert('Bildet er for stort (over 25 MB).'); continue; }
     try {
-      const dataUrl = await new Promise((res, rej) => {
-        const reader = new FileReader();
-        reader.onload = () => res(reader.result);
-        reader.onerror = rej;
-        reader.readAsDataURL(file);
-      });
-      const payload = { url: dataUrl, tekst: beskrivelse.trim(), av: navn, ts: Date.now() };
+      const dataUrl = await krympBilde(file);
+      const payload = { url: dataUrl, tekst: beskrivelse, av: navn, ts: Date.now() };
       const resp = await fetch(GALLERI_REF + '.json', { method: 'POST', body: JSON.stringify(payload) });
       if (!resp.ok) throw new Error('Feil ved opplasting');
     } catch(e) {
       console.warn('Opplasting feilet', e);
-      alert('Kunne ikke laste opp bilde. Prøv igjen.');
+      if (e && e.message === 'format') {
+        alert('Dette bildeformatet støttes ikke i denne nettleseren.\n\nLast det opp som JPEG eller PNG, eller prøv fra en annen enhet.');
+      } else if (e && e.message === 'stor') {
+        alert('Bildet ble for stort selv etter komprimering. Prøv et mindre bilde.');
+      } else {
+        alert('Kunne ikke laste opp bilde. Prøv igjen.');
+      }
     }
   }
   document.getElementById('galleriInput').value = '';
@@ -1237,7 +1293,6 @@ async function hentKampResultat(kamp) {
   return null;
 }
 
-let _tippLastet = false;
 let _tippNesteKamp = null;
 
 function visTippFane(fane, btn) {
@@ -1404,7 +1459,7 @@ async function lastTipping() {
     html += `<input type="number" id="tippBorte" class="tipp-input" min="0" max="20" placeholder="0">`;
     html += `</div>`;
     if (!navn) {
-      html += `<div style="margin-top:10px;"><input type="text" id="tippNavn" class="form-field" placeholder="Navnet ditt" style="border-radius:6px;text-align:center;"></div>`;
+      html += `<div style="margin-top:10px;"><input type="text" id="tippNavn" class="form-field" maxlength="100" placeholder="Navnet ditt" style="border-radius:6px;text-align:center;"></div>`;
     }
     html += `<button class="tipp-send-btn" onclick="sendTipp('${kampId}')">Tipp!</button>`;
   } else {
@@ -2006,13 +2061,13 @@ function kortHtml(a, fortid) {
       <div style="margin-top:10px;border-top:1px solid rgba(255,255,255,.06);padding-top:10px;">
         <div id="komm_liste_${a.id}" style="margin-bottom:8px;"></div>
         <div id="komm_navn_${a.id}" style="display:none;gap:6px;margin-bottom:6px;">
-          <input id="komm_navn_inp_${a.id}" class="komm-input" type="text"
+          <input id="komm_navn_inp_${a.id}" class="komm-input" type="text" maxlength="100"
             placeholder="Ditt navn..." style="flex:1;">
           <button type="button" class="gb gb-dark komm-ok-btn"
             onclick="bekreftKommNavn('${a.id}')">OK</button>
         </div>
         <div style="display:flex;gap:6px;">
-          <input id="komm_inp_${a.id}" class="komm-input" type="text"
+          <input id="komm_inp_${a.id}" class="komm-input" type="text" maxlength="500"
             placeholder="Skriv kommentar..."
             data-eid="${a.id}">
           <button type="button" class="komm-send gb gb-dark" data-eid="${a.id}">Send</button>
@@ -2109,7 +2164,7 @@ window.addEventListener('partisan_page_change', (e) => {
     <div class="sec-title-style" style="font-size:16px;margin-bottom:12px;">Opprett nytt arrangement</div>
 
     <label class="form-label">Ditt navn</label>
-    <input id="fNavn" class="form-field" type="text" placeholder="Hvem oppretter arrangementet?"
+    <input id="fNavn" class="form-field" type="text" maxlength="100" placeholder="Hvem oppretter arrangementet?"
       style="margin-bottom:12px;" autocomplete="name">
 
     <label class="form-label">Type arrangement</label>
@@ -2127,7 +2182,7 @@ window.addEventListener('partisan_page_change', (e) => {
     </div>
 
     <label class="form-label">Tittel</label>
-    <input id="fTittel" class="form-field" type="text" placeholder="F.eks. Kampvisning: FCSP vs HSV"
+    <input id="fTittel" class="form-field" type="text" maxlength="200" placeholder="F.eks. Kampvisning: FCSP vs HSV"
       style="margin-bottom:12px;">
 
     <label class="form-label">Dato og tid</label>
@@ -2141,11 +2196,11 @@ window.addEventListener('partisan_page_change', (e) => {
     </div>
 
     <label class="form-label">Sted / Lokasjon</label>
-    <input id="fSted" class="form-field" type="text" placeholder="F.eks. Martins Pub, Lillestrøm"
+    <input id="fSted" class="form-field" type="text" maxlength="200" placeholder="F.eks. Martins Pub, Lillestrøm"
       style="margin-bottom:12px;">
 
     <label class="form-label">Beskrivelse</label>
-    <textarea id="fBeskr" class="form-field" rows="3" placeholder="Mer informasjon om arrangementet..."
+    <textarea id="fBeskr" class="form-field" rows="3" maxlength="1000" placeholder="Mer informasjon om arrangementet..."
       style="resize:none;margin-bottom:16px;"></textarea>
 
     <div style="display:flex;gap:8px;">
@@ -2293,12 +2348,17 @@ function renderNyheter(containerId, items, prikkFarge, harBilde) {
   const c = document.getElementById(containerId);
   if (!c || !items || !items.length) return;
   c.innerHTML = items.map(n => {
+    // Alt som kommer fra data.json escapes. Innholdet er ikke skrevet av
+    // medlemmene, men det er hentet fra scraping av fcstpauli.com og
+    // millernton.de og kjørt gjennom et tredjeparts oversettelses-API -
+    // altså tekst vi ikke kontrollerer. En apostrof eller < i en
+    // overskrift ville ellers brutt markupen.
     const bilde = n.image
-      ? `<img class="ni" src="${n.image}" alt="" referrerpolicy="no-referrer" onerror="bildeFallback(this)">`
+      ? `<img class="ni" src="${esc(n.image)}" alt="" referrerpolicy="no-referrer" onerror="bildeFallback(this)">`
       : `<div class="nip">&#9917;</div>`;
-    const kilde = harBilde ? 'fcstpauli.com' : ('millernton.de &middot; ' + n.date);
-    const oversattUrl = 'https://translate.google.com/translate?sl=de&tl=no&u=' + encodeURIComponent(n.url);
-    return `<a class="nc" href="${oversattUrl}" target="_blank">${bilde}<div class="nb2"><div class="nt">${n.title_no}</div><div class="no">${n.title_de}</div><div class="ns"><div class="sd" style="background:${prikkFarge};"></div>${kilde}</div></div></a>`;
+    const kilde = harBilde ? 'fcstpauli.com' : ('millernton.de &middot; ' + esc(n.date || ''));
+    const oversattUrl = 'https://translate.google.com/translate?sl=de&tl=no&u=' + encodeURIComponent(n.url || '');
+    return `<a class="nc" href="${esc(oversattUrl)}" target="_blank">${bilde}<div class="nb2"><div class="nt">${esc(n.title_no)}</div><div class="no">${esc(n.title_de)}</div><div class="ns"><div class="sd" style="background:${prikkFarge};"></div>${kilde}</div></div></a>`;
   }).join('');
 }
 
@@ -2314,14 +2374,27 @@ function visKamp(kamp) {
     const d = new Date(kamp.dato + (kamp.tid ? 'T' + kamp.tid : 'T12:00'));
     const dagKort = d.toLocaleDateString('nb-NO',{weekday:'short',day:'numeric',month:'short'});
     const hj = kamp.hjemme;
+    const mots = esc(kamp.motstander || '');
     bar.innerHTML = `
   <span class="heading-bebas" style="font-size:14px;line-height:1;color:rgba(255,255,255,.4);white-space:nowrap;">NESTE KAMP</span>
   <span class="heading-bebas" style="font-size:14px;line-height:1;color:rgba(255,255,255,.2);margin:0 8px;">·</span>
-  <span class="heading-bebas" style="font-size:14px;line-height:1;color:rgba(255,255,255,.85);white-space:nowrap;">${hj?'FC St. Pauli':kamp.motstander} · ${hj?kamp.motstander:'FC St. Pauli'}</span>
+  <span class="heading-bebas" style="font-size:14px;line-height:1;color:rgba(255,255,255,.85);white-space:nowrap;">${hj?'FC St. Pauli':mots} · ${hj?mots:'FC St. Pauli'}</span>
   <span class="heading-bebas" style="font-size:14px;line-height:1;color:rgba(255,255,255,.2);margin:0 8px;">·</span>
-  <span class="info-meta" style="line-height:1;white-space:nowrap;">${dagKort}${kamp.tid?' '+kamp.tid:''}</span>
-  <button class="kal-btn" style="margin-left:8px;" onclick="lagICS('${(kamp.motstander||'').replace(/'/g,"\\'")}','${kamp.dato}','${kamp.tid||'15:00'}','${(kamp.stadion||'').replace(/'/g,"\\'")}',${!!kamp.hjemme})">📅</button>
+  <span class="info-meta" style="line-height:1;white-space:nowrap;">${esc(dagKort)}${kamp.tid?' '+esc(kamp.tid):''}</span>
+  <button class="kal-btn" id="kalBtn" style="margin-left:8px;">📅</button>
 `;
+    // Kalenderknappen får en lytter i stedet for et onclick-attributt.
+    // Attributtet flettet lagnavn og stadion inn i en JS-streng og escapet
+    // bare apostrof - et anførselstegn i et stadionnavn ville brutt ut av
+    // strengen. Lytteren lukker over kamp-objektet, så ingen escaping
+    // trengs i det hele tatt.
+    const kalBtn = document.getElementById('kalBtn');
+    if (kalBtn) {
+      kalBtn.addEventListener('click', () => lagICS(
+        kamp.motstander || '', kamp.dato, kamp.tid || '15:00',
+        kamp.stadion || '', !!kamp.hjemme
+      ));
+    }
   }
 }
 
@@ -2454,7 +2527,7 @@ function visMeldModal(eventId, tittel) {
     <div class="navn-boks gb">
       <h3>Meld deg på</h3>
       <div class="info-val-dim" style="margin-bottom:12px;">${tittel || ''}</div>
-      <input class="navn-input" id="navnInput" type="text"
+      <input class="navn-input" id="navnInput" type="text" maxlength="100"
         placeholder="Ditt navn" value="${_mittNavn}" autocomplete="name">
       <div class="navn-knapper">
         <button class="navn-ok gb" onclick="bekreftNavn('${eventId}')">Meld på</button>
@@ -2494,7 +2567,6 @@ async function lastAlleRSVP() {
 }
 
 // Kjør når arr-siden vises
-const _origVisArr = typeof visArr === 'function' ? visArr : null;
 </script>
 
 
