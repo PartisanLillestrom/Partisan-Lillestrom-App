@@ -668,6 +668,32 @@ def validate(payload: dict) -> None:
 # Hovedprogram
 # ---------------------------------------------------------------------------
 
+SW_FILE = "sw.js"
+
+
+def oppdater_sw_versjon():
+    """Oppdaterer CACHE_VERSION i sw.js til dagens dato, slik at nettlesere
+    oppdager endringer og henter nye filer. Gjør ingenting hvis datoen
+    allerede er dagens."""
+    idag = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    try:
+        with open(SW_FILE, "r", encoding="utf-8") as f:
+            innhold = f.read()
+        ny = re.sub(
+            r"const CACHE_VERSION = '[^']+';",
+            f"const CACHE_VERSION = '{idag}';",
+            innhold,
+        )
+        if ny != innhold:
+            with open(SW_FILE, "w", encoding="utf-8") as f:
+                f.write(ny)
+            print(f"  - sw.js CACHE_VERSION oppdatert til {idag}")
+        else:
+            print(f"  - sw.js CACHE_VERSION allerede {idag}")
+    except Exception as e:
+        print(f"  (advarsel: kunne ikke oppdatere sw.js: {e})", file=sys.stderr)
+
+
 def main() -> int:
     # --- MillernTon ---
     rss_items = fetch_millernton_rss()
@@ -761,6 +787,9 @@ def main() -> int:
     with open(DATA_FILE, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)
         f.write("\n")
+
+    # Oppdater service worker cache-versjon slik at brukerne får nye filer
+    oppdater_sw_versjon()
 
     print(f"OK: data.json oppdatert ({payload['updated']})")
     print(f"  - {len(payload['fcstpauli_news'])} fcstpauli-nyheter")
