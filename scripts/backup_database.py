@@ -10,6 +10,7 @@ Bruker Google Service Account for autentisering mot Firebase.
 import json
 import os
 import sys
+import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 
@@ -102,15 +103,11 @@ def main():
     storrelse = os.path.getsize(filnavn)
     print(f"Backup lagret: {filnavn} ({storrelse} bytes)")
 
-    # Slett gamle backupper (behold siste 30)
-    backups = sorted(
-        [f for f in os.listdir("backups") if f.startswith("firebase-backup-") and f.endswith(".json")]
-    )
-    if len(backups) > 30:
-        for gammel in backups[:-30]:
-            os.remove(f"backups/{gammel}")
-            print(f"Slettet gammel backup: {gammel}")
-
+    # Her stod det tidligere logikk for aa beholde de siste 30 backupene.
+    # Den var daud kode: backups/ er ikke i repoet, og hver GitHub
+    # Actions-kjoering starter paa en fersk maskin med tom mappe - saa det
+    # fantes aldri mer enn en fil aa rydde i. Oppbevaringen styres i
+    # praksis av retention-days i .github/workflows/backup.yml.
     print("Backup fullført!")
 
 
