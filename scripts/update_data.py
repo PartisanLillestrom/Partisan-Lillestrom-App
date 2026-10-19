@@ -28,6 +28,8 @@ import urllib.request
 import urllib.error
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
+# Alias fordi 'html' brukes som lokalt variabelnavn flere steder i filen
+from html import unescape as html_unescape
 
 # Kamptider i Rahmenspielplan er tysk lokaltid (CET/CEST). Norge deler
 # tidssone med Tyskland, saa tidene kan vises direkte i appen.
@@ -190,20 +192,49 @@ def fetch_millernton_rss(limit: int = 5) -> list:
 # Felles og:tag-henting (brukes av begge kilder)
 # ---------------------------------------------------------------------------
 
-def fetch_og_tag(page_url: str, tag: str) -> str:
-    """Henter en og:-meta-tag (f.eks. 'og:image' eller 'og:title') fra en
-    artikkelside. Tom streng hvis ikke funnet."""
+def hent_artikkel_html(page_url: str) -> str:
+    """Henter en artikkelside EN gang. Tidligere hentet fetch_og_title og
+    fetch_og_image siden hver for seg - to kall per artikkel, ti per
+    kjoering. Naa trekker vi alt vi trenger ut av samme HTML."""
     try:
         req = urllib.request.Request(page_url, headers={"User-Agent": USER_AGENT})
         with urllib.request.urlopen(req, timeout=30) as resp:
-            html = resp.read(400_000).decode("utf-8", "replace")
-        pattern_a = rf'property=["\']{re.escape(tag)}["\'"][^>]*content=["\'"]([^"\']+)'
-        pattern_b = rf'content=["\'"]([^"\']+)["\'"][^>]*property=["\']{re.escape(tag)}'
-        m = re.search(pattern_a, html) or re.search(pattern_b, html)
-        return m.group(1) if m else ""
+            return resp.read(400_000).decode("utf-8", "replace")
     except Exception as e:
-        print(f"  (advarsel: fant ikke {tag} på {page_url}: {e})", file=sys.stderr)
+        print(f"  (advarsel: kunne ikke hente {page_url}: {e})", file=sys.stderr)
         return ""
+
+
+def _og_fra_html(doc: str, tag: str) -> str:
+    """Trekker ut en og:-meta-tag (f.eks. 'og:image') fra ferdig hentet HTML."""
+    if not doc:
+        return ""
+    pattern_a = rf'property=["\']{re.escape(tag)}["\'][^>]*content=["\']([^"\']+)'
+    pattern_b = rf'content=["\']([^"\']+)["\'][^>]*property=["\']{re.escape(tag)}'
+    m = re.search(pattern_a, doc) or re.search(pattern_b, doc)
+    return html_unescape(m.group(1)) if m else ""
+
+
+def _tittel_tag(doc: str) -> str:
+    """Trekker ut innholdet i <title> fra ferdig hentet HTML.
+
+    fcstpauli.com korter og:title ned til ca. 50 tegn, mens <title> er hele
+    overskriften med " | FC St. Pauli" bakpaa - og det suffikset fjerner
+    rydd_tittel() allerede. Den fulle teksten er viktig fordi en avkuttet
+    tittel gir feiloversettelser: "1. Frauen bezwingen" (de VANT) ble
+    "Kvinnetap"."""
+    if not doc:
+        return ""
+    m = re.search(r'<title[^>]*>(.*?)</title>', doc, re.S | re.I)
+    if not m:
+        return ""
+    return html_unescape(re.sub(r'\s+', ' ', m.group(1)).strip())
+
+
+def fetch_og_tag(page_url: str, tag: str) -> str:
+    """Henter en og:-meta-tag fra en artikkelside (egen henting).
+    Brukes av millernton-loypa, som bare trenger og:image."""
+    return _og_fra_html(hent_artikkel_html(page_url), tag)
 
 
 def fetch_og_image(page_url: str) -> str:
@@ -212,6 +243,21 @@ def fetch_og_image(page_url: str) -> str:
 
 def fetch_og_title(page_url: str) -> str:
     return fetch_og_tag(page_url, "og:title")
+
+
+def velg_tittel(og_title: str, title_tag: str) -> str:
+    """Velger den mest komplette overskriften av og:title og <title>.
+
+    Begge ryddes foerst for klubbnavn og ellipse. Den som gir mest tekst
+    vinner: er <title> bare "FC St. Pauli" eller "Startseite | FC St.
+    Pauli", blir den kort etter rydding og og:title beholdes."""
+    og = rydd_tittel(og_title)
+    tt = rydd_tittel(title_tag)
+    if not tt:
+        return og
+    if not og:
+        return tt
+    return tt if len(tt) > len(og) else og
 
 
 # ---------------------------------------------------------------------------
@@ -370,13 +416,18 @@ def rydd_tittel(t: str) -> str:
 
 
 def fetch_article_meta(url: str) -> tuple:
-    """Henter (tittel, bilde-URL) for en artikkel. Prover direkte og:tags
-    forst, deretter Jina-proxyen (som gir 'Title:'-linje + markdown-bilder)."""
-    # Lag 1: direkte og:title / og:image
-    title = rydd_tittel(fetch_og_title(url))
-    image = fetch_og_image(url) if title else ""
+    """Henter (tittel, bilde-URL) for en artikkel. Prover direkte meta-tagger
+    forst, deretter Jina-proxyen (som gir 'Title:'-linje + markdown-bilder).
+
+    Artikkelsiden hentes EN gang, og baade og:title, <title> og og:image
+    leses ut av samme HTML. Tittelen velges av velg_tittel(), som
+    foretrekker <title> naar den er mer komplett enn den avkuttede
+    og:title."""
+    # Lag 1: direkte meta-tagger - én henting
+    doc = hent_artikkel_html(url)
+    title = velg_tittel(_og_fra_html(doc, "og:title"), _tittel_tag(doc))
     if title:
-        return title, verifiser_artikkelbilde(url, image)
+        return title, verifiser_artikkelbilde(url, _og_fra_html(doc, "og:image"))
 
     # Lag 2: via Jina
     try:
