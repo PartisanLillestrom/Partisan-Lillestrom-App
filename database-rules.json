@@ -1,0 +1,105 @@
+{
+  "rules": {
+    "arrangementer": {
+      ".read": true,
+      "$arrId": {
+        ".write": true,
+        ".validate": "newData.hasChildren(['id','type','tittel','dato','opprettetAv'])",
+        "id":           { ".validate": "newData.isString() && newData.val().length <= 50" },
+        "type":         { ".validate": "newData.isString() && newData.val().length <= 20" },
+        "tittel":       { ".validate": "newData.isString() && newData.val().length <= 200" },
+        "dato":         { ".validate": "newData.isString() && newData.val().length <= 30" },
+        "sted":         { ".validate": "newData.isString() && newData.val().length <= 200" },
+        "beskr":        { ".validate": "newData.isString() && newData.val().length <= 1000" },
+        "opprettet":    { ".validate": "newData.isString() && newData.val().length <= 10" },
+        "opprettetAv":  { ".validate": "newData.isString() && newData.val().length <= 100" },
+        "$other":       { ".validate": false }
+      }
+    },
+    "arr_slettet": {
+      ".read": true,
+      "$arrId": {
+        ".write": true,
+        ".validate": "newData.isBoolean()"
+      }
+    },
+    "rsvp": {
+      ".read": true,
+      "$eventId": {
+        "$navn": {
+          ".write": true,
+          ".validate": "newData.isString() && newData.val().length <= 100"
+        }
+      }
+    },
+    "komm": {
+      ".read": true,
+      "$eventId": {
+        ".read": true,
+        "$kommId": {
+          ".write": true,
+          ".validate": "newData.hasChildren(['id','navn','tekst','tid'])",
+          "id":    { ".validate": "newData.isString() && newData.val().length <= 50" },
+          "navn":  { ".validate": "newData.isString() && newData.val().length <= 100" },
+          "tekst": { ".validate": "newData.isString() && newData.val().length <= 500" },
+          "tid":   { ".validate": "newData.isString() && newData.val().length <= 30" },
+          "$other": { ".validate": false }
+        }
+      }
+    },
+    "oppmote": {
+      ".read": true,
+      "$kampId": {
+        "$navn": {
+          ".write": true,
+          ".validate": "newData.isString() && newData.val().length <= 100"
+        }
+      }
+    },
+    "galleri": {
+      ".read": true,
+      "$bildeId": {
+        ".write": true,
+        ".validate": "newData.hasChildren(['url','av','ts'])",
+        "url":    { ".validate": "newData.isString() && newData.val().length <= 2000000" },
+        "av":     { ".validate": "newData.isString() && newData.val().length <= 100" },
+        "tekst":  { ".validate": "newData.isString() && newData.val().length <= 500" },
+        "ts":     { ".validate": "newData.isNumber()" },
+        "$other": { ".validate": false }
+      }
+    },
+    "tipping": {
+      ".read": true,
+      "$kampId": {
+        ".read": true,
+        "$navn": {
+          ".write": true,
+          ".validate": "newData.hasChildren(['h','b','ts'])",
+          "h":    { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 20" },
+          "b":    { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 20" },
+          "ts":   { ".validate": "newData.isNumber()" },
+          "$other": { ".validate": false }
+        }
+      }
+    },
+    "kampresultater": {
+      ".read": true,
+      ".write": false,
+      "$dato": {
+        ".validate": "newData.hasChildren(['h','b','ferdig'])",
+        "h":          { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 20" },
+        "b":          { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 20" },
+        "hjemmelag":  { ".validate": "newData.isString() && newData.val().length <= 100" },
+        "bortelag":   { ".validate": "newData.isString() && newData.val().length <= 100" },
+        "ferdig":     { ".validate": "newData.isBoolean()" },
+        "dato":       { ".validate": "newData.isString() && newData.val().length <= 10" },
+        "matchId":    { ".validate": "newData.isNumber()" },
+        "$other":     { ".validate": false }
+      }
+    },
+    "$other": {
+      ".read": false,
+      ".write": false
+    }
+  }
+}
