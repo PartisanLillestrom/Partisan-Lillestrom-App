@@ -225,12 +225,27 @@ input,select,textarea{font-size:16px !important;-webkit-text-size-adjust:100%;} 
 
 /* NEWS CARDS */
 .cw{margin:0 14px 16px;}
+/* Nyhetskort: .nw er en posisjoneringsramme rundt to SØSKEN-lenker -
+   .nc dekker hele kortet og går rett til artikkelen, .ntr er den lille
+   oversett-knappen i hjørnet. De er bevisst ikke nøstet: en lenke inne i
+   en lenke er ugyldig HTML og oppfører seg ulikt mellom nettlesere. Som
+   søsken beholder begge det <a> gir gratis - midtklikk for ny fane,
+   langtrykk-menyen på mobil og tastaturnavigasjon. */
+.nw{position:relative;border-bottom:1px solid rgba(255,255,255,.06);}
+.nw:last-child{border-bottom:none;}
 .nc{
   display:flex;gap:12px;padding:12px 0;
-  border-bottom:1px solid rgba(255,255,255,.06);
   text-decoration:none;
 }
-.nc:last-child{border-bottom:none;}
+.ntr{
+  position:absolute;right:0;bottom:12px;z-index:2;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:9px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+  color:rgba(255,255,255,.3);text-decoration:none;white-space:nowrap;
+  padding:3px 7px;border:1px solid rgba(255,255,255,.1);border-radius:4px;
+  background:#0a0a0a;
+}
+.ntr:active{color:rgba(255,255,255,.65);border-color:rgba(255,255,255,.25);}
 .ni{width:72px;height:72px;border-radius:6px;object-fit:cover;flex-shrink:0;background:var(--g1);}
 .nip{
   width:72px;height:72px;border-radius:6px;flex-shrink:0;
@@ -2344,6 +2359,28 @@ function bildeFallback(img) {
   img.style.display = 'none';
 }
 
+// Bygger en Google Translate-lenke på det GJELDENDE translate.goog-formatet.
+// Den gamle formen, translate.google.com/translate?u=..., er faset ut og
+// fungerer bare via en videresending til nettopp dette domenet - så vi
+// hopper over mellomleddet. Tom streng ved ugyldig URL, og da vises ingen
+// oversett-knapp i stedet for en ødelagt lenke.
+function oversettUrl(u) {
+  try {
+    const url = new URL(u);
+    if (!/^https?:$/.test(url.protocol)) return '';
+    // Googles skjema: punktum blir bindestrek, og bindestreker som alt
+    // finnes dobles, slik at omskrivingen er entydig og reversibel.
+    const vert = url.hostname.replace(/-/g, '--').replace(/\./g, '-');
+    const ny = new URL(url.pathname + url.search + url.hash, 'https://' + vert + '.translate.goog');
+    ny.searchParams.set('_x_tr_sl', 'de');
+    ny.searchParams.set('_x_tr_tl', 'no');
+    ny.searchParams.set('_x_tr_hl', 'no');
+    return ny.toString();
+  } catch(e) {
+    return '';
+  }
+}
+
 function renderNyheter(containerId, items, prikkFarge, harBilde) {
   const c = document.getElementById(containerId);
   if (!c || !items || !items.length) return;
@@ -2357,17 +2394,16 @@ function renderNyheter(containerId, items, prikkFarge, harBilde) {
       ? `<img class="ni" src="${esc(n.image)}" alt="" referrerpolicy="no-referrer" onerror="bildeFallback(this)">`
       : `<div class="nip">&#9917;</div>`;
     const kilde = harBilde ? 'fcstpauli.com' : ('millernton.de &middot; ' + esc(n.date || ''));
-    // Lenk DIREKTE til artikkelen, ikke via Google Translate.
-    // fcstpauli.com bruker consentmanager.net. Da Google Translate hentet
-    // siden og viste den paa nytt under translate.goog, lastet samtykke-
-    // koden paa et domene klubben ikke har godkjent. Domenet laa som
-    // «pending» og fungerte i tre maaneder, men ble automatisk avvist
-    // etter 14 dager - og da fikk medlemmene consentmanager sin hjelpeside
-    // i stedet for artikkelen. Det er klubbens konfigurasjon, utenfor vaar
-    // kontroll, og den kan trekkes tilbake like stille for millernton.de.
-    // Chrome og Safari tilbyr selv aa oversette en tysk side, og kortet
-    // viser allerede den norske overskriften.
-    return `<a class="nc" href="${esc(n.url || '')}" target="_blank" rel="noopener noreferrer">${bilde}<div class="nb2"><div class="nt">${esc(n.title_no)}</div><div class="no">${esc(n.title_de)}</div><div class="ns"><div class="sd" style="background:${prikkFarge};"></div>${kilde}</div></div></a>`;
+    // Hovedlenken går DIREKTE til artikkelen, så lesing aldri avhenger av
+    // en tredjepart. Oversettelsen ligger ved siden av som et valg: ryker
+    // den, er hovedveien uberørt. Det var nettopp sammenblandingen som
+    // slo ut i dag - da fcstpauli.com sitt samtykkesystem svartelistet
+    // translate.goog, mistet medlemmene selve artikkelen også.
+    const oversatt = oversettUrl(n.url || '');
+    const tKnapp = oversatt
+      ? `<a class="ntr" href="${esc(oversatt)}" target="_blank" rel="noopener noreferrer" title="Åpne oversatt til norsk">NO</a>`
+      : '';
+    return `<div class="nw"><a class="nc" href="${esc(n.url || '')}" target="_blank" rel="noopener noreferrer">${bilde}<div class="nb2"><div class="nt">${esc(n.title_no)}</div><div class="no">${esc(n.title_de)}</div><div class="ns"><div class="sd" style="background:${prikkFarge};"></div>${kilde}</div></div></a>${tKnapp}</div>`;
   }).join('');
 }
 
