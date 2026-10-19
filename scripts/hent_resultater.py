@@ -162,6 +162,14 @@ def finn_ferdige_st_pauli_kamper(matches):
         dato = match_dt[:10]  # YYYY-MM-DD
 
         ferdige.append({
+            # matchId knytter resultatet til kampen uavhengig av dato.
+            # DFL fastsetter helgen for hele sesongen, men dag og
+            # klokkeslett kommer i bolker - flyttes en kamp fra loerdag
+            # til soendag, endrer datoen seg, og et tipp lagret under den
+            # gamle datoen ville mistet koblingen til resultatet. Noden
+            # noekles fortsatt paa dato (uendret for eksisterende data),
+            # men appen slaar opp paa matchId naar det finnes.
+            "matchId": match.get("matchID") or match.get("matchId"),
             "dato": dato,
             "hjemmelag": hjemme,
             "bortelag": borte,
@@ -213,7 +221,14 @@ def main():
         dato = kamp["dato"]
         if dato in eksisterende:
             eks = eksisterende[dato]
-            if eks.get("h") == kamp["h"] and eks.get("b") == kamp["b"]:
+            uendret_resultat = (
+                eks.get("h") == kamp["h"] and eks.get("b") == kamp["b"]
+            )
+            # Rader lagret for matchId ble innfoert mangler feltet. De maa
+            # skrives om selv om selve resultatet er uendret, ellers blir de
+            # aldri etterfylt og appen maa falle tilbake paa dato-oppslag.
+            har_match_id = eks.get("matchId") is not None
+            if uendret_resultat and har_match_id:
                 continue
 
         print(f"  Lagrer: {kamp['hjemmelag']} {kamp['h']}-{kamp['b']} {kamp['bortelag']} ({dato})")
