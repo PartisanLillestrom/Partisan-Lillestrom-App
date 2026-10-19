@@ -462,6 +462,11 @@ STPAULI_TEAM_ID = 98  # FC St. Paulis team-ID i OpenLigaDB
 
 # Stadion-oppslag for bortekamper (OpenLigaDB har location=null).
 # Hjemmekamper er alltid Millerntor. Oppdater ved behov.
+#
+# NB: OpenLigaDB bruker ikke alltid lagets fulle navn - "Dynamo Dresden"
+# der andre kilder skriver "SG Dynamo Dresden". Oppslaget skjer paa det
+# navnet API-et faktisk returnerer, saa begge skrivemaatene ligger inne.
+# Uten treff blir stadion tom, og kampkortet mister stedsangivelsen.
 BORTE_STADION = {
     "Holstein Kiel":          "Holstein-Stadion, Kiel",
     "SpVgg Greuther Fürth":   "Sportpark Ronhof, Fürth",
@@ -469,12 +474,14 @@ BORTE_STADION = {
     "DSC Arminia Bielefeld":  "SchücoArena, Bielefeld",
     "VfL Wolfsburg":          "Volkswagen Arena, Wolfsburg",
     "FC Energie Cottbus":     "Stadion der Freundschaft, Cottbus",
+    "Energie Cottbus":        "Stadion der Freundschaft, Cottbus",
     "Karlsruher SC":          "BBBank Wildpark, Karlsruhe",
     "Hannover 96":            "Heinz von Heiden Arena, Hannover",
     "SV Darmstadt 98":        "Merck-Stadion am Böllenfalltor, Darmstadt",
     "1. FC Nürnberg":         "Max-Morlock-Stadion, Nürnberg",
     "1. FC Magdeburg":        "MDCC-Arena, Magdeburg",
     "SG Dynamo Dresden":      "Rudolf-Harbig-Stadion, Dresden",
+    "Dynamo Dresden":         "Rudolf-Harbig-Stadion, Dresden",
     "1. FC Heidenheim 1846":  "Voith-Arena, Heidenheim",
     "VfL Osnabrück":          "Bremer Brücke, Osnabrück",
     "Hertha BSC":             "Olympiastadion, Berlin",
@@ -599,6 +606,7 @@ def _next_match_openligadb(sesong: int) -> dict:
 
     print(f"OpenLigaDB: neste kamp = {motstander} ({dato} {tid}), spilldag {spilldag}")
     return {
+        "matchId": neste.get("matchID") or neste.get("matchId"),
         "motstander": motstander,
         "dato": dato,
         "tid": tid,
@@ -631,6 +639,14 @@ def _kamp_til_appform(m: dict) -> dict:
     stadion = "Millerntor-Stadion, Hamburg" if hjemme else BORTE_STADION.get(motstander, "")
 
     return {
+        # matchId foelger kampen gjennom omberamminger. DFL fastsetter
+        # helgen for hele sesongen, men dag og klokkeslett kommer i bolker
+        # gjennom sesongen - saa datoen er IKKE en stabil noekkel. Appen
+        # bruker matchId som tippe-noekkel slik at et tipp ikke mister
+        # koblingen til resultatet hvis kampen flyttes fra loerdag til
+        # soendag. Feltnavnet varierer i OpenLigaDB-dokumentasjonen, saa
+        # vi leser begge skrivemaatene.
+        "matchId": m.get("matchID") or m.get("matchId"),
         "motstander": motstander,
         "dato": dato,
         "tid": tid,
