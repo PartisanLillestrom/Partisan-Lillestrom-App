@@ -1323,7 +1323,7 @@ async function lastTipping() {
   let mittTipp = null;
   if (navn) {
     try {
-      const resp = await fetch(TIPPING_REF + '/' + kampId + '/' + encodeURIComponent(navn) + '.json');
+      const resp = await fetch(TIPPING_REF + '/' + kampId + '/' + encodeURIComponent(_fbKey(navn)) + '.json');
       const data = await resp.json();
       if (data) mittTipp = data;
     } catch(e) {}
@@ -1444,7 +1444,7 @@ async function sendTipp(kampId) {
 
   try {
     const payload = { h, b, ts: Date.now() };
-    const resp = await fetch(TIPPING_REF + '/' + kampId + '/' + encodeURIComponent(navn) + '.json', {
+    const resp = await fetch(TIPPING_REF + '/' + kampId + '/' + encodeURIComponent(_fbKey(navn)) + '.json', {
       method: 'PUT',
       body: JSON.stringify(payload)
     });
@@ -1460,7 +1460,7 @@ async function fjernTipp(kampId) {
   const navn = localStorage.getItem('pl_navn') || '';
   if (!navn) return;
   try {
-    await fetch(TIPPING_REF + '/' + kampId + '/' + encodeURIComponent(navn) + '.json', { method: 'DELETE' });
+    await fetch(TIPPING_REF + '/' + kampId + '/' + encodeURIComponent(_fbKey(navn)) + '.json', { method: 'DELETE' });
     lastTipping();
   } catch(e) {
     console.warn('Kunne ikke fjerne tipp', e);
