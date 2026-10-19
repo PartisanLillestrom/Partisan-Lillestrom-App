@@ -478,10 +478,18 @@ def fetch_next_match_fcstpauli() -> dict:
     return {}
 
 
-def _next_match_openligadb(sesong: int) -> dict:
-    """Henter alle 2. Bundesliga-kamper for en sesong fra OpenLigaDB og
-    returnerer neste uspilte FC St. Pauli-kamp."""
+_OLB_CACHE = {}
+
+
+def _openligadb_kamper(sesong: int) -> list:
+    """Henter alle 2. Bundesliga-kamper for en sesong fra OpenLigaDB.
+    Resultatet caches per sesong, slik at kampplanen og neste kamp deler
+    ett og samme API-kall i stedet for aa hente de samme dataene to ganger.
+    Returnerer tom liste ved feil - kallerne har egne fallback-veier."""
+    if sesong in _OLB_CACHE:
+        return _OLB_CACHE[sesong]
     url = f"https://api.openligadb.de/getmatchdata/bl2/{sesong}"
+    data = []
     try:
         req = urllib.request.Request(url, headers={
             "Accept": "application/json",
@@ -491,18 +499,33 @@ def _next_match_openligadb(sesong: int) -> dict:
             data = json.loads(resp.read().decode("utf-8"))
     except Exception as e:
         print(f"  (OpenLigaDB-henting feilet for sesong {sesong}: {e})", file=sys.stderr)
-        return {}
-
+        data = []
     if not isinstance(data, list):
         print(f"  (OpenLigaDB: uventet dataformat for sesong {sesong})", file=sys.stderr)
+        data = []
+    _OLB_CACHE[sesong] = data
+    return data
+
+
+def _er_stpauli_kamp(m: dict) -> bool:
+    """Sant hvis FC St. Pauli er ett av lagene i kampen."""
+    return STPAULI_TEAM_ID in (
+        m.get("team1", {}).get("teamId"),
+        m.get("team2", {}).get("teamId"),
+    )
+
+
+def _next_match_openligadb(sesong: int) -> dict:
+    """Henter alle 2. Bundesliga-kamper for en sesong fra OpenLigaDB og
+    returnerer neste uspilte FC St. Pauli-kamp."""
+    data = _openligadb_kamper(sesong)
+    if not data:
         return {}
 
     # Filtrer St. Pauli-kamper som ikke er spilt ennaa
     kommende = []
     for m in data:
-        t1_id = m.get("team1", {}).get("teamId")
-        t2_id = m.get("team2", {}).get("teamId")
-        if STPAULI_TEAM_ID not in (t1_id, t2_id):
+        if not _er_stpauli_kamp(m):
             continue
         if m.get("matchIsFinished", False):
             continue
@@ -559,6 +582,80 @@ def _next_match_openligadb(sesong: int) -> dict:
         "hjemme": hjemme,
         "stadion": stadion,
     }
+
+
+def _kamp_til_appform(m: dict) -> dict:
+    """Gjoer en OpenLigaDB-kamp om til NOEYAKTIG samme form som appens
+    KJENTE_KAMPER-liste bruker, slik at index.html kan bruke kampplanen
+    direkte uten aa oversette feltnavn."""
+    hjemme = m.get("team1", {}).get("teamId") == STPAULI_TEAM_ID
+    motstander = (m.get("team2") if hjemme else m.get("team1")) or {}
+    motstander = motstander.get("teamName", "")
+
+    # matchDateTime er tysk lokaltid (CET/CEST), f.eks. "2026-10-23T18:30:00"
+    dt_str = m.get("matchDateTime", "")
+    dato, tid = "", ""
+    if dt_str:
+        try:
+            dt = datetime.strptime(dt_str[:19], "%Y-%m-%dT%H:%M:%S")
+            dato = dt.strftime("%Y-%m-%d")
+            tid = dt.strftime("%H:%M")
+        except ValueError:
+            dato = dt_str[:10]
+
+    stadion = "Millerntor-Stadion, Hamburg" if hjemme else BORTE_STADION.get(motstander, "")
+
+    return {
+        "motstander": motstander,
+        "dato": dato,
+        "tid": tid,
+        "turnering": "2. Bundesliga",
+        "hjemme": hjemme,
+        "stadion": stadion,
+    }
+
+
+def fetch_kampplan_fcstpauli() -> list:
+    """Henter HELE 2. Bundesliga-kampplanen for FC St. Pauli - spilte og
+    uspilte kamper - sortert paa dato.
+
+    Appen (index.html) brukte tidligere en hardkodet KJENTE_KAMPER-liste som
+    kilde for tippingen. Avsparkstider fastsettes av DFL i puljer bare noen
+    uker i forveien, saa en haandvedlikeholdt liste drifter uunngaaelig fra
+    virkeligheten - og da stengte tippefristen paa feil klokkeslett. Ved aa
+    levere kampplanen her blir den oppdatert hver gang denne jobben kjoerer.
+
+    Returnerer tom liste ved feil; appen faller da tilbake paa sin egen
+    innebygde liste, og main() beholder forrige kampplan fra data.json."""
+    kamper = []
+    for sesong in (_openligadb_sesong(), _openligadb_sesong() + 1):
+        for m in _openligadb_kamper(sesong):
+            if not _er_stpauli_kamp(m):
+                continue
+            k = _kamp_til_appform(m)
+            if k["dato"] and k["motstander"]:
+                kamper.append(k)
+        if kamper:
+            break
+
+    # Sorter kronologisk - appen forutsetter denne rekkefoelgen naar den
+    # leter bakover etter sist spilte kamp.
+    kamper.sort(key=lambda k: (k["dato"], k["tid"]))
+
+    # Samme dato skal bare forekomme en gang (vern mot duplikater i API-et)
+    unike, sett = [], set()
+    for k in kamper:
+        if k["dato"] in sett:
+            continue
+        sett.add(k["dato"])
+        unike.append(k)
+
+    if unike:
+        print(f"OpenLigaDB: kampplan med {len(unike)} 2. Bundesliga-kamper "
+              f"({unike[0]['dato']} - {unike[-1]['dato']})")
+    else:
+        print("  (advarsel: fant ingen 2. Bundesliga-kampplan i OpenLigaDB)", file=sys.stderr)
+    return unike
 
 
 # ---------------------------------------------------------------------------
@@ -714,8 +811,9 @@ def main() -> int:
             "image": image_url,
         })
 
-    # --- Neste kamp ---
+    # --- Neste kamp og hele kampplanen (deler ett OpenLigaDB-kall) ---
     next_match = fetch_next_match_fcstpauli()
+    kampplan = fetch_kampplan_fcstpauli()
 
     # --- Kamplogg og medlemstall (fra Excel-filer i repo-et) ---
     kamplogg = les_kamplogg()
@@ -734,6 +832,7 @@ def main() -> int:
             for it in rss_items
         ],
         "next_match": next_match,
+        "kampplan": kampplan,
         "kamplogg": kamplogg,
         "medlemstall": medlemstall,
     }
@@ -747,6 +846,9 @@ def main() -> int:
     if not payload["millernton_news"] and gammel.get("millernton_news"):
         payload["millernton_news"] = gammel["millernton_news"]
         print("  (info: millernton-RSS ga ingenting - beholder forrige nyhetsliste)")
+    if not payload["kampplan"] and gammel.get("kampplan"):
+        payload["kampplan"] = gammel["kampplan"]
+        print("  (info: kampplan-henting ga ingenting - beholder forrige kampplan)")
     if not payload["kamplogg"] and gammel.get("kamplogg"):
         payload["kamplogg"] = gammel["kamplogg"]
         print("  (info: kamplogg-lesing feilet - beholder forrige kamplogg)")
@@ -798,6 +900,7 @@ def main() -> int:
         print(f"  - neste kamp: {payload['next_match']['motstander']} ({payload['next_match']['dato']})")
     else:
         print("  - neste kamp: ikke funnet")
+    print(f"  - {len(payload.get('kampplan', []))} kamper i kampplan")
     print(f"  - {len(payload.get('kamplogg', []))} kamper i kamplogg")
     if payload.get("medlemstall"):
         print(f"  - medlemstall: {payload['medlemstall'].get('betalende', '?')} betalende")
