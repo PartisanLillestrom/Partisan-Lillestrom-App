@@ -1498,9 +1498,16 @@ async function lastTippHistorikk() {
 
 // ---- LEGG TIL I KALENDER (ICS) ----
 function lagICS(motstander, dato, tid, stadion, hjemme) {
-  const start = new Date(dato + 'T' + (tid || '15:00'));
-  const slutt = new Date(start.getTime() + 2 * 3600000); // 2 timer
-  const fmt = d => d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+  // Kamptider er i CET/CEST (Europe/Berlin = Europe/Oslo).
+  // ICS bruker TZID for korrekt tidssone uansett hvor brukeren er.
+  const tidStr = (tid || '15:00').replace(':', '');
+  const datoStr = dato.replace(/-/g, '');
+  const startICS = datoStr + 'T' + tidStr + '00';
+  // Slutt = 2 timer etter avspark
+  const startH = parseInt(tidStr.substring(0, 2));
+  const startM = tidStr.substring(2, 4);
+  const sluttH = String(startH + 2).padStart(2, '0');
+  const sluttICS = datoStr + 'T' + sluttH + startM + '00';
   const tittel = hjemme
     ? `FC St. Pauli vs ${motstander}`
     : `${motstander} vs FC St. Pauli`;
@@ -1509,8 +1516,8 @@ function lagICS(motstander, dato, tid, stadion, hjemme) {
     'VERSION:2.0',
     'PRODID:-//Partisan Lillestrøm//Kamp//NO',
     'BEGIN:VEVENT',
-    'DTSTART:' + fmt(start),
-    'DTEND:' + fmt(slutt),
+    'DTSTART;TZID=Europe/Berlin:' + startICS,
+    'DTEND;TZID=Europe/Berlin:' + sluttICS,
     'SUMMARY:' + tittel,
     'LOCATION:' + (stadion || ''),
     'DESCRIPTION:' + (hjemme ? 'Hjemmekamp' : 'Bortekamp') + ' - 2. Bundesliga',
