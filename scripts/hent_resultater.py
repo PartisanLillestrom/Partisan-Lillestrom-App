@@ -25,8 +25,6 @@ ST_PAULI_NAMES = ["st. pauli", "st pauli", "fc st. pauli"]
 def hent_access_token():
     """Genererer et OAuth2 access token fra service account."""
     import base64
-    import hashlib
-    import hmac
     import time
 
     sa_json = os.environ.get("FIREBASE_SERVICE_ACCOUNT", "")
