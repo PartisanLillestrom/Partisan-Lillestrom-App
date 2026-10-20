@@ -69,9 +69,16 @@ def hent_access_token():
 
 
 def hent_hele_databasen(access_token):
-    """Henter hele databasen fra Firebase."""
-    url = f"{FIREBASE_DB}/.json?access_token={access_token}"
-    req = urllib.request.Request(url)
+    """Henter hele databasen fra Firebase.
+
+    Tokenet sendes i Authorization-headeren, ikke som spoerringsparameter.
+    En URL havner i Firebase sine tilgangslogger og i e.url paa en
+    HTTPError; en header gjoer ikke det."""
+    url = f"{FIREBASE_DB}/.json"
+    headers = {}
+    if access_token:
+        headers["Authorization"] = f"Bearer {access_token}"
+    req = urllib.request.Request(url, headers=headers)
     with urllib.request.urlopen(req, timeout=30) as resp:
         return json.loads(resp.read().decode())
 
