@@ -848,12 +848,18 @@ def fetch_kampplan_fcstpauli() -> list:
     # leter bakover etter sist spilte kamp.
     kamper.sort(key=lambda k: (k["dato"], k["tid"]))
 
-    # Samme dato skal bare forekomme en gang (vern mot duplikater i API-et)
+    # Vern mot at samme kamp kommer to ganger fra API-et. Noekkelen er
+    # matchId, ikke dato: to runder som DFL ennaa ikke har fastsatt kan
+    # ligge paa samme plassholderdato i OpenLigaDB, og en dato-noekkel
+    # ville da kastet den ene kampen stille ut av bade kampplan og
+    # tipping. Kamper uten matchId (skulle ikke forekomme) faller tilbake
+    # paa dato + motstander, saa de fortsatt ikke kan dubleres.
     unike, sett = [], set()
     for k in kamper:
-        if k["dato"] in sett:
+        nokkel = k["matchId"] if k.get("matchId") else (k["dato"], k["motstander"])
+        if nokkel in sett:
             continue
-        sett.add(k["dato"])
+        sett.add(nokkel)
         unike.append(k)
 
     if unike:
