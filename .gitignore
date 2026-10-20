@@ -16,3 +16,8 @@ Thumbs.db
 *.swp
 .idea/
 .vscode/
+
+# Testoppsett
+node_modules/
+package-lock.json
+tests/.bilder/
