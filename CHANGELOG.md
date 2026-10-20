@@ -10,6 +10,7 @@
 - **Arbeidsflyt:** Resultathentingen kjører nå hver time hele uka. Tidligere dekket den bare fredag–søndag, og siste lørdagskjøring lå før kampslutt for 20:30-kamper — VfL Bochum 21.11 ville fått resultatet 16 timer senere, og midtukekamper to døgn senere. Nå er lengste ventetid 35 minutter.
 - **Arbeidsflyt:** «Oppdater nyheter og kampdata» henter inn og prøver på nytt hvis noen pusher til main mens kjøringen er i gang (filopplasting i nettleseren gjorde tidligere kjøringen rød selv om oppdateringen var i orden)
 - **Arbeidsflyt:** resultater.yml og backup.yml har fått `permissions: contents: read` — de trenger ikke skrivetilgang til repoet
+- **Pipeline:** Duplikatfjerningen i kampplanen nøkler på matchId i stedet for dato. To runder DFL ennå ikke har fastsatt kan ligge på samme plassholderdato i OpenLigaDB, og en dato-nøkkel ville da kastet den ene kampen stille ut av både kampplan og tipping
 
 ## v2.4 — 16. oktober 2026
 - **Ny funksjon:** Kamptipping — tipp resultat på 2. Bundesliga-kamper, poengberegning og toppliste
