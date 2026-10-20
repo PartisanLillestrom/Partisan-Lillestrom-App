@@ -133,13 +133,43 @@ def _mymemory(text: str, src: str) -> str:
         return ""
 
 
-def translate_to_no(text: str) -> str:
+# Teller for loggen, slik at det er synlig om cachen faktisk sparer kall
+_OVERSETT_TELLER = {"gjenbrukt": 0, "oversatt": 0}
+
+
+def bygg_oversettelses_cache(gammel: dict) -> dict:
+    """Kart fra tysk tittel til ferdig norsk oversettelse, bygget av forrige
+    data.json.
+
+    Uten dette oversettes de samme ti overskriftene paa nytt hver eneste
+    kjoering - tolv ganger daglig - selv om sakene staar urort i flere
+    dager. MyMemory har kvote, og naar den er brukt opp faller alle
+    oversettelser tilbake til tysk. Her gjenbrukes det vi alt har.
+
+    Mislykkede oversettelser caches IKKE: translate_to_no() returnerer
+    originalteksten naar kallet feiler, og hadde vi lagret den, ville saken
+    aldri blitt forsoekt oversatt igjen."""
+    cache = {}
+    for felt in ("fcstpauli_news", "millernton_news"):
+        for it in (gammel.get(felt) or []):
+            de = (it.get("title_de") or "").strip()
+            no = (it.get("title_no") or "").strip()
+            if de and no and de != no:
+                cache[de] = no
+    return cache
+
+
+def translate_to_no(text: str, cache: dict = None) -> str:
     """Oversetter en kort tittel (tysk ELLER engelsk) til norsk. Prover
     forst spraket som detekteres, deretter det andre som fallback - MT-
     motoren bak MyMemory takler ofte 'feil' kildesprak helt fint. Returnerer
     originalteksten uendret hvis begge forsok feiler."""
     if not text:
         return text
+    if cache is not None and text in cache:
+        _OVERSETT_TELLER["gjenbrukt"] += 1
+        return cache[text]
+    _OVERSETT_TELLER["oversatt"] += 1
     src = detect_lang(text)
     for lang in (src, "en" if src == "de" else "de"):
         result = _mymemory(text, lang)
@@ -968,11 +998,18 @@ def oppdater_sw_versjon():
 
 
 def main() -> int:
+    # Forrige data.json leses foerst, slik at ferdige oversettelser kan
+    # gjenbrukes. Uten det oversettes de samme titlene paa nytt tolv ganger
+    # daglig, og MyMemory-kvoten brukes opp paa arbeid vi alt har gjort.
+    gammel = les_gammel_data()
+    cache = bygg_oversettelses_cache(gammel)
+    print(f"Oversettelses-cache: {len(cache)} kjente titler fra forrige kjoring")
+
     # --- MillernTon ---
     rss_items = fetch_millernton_rss()
     for it in rss_items:
         it["image"] = fetch_og_image(it["url"])
-        it["title_no"] = translate_to_no(it["title_de"])
+        it["title_no"] = translate_to_no(it["title_de"], cache)
 
     # --- fcstpauli.com ---
     # Kandidater fra ALLE nyhetsseksjonene. Klubben har egne oversikter for
@@ -999,7 +1036,7 @@ def main() -> int:
     fcstpauli_items = []
     for x in (med_dato + uten_dato)[:5]:
         fcstpauli_items.append({
-            "title_no": translate_to_no(x["title_de"]),
+            "title_no": translate_to_no(x["title_de"], cache),
             "title_de": x["title_de"],
             "url": x["url"],
             "image": x["image"],
@@ -1035,7 +1072,7 @@ def main() -> int:
 
     # Per-kilde fallback: hvis én kilde feilet i natt, gjenbruk forrige
     # liste for AKKURAT den kilden - den andre oppdateres som normalt.
-    gammel = les_gammel_data()
+    # (gammel ble lest helt oeverst i main() for oversettelses-cachen)
     if not payload["fcstpauli_news"] and gammel.get("fcstpauli_news"):
         payload["fcstpauli_news"] = gammel["fcstpauli_news"]
         print("  (info: fcstpauli-scraping ga ingenting - beholder forrige nyhetsliste)")
@@ -1089,7 +1126,9 @@ def main() -> int:
     # Oppdater service worker cache-versjon slik at brukerne får nye filer
     oppdater_sw_versjon()
 
+    t = _OVERSETT_TELLER
     print(f"OK: data.json oppdatert ({payload['updated']})")
+    print(f"  - oversettelser: {t['oversatt']} nye kall, {t['gjenbrukt']} gjenbrukt fra cache")
     print(f"  - {len(payload['fcstpauli_news'])} fcstpauli-nyheter")
     print(f"  - {len(payload['millernton_news'])} millernton-nyheter")
     if payload["next_match"].get("motstander"):
