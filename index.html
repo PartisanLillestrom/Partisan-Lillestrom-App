@@ -6,6 +6,7 @@
 <title>Partisan Lillestrøm</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#2a1509">
+<link rel="icon" href="app-icon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="app-icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -496,13 +497,27 @@ function esc(s) {
   return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
+// localStorage kan kaste - i privat modus, med blokkerte nettstedsdata,
+// eller under enkelte bedriftsinnstillinger. Da skal appen fungere videre
+// uten lagring, ikke stoppe. Tidligere krasjet Arrangementer-fanen helt,
+// fordi sp() skrev «sist sett»-datoen uten beskyttelse.
+function lsGet(nokkel) {
+  try { return localStorage.getItem(nokkel); } catch(e) { return null; }
+}
+function lsSet(nokkel, verdi) {
+  try { localStorage.setItem(nokkel, verdi); return true; } catch(e) { return false; }
+}
+function lsDel(nokkel) {
+  try { localStorage.removeItem(nokkel); } catch(e) {}
+}
+
 // Migrasjon: tidligere brukte appen to ulike navnenøkler (pl_mitt_navn og pl_navn).
 // Nå brukes kun pl_navn. Kopier over fra gammel nøkkel hvis brukeren har den.
 try {
-  const _gammelNavn = localStorage.getItem('pl_mitt_navn');
-  const _nyNavn = localStorage.getItem('pl_navn');
+  const _gammelNavn = lsGet('pl_mitt_navn');
+  const _nyNavn = lsGet('pl_navn');
   if (_gammelNavn && !_nyNavn) {
-    localStorage.setItem('pl_navn', _gammelNavn);
+    lsSet('pl_navn', _gammelNavn);
   }
 } catch(e) {}
 </script>
@@ -557,7 +572,7 @@ try {
     <div class="sec">
       <div class="sec-hdr">
         <span class="sec-title">FC St. Pauli</span>
-        <a href="https://www.fcstpauli.com/news/" target="_blank" class="sec-link">fcstpauli.com &rarr;</a>
+        <a href="https://www.fcstpauli.com/fu%C3%9Fball/aktuelles" target="_blank" class="sec-link">fcstpauli.com &rarr;</a>
       </div>
     </div>
     <div class="cw" id="fcstpauliNews">
@@ -581,7 +596,7 @@ try {
 </div>
 
 <!-- KAMPER -->
-<div id="kamper" class="page" style="display:none;flex-direction:column;overflow:hidden;">
+<div id="kamper" class="page" style="flex-direction:column;overflow:hidden;">
   <div style="flex-shrink:0;padding:16px 14px 16px;">
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">
       <div class="card-bg" style="border-radius:6px;padding:12px 6px;text-align:center;">
@@ -989,7 +1004,7 @@ function bekreftOppNavn(kampId) {
   const n = inp ? inp.value.trim() : '';
   if (!n) { inp?.focus(); return; }
   _mittNavn = n;
-  localStorage.setItem('pl_navn', _mittNavn);
+  lsSet('pl_navn', _mittNavn);
   const navnDiv = document.getElementById('opp_navn_' + kampId);
   if (navnDiv) navnDiv.style.display = 'none';
   toggleVarDer(kampId);
@@ -1003,7 +1018,7 @@ function sp(id,btn){
 
   if(id==='arr') {
     visArr('alle'); setTimeout(() => { lastAlleRSVP(); lastAlleKommentarer(); }, 100);
-    localStorage.setItem('pl_arr_sist_sett', new Date().toISOString().split('T')[0]);
+    lsSet('pl_arr_sist_sett', new Date().toISOString().split('T')[0]);
     const badge = document.getElementById('arrBadge');
     if (badge) badge.style.display = 'none';
   }
@@ -1246,7 +1261,7 @@ async function bekreftGalleriOpplasting() {
   if (inp) inp.value = '';
   window._galleriVentendeFiles = null;
   document.getElementById('galleriInput').value = '';
-  const navn = localStorage.getItem('pl_navn') || '';
+  const navn = lsGet('pl_navn') || '';
   const grid = document.getElementById('galleriGrid');
   const tom = document.getElementById('galleriTom');
   for (const file of files) {
@@ -1426,7 +1441,7 @@ async function lastTipping() {
   // Sjekk om brukeren allerede har tippet. Prøv den gamle dato-baserte
   // nøkkelen i tillegg, slik at et tipp lagret før matchId ble innført
   // fortsatt vises i stedet for at kortet ser ut som om man ikke har tippet.
-  const navn = localStorage.getItem('pl_navn') || '';
+  const navn = lsGet('pl_navn') || '';
   let mittTipp = null;
   if (navn) {
     const legacyId = lagKampIdLegacy(kamp);
@@ -1546,12 +1561,12 @@ function beregnPoeng(tH, tB, fH, fB) {
 }
 
 async function sendTipp(kampId) {
-  let navn = localStorage.getItem('pl_navn') || '';
+  let navn = lsGet('pl_navn') || '';
   const navnFelt = document.getElementById('tippNavn');
   if (navnFelt) {
     navn = navnFelt.value.trim();
     if (!navn) { alert('Skriv inn navnet ditt.'); return; }
-    localStorage.setItem('pl_navn', navn);
+    lsSet('pl_navn', navn);
   }
   if (!navn) { alert('Skriv inn navnet ditt (gå til Arrangementer for å sette navn).'); return; }
 
@@ -1579,7 +1594,7 @@ async function sendTipp(kampId) {
 }
 
 async function fjernTipp(kampId) {
-  const navn = localStorage.getItem('pl_navn') || '';
+  const navn = lsGet('pl_navn') || '';
   if (!navn) return;
   try {
     // Slett under begge nøklene, ellers kan et gammelt dato-basert tipp
@@ -1880,7 +1895,7 @@ if (_fdb) {
     _skyArr = snap.exists() ? Object.values(snap.val()) : [];
     visArr(_gjeldendeFilter);
     // Badge: sjekk om det finnes arrangementer opprettet etter sist besøk
-    const sist = localStorage.getItem('pl_arr_sist_sett') || '0';
+    const sist = lsGet('pl_arr_sist_sett') || '0';
     const harNye = _skyArr.some(a => a.opprettet && a.opprettet > sist);
     const badge = document.getElementById('arrBadge');
     const erPaaArr = document.getElementById('arr') && document.getElementById('arr').classList.contains('active');
@@ -1901,9 +1916,9 @@ function hentArr() {
       slettet = _skySlettet || [];
     } else {
       // Fallback: lokal lagring på denne enheten
-      const data = localStorage.getItem('pl_arr');
+      const data = lsGet('pl_arr');
       user = data ? JSON.parse(data) : [];
-      slettet = JSON.parse(localStorage.getItem('pl_arr_slettet') || '[]');
+      slettet = JSON.parse(lsGet('pl_arr_slettet') || '[]');
     }
     // Filtrer ut slettede defaults
     const aktiveDefaults = defaultArr.filter(a => !slettet.includes(a.id));
@@ -1932,7 +1947,7 @@ function lagreArr() {
 
   // Husk navnet til neste gang
   _mittNavn = navn;
-  localStorage.setItem('pl_navn', navn);
+  lsSet('pl_navn', navn);
 
   const nytt = { id: 'u_' + Date.now(), type, tittel, dato, sted, beskr, opprettet: new Date().toISOString().split('T')[0], opprettetAv: navn };
 
@@ -1944,10 +1959,10 @@ function lagreArr() {
     });
   } else {
     try {
-      const eksist = localStorage.getItem('pl_arr');
+      const eksist = lsGet('pl_arr');
       const liste = eksist ? JSON.parse(eksist) : [];
       liste.push(nytt);
-      localStorage.setItem('pl_arr', JSON.stringify(liste));
+      lsSet('pl_arr', JSON.stringify(liste));
     } catch(e) {}
   }
 
@@ -1985,16 +2000,16 @@ function slettArr(id) {
       }
     } else if (id.startsWith('u_')) {
       // Brukeropprettet: fjern fra localStorage-listen
-      const data = localStorage.getItem('pl_arr');
+      const data = lsGet('pl_arr');
       if (data) {
         const liste = JSON.parse(data).filter(a => a.id !== id);
-        localStorage.setItem('pl_arr', JSON.stringify(liste));
+        lsSet('pl_arr', JSON.stringify(liste));
       }
     } else {
       // Default-arrangement: legg til i slettet-liste
-      const slettet = JSON.parse(localStorage.getItem('pl_arr_slettet') || '[]');
+      const slettet = JSON.parse(lsGet('pl_arr_slettet') || '[]');
       if (!slettet.includes(id)) slettet.push(id);
-      localStorage.setItem('pl_arr_slettet', JSON.stringify(slettet));
+      lsSet('pl_arr_slettet', JSON.stringify(slettet));
     }
   } catch(e) {}
   visArr(_gjeldendeFilter);
@@ -2107,8 +2122,8 @@ function kortHtml(a, fortid) {
       <div style="margin-top:10px;border-top:1px solid rgba(255,255,255,.06);padding-top:10px;">
         <div id="komm_liste_${a.id}" style="margin-bottom:8px;"></div>
         <div id="komm_navn_${a.id}" style="display:none;gap:6px;margin-bottom:6px;">
-          <input id="komm_navn_inp_${a.id}" class="komm-input" type="text" maxlength="100"
-            placeholder="Ditt navn..." style="flex:1;">
+          <input id="komm_navn_inp_${a.id}" class="komm-input komm-navn-felt" type="text" maxlength="100"
+            placeholder="Ditt navn..." data-eid="${a.id}" style="flex:1;">
           <button type="button" class="gb gb-dark komm-ok-btn"
             onclick="bekreftKommNavn('${a.id}')">OK</button>
         </div>
@@ -2128,9 +2143,6 @@ function kortHtml(a, fortid) {
 
 // Init
 document.addEventListener('DOMContentLoaded', () => visArr('alle'));
-window.addEventListener('partisan_page_change', (e) => {
-  if (e.detail === 'arr') visArr('alle');
-});
 </script>
 
 
@@ -2321,15 +2333,15 @@ async function hentNesteKamp(force) {
 
   // Slett gammel cache ved force
   if (force) {
-    localStorage.removeItem(CACHE_KEY);
-    localStorage.removeItem(CACHE_TS);
+    lsDel(CACHE_KEY);
+    lsDel(CACHE_TS);
     if (btn) btn.textContent = '⟳ Henter...';
   } else {
     // Bruk kamp-cache hvis under 6 timer gammel OG kampdatoen ikke er passert
     try {
-      const ts = localStorage.getItem(CACHE_TS);
+      const ts = lsGet(CACHE_TS);
       if (ts && (Date.now() - parseInt(ts)) < 6*3600*1000) {
-        const cached = localStorage.getItem(CACHE_KEY);
+        const cached = lsGet(CACHE_KEY);
         if (cached) {
           const k = JSON.parse(cached);
           if (k && k.dato && new Date(k.dato + 'T23:59') >= new Date()) {
@@ -2358,8 +2370,8 @@ async function hentNesteKamp(force) {
     // Neste kamp – vis kun hvis kampdato ikke er passert
     if (!kampCached && data.next_match && data.next_match.dato) {
       if (new Date(data.next_match.dato + 'T23:59') >= new Date()) {
-        localStorage.setItem(CACHE_KEY, JSON.stringify(data.next_match));
-        localStorage.setItem(CACHE_TS, Date.now().toString());
+        lsSet(CACHE_KEY, JSON.stringify(data.next_match));
+        lsSet(CACHE_TS, Date.now().toString());
         visKamp(data.next_match);
       }
     }
@@ -2477,7 +2489,7 @@ function visKamp(kamp) {
 }
 
 // Slett gammel cache fra tidligere versjoner
-['pl_nestekamp','pl_nestekamp_time','pl_nestekamp_v2','pl_nestekamp_v2_time'].forEach(k => localStorage.removeItem(k));
+['pl_nestekamp','pl_nestekamp_time','pl_nestekamp_v2','pl_nestekamp_v2_time'].forEach(k => lsDel(k));
 
 document.addEventListener('DOMContentLoaded', () => {
   hentNesteKamp(false);
@@ -2512,7 +2524,7 @@ async function oppdaterNyheter() {
 <script>
 // ---- PÅMELDING ----
 
-let _mittNavn = localStorage.getItem('pl_navn') || '';
+let _mittNavn = lsGet('pl_navn') || '';
 
 // Hent delt lagring (Firebase hvis konfigurert, ellers localStorage lokalt)
 async function getRSVP(eventId) {
@@ -2521,12 +2533,12 @@ async function getRSVP(eventId) {
       const snap = await _fdb.ref('rsvp/' + eventId).get();
       const liste = snap.exists() ? Object.values(snap.val()) : [];
       // Speil til localStorage så listen også vises offline
-      try { localStorage.setItem('rsvp_' + eventId, JSON.stringify(liste)); } catch(e) {}
+      try { lsSet('rsvp_' + eventId, JSON.stringify(liste)); } catch(e) {}
       return liste;
     } catch(e) { console.warn('RSVP-henting fra skyen feilet:', e); }
   }
   try {
-    const d = localStorage.getItem('rsvp_' + eventId);
+    const d = lsGet('rsvp_' + eventId);
     return d ? JSON.parse(d) : [];
   } catch(e) { return []; }
 }
@@ -2555,7 +2567,7 @@ async function meldPaa(eventId, tittel) {
     catch(e) { console.warn('Påmelding til skyen feilet:', e); }
   }
   liste.push(_mittNavn);
-  try { localStorage.setItem('rsvp_' + eventId, JSON.stringify(liste)); } catch(e) {}
+  try { lsSet('rsvp_' + eventId, JSON.stringify(liste)); } catch(e) {}
   await oppdaterRSVPVisning(eventId);
 }
 
@@ -2566,7 +2578,7 @@ async function meldAv(eventId) {
     try { await _fdb.ref('rsvp/' + eventId + '/' + _fbKey(_mittNavn)).remove(); }
     catch(e) { console.warn('Avmelding fra skyen feilet:', e); }
   }
-  try { localStorage.setItem('rsvp_' + eventId, JSON.stringify(ny)); } catch(e) {}
+  try { lsSet('rsvp_' + eventId, JSON.stringify(ny)); } catch(e) {}
   await oppdaterRSVPVisning(eventId);
 }
 
@@ -2626,7 +2638,7 @@ async function bekreftNavn(eventId) {
   const navn = input?.value.trim();
   if (!navn) { input?.focus(); return; }
   _mittNavn = navn;
-  localStorage.setItem('pl_navn', navn);
+  lsSet('pl_navn', navn);
   lukkModal();
   await meldPaa(eventId, '');
 }
@@ -2658,12 +2670,12 @@ async function getKommentarer(eventId) {
       const liste = snap.exists() ? Object.values(snap.val()) : [];
       // Kommentar-ID starter med tidsstempel, så dette gir kronologisk rekkefølge
       liste.sort((a, b) => String(a.id).localeCompare(String(b.id)));
-      try { localStorage.setItem('komm_' + eventId, JSON.stringify(liste)); } catch(e) {}
+      try { lsSet('komm_' + eventId, JSON.stringify(liste)); } catch(e) {}
       return liste;
     } catch(e) { console.warn('Kommentar-henting fra skyen feilet:', e); }
   }
   try {
-    const d = localStorage.getItem('komm_' + eventId);
+    const d = lsGet('komm_' + eventId);
     return d ? JSON.parse(d) : [];
   } catch(e) { return []; }
 }
@@ -2682,9 +2694,9 @@ async function lagreKommentar(eventId, komm) {
     catch(e) { console.warn('Kommentar-lagring til skyen feilet:', e); }
   }
   try {
-    const liste = JSON.parse(localStorage.getItem('komm_' + eventId) || '[]');
+    const liste = JSON.parse(lsGet('komm_' + eventId) || '[]');
     liste.push(komm);
-    localStorage.setItem('komm_' + eventId, JSON.stringify(liste));
+    lsSet('komm_' + eventId, JSON.stringify(liste));
   } catch(e) {}
 }
 
@@ -2694,8 +2706,8 @@ async function fjernKommentar(eventId, kommId) {
     catch(e) { console.warn('Kommentar-sletting i skyen feilet:', e); }
   }
   try {
-    const liste = JSON.parse(localStorage.getItem('komm_' + eventId) || '[]');
-    localStorage.setItem('komm_' + eventId, JSON.stringify(liste.filter(k => k.id !== kommId)));
+    const liste = JSON.parse(lsGet('komm_' + eventId) || '[]');
+    lsSet('komm_' + eventId, JSON.stringify(liste.filter(k => k.id !== kommId)));
   } catch(e) {}
 }
 
@@ -2704,7 +2716,7 @@ function bekreftKommNavn(eventId) {
   const navn = inp ? inp.value.trim() : '';
   if (!navn) { if(inp) inp.focus(); return; }
   _mittNavn = navn;
-  localStorage.setItem('pl_navn', navn);
+  lsSet('pl_navn', navn);
   const navnDiv = document.getElementById('komm_navn_' + eventId);
   if (navnDiv) navnDiv.style.display = 'none';
   sendKommentar(eventId);
@@ -2757,7 +2769,6 @@ async function oppdaterKommListe(eventId) {
   `).join('');
 }
 
-async function oppdaterKommentarVisning(eventId) { await oppdaterKommListe(eventId); }
 async function lastAlleKommentarer() {
   document.querySelectorAll('[id^="komm_liste_"]').forEach(b => {
     oppdaterKommListe(b.id.replace('komm_liste_',''));
@@ -2778,11 +2789,13 @@ document.addEventListener('click', function(e) {
 });
 
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter' && e.target.classList.contains('komm-input')) {
-    e.preventDefault();
-    const eventId = e.target.getAttribute('data-eid');
-    if (eventId) sendKommentar(eventId);
-  }
+  if (e.key !== 'Enter' || !e.target.classList.contains('komm-input')) return;
+  const eventId = e.target.getAttribute('data-eid');
+  if (!eventId) return;
+  e.preventDefault();
+  // Navnefeltet bekrefter navnet; kommentarfeltet sender kommentaren.
+  if (e.target.classList.contains('komm-navn-felt')) bekreftKommNavn(eventId);
+  else sendKommentar(eventId);
 });
 
 // Oppdatert sendKommentar bruker data-event-id
