@@ -1,18 +1,30 @@
 name: Hent kampresultater
 
 on:
-  # Kjør automatisk etter typiske kamptider (fredager, lørdager, søndager)
   schedule:
-    # Fredager kl. 22:30 og 23:30 CET (20:30/21:30 UTC)
-    - cron: '30 20,21 * * 5'
-    # Lørdager kl. 16:00, 17:00, 18:30, 20:30, 22:30 CET
-    - cron: '0 14,15 * * 6'
-    - cron: '30 16,18,20 * * 6'
-    # Søndager kl. 15:30, 18:00, 20:30 CET
-    - cron: '30 13,18 * * 0'
-    - cron: '0 16 * * 0'
+    # Én kjøring i timen, hele uka. Dette erstatter en liste med
+    # kamptidspunkter for fredag/lørdag/søndag, som hadde tre problemer:
+    #
+    #   1. Siste lørdagskjøring lå 21:30 norsk vintertid, mens en kamp med
+    #      avspark 20:30 ikke er ferdig før rundt 22:20. Resultatet kom
+    #      først søndag ettermiddag.
+    #   2. Midtukekamper (f.eks. Karlsruher SC onsdag 3. mars) hadde ingen
+    #      kjøring i det hele tatt - resultatet kom to døgn senere.
+    #   3. Tidene var skrevet i sommertid, så alt forskjøv seg en time
+    #      hver gang klokka ble stilt.
+    #
+    # Timeplanen koster ingenting: repoet er offentlig, så Actions-minutter
+    # er gratis, og skriptet skriver bare til Firebase når et resultat
+    # faktisk har endret seg. Overbooking er dessuten en fordel - GitHub
+    # forsinker og dropper planlagte kjøringer, så flere forsøk gir
+    # jevnere oppdatering. Minutt 25 unngår køen på :00.
+    - cron: '25 * * * *'
   # Manuell kjøring
   workflow_dispatch:
+
+# Skriptet leser repoet og skriver bare til Firebase, ikke til GitHub.
+permissions:
+  contents: read
 
 jobs:
   hent-resultater:
