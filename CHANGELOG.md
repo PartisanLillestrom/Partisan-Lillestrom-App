@@ -7,6 +7,9 @@
 - **Pipeline:** hent_resultater.py bruker tysk tid for sesongberegning (likt update_data.py), fortsetter etter en feilet skriving og avslutter med feilkode slik at workflowen blir rød
 - **Opprydding:** Fjernet død kode (partisan_page_change-lytter, oppdaterKommentarVisning), villedende inline display:none på #kamper
 - **Småtteri:** Seksjonslenken peker på fcstpauli.com/fußball/aktuelles; favicon lagt inn (ga 404 i konsollen ved hver sidelasting)
+- **Arbeidsflyt:** Resultathentingen kjører nå hver time hele uka. Tidligere dekket den bare fredag–søndag, og siste lørdagskjøring lå før kampslutt for 20:30-kamper — VfL Bochum 21.11 ville fått resultatet 16 timer senere, og midtukekamper to døgn senere. Nå er lengste ventetid 35 minutter.
+- **Arbeidsflyt:** «Oppdater nyheter og kampdata» henter inn og prøver på nytt hvis noen pusher til main mens kjøringen er i gang (filopplasting i nettleseren gjorde tidligere kjøringen rød selv om oppdateringen var i orden)
+- **Arbeidsflyt:** resultater.yml og backup.yml har fått `permissions: contents: read` — de trenger ikke skrivetilgang til repoet
 
 ## v2.4 — 16. oktober 2026
 - **Ny funksjon:** Kamptipping — tipp resultat på 2. Bundesliga-kamper, poengberegning og toppliste
