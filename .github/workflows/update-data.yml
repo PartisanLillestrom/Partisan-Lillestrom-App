@@ -40,7 +40,26 @@ jobs:
           git add data.json sw.js
           if git diff --cached --quiet; then
             echo "Ingen endringer - hopper over commit."
-          else
-            git commit -m "Automatisk oppdatering av data.json"
-            git push
+            exit 0
           fi
+          git commit -m "Automatisk oppdatering av data.json"
+          # Hvis noen pusher til main mens denne kjoringen er i gang - for
+          # eksempel ved opplasting av filer i nettleseren - blir var push
+          # avvist som utdatert, og kjoringen gikk tidligere rod selv om
+          # selve oppdateringen var i orden. Vi henter inn det nye og
+          # prover igjen. --rebase legger var datacommit paa toppen; vi
+          # rorer bare data.json og sw.js, saa det kan ikke kollidere med
+          # endringer i andre filer.
+          for forsok in 1 2 3; do
+            if git push; then
+              echo "Push OK (forsok $forsok)."
+              exit 0
+            fi
+            echo "Push avvist - noen pushet forst. Henter og prover igjen..."
+            git pull --rebase origin main || {
+              echo "Rebase feilet - avbryter."
+              exit 1
+            }
+          done
+          echo "Push feilet etter 3 forsok."
+          exit 1
