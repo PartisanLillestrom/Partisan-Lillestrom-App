@@ -328,16 +328,55 @@ def _extract_news_links(text: str, limit: int) -> list:
     return urls
 
 
-def fetch_fcstpauli_news_urls(limit: int = 5) -> list:
+# Klubben har egne nyhetsoversikter per omraade. En sak ligger bare i sin
+# egen seksjon, saa alle maa hentes. NB: "fussball" med dobbel s traff
+# aldri - stien er "fußball" med ß, som i URL-en blir %C3%9F.
+FCSP_NYHETSSIDER = [
+    "https://www.fcstpauli.com/fu%C3%9Fball/aktuelles",   # fotballaget
+    "https://www.fcstpauli.com/verein/aktuelles",          # foreningen
+]
+
+
+def fetch_fcstpauli_news_urls(limit: int = 5, per_seksjon: int = 6) -> list:
     """Henter de nyeste artikkel-lenkene fra fcstpauli.com.
 
-    Flerlags-strategi slik at dette ALLTID fungerer fra GitHub Actions:
-      1. Bluesky API (paalitelig, strukturert JSON, ingen blokkering)
-      2. Direkte henting med fulle nettleser-headere
-      3. Jina Reader-proxy (r.jina.ai)
+    Flerlags-strategi, i prioritert rekkefoelge:
+      1. Klubbens egen nyhetsoversikt, direkte henting
+      2. Samme side via Jina Reader-proxyen (omgaar IP-blokkering)
+      3. Bluesky API som siste utvei
+
+    Bluesky var tidligere foerstevalget fordi skraping var ustabil fra
+    GitHub Actions. Men Bluesky viser bare det klubben har DELT der, ikke
+    det de har PUBLISERT, og i rekkefoelgen de postet det. Saker som ikke
+    deles paa Bluesky naadde derfor aldri fram til appen uansett hvor mange
+    ganger jobben kjoerte. Nyhetsoversikten er komplett og sortert etter
+    publisering, saa den gaar foerst - med Bluesky som sikkerhetsnett hvis
+    skrapingen feiler. Da blir utfallet aldri daarligere enn foer.
     """
 
-    # --- Lag 1: Bluesky API ---
+    kandidat_sider = list(FCSP_NYHETSSIDER)
+
+    # --- Lag 1 og 2: klubbens egne nyhetsoversikter ---
+    # Alle seksjonene hentes, ikke bare den foerste som gir treff - klubben
+    # har egne oversikter for fotball og for foreningen, og en sak ligger
+    # bare i sin egen seksjon. main() sorterer etterpaa paa dato.
+    samlet, sett = [], set()
+    for hent, merkelapp in ((http_get_text, "direkte"), (fetch_via_jina, "via Jina-proxy")):
+        for page_url in kandidat_sider:
+            try:
+                tekst = hent(page_url)
+                funnet = _extract_news_links(tekst, per_seksjon)
+                nye = [u for u in funnet if u not in sett]
+                sett.update(nye)
+                samlet.extend(nye)
+                print(f"Nyhetsoversikt ({merkelapp}): {len(funnet)} lenker pa {page_url}"
+                      f" ({len(nye)} nye)")
+            except Exception as e:
+                print(f"  ({merkelapp} henting av {page_url} feilet: {e})", file=sys.stderr)
+        if samlet:
+            return samlet
+
+    # --- Lag 3: Bluesky API ---
     try:
         bsky_url = "https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=fcstpauli.com&limit=100"
         req = urllib.request.Request(bsky_url, headers={"Accept": "application/json", "User-Agent": USER_AGENT})
@@ -399,33 +438,6 @@ def fetch_fcstpauli_news_urls(limit: int = 5) -> list:
     except Exception as e:
         print(f"  (Bluesky API feilet: {e})", file=sys.stderr)
 
-    kandidat_sider = [
-        "https://www.fcstpauli.com/news/",
-        "https://www.fcstpauli.com/fussball/aktuelles",
-    ]
-
-    # --- Lag 2: direkte ---
-    for page_url in kandidat_sider:
-        try:
-            html = http_get_text(page_url)
-            urls = _extract_news_links(html, limit)
-            print(f"Scraping (direkte): fant {len(urls)} artikkel-lenker pa {page_url}")
-            if urls:
-                return urls
-        except Exception as e:
-            print(f"  (direkte henting av {page_url} feilet: {e})", file=sys.stderr)
-
-    # --- Lag 3: Jina Reader-proxy ---
-    for page_url in kandidat_sider:
-        try:
-            md = fetch_via_jina(page_url)
-            urls = _extract_news_links(md, limit)
-            print(f"Scraping (via Jina-proxy): fant {len(urls)} artikkel-lenker pa {page_url}")
-            if urls:
-                return urls
-        except Exception as e:
-            print(f"  (Jina-henting av {page_url} feilet: {e})", file=sys.stderr)
-
     print("Scraping: fant 0 artikkel-lenker pa alle veier", file=sys.stderr)
     return []
 
@@ -457,8 +469,36 @@ def rydd_tittel(t: str) -> str:
     return t.strip()
 
 
+def _publisert_fra_html(doc: str) -> str:
+    """Leser publiseringstidspunktet ut av artikkel-HTML-en.
+
+    fcstpauli.com har hverken article:published_time, og:updated_time eller
+    JSON-LD - datoen finnes bare som synlig tekst i artikkelhodet, paa
+    formen "19.10.26" fulgt av "13:55 Uhr". Vi leter derfor etter det
+    foerste dato/tid-paret i dokumentet.
+
+    Den fulle DD.MM.YY-formen er med vilje: brodteksten skriver gjerne
+    "Ab dem heutigen Montag (19.10.)" uten aarstall, og det skal IKKE
+    matche. Returnerer ISO-form for sortering, eller tom streng."""
+    if not doc:
+        return ""
+    m = re.search(r'(\d{2})\.(\d{2})\.(\d{2})\D{0,400}?(\d{2}):(\d{2})', doc, re.S)
+    if not m:
+        m2 = re.search(r'(\d{2})\.(\d{2})\.(\d{2})(?!\d)', doc)
+        if not m2:
+            return ""
+        d, mnd, aar = m2.groups()
+        return f"20{aar}-{mnd}-{d}T00:00"
+    d, mnd, aar, t, mi = m.groups()
+    try:
+        datetime(2000 + int(aar), int(mnd), int(d), int(t), int(mi))
+    except ValueError:
+        return ""
+    return f"20{aar}-{mnd}-{d}T{t}:{mi}"
+
+
 def fetch_article_meta(url: str) -> tuple:
-    """Henter (tittel, bilde-URL) for en artikkel. Prover direkte meta-tagger
+    """Henter (tittel, bilde-URL, publisert) for en artikkel. Prover direkte meta-tagger
     forst, deretter Jina-proxyen (som gir 'Title:'-linje + markdown-bilder).
 
     Artikkelsiden hentes EN gang, og baade og:title, <title> og og:image
@@ -469,7 +509,9 @@ def fetch_article_meta(url: str) -> tuple:
     doc = hent_artikkel_html(url)
     title = velg_tittel(_og_fra_html(doc, "og:title"), _tittel_tag(doc), doc)
     if title:
-        return title, verifiser_artikkelbilde(url, _og_fra_html(doc, "og:image"))
+        return (title,
+                verifiser_artikkelbilde(url, _og_fra_html(doc, "og:image")),
+                _publisert_fra_html(doc))
 
     # Lag 2: via Jina
     try:
@@ -480,10 +522,10 @@ def fetch_article_meta(url: str) -> tuple:
         image = m_img.group(1) if m_img else ""
         if title:
             print(f"  (artikkel-metadata hentet via Jina for {url})")
-        return title, verifiser_artikkelbilde(url, image)
+        return title, verifiser_artikkelbilde(url, image), _publisert_fra_html(md)
     except Exception as e:
         print(f"  (Jina-metadata feilet for {url}: {e})", file=sys.stderr)
-        return "", ""
+        return "", "", ""
 
 
 def bilde_kan_hentes(url: str) -> bool:
@@ -933,17 +975,37 @@ def main() -> int:
         it["title_no"] = translate_to_no(it["title_de"])
 
     # --- fcstpauli.com ---
-    fcstpauli_items = []
-    for url in fetch_fcstpauli_news_urls(limit=5):
-        title_de, image_url = fetch_article_meta(url)
+    # Kandidater fra ALLE nyhetsseksjonene. Klubben har egne oversikter for
+    # fotball og for foreningen, og en sak ligger bare i sin egen - uten
+    # dette gaar halve nyhetsstroemmen tapt. Vi henter flere enn vi trenger,
+    # sorterer paa publiseringstidspunkt og beholder de nyeste.
+    kandidater = fetch_fcstpauli_news_urls(limit=5, per_seksjon=6)
+    raa = []
+    for url in kandidater:
+        title_de, image_url, publisert = fetch_article_meta(url)
         if not title_de:
             continue
+        raa.append({"title_de": title_de, "url": url, "image": image_url,
+                    "publisert": publisert})
+
+    # Nyeste foerst. Saker uten lesbar dato havner bakerst, men beholder
+    # rekkefoelgen de hadde i oversikten.
+    med_dato = [x for x in raa if x["publisert"]]
+    uten_dato = [x for x in raa if not x["publisert"]]
+    med_dato.sort(key=lambda x: x["publisert"], reverse=True)
+    if uten_dato:
+        print(f"  (info: {len(uten_dato)} saker uten lesbar dato - lagt bakerst)")
+
+    fcstpauli_items = []
+    for x in (med_dato + uten_dato)[:5]:
         fcstpauli_items.append({
-            "title_no": translate_to_no(title_de),
-            "title_de": title_de,
-            "url": url,
-            "image": image_url,
+            "title_no": translate_to_no(x["title_de"]),
+            "title_de": x["title_de"],
+            "url": x["url"],
+            "image": x["image"],
         })
+    if fcstpauli_items:
+        print(f"fcstpauli: {len(raa)} kandidater -> beholder {len(fcstpauli_items)} nyeste")
 
     # --- Neste kamp og hele kampplanen (deler ett OpenLigaDB-kall) ---
     next_match = fetch_next_match_fcstpauli()
