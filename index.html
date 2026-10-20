@@ -1753,33 +1753,79 @@ async function lastTippHistorikk() {
 }
 
 // ---- LEGG TIL I KALENDER (ICS) ----
-function lagICS(motstander, dato, tid, stadion, hjemme) {
+// Escaping av TEXT-verdier i ICS (RFC 5545 §3.3.11). Komma skiller mellom
+// flere verdier i et felt, så et ikke-escapet komma i et stadionnavn som
+// "Merck-Stadion am Böllenfalltor, Darmstadt" gjør stedet om til to verdier.
+function icsTekst(s) {
+  return String(s == null ? '' : s)
+    .replace(/\\/g, '\\\\')
+    .replace(/;/g, '\\;')
+    .replace(/,/g, '\\,')
+    .replace(/\r?\n/g, '\\n');
+}
+
+// Linjer over 75 oktetter skal brytes med CRLF + mellomrom (RFC 5545 §3.1).
+// Grensen gjelder bytes, ikke tegn, og en multibyte-sekvens må ikke deles.
+function icsFold(linje) {
+  const bytes = new TextEncoder().encode(linje);
+  if (bytes.length <= 75) return linje;
+  const ut = [];
+  let start = 0;
+  let grense = 75;
+  while (start < bytes.length) {
+    let slutt = Math.min(start + grense, bytes.length);
+    // Ikke del midt i et UTF-8-tegn: fortsettelsesbytes er 10xxxxxx
+    while (slutt > start && slutt < bytes.length && (bytes[slutt] & 0xc0) === 0x80) slutt--;
+    ut.push(new TextDecoder().decode(bytes.slice(start, slutt)));
+    start = slutt;
+    grense = 74; // etterfølgende linjer starter med et mellomrom
+  }
+  return ut.join('\r\n ');
+}
+
+function lagICS(motstander, dato, tid, stadion, hjemme, matchId) {
   // Kamptider er i CET/CEST (Europe/Berlin = Europe/Oslo).
   // ICS bruker TZID for korrekt tidssone uansett hvor brukeren er.
-  const tidStr = (tid || '15:00').replace(':', '');
-  const datoStr = dato.replace(/-/g, '');
-  const startICS = datoStr + 'T' + tidStr + '00';
-  // Slutt = 2 timer etter avspark
-  const startH = parseInt(tidStr.substring(0, 2));
-  const startM = tidStr.substring(2, 4);
-  const sluttH = String(startH + 2).padStart(2, '0');
-  const sluttICS = datoStr + 'T' + sluttH + startM + '00';
+  const [aar, mnd, dag] = dato.split('-').map(Number);
+  const [time, min] = (tid || '15:00').split(':').map(Number);
+  const toSiffer = n => String(n).padStart(2, '0');
+  const stempel = d => d.getUTCFullYear() + toSiffer(d.getUTCMonth() + 1) + toSiffer(d.getUTCDate())
+    + 'T' + toSiffer(d.getUTCHours()) + toSiffer(d.getUTCMinutes()) + '00';
+
+  // Regnes i UTC-rommet, men verdiene er lokal veggklokke - det er nettopp
+  // det TZID-formatet forventer. Slik ruller slutttiden riktig over til
+  // neste døgn: avspark 22:30 ga tidligere det ugyldige klokkeslettet 24:30.
+  const start = new Date(Date.UTC(aar, mnd - 1, dag, time, min));
+  const slutt = new Date(start.getTime() + 2 * 60 * 60 * 1000);
+
   const tittel = hjemme
     ? `FC St. Pauli vs ${motstander}`
     : `${motstander} vs FC St. Pauli`;
+
+  // UID må være stabil for kampen. Da oppdaterer kalenderen en oppføring
+  // som alt finnes i stedet for å lage en ny ved ny import - også hvis DFL
+  // flytter kampen, siden matchId følger den gjennom omberamminger.
+  const uid = (matchId != null && matchId !== ''
+    ? 'kamp-' + matchId
+    : 'kamp-' + dato + '-' + String(motstander).replace(/[^a-zA-Z0-9]/g, '')
+  ) + '@partisanlillestrom.github.io';
+
   const ics = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
     'PRODID:-//Partisan Lillestrøm//Kamp//NO',
+    'CALSCALE:GREGORIAN',
     'BEGIN:VEVENT',
-    'DTSTART;TZID=Europe/Berlin:' + startICS,
-    'DTEND;TZID=Europe/Berlin:' + sluttICS,
-    'SUMMARY:' + tittel,
-    'LOCATION:' + (stadion || ''),
-    'DESCRIPTION:' + (hjemme ? 'Hjemmekamp' : 'Bortekamp') + ' - 2. Bundesliga',
+    'UID:' + uid,
+    'DTSTAMP:' + stempel(new Date()) + 'Z',
+    'DTSTART;TZID=Europe/Berlin:' + stempel(start),
+    'DTEND;TZID=Europe/Berlin:' + stempel(slutt),
+    'SUMMARY:' + icsTekst(tittel),
+    'LOCATION:' + icsTekst(stadion),
+    'DESCRIPTION:' + icsTekst((hjemme ? 'Hjemmekamp' : 'Bortekamp') + ' - 2. Bundesliga'),
     'END:VEVENT',
     'END:VCALENDAR'
-  ].join('\r\n');
+  ].map(icsFold).join('\r\n') + '\r\n';
   const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -2424,7 +2470,7 @@ function visKamp(kamp) {
     if (kalBtn) {
       kalBtn.addEventListener('click', () => lagICS(
         kamp.motstander || '', kamp.dato, kamp.tid || '15:00',
-        kamp.stadion || '', !!kamp.hjemme
+        kamp.stadion || '', !!kamp.hjemme, kamp.matchId
       ));
     }
   }
@@ -2558,9 +2604,9 @@ function visMeldModal(eventId, tittel) {
   modal.innerHTML = `
     <div class="navn-boks gb">
       <h3>Meld deg på</h3>
-      <div class="info-val-dim" style="margin-bottom:12px;">${tittel || ''}</div>
+      <div class="info-val-dim" style="margin-bottom:12px;">${esc(tittel || '')}</div>
       <input class="navn-input" id="navnInput" type="text" maxlength="100"
-        placeholder="Ditt navn" value="${_mittNavn}" autocomplete="name">
+        placeholder="Ditt navn" value="${esc(_mittNavn)}" autocomplete="name">
       <div class="navn-knapper">
         <button class="navn-ok gb" onclick="bekreftNavn('${eventId}')">Meld på</button>
         <button class="navn-avbryt" onclick="lukkModal()">Avbryt</button>
