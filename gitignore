@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Firebase-backupper. backup_database.py skriver hit, men mappen skal ikke
+# i repoet - backupene lastes opp som GitHub Actions-artifact (se
+# .github/workflows/backup.yml) og er tilgjengelige derfra i 90 dager.
+backups/
+
+# Operativsystem og editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Testoppsett
+node_modules/
+package-lock.json
+tests/.bilder/

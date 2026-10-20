@@ -1,6 +1,7 @@
 # Endringslogg — Partisan Lillestrøm App
 
 ## v2.5 — 20. oktober 2026
+- **Tester:** Ni testsett lagt inn i `tests/` — tipping og omberamming, escaping, ICS mot RFC 5545, datapipelinen, resultathentingen, oppstart av alle script-blokker, navigasjon mellom alle sider, feilhåndtering når data.json/Firebase/localStorage svikter, og bildekrymping mot Firebase-grensen. Kjøres med `npm test`; ingen av dem går på nettet
 - **Robusthet:** All bruk av localStorage går gjennom lsGet/lsSet/lsDel — appen krasjer ikke lenger i privat nettlesermodus eller når lagring er blokkert (Arrangementer sluttet å virke helt)
 - **Retting:** Enter i navnefeltet under kommentarer bekrefter navnet i stedet for å sende en tom kommentar
 - **Sikkerhet:** Firebase-tokenet sendes i Authorization-headeren i stedet for i adressen (hent_resultater.py, backup_database.py) — havner ikke lenger i tilgangslogger eller feilmeldinger
