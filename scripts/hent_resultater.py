@@ -22,6 +22,13 @@ RESULTATER_REF = f"{FIREBASE_DB}/kampresultater"
 
 ST_PAULI_NAMES = ["st. pauli", "st pauli", "fc st. pauli"]
 
+# Kamptider fra OpenLigaDB er tysk lokaltid. Samme kilde som update_data.py.
+try:
+    from zoneinfo import ZoneInfo
+    TZ_DE = ZoneInfo("Europe/Berlin")
+except Exception:  # svaert usannsynlig paa GitHub Actions, men aldri krasj
+    TZ_DE = timezone.utc
+
 
 def hent_access_token():
     """Genererer et OAuth2 access token fra service account."""
@@ -82,8 +89,11 @@ def er_st_pauli(lagnavn):
 
 
 def hent_sesong():
-    """Beregner gjeldende sesong (2026 = 2026/27-sesongen)."""
-    now = datetime.now(timezone.utc)
+    """Beregner gjeldende sesong (2026 = 2026/27-sesongen).
+
+    Regnes i tysk tid, som i update_data.py. Med UTC ga de to skriptene
+    ulikt svar de to foerste timene av 1. juli hvert aar."""
+    now = datetime.now(TZ_DE)
     return now.year if now.month >= 7 else now.year - 1
 
 
@@ -110,14 +120,17 @@ def hent_firebase_resultater():
 
 
 def lagre_resultat(dato, data, access_token):
-    """Lagrer et kampresultat i Firebase med autentisering."""
+    """Lagrer et kampresultat i Firebase med autentisering.
+
+    Tokenet sendes i Authorization-headeren, ikke som spoerringsparameter.
+    En URL havner i Firebase sine tilgangslogger og i e.url paa en
+    HTTPError; en header gjoer ikke det."""
     url = f"{RESULTATER_REF}/{dato}.json"
+    headers = {"Content-Type": "application/json"}
     if access_token:
-        url += f"?access_token={access_token}"
+        headers["Authorization"] = f"Bearer {access_token}"
     payload = json.dumps(data).encode()
-    req = urllib.request.Request(url, data=payload, method="PUT", headers={
-        "Content-Type": "application/json"
-    })
+    req = urllib.request.Request(url, data=payload, method="PUT", headers=headers)
     with urllib.request.urlopen(req, timeout=10) as resp:
         return json.loads(resp.read().decode())
 
@@ -212,12 +225,13 @@ def main():
 
     if not ferdige:
         print("Ingen ferdige kamper å oppdatere.")
-        return
+        return 0
 
     print("Henter eksisterende resultater fra Firebase...")
     eksisterende = hent_firebase_resultater()
 
     nye = 0
+    feilet = 0
     for kamp in ferdige:
         dato = kamp["dato"]
         if dato in eksisterende:
@@ -233,11 +247,22 @@ def main():
                 continue
 
         print(f"  Lagrer: {kamp['hjemmelag']} {kamp['h']}-{kamp['b']} {kamp['bortelag']} ({dato})")
-        lagre_resultat(dato, kamp, access_token)
-        nye += 1
+        try:
+            lagre_resultat(dato, kamp, access_token)
+            nye += 1
+        except Exception as e:
+            # En enkelt feilet skriving skal ikke stoppe de oevrige. Uten
+            # dette avbroet foerste nettverksblipp hele loekka, og kampene
+            # etter den ble staaende uskrevet til neste kjoering.
+            print(f"  FEIL ved lagring av {dato}: {e}", file=sys.stderr)
+            feilet += 1
 
     print(f"Ferdig! {nye} nye/oppdaterte resultater lagret.")
+    if feilet:
+        print(f"{feilet} resultat(er) kunne ikke lagres - se feilmeldinger over.", file=sys.stderr)
+        return 1
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
