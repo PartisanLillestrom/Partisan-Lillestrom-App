@@ -245,19 +245,61 @@ def fetch_og_title(page_url: str) -> str:
     return fetch_og_tag(page_url, "og:title")
 
 
-def velg_tittel(og_title: str, title_tag: str) -> str:
-    """Velger den mest komplette overskriften av og:title og <title>.
+def _overskrifter_fra_html(doc: str) -> list:
+    """Henter teksten i alle <h1> og <h2> paa siden, uten markup."""
+    ut = []
+    for m in re.finditer(r'<h[12][^>]*>(.*?)</h[12]>', doc, re.S | re.I):
+        tekst = re.sub(r'<[^>]+>', ' ', m.group(1))          # fjern inner-markup
+        tekst = html_unescape(re.sub(r'\s+', ' ', tekst)).strip()
+        if tekst:
+            ut.append(tekst)
+    return ut
 
-    Begge ryddes foerst for klubbnavn og ellipse. Den som gir mest tekst
-    vinner: er <title> bare "FC St. Pauli" eller "Startseite | FC St.
-    Pauli", blir den kort etter rydding og og:title beholdes."""
+
+def _normaliser_tittel(s: str) -> str:
+    """Form for sammenligning: ufoelsom for mellomrom, typografiske
+    anfoerselstegn, tankestreker og store/smaa bokstaver. Et CMS gjengir
+    gjerne og:title og <h1> litt ulikt uten at overskriften er en annen."""
+    s = re.sub(r'[‘’‚‛]', "'", s)
+    s = re.sub(r'[“”„‟«»]', '"', s)
+    s = re.sub(r'[‐-―]', '-', s)
+    return re.sub(r'\s+', ' ', s).strip().lower()
+
+
+def _samme_overskrift(basis: str, kandidat: str) -> bool:
+    """Sant hvis kandidaten er den SAMME overskriften, bare mindre avkuttet.
+
+    Dette er sikringen som gjoer tittelvalget trygt: en kandidat som ikke
+    begynner med den teksten vi alt vet er riktig, blir aldri valgt. Verste
+    utfall er «ingen forbedring», aldri «feil overskrift». Minstelengden
+    hindrer at en veldig kort basis gir tilfeldige treff."""
+    if len(basis) < 12:
+        return False
+    return _normaliser_tittel(kandidat).startswith(_normaliser_tittel(basis))
+
+
+def velg_tittel(og_title: str, title_tag: str, doc: str = "") -> str:
+    """Velger den mest komplette utgaven av artikkelens overskrift.
+
+    fcstpauli.com korter BAADE og:title og <title> ned, saa den fulle
+    teksten finnes bare i sidens egen <h1>. Et avkuttet fragment gir
+    feiloversettelser: "1. Frauen bezwingen" (de VANT 5-1) ble oversatt til
+    "Kvinnetap", og "U17 besiegt den" ble "U17 taper" - begge stikk motsatt.
+
+    og:title er utgangspunktet fordi den er den mest paalitelige kilden til
+    HVILKEN overskrift saken har. <title> og sidens <h1>/<h2> brukes bare
+    til aa FORLENGE den, og kun naar de begynner med samme tekst."""
     og = rydd_tittel(og_title)
     tt = rydd_tittel(title_tag)
-    if not tt:
-        return og
-    if not og:
-        return tt
-    return tt if len(tt) > len(og) else og
+    basis = og or tt
+    if not basis:
+        return ""
+    beste = basis
+    for kandidat in [tt] + _overskrifter_fra_html(doc):
+        k = rydd_tittel(kandidat)
+        if len(k) > len(beste) and _samme_overskrift(basis, k):
+            beste = k
+    return beste
 
 
 # ---------------------------------------------------------------------------
@@ -425,7 +467,7 @@ def fetch_article_meta(url: str) -> tuple:
     og:title."""
     # Lag 1: direkte meta-tagger - én henting
     doc = hent_artikkel_html(url)
-    title = velg_tittel(_og_fra_html(doc, "og:title"), _tittel_tag(doc))
+    title = velg_tittel(_og_fra_html(doc, "og:title"), _tittel_tag(doc), doc)
     if title:
         return title, verifiser_artikkelbilde(url, _og_fra_html(doc, "og:image"))
 
