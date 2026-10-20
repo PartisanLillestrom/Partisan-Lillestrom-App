@@ -1,5 +1,13 @@
 # Endringslogg — Partisan Lillestrøm App
 
+## v2.5 — 20. oktober 2026
+- **Robusthet:** All bruk av localStorage går gjennom lsGet/lsSet/lsDel — appen krasjer ikke lenger i privat nettlesermodus eller når lagring er blokkert (Arrangementer sluttet å virke helt)
+- **Retting:** Enter i navnefeltet under kommentarer bekrefter navnet i stedet for å sende en tom kommentar
+- **Sikkerhet:** Firebase-tokenet sendes i Authorization-headeren i stedet for i adressen (hent_resultater.py, backup_database.py) — havner ikke lenger i tilgangslogger eller feilmeldinger
+- **Pipeline:** hent_resultater.py bruker tysk tid for sesongberegning (likt update_data.py), fortsetter etter en feilet skriving og avslutter med feilkode slik at workflowen blir rød
+- **Opprydding:** Fjernet død kode (partisan_page_change-lytter, oppdaterKommentarVisning), villedende inline display:none på #kamper
+- **Småtteri:** Seksjonslenken peker på fcstpauli.com/fußball/aktuelles; favicon lagt inn (ga 404 i konsollen ved hver sidelasting)
+
 ## v2.4 — 16. oktober 2026
 - **Ny funksjon:** Kamptipping — tipp resultat på 2. Bundesliga-kamper, poengberegning og toppliste
 - **Navigasjon:** Bunnav: Hjem, Arr., Tabell, Tipping, ☰ Meny — Kamplogg flyttet til hamburgermeny
