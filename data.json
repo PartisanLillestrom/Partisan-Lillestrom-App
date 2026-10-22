@@ -1,16 +1,16 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "Neste flombelyste kamp i Darmstadt: Femte forsøk på første borteseier",
+      "title_de": "Nächstes Flutlichtspiel in Darmstadt: Im fünften Anlauf zum ersten Auswärtssieg",
+      "url": "https://www.fcstpauli.com/news/vorbericht-auswaertsspiel-darmstadt-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FGegner%2FDarmstadt%2F_1200x630_crop_center-center_82_none%2F2223_MD31_SVDSTP_LS_109.jpg%3Fv%3D1792652052%252C0.306%252C0.4845&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FCSPs faste spillerbord: Diskusjon om 50+1-regelen og fremtiden til kvinnenes førstelag.",
       "title_de": "FCSP-Stammtisch: Diskussion über 50+1 und die Zukunft der 1. Frauen",
       "url": "https://www.fcstpauli.com/news/fcsp-stammtisch-diskussion-ueber-50-1-und-die-zukunft-der-1-frauen",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FVerein%2FVeranstaltungen-Events%2FStammtisch-10-26%2F_1200x630_crop_center-center_82_none%2FFCS06847-1.jpg%3Fv%3D1792665065%252C0.5289%252C0.5787&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "«Vi trenger fysisk styrke, kreativitet og lagånd.»",
-      "title_de": "„Wir brauchen Physis, Kreativität und mannschaftliche Geschlossenheit“",
-      "url": "https://www.fcstpauli.com/news/cheftrainer-marcel-rapp-vor-auswaertsspiel-darmstadt-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FCheftrainer%2FMillerntor%2F_1200x630_crop_center-center_82_none%2FFCS04144.jpg%3Fv%3D1792612857%252C0.5251%252C0.4397&w=400&output=webp&q=70"
     },
     {
       "title_no": "Kort og søt oktober 2026",
@@ -19,16 +19,16 @@
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FFlaggen-Sticker%2FSticker%2F_1200x630_crop_center-center_82_none%2FFCP5338.jpg%3Fv%3D1792613864%252C0.5384%252C0.5&w=400&output=webp&q=70"
     },
     {
+      "title_no": "«Vi trenger fysisk styrke, kreativitet og lagånd.»",
+      "title_de": "„Wir brauchen Physis, Kreativität und mannschaftliche Geschlossenheit“",
+      "url": "https://www.fcstpauli.com/news/cheftrainer-marcel-rapp-vor-auswaertsspiel-darmstadt-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FCheftrainer%2FMillerntor%2F_1200x630_crop_center-center_82_none%2FFCS04144.jpg%3Fv%3D1792612857%252C0.5251%252C0.4397&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "«Ingen som er blant de som starter kan hvile.»",
       "title_de": "„Niemand, der in der Startelf steht, kann sich ausruhen“",
       "url": "https://www.fcstpauli.com/news/presserunde-lars-ritzka-vor-auswaertsspiel-darmstadt-2627",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FRitzka%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-7180.jpg%3Fv%3D1792612931%252C0.4211%252C0.4774&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Motstander sjekker SV Darmstadt 98: «Gul konge» Weißhaupt og headermonsteret Vukotić",
-      "title_de": "Gegnercheck SV Darmstadt 98: „Gelb-König“ Weißhaupt und Kopfballungeheuer Vukotić",
-      "url": "https://www.fcstpauli.com/news/gegnercheck-darmstadt-98-viele-karten-und-ein-kopfballungeheuer",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FGegner%2FDarmstadt%2F_1200x630_crop_center-center_82_none%2F260830_EP_SVD_JGG_0050.jpeg%3Fv%3D1792612848%252C0.5272%252C0.3682&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -823,5 +823,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-10-22T12:22:43Z"
+  "updated": "2026-10-22T15:54:33Z"
 }
