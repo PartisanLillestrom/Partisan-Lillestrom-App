@@ -2,7 +2,7 @@
 // Gjør appen installerbar og cacher kjernefiler for raskere lasting.
 // CACHE_VERSION oppdateres av GitHub Actions (update_data.py) ved endringer.
 
-const CACHE_VERSION = '2026-10-22';
+const CACHE_VERSION = '2026-10-23';
 const CACHE_NAME = 'partisan-' + CACHE_VERSION;
 const CORE_ASSETS = [
   './',
