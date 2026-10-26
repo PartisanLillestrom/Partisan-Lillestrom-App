@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "Tredje seier på rad: Første kvinnelag gir Buntentor ingen sjanse",
+      "title_de": "Dritter Sieg in Serie: 1. Frauen lassen Buntentor keine Chance",
+      "url": "https://www.fcstpauli.com/news/spielbericht-1-frauen-vs-buntentor-heim-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FAbteilungen%2FFrauenfu%25C3%259Fball%2F0-Saison-2026-2027%2FLigaspiele%2F9_Buntentor_Heim%2F_1200x630_crop_center-center_82_none%2FEDI01269.jpeg%3Fv%3D1793014350%252C0.5859%252C0.4288&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "FCSP teqball-spiller Daytona Hansen feirer nok en turneringsseier",
       "title_de": "FCSP-Teqballspielerin Daytona Hansen feiert nächsten Turniersieg",
       "url": "https://www.fcstpauli.com/news/fcsp-teqballspielerin-daytona-hansen-feiert-naechsten-turniersieg",
@@ -17,12 +23,6 @@
       "title_de": "U23 schlägt Regionalliga-Tabellenführer Flensburg",
       "url": "https://www.fcstpauli.com/news/spielbericht-u23-heimspiel-weiche-flensburg-2627",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FU23%2FLigaspiele%2F15-Flensburg-H%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-07939.jpg%3Fv%3D1792937373%252C0.5514%252C0.3216&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Det er mulig i helgen",
-      "title_de": "Das geht am Wochenende",
-      "url": "https://www.fcstpauli.com/news/fcsp-am-wochenende-kw43-2026",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFCSP-am-WE%2F2627%2F_1200x630_crop_center-center_82_none%2FHEN06070.jpg%3Fv%3D1792675022%252C0.605%252C0.5346&w=400&output=webp&q=70"
     },
     {
       "title_no": "«Vi må bli tydeligere i spillet vårt med ballen.»",
@@ -823,5 +823,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-10-26T11:11:36Z"
+  "updated": "2026-10-26T13:31:42Z"
 }
