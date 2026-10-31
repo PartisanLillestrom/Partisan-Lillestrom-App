@@ -1,10 +1,10 @@
 {
   "fcstpauli_news": [
     {
-      "title_no": "Billettinformasjon for kampen mot Dynamo Dresden",
-      "title_de": "Ticket-Infos zum Spiel bei Dynamo Dresden",
-      "url": "https://www.fcstpauli.com/news/ticket-infos-auswaertsspiel-dynamo-dresden-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FGegner%2FDresden%2F_1200x630_crop_center-center_82_none%2F2627_MD02_SGDSVD_JP_2558_c4WYtv82.jpg%3Fv%3D1793356590%252C0.6329%252C0.5112&w=400&output=webp&q=70"
+      "title_no": "Mot et sterkt Nürnberg-lag: Kiezkicker sikter mot sin tredje hjemmeseier på rad",
+      "title_de": "Gegen spielstarke Nürnberger: Kiezkicker wollen dritten Heimsieg in Serie",
+      "url": "https://www.fcstpauli.com/news/vorbericht-heimspiel-1-fc-nuernberg-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2F1-Ligaspiele-Pokalspiele%2F07-Karlsruhe-H%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-7219.jpg%3Fv%3D1793375008%252C0.5541%252C0.5577&w=400&output=webp&q=70"
     },
     {
       "title_no": "Det er mulig i helgen",
@@ -13,16 +13,16 @@
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFCSP-am-WE%2F2627%2F_1200x630_crop_center-center_82_none%2FDSC2100.jpg%3Fv%3D1793284794%252C0.4866%252C0.5271&w=400&output=webp&q=70"
     },
     {
+      "title_no": "Billettinformasjon for kampen mot Dynamo Dresden",
+      "title_de": "Ticket-Infos zum Spiel bei Dynamo Dresden",
+      "url": "https://www.fcstpauli.com/news/ticket-infos-auswaertsspiel-dynamo-dresden-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FGegner%2FDresden%2F_1200x630_crop_center-center_82_none%2F2627_MD02_SGDSVD_JP_2558_c4WYtv82.jpg%3Fv%3D1793356590%252C0.6329%252C0.5112&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "«Vi er glade for å ha så mye å velge mellom.»",
       "title_de": "„Wir sind glücklich, so viel Auswahl zu haben“",
       "url": "https://www.fcstpauli.com/news/cheftrainer-marcel-rapp-vor-heimspiel-1-fc-nuernberg-2627",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FCheftrainer%2FMillerntor%2F_1200x630_crop_center-center_82_none%2FFCS03138.jpg%3Fv%3D1793365680%252C0.4972%252C0.4399&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Hanau-overlevende Said Etris Hashemi besøker NLZ",
-      "title_de": "Hanau-Überlebender Said Etris Hashemi zu Gast beim NLZ",
-      "url": "https://www.fcstpauli.com/news/interview-said-etris-hashemi",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FLeistungsbereich%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-08090.jpg%3Fv%3D1793196765%252C0.5423%252C0.3954&w=400&output=webp&q=70"
     },
     {
       "title_no": "Kort og søt oktober 2026",
@@ -823,5 +823,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-10-31T07:39:23Z"
+  "updated": "2026-10-31T10:57:53Z"
 }
