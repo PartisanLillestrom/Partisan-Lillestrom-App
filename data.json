@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "Kenzy Akame fra ungdomsakademiet er nominert til U17-VM",
+      "title_de": "Kenzy Akame aus dem NLZ für die U17-WM nominiert",
+      "url": "https://www.fcstpauli.com/news/kenzy-akame-aus-dem-nlz-fuer-die-u17-wm-nominiert",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FLeistungsbereich%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-07605.jpg%3Fv%3D1793797165%252C0.5651%252C0.2787&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "Motstandersjekk 1. FC Magdeburg: Enorm effektivitet og en driblekunstner",
       "title_de": "Gegnercheck 1. FC Magdeburg: Enorme Effizienz und ein Dribbelkünstler",
       "url": "https://www.fcstpauli.com/news/gegnercheck-auswaertsspiel-1-fc-magdeburg-2627",
@@ -23,12 +29,6 @@
       "title_de": "Doppeltes Remis für den Leistungsbereich, U14 testet Großfeld gegen Altona",
       "url": "https://www.fcstpauli.com/news/yr-nachberichte-kw45-2026",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FLeistungsbereich%2F_1200x630_crop_center-center_82_none%2FDSC_4822.jpg%3Fv%3D1793616726%252C0.5617%252C0.4828&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "I siste sekund: U23 tvinger frem uavgjort mot ETV",
-      "title_de": "In letzter Sekunde: U23 erzwingt Remis gegen den ETV",
-      "url": "https://www.fcstpauli.com/news/in-letzter-sekunde-u23-erzwingt-remis-gegen-den-etv",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FU23%2FLigaspiele%2F16-ETV-H%2F_1200x630_crop_center-center_82_none%2FDSC_76761.jpg%3Fv%3D1793551224%252C0.478%252C0.3708&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -823,5 +823,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-11-04T13:02:23Z"
+  "updated": "2026-11-04T14:51:52Z"
 }
