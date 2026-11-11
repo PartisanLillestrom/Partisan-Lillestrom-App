@@ -1,10 +1,16 @@
 {
   "fcstpauli_news": [
     {
-      "title_no": "Før starten av andre halvdel av sesongen: Kiezkicker tar imot FC Luzern",
-      "title_de": "Vor dem Start der Rückrunde: Kiezkicker empfangen den FC Luzern",
-      "url": "https://www.fcstpauli.com/news/winterfahrplan-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FAllgemein%2FSpielball-2BL%2F_1200x630_crop_center-center_82_none%2FWITTERS_2349902.jpg%3Fv%3D1794392621%252C0.6079%252C0.3413&w=400&output=webp&q=70"
+      "title_no": "Etter den allerede utnevnte kvartetten: Jones nominert til Jamaica",
+      "title_de": "Nach bereits berufenem Quartett: Jones für Jamaika nachnominiert",
+      "url": "https://www.fcstpauli.com/news/kiezkicker-auf-laenderspielreise-november-2026",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FJones%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-05439.jpg%3Fv%3D1794402663%252C0.4519%252C0.4518&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "Jingle Health Bells: Health Bells-festivalen kommer til Millerntor i juleutgaven.",
+      "title_de": "Jingle Health Bells: Das Health Bells Festival kommt in der Weihnachtsedition ans Millerntor",
+      "url": "https://www.fcstpauli.com/news/das-health-bells-festival-kommt-in-der-weihnachtsedition-ans-millerntor",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FSteinwappen%2F_1200x630_crop_center-center_82_none%2FIMG_2619.jpg%3Fv%3D1794329772%252C0.4937%252C0.4936&w=400&output=webp&q=70"
     },
     {
       "title_no": "Internasjonal Teqball-turnering denne helgen i Hamburg",
@@ -19,16 +25,10 @@
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FFlaggen-Sticker%2FSticker%2F_1200x630_crop_center-center_82_none%2FFCSP-YD-8983.jpeg%3Fv%3D1793607849%252C0.5%252C0.5&w=400&output=webp&q=70"
     },
     {
-      "title_no": "FC St. Pauli støtter 28 Christopher Street-dager i kampen mot skeivfobi.",
-      "title_de": "Der FC St. Pauli unterstützt 28 CSDs im Kampf gegen Queerfeindlichkeit",
-      "url": "https://www.fcstpauli.com/news/der-fc-st-pauli-unterstuetzt-28-csds-im-kampf-gegen-queerfeindlichkeit",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FFlaggen-Sticker%2F_1200x630_crop_center-center_82_none%2FWITTERS_2094225.jpg%3Fv%3D1794304755%252C0.7074%252C0.5036&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Leirdatoer 2027: Rabauken-fotballleirene går inn i neste runde!",
-      "title_de": "Camp-Termine 2027: Die Rabauken Fußballcamps gehen in die nächste Runde!",
-      "url": "https://www.fcstpauli.com/news/rabauken-fussballcamps-termine-2027",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FRabauken%2FNews%2FCamp-Termine-2027%2F_1200x630_crop_center-center_82_none%2FSudheimer_Rabauken_Hitzacker-260722-13239.jpg%3Fv%3D1794201907%252C0.4828%252C0.5627&w=400&output=webp&q=70"
+      "title_no": "Før starten av andre halvdel av sesongen: Kiezkicker tar imot FC Luzern",
+      "title_de": "Vor dem Start der Rückrunde: Kiezkicker empfangen den FC Luzern",
+      "url": "https://www.fcstpauli.com/news/winterfahrplan-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FAllgemein%2FSpielball-2BL%2F_1200x630_crop_center-center_82_none%2FWITTERS_2349902.jpg%3Fv%3D1794392621%252C0.6079%252C0.3413&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -823,5 +823,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-11-11T12:46:00Z"
+  "updated": "2026-11-11T14:42:13Z"
 }
