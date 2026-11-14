@@ -1,6 +1,12 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "Deumelandt: «Vi bør ikke bare sette navn på verdiene våre, men vi bør også forsvare dem og fylle dem med mening.»",
+      "title_de": "Deumelandt: „Unsere Werte nicht nur benennen, sondern auch verteidigen und mit Inhalt füllen“",
+      "url": "https://www.fcstpauli.com/news/berichte-aufsichtsrat-amateurvorstand-afm-ehrenrat-mv-2026",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FVerein%2FMitgliederversammlung%2F2026%2FAR-Deumelandt%2F_1200x630_crop_center-center_82_none%2FWITTERS_2387769.jpg%3Fv%3D1794659453%252C0.6908%252C0.2698&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "Oke Göttlich: «Vårt mangfold er vår styrke»",
       "title_de": "Oke Göttlich: „Unsere Vielfalt ist unsere Stärke“",
       "url": "https://www.fcstpauli.com/news/bericht-praesidium-mitgliederversammlung-2026",
@@ -11,12 +17,6 @@
       "title_de": "Der FC St. Pauli schließt Geschäftsjahr 2025/26 mit 16,7 Mio. Euro Überschuss ab",
       "url": "https://www.fcstpauli.com/news/fc-st-pauli-geschaeftsbilanz-2526",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FSteinwappen%2F_1200x630_crop_center-center_82_none%2FFCSP-Steinwappen.jpg%3Fv%3D1794498035%252C0.5027%252C0.4148&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Kort og søt november 2026",
-      "title_de": "Kurz und knackig November 2026",
-      "url": "https://www.fcstpauli.com/news/kurz-und-knackig-november-2026",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FFlaggen-Sticker%2FSticker%2F_1200x630_crop_center-center_82_none%2FFCSP-YD-8983.jpeg%3Fv%3D1794497638%252C0.5%252C0.5&w=400&output=webp&q=70"
     },
     {
       "title_no": "En annen St. Pauli-spiller på landslagsoppdrag: Pyrka ble kalt opp til Polen.",
@@ -823,5 +823,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-11-14T12:16:03Z"
+  "updated": "2026-11-14T13:47:11Z"
 }
