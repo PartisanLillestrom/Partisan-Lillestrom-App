@@ -1,28 +1,28 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "Oke Göttlich: «Vårt mangfold er vår styrke»",
+      "title_de": "Oke Göttlich: „Unsere Vielfalt ist unsere Stärke“",
+      "url": "https://www.fcstpauli.com/news/bericht-praesidium-mitgliederversammlung-2026",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FVerein%2FMitgliederversammlung%2F2026%2FG%25C3%25B6ttlich%2F_1200x630_crop_center-center_82_none%2FFCS07126.jpg%3Fv%3D1794654587%252C0.4454%252C0.2716&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "FC St. Pauli avslutter regnskapsåret 2025/26 med et overskudd på 16,7 millioner euro.",
+      "title_de": "Der FC St. Pauli schließt Geschäftsjahr 2025/26 mit 16,7 Mio. Euro Überschuss ab",
+      "url": "https://www.fcstpauli.com/news/fc-st-pauli-geschaeftsbilanz-2526",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FSteinwappen%2F_1200x630_crop_center-center_82_none%2FFCSP-Steinwappen.jpg%3Fv%3D1794498035%252C0.5027%252C0.4148&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "Kort og søt november 2026",
       "title_de": "Kurz und knackig November 2026",
       "url": "https://www.fcstpauli.com/news/kurz-und-knackig-november-2026",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FFlaggen-Sticker%2FSticker%2F_1200x630_crop_center-center_82_none%2FFCSP-YD-8983.jpeg%3Fv%3D1794497638%252C0.5%252C0.5&w=400&output=webp&q=70"
     },
     {
-      "title_no": "Det er mulig i helgen",
-      "title_de": "Das geht am Wochenende",
-      "url": "https://www.fcstpauli.com/news/fcsp-am-wochenende-kw46-2026",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFCSP-am-WE%2F_1200x630_crop_center-center_82_none%2FDSC2096.jpg%3Fv%3D1794568098%252C0.4489%252C0.5238&w=400&output=webp&q=70"
-    },
-    {
       "title_no": "En annen St. Pauli-spiller på landslagsoppdrag: Pyrka ble kalt opp til Polen.",
       "title_de": "Nächster Kiezkicker auf Länderspielreise: Pyrka für Polen nachnominiert",
       "url": "https://www.fcstpauli.com/news/kiezkicker-auf-laenderspielreise-november-2026",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2FMannschaft%2FPyrka%2F_1200x630_crop_center-center_82_none%2FWITTERS_2371943.jpg%3Fv%3D1794499661%252C0.5431%252C0.2179&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "St. Pauli Song Contest presenterer de 25 beste",
-      "title_de": "Der St. Pauli Song Contest präsentiert die Top 25",
-      "url": "https://www.fcstpauli.com/news/die-top-25-des-st-pauli-song-contests",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FVerein%2FSt.-Pauli-Song-Contest%2F_1200x630_crop_center-center_82_none%2Fsued.jpg%3Fv%3D1794497014%252C0.5134%252C0.6516&w=400&output=webp&q=70"
     },
     {
       "title_no": "Billettinformasjon for hjemmekampen mot Hertha BSC",
@@ -823,5 +823,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-11-13T22:10:10Z"
+  "updated": "2026-11-14T12:16:03Z"
 }
