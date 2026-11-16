@@ -33,6 +33,20 @@
   ],
   "millernton_news": [
     {
+      "title_no": "SPSC: Topp 25-profil – Peter B.",
+      "title_de": "SPSC: Top-25-Steckbrief – Peter B.",
+      "url": "https://millernton.de/2026/11/16/spsc-top-25-steckbrief-peter-b/",
+      "date": "16. november",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F10%2Ffcspwob_20260912_stefangroenveld_fcsp22310663.jpg&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "SPSC: Topp 25-profil – Jule (Harbour Rebels)",
+      "title_de": "SPSC: Top-25-Steckbrief – Jule (Harbour Rebels)",
+      "url": "https://millernton.de/2026/11/16/spsc-top-25-steckbrief-jule-harbour-rebels/",
+      "date": "16. november",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F10%2Ffcspwob_20260912_stefangroenveld_fcsp22310663.jpg&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "SPSC: Topp 25-profil – Thees Uhlmann",
       "title_de": "SPSC: Top-25-Steckbrief – Thees Uhlmann",
       "url": "https://millernton.de/2026/11/16/spsc-top-25-steckbrief-thees-uhlmann/",
@@ -50,20 +64,6 @@
       "title_no": "SPSC: Topp 25-profil – Marlo Grosshardt",
       "title_de": "SPSC: Top-25-Steckbrief – Marlo Grosshardt",
       "url": "https://millernton.de/2026/11/16/spsc-top-25-steckbrief-marlo-grosshardt/",
-      "date": "16. november",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F10%2Ffcspwob_20260912_stefangroenveld_fcsp22310663.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "SPSC: Topp 25-profil – LAK",
-      "title_de": "SPSC: Top-25-Steckbrief – LAK",
-      "url": "https://millernton.de/2026/11/16/spsc-top-25-steckbrief-lak/",
-      "date": "16. november",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F10%2Ffcspwob_20260912_stefangroenveld_fcsp22310663.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "SPSC: Topp 25-profil – Rubberslime",
-      "title_de": "SPSC: Top-25-Steckbrief – Rubberslime",
-      "url": "https://millernton.de/2026/11/16/spsc-top-25-steckbrief-rubberslime/",
       "date": "16. november",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F10%2Ffcspwob_20260912_stefangroenveld_fcsp22310663.jpg&w=400&output=webp&q=70"
     }
@@ -823,5 +823,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-11-16T16:24:21Z"
+  "updated": "2026-11-16T23:45:48Z"
 }
