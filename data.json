@@ -1,6 +1,18 @@
 {
   "fcstpauli_news": [
     {
+      "title_no": "U19 feirer viktig hjemmeseier mot Magdeburg",
+      "title_de": "U19 feiert wichtigen Heimsieg gegen Magdeburg",
+      "url": "https://www.fcstpauli.com/news/yr-nachberichte-kw47-2026",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FLeistungsbereich%2F_1200x630_crop_center-center_82_none%2FNH_FCStPauliU19_1FCMagdeburgU19_DFBNachwuchsliga_14112026_064.jpg%3Fv%3D1794838464%252C0.4353%252C0.4797&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "Femte seier på rad: 1. Kvinnene slår også ETV",
+      "title_de": "Fünfter Sieg in Serie: 1. Frauen bezwingen auch den ETV",
+      "url": "https://www.fcstpauli.com/news/spielbericht-1-frauen-eimsbuetteler-tv-heimspiel-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FAbteilungen%2FFrauenfu%25C3%259Fball%2F0-Saison-2026-2027%2FLigaspiele%2F11_Eimsb%25C3%25BCttel_Heim%2F_1200x630_crop_center-center_82_none%2FAufmacher.jpeg%3Fv%3D1794826998%252C0.5331%252C0.5395&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "SALLOS x FC St. Pauli-konkurransen: Kjøp lakris, vinn hjemmekampbilletter",
       "title_de": "Das SALLOS x FC St. Pauli Gewinnspiel: Lakritz kaufen, Heimspieltickets gewinnen",
       "url": "https://www.fcstpauli.com/news/ticket-gewinnspiel-fc-st-pauli-sallos",
@@ -17,55 +29,43 @@
       "title_de": "Mitglieder wählen neuen Aufsichtsrat - Trio im Amt bestätigt",
       "url": "https://www.fcstpauli.com/news/wahl-aufsichtsrat-mitgliederversammlung-2026",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FVerein%2FMitgliederversammlung%2F2026%2FAR-Deumelandt%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-09735.jpg%3Fv%3D1794669641%252C0.4879%252C0.381&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Oke Göttlich: «Vårt mangfold er vår styrke»",
-      "title_de": "Oke Göttlich: „Unsere Vielfalt ist unsere Stärke“",
-      "url": "https://www.fcstpauli.com/news/bericht-praesidium-mitgliederversammlung-2026",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FVerein%2FMitgliederversammlung%2F2026%2FG%25C3%25B6ttlich%2F_1200x630_crop_center-center_82_none%2FFCS07126.jpg%3Fv%3D1794654587%252C0.4454%252C0.2716&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Deumelandt: «Vi bør ikke bare sette navn på verdiene våre, men vi bør også forsvare dem og fylle dem med mening.»",
-      "title_de": "Deumelandt: „Unsere Werte nicht nur benennen, sondern auch verteidigen und mit Inhalt füllen“",
-      "url": "https://www.fcstpauli.com/news/berichte-aufsichtsrat-amateurvorstand-afm-ehrenrat-mv-2026",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FVerein%2FMitgliederversammlung%2F2026%2FAR-Deumelandt%2F_1200x630_crop_center-center_82_none%2FWITTERS_2387769.jpg%3Fv%3D1794659453%252C0.6908%252C0.2698&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
     {
-      "title_no": "Beliggenhet på Millerntor – 16. november 2026",
-      "title_de": "Lage am Millerntor – 16. November 2026",
-      "url": "https://millernton.de/2026/11/16/lage-am-millerntor-16-november-2026/",
+      "title_no": "SPSC: Topp 25-profil – Thees Uhlmann",
+      "title_de": "SPSC: Top-25-Steckbrief – Thees Uhlmann",
+      "url": "https://millernton.de/2026/11/16/spsc-top-25-steckbrief-thees-uhlmann/",
       "date": "16. november",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F10%2Ffcspwob_20260912_stefangroenveld_fcsp22310663.jpg&w=400&output=webp&q=70"
     },
     {
-      "title_no": "FC St. Pauli generalforsamling 2026",
-      "title_de": "FC St. Pauli Mitgliederversammlung 2026",
-      "url": "https://millernton.de/2026/11/15/fc-st-pauli-mitgliederversammlung-2026/",
-      "date": "15. november",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F11%2FfcspMV_20261114_stefangroenveld_fcsp13001302.jpg&w=400&output=webp&q=70"
+      "title_no": "SPSC: Topp 25-profil – mahoin",
+      "title_de": "SPSC: Top-25-Steckbrief – mahoin",
+      "url": "https://millernton.de/2026/11/16/spsc-top-25-steckbrief-mahoin/",
+      "date": "16. november",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F10%2Ffcspwob_20260912_stefangroenveld_fcsp22310663.jpg&w=400&output=webp&q=70"
     },
     {
-      "title_no": "Foreløpig rapport om generalforsamlingen i 2026",
-      "title_de": "Vorbericht Mitgliederversammlung 2026",
-      "url": "https://millernton.de/2026/11/13/vorbericht-mitgliederversammlung-2026/",
-      "date": "13. november",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2025%2F11%2Ffcspmv25_Akklamation_stefangroenveld.jpg&w=400&output=webp&q=70"
+      "title_no": "SPSC: Topp 25-profil – Marlo Grosshardt",
+      "title_de": "SPSC: Top-25-Steckbrief – Marlo Grosshardt",
+      "url": "https://millernton.de/2026/11/16/spsc-top-25-steckbrief-marlo-grosshardt/",
+      "date": "16. november",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F10%2Ffcspwob_20260912_stefangroenveld_fcsp22310663.jpg&w=400&output=webp&q=70"
     },
     {
-      "title_no": "Beliggenhet på Millerntor – 13. november 2026",
-      "title_de": "Lage am Millerntor – 13. November 2026",
-      "url": "https://millernton.de/2026/11/13/lage-am-millerntor-13-november-2026/",
-      "date": "13. november",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
+      "title_no": "SPSC: Topp 25-profil – LAK",
+      "title_de": "SPSC: Top-25-Steckbrief – LAK",
+      "url": "https://millernton.de/2026/11/16/spsc-top-25-steckbrief-lak/",
+      "date": "16. november",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F10%2Ffcspwob_20260912_stefangroenveld_fcsp22310663.jpg&w=400&output=webp&q=70"
     },
     {
-      "title_no": "Beliggenhet på Millerntor – 12. november 2026",
-      "title_de": "Lage am Millerntor – 12. November 2026",
-      "url": "https://millernton.de/2026/11/12/lage-am-millerntor-12-november-2026/",
-      "date": "12. november",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
+      "title_no": "SPSC: Topp 25-profil – Rubberslime",
+      "title_de": "SPSC: Top-25-Steckbrief – Rubberslime",
+      "url": "https://millernton.de/2026/11/16/spsc-top-25-steckbrief-rubberslime/",
+      "date": "16. november",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F10%2Ffcspwob_20260912_stefangroenveld_fcsp22310663.jpg&w=400&output=webp&q=70"
     }
   ],
   "next_match": {
@@ -823,5 +823,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-11-16T13:45:49Z"
+  "updated": "2026-11-16T16:24:21Z"
 }
