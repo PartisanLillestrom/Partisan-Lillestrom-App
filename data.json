@@ -1,10 +1,16 @@
 {
   "fcstpauli_news": [
     {
-      "title_no": "2-0 på Buniamshof: U23-seier på Phönix Lübeck",
-      "title_de": "2:0 im Buniamshof: U23 siegt bei Phönix Lübeck",
-      "url": "https://www.fcstpauli.com/news/spielbericht-u23-auswaertsspiel-phoenix-luebeck-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FU23%2FLigaspiele%2F17-Oldenburg-A%2F_1200x630_crop_center-center_82_none%2FIMG_5279.jpeg%3Fv%3D1795364842&w=400&output=webp&q=70"
+      "title_no": "Bundesliga-talentserien: St. Pauli taper mot Wolfsburg",
+      "title_de": "Bundesliga Talent Series: St. Pauli verliert in Wolfsburg",
+      "url": "https://www.fcstpauli.com/news/bundesliga-talent-series-st-pauli-verliert-in-wolfsburg",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FSonstiges%2F_1200x630_crop_center-center_82_none%2FTalent_Series_STP_RGB.png%3Fv%3D1795123243%252C0.2383%252C0.4656&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "Sene mål i Ahrensburg: 1. kvinnelag slår SSC Hagen",
+      "title_de": "Späte Tore in Ahrensburg: 1. Frauen ringen den SSC Hagen nieder",
+      "url": "https://www.fcstpauli.com/news/spaete-tore-in-ahrensburg-1-frauen-ringen-den-ssc-hagen-nieder",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FAbteilungen%2FFrauenfu%25C3%259Fball%2F0-Saison-2026-2027%2FLigaspiele%2F12_Ahrensburg_Ausw%25C3%25A4rts%2F_1200x630_crop_center-center_82_none%2FAufmacher.jpeg%3Fv%3D1795432526%252C0.5729%252C0.5209&w=400&output=webp&q=70"
     },
     {
       "title_no": "Kort og søt november 2026",
@@ -13,25 +19,33 @@
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FFlaggen-Sticker%2FSticker%2F_1200x630_crop_center-center_82_none%2FFCSP-YD-8983.jpeg%3Fv%3D1795111672%252C0.5%252C0.5&w=400&output=webp&q=70"
     },
     {
+      "title_no": "2-0 på Buniamshof: U23-seier på Phönix Lübeck",
+      "title_de": "2:0 im Buniamshof: U23 siegt bei Phönix Lübeck",
+      "url": "https://www.fcstpauli.com/news/spielbericht-u23-auswaertsspiel-phoenix-luebeck-2627",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FU23%2FLigaspiele%2F17-Oldenburg-A%2F_1200x630_crop_center-center_82_none%2FIMG_5279.jpeg%3Fv%3D1795413866%252C0.4782%252C0.6035&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "«Vi belønnet oss selv i dag med en veldig god kamp.»",
       "title_de": "„Wir haben uns heute mit einem sehr guten Spiel belohnt“",
       "url": "https://www.fcstpauli.com/news/stimmen-heimspiel-vfl-bochum-2627",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2F1-Ligaspiele-Pokalspiele%2F12-Bochum-H%2F_1200x630_crop_center-center_82_none%2FFCS00768.jpg%3Fv%3D1795301797%252C0.4588%252C0.406&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "2-0 mot Bochum – lynraske mål baner vei for sesongens tredje seier",
-      "title_de": "2:0 gegen Bochum - Blitztore ebnen den Weg zum dritten Saisonsieg",
-      "url": "https://www.fcstpauli.com/news/spielbericht-heimspiel-vfl-bochum-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2F1-Ligaspiele-Pokalspiele%2F12-Bochum-H%2F_1200x630_crop_center-center_82_none%2FFCSP_YD-3111.jpg%3Fv%3D1795294585%252C0.5419%252C0.4701&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Mot Bochum: Kampdag for barn om barns rettigheter og patriarkalsk vold",
-      "title_de": "Gegen Bochum: Aktionsspieltag zu Kinderrechten und patriarchaler Gewalt",
-      "url": "https://www.fcstpauli.com/news/aktionsspieltag-zu-kinderrechten-und-patriarchaler-gewalt-gegen-bochum",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FNachhaltigkeit-SVN%2FAwareness%2FAktionsspieltag-Bochum-2627%2F_1200x630_crop_center-center_82_none%2FCollage-Aktionsspieltag-Bochum.jpg%3Fv%3D1795168868&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
+    {
+      "title_no": "«Et eksempel på hvor viktig det er å score det første målet.»",
+      "title_de": "„An example of how important it is to score the first goal.“",
+      "url": "https://millernton.de/2026/11/23/an-example-of-how-important-it-is-to-score-the-first-goal/",
+      "date": "23. november",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2026%2F11%2Ffcspvfl_20261121_stefangroenveld_fcsp21581373.jpg&w=400&output=webp&q=70"
+    },
+    {
+      "title_no": "Beliggenhet på Millerntor – 23. november 2026",
+      "title_de": "Lage am Millerntor – 23. November 2026",
+      "url": "https://millernton.de/2026/11/23/lage-am-millerntor-23-november-2026/",
+      "date": "23. november",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
+    },
     {
       "title_no": "FC St. Pauli vs. VfL Bochum 2:0 – Morgenfuglen vinner hjemmeseieren",
       "title_de": "FC St. Pauli vs. VfL Bochum 2:0 – Der frühe Vogel fängt den Heimsieg",
@@ -51,20 +65,6 @@
       "title_de": "Lage am Millerntor – 20. November 2026",
       "url": "https://millernton.de/2026/11/20/lage-am-millerntor-20-november-2026/",
       "date": "20. november",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "SPSC – Topp 5: Fokus FC St. Pauli",
-      "title_de": "SPSC – Die Top 5: Fokus FC St. Pauli",
-      "url": "https://millernton.de/2026/11/19/spsc-die-top-5-fokus-fc-st-pauli/",
-      "date": "19. november",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2025%2F08%2Ffcspbvb_20250823_stefangroenveld_fcsp18300229.jpg&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "Beliggenhet på Millerntor – 19. november 2026",
-      "title_de": "Lage am Millerntor – 19. November 2026",
-      "url": "https://millernton.de/2026/11/19/lage-am-millerntor-19-november-2026/",
-      "date": "19. november",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fmillernton.de%2Fwp-content%2Fuploads%2F2020%2F08%2FLage_Titel1-e1647953710160.jpg&w=400&output=webp&q=70"
     }
   ],
@@ -823,5 +823,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-11-22T22:00:03Z"
+  "updated": "2026-11-23T13:12:15Z"
 }
