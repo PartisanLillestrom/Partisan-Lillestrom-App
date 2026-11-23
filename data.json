@@ -1,10 +1,10 @@
 {
   "fcstpauli_news": [
     {
-      "title_no": "Bundesliga-talentserien: St. Pauli taper mot Wolfsburg",
-      "title_de": "Bundesliga Talent Series: St. Pauli verliert in Wolfsburg",
-      "url": "https://www.fcstpauli.com/news/bundesliga-talent-series-st-pauli-verliert-in-wolfsburg",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FSonstiges%2F_1200x630_crop_center-center_82_none%2FTalent_Series_STP_RGB.png%3Fv%3D1795123243%252C0.2383%252C0.4656&w=400&output=webp&q=70"
+      "title_no": "Dämpfer im Derby für die U17, U15 klettert an die Tabellenspitze",
+      "title_de": "Dämpfer im Derby für die U17, U15 klettert an die Tabellenspitze",
+      "url": "https://www.fcstpauli.com/news/yr-nachberichte-kw48-2026",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FLeistungsbereich%2F_1200x630_crop_center-center_82_none%2FIMG_5171.jpeg%3Fv%3D1795445049%252C0.5803%252C0.8696&w=400&output=webp&q=70"
     },
     {
       "title_no": "Sene mål i Ahrensburg: 1. kvinnelag slår SSC Hagen",
@@ -19,16 +19,16 @@
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FMillerntor%2FStadion%2FFlaggen-Sticker%2FSticker%2F_1200x630_crop_center-center_82_none%2FFCSP-YD-8983.jpeg%3Fv%3D1795111672%252C0.5%252C0.5&w=400&output=webp&q=70"
     },
     {
+      "title_no": "Bundesliga-talentserien: St. Pauli taper mot Wolfsburg",
+      "title_de": "Bundesliga Talent Series: St. Pauli verliert in Wolfsburg",
+      "url": "https://www.fcstpauli.com/news/bundesliga-talent-series-st-pauli-verliert-in-wolfsburg",
+      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FSonstiges%2F_1200x630_crop_center-center_82_none%2FTalent_Series_STP_RGB.png%3Fv%3D1795123243%252C0.2383%252C0.4656&w=400&output=webp&q=70"
+    },
+    {
       "title_no": "2-0 på Buniamshof: U23-seier på Phönix Lübeck",
       "title_de": "2:0 im Buniamshof: U23 siegt bei Phönix Lübeck",
       "url": "https://www.fcstpauli.com/news/spielbericht-u23-auswaertsspiel-phoenix-luebeck-2627",
       "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F2-Nachwuchs%2FSaison-2026-2027%2FU23%2FLigaspiele%2F17-Oldenburg-A%2F_1200x630_crop_center-center_82_none%2FIMG_5279.jpeg%3Fv%3D1795413866%252C0.4782%252C0.6035&w=400&output=webp&q=70"
-    },
-    {
-      "title_no": "«Vi belønnet oss selv i dag med en veldig god kamp.»",
-      "title_de": "„Wir haben uns heute mit einem sehr guten Spiel belohnt“",
-      "url": "https://www.fcstpauli.com/news/stimmen-heimspiel-vfl-bochum-2627",
-      "image": "https://images.weserv.nl/?url=https%3A%2F%2Fapi.fcstpauli.com%2Fuploads%2Fimages%2FFu%25C3%259Fball%2F1-Profis%2FSaison-2026-2027%2F1-Ligaspiele-Pokalspiele%2F12-Bochum-H%2F_1200x630_crop_center-center_82_none%2FFCS00768.jpg%3Fv%3D1795301797%252C0.4588%252C0.406&w=400&output=webp&q=70"
     }
   ],
   "millernton_news": [
@@ -823,5 +823,5 @@
   "medlemstall": {
     "betalende": 32
   },
-  "updated": "2026-11-23T13:12:15Z"
+  "updated": "2026-11-23T16:04:18Z"
 }
